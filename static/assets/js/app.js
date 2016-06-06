@@ -6,7 +6,7 @@
 		if(typeof(Storage) === "undefined") {
 		   alert('Sorry! No Web Storage support..');
 		} else {
-			setInterval(syncKioskChanges, 1000 * 5);
+			setInterval(syncKioskChanges, 1000 * 60 * 1 );
 		}
 
 	});
