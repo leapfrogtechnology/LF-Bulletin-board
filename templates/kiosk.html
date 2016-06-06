@@ -1,0 +1,43 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+  <title>LF Kiosk</title>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' />
+  <link rel="stylesheet" type="text/css" href="{% static '/static/assets/lib/bootstrap/dist/css/bootstrap.min.css' %}" />
+  <link rel="stylesheet" type="text/css" href="{% static '/static/assets/css/keen-dashboards.css' %}" />
+  <link rel="stylesheet" type="text/css" href="{% static '/static/assets/css/style.css' %}" />
+</head>
+<body class="">
+
+  <div class="container-fluid">
+
+    <div class="row">
+        <div class="chart-wrapper">
+          <div class="chart-title">
+           LF Kiosk
+          </div>
+          <div class="chart-stage" style="height: 100vh;" id="webview">
+            <img data-src="holder.js' %}/100%x650/white">
+          </div>
+        </div>
+      </div>
+
+
+
+
+  <script type="text/javascript" src="{% static '/static/assets/lib/jquery/dist/jquery.min.js' %}"></script>
+  <script type="text/javascript" src="{% static '/static/assets/lib/bootstrap/dist/js/bootstrap.min.js' %}"></script>
+
+  <script type="text/javascript" src="{% static '/static/assets/lib/holderjs/holder.js' %}"></script>
+  <script>
+    Holder.add_theme("white", { background:"#fff", foreground:"#a7a7a7", size:10 });
+  </script>
+
+  <script type="text/javascript" src="{% static '/static/assets/lib/keen-js/dist/keen.min.js' %}"></script>
+  <script type="text/javascript" src="{% static '/static/assets/js/meta.js' %}"></script>
+
+  <script type="text/javascript" src="{% static '/static/assets/js/app.js' %}"></script>
+
+</body>
+</html>
