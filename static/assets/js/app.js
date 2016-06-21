@@ -113,6 +113,7 @@
                       currentDate.getMinutes() + ":" +
                       currentDate.getSeconds();
         currentTime = Date.parse("21/06/2016 " + currentTime);
+        currentTime.setTime(currentTime.getTime() + currentTime.getTimezoneOffset()*60*1000);
 
 
         videoTiming = false;
