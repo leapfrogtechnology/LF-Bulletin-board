@@ -73,8 +73,6 @@
 
         checkKioskMode();
 
-        console.log(kioskMode);
-
         if (kioskMode == VIDEO_INIT)
         {
             $("#container-fluid").html('<div class="chart-stage" style="height: 100vh;" id="webview"></div>');

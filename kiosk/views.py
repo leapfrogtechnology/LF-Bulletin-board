@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.core import serializers
 
 import json
+import random
 
 from kiosk.models import Kiosk
 from youtube.models import Youtube
@@ -31,6 +32,8 @@ def data(request):
 			video_id = video_id[1].split("&")
 			playlist.append(video_id[0])
 			last_update.append(youtube.updated_at)
+	random.shuffle(playlist)
+	print(playlist)
 
 	schedule_objects = Schedule.objects.all()
 	schedule = []
