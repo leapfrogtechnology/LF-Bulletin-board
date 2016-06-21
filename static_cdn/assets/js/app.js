@@ -1,8 +1,5 @@
 (function() {
 
-    alert(new Date());
-    return ;
-
     const WEBVIEW_INIT   = 0;
     const WEBVIEW_LOADED = 1;
     const VIDEO_INIT     = 2;
