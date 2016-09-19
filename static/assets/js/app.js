@@ -139,7 +139,7 @@
 
     function loadWebviewContent() {
         if (localStorage.getItem("url") === "undefined") {
-            $("#webview").html("<h1>LF Kiosk</h1>");
+            $("#webview").html("<h1>Leapfrog Bulletin Board</h1>");
         } else {
             url = localStorage.getItem("url");
             html = getWebviewContent(url);
@@ -153,7 +153,7 @@
         iframeForGoogleSlide = '<iframe src="{0}" frameborder="0" width="960" height="569" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>';
 
         if (url === null) {
-            html = "<h1>LF Kiosk</h1>";
+            html = "<h1>Leapfrog Bulletin Board</h1>";
         } else if (url.search("https://docs.google.com/presentation") != -1) {
             html = iframeForYoutube.format([url]);
         } else if (url.search("https://www.youtube.com/embed") != -1) {
