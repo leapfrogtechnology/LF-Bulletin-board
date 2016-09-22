@@ -20,7 +20,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'og9w63)$8um*b6u5450u0x_qsr=6b8^c!s9x0u(!a(i%!my9+i'
+SECRET_KEY = 'your_secret'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -79,15 +79,17 @@ WSGI_APPLICATION = 'lf_kiosk.wsgi.application'
 
 DATABASES = {
     'default': {
+        # Configuration for SQLite Database
         # 'ENGINE': 'django.db.backends.sqlite3',
         # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
 
+        # Configuration for Postgres database
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'd2mpal7thk8ck9',
-        'USER': 'lwtsijmxfrpkms',
-        'PASSWORD': 'dGRmrq4OVJdk_LRAXsdRrZJirl',
-        'HOST': 'ec2-54-225-93-34.compute-1.amazonaws.com',
-        'PORT': '5432',
+        'NAME': os.environ.get('DB_NAME'),
+        'USER': os.environ.get('DB_USER'),
+        'PASSWORD': os.environ.get('DB_PASSWORD'),
+        'HOST': os.environ.get('DB_HOST'),
+        'PORT': os.environ.get('DB_PORT'),
     }
 }
 
@@ -135,4 +137,3 @@ STATICFILES_DIRS = [
 ]
 
 STATIC_ROOT = os.path.join(BASE_DIR, "static_cdn")
-

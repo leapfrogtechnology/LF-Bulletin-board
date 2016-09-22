@@ -1,0 +1,17 @@
+{
+  "name": "Leapfrog Bulletin Board",
+  "description": "Leapfrog Bulletin Board is a Web App that helps to build an interactive Kiosk.",
+  "keywords": [
+    "leapfrog",
+    "bulletin board",
+    "web app",
+    "python",
+    "django",
+    "youtube",
+    "google slide"
+  ],
+  "website": "http://bulletin.lftechnology.com/",
+  "repository": "https://github.com/leapfrogtechnology/LF-Bulletin-board/tree/dev",
+  "logo": "http://lftechnology.com/media/images/top_mast_logo.png",
+  "success_url": "/"
+}

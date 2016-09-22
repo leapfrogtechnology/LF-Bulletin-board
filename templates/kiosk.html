@@ -4,41 +4,17 @@
 <head>
   <title>Leapfrog Bulletin Board</title>
   <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' />
-  <link rel="stylesheet" type="text/css" href="{% static '/static/assets/lib/bootstrap/dist/css/bootstrap.min.css' %}" />
-  <link rel="stylesheet" type="text/css" href="{% static '/static/assets/css/keen-dashboards.css' %}" />
-  <link rel="stylesheet" type="text/css" href="{% static '/static/assets/css/style.css' %}" />
-
-  <style scoped>video {
-    width: 100%    !important;
-    height: auto   !important;
-    }
-  </style>
+  <link rel="stylesheet" type="text/css" href="{% static '/static/css/style.css' %}">
 </head>
 <body style="background-color: #000">
 
   <div class="container-fluid" id="container-fluid">
     <div class="chart-stage" style="height: 100vh;" id="webview">
+    </div>
   </div>
 
-
-
-
-  <script type="text/javascript" src="{% static '/static/assets/lib/jquery/dist/jquery.min.js' %}"></script>
-  <script type="text/javascript" src="{% static '/static/assets/lib/bootstrap/dist/js/bootstrap.min.js' %}"></script>
-
-  <script type="text/javascript" src="{% static '/static/assets/lib/holderjs/holder.js' %}"></script>
-  <script>
-    Holder.add_theme("white", { background:"#fff", foreground:"#a7a7a7", size:10 });
-  </script>
-
-  <script type="text/javascript" src="{% static '/static/assets/lib/keen-js/dist/keen.min.js' %}"></script>
-  <script type="text/javascript" src="{% static '/static/assets/js/meta.js' %}"></script>
-
-  <!-- <script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.6/highlight.min.js"></script> -->
+  <script type="text/javascript" src="//code.jquery.com/jquery-2.2.4.min.js"></script>
   <script src="https://www.youtube.com/iframe_api"></script>
-
-  <script type="text/javascript" src="{% static '/static/assets/js/app.js' %}"></script>
-
-
+  <script type="text/javascript" src="{% static '/static/js/app.js' %}"></script>
 </body>
 </html>
