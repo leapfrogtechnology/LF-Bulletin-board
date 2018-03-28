@@ -1,6 +1,7 @@
 import Modal from 'react-modal';
 import React, { Component} from 'react';
 import FontAwesome from 'react-fontawesome';
+import * as bulletinService from '../../services/bulletinService';
 import { FormGroup, ControlLabel, FormControl, Button} from 'react-bootstrap';
 
 
@@ -21,14 +22,41 @@ class AddEntry extends Component {
     super();
 
     this.state = {
-      modalIsOpen : false
+      modalIsOpen : false,
+      formdata: {
+        title: "",
+        priority: null,
+        duration: null,
+        url: ""
+      }
     };
 
     this.openModal = this.openModal.bind(this); 
     this.afterOpenModal = this.afterOpenModal.bind(this); 
     this.closeModal = this.closeModal.bind(this); 
+    this.handleSubmit = this.handleSubmit.bind(this); 
+    this.handleChange = this.handleChange.bind(this); 
   }
   
+  handleSubmit (event) {
+    event.preventDefault();
+    let params = this.state.formdata;
+    bulletinService.addBulletin(params).then((response) => {
+      this.props.refreshList();
+      this.closeModal();
+    });
+  }
+
+  handleChange (el) {
+    let inputName = el.target.name;
+    let inputValue = el.target.value;
+    let tempObj = Object.assign({}, this.state.formdata);
+    tempObj[inputName] = inputValue;
+    this.setState({
+      formdata: tempObj
+    });
+  }
+
   openModal () {
     this.setState({
       modalIsOpen: true
@@ -50,7 +78,7 @@ class AddEntry extends Component {
     return (
       <div>
         <Button className="add-entry-button" bsStyle="primary" onClick={this.openModal}>
-          <span>Add entry</span>
+          <span>Add</span>
           <FontAwesome
             className="super-crazy-colors"
             name="plus"
@@ -66,26 +94,39 @@ class AddEntry extends Component {
           content-label="add entry modal"
         >
           <h2>Add New Entry</h2>
-          <form className="add-entry-form">
+          <form className="add-entry-form" onSubmit={this.handleSubmit}>
 
             <FormGroup>
               <ControlLabel>Segment Title</ControlLabel>
-              <FormControl type="text" placeholder="segment title"/>
+              <FormControl id="title" name="title" type="text" placeholder="segment title"
+                value={this.state.title}
+                onChange={this.handleChange}
+              />
             </FormGroup>
 
             <FormGroup>
               <ControlLabel>Priority</ControlLabel>
-              <FormControl type="text" placeholder="priority"/>
+              <FormControl id="priority" name="priority" type="text" placeholder="priority"
+                value={this.state.priority}
+                onChange={this.handleChange}
+              />
             </FormGroup>
 
             <FormGroup>
               <ControlLabel>Duration</ControlLabel>
-              <FormControl type="text" placeholder="duration"/>
+              <FormControl id="duration" name="duration" type="text" placeholder="duration"
+                value={this.state.duration}
+                onChange={(event) => this.setState({formdata:{duration: event.target.value}})}
+                onChange={this.handleChange}                
+              />
             </FormGroup>
 
             <FormGroup>
               <ControlLabel>Url</ControlLabel>
-              <FormControl type="text" placeholder="url"/>
+              <FormControl id="url" name="url" type="text" placeholder="url"
+                value={this.state.url}
+                onChange={this.handleChange}                
+              />
             </FormGroup>
             <Button className="submit-button" bsStyle="primary" type="submit">Submit</Button>
             <Button className="cancel-button" bsStyle="default" onClick={this.closeModal}>Cancel</Button>

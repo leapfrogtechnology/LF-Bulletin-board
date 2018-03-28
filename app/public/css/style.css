@@ -3,6 +3,16 @@
   src: url(../fonts/geomanist-regular-webfont.ttf);
 }
 
+@font-face {
+  font-family: 'montserrat';
+  src: url(../fonts/montserrat/Montserrat-Regular.otf);
+}
+
+@font-face {
+  font-family: 'montserrat-bold';
+  src: url(../fonts/montserrat/Montserrat-SemiBold.otf);
+}
+
 body {
   color: rgb(90, 90, 90);
   background: #ffffff;
@@ -185,6 +195,11 @@ body {
   background-color: #ffffff;
 }
 
+.add-entry-button {
+  background-color: #30BEFF;
+  border: none;
+}
+
 .add-entry-button span{
   display: inline-block;
 }
@@ -195,32 +210,73 @@ body {
 
 .bulletin-table {
   width: 100%;
+  display: block;
+  font-family: "montserrat";
 }
 
-.bulletin-table thead{
-  border-bottom: 2px solid gray;
+.table-row {
+  border-radius: 3px;
+  border: 2px solid #EFF5F9;
+  margin-bottom: 5px;  
 }
 
-.bulletin-table tbody tr {
-  border-bottom: 1px solid gray;
-}
-
-.bulletin-table td {
-  padding: 3px 5px;
-}
-
-.bulletin-table td span {
+.table-row div{
   display: inline-block;
+  padding: 10px;
+  /* width: 14.2%; */
+  background-color: #F7FBFE;
 }
-
-.bulletin-table td span:last-child {
-  margin-left: 10px;
+.table-head div {
+  display: inline-block;
+  padding: 10px;
+  /* width: 14.2%; */
+  margin-bottom: 5px;  
 }
 
 .edit-icon {
-  color: rgb(93, 142, 189);
+  color: #95ACBC;
+  margin-left: 10px;  
 }
 
 .cancel-icon {
-  color: rgb(182, 35, 60);
+  color: #95ACBC;
+  margin-left: 10px;
+}
+
+.bulletin-drag-handle {
+  width: 5%;
+}
+
+.bulletin-table .table-row .bulletin-drag-handle {
+  border-right: 1px solid rgb(227, 236, 241);
+}
+.bulletin-table .table-row .bulletin-actions {
+  border-left: 1px solid rgb(227, 236, 241);
+}
+.bulletin-table .table-head {
+  font-size: 11px;
+}
+
+.bulletin-id {
+  width: 7%;
+}
+
+.bulletin-title {
+  width: 25%;
+}
+.bulletin-owner {
+  width: 13%;
+}
+.bulletin-duration {
+  width: 10%;
+}
+.bulletin-url {
+  width: 30%;
+}
+.bulletin-actions {
+  width: 10%;
+}
+
+.bulletin-title {
+  font-family: 'montserrat';
 }
