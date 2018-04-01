@@ -4,14 +4,11 @@ import * as bulletinService from '../../services/bulletinService';
 import {arrayMove, SortableElement, SortableContainer, SortableHandle} from 'react-sortable-hoc';
 
 import AddEntry from '../addEntry';
+import EditEntry from '../editEntry';
 
-const DragHandle = SortableHandle(() => <FontAwesome
-name="bars"
-size="1x"
-style={{ textShadow: '0 1px 0 rgba(0, 0, 0, 0.1)' }}
-/>);
+const DragHandle = SortableHandle(() => <i className="icon ion-drag"></i>);
 
-const SortableItem = SortableElement(({item, deleteBulletin}) => {
+const SortableItem = SortableElement(({item, deleteBulletin, refreshList}) => {
   return (
     <div className="table-row">
       <div className="bulletin-drag-handle"><DragHandle/></div>
@@ -21,29 +18,22 @@ const SortableItem = SortableElement(({item, deleteBulletin}) => {
       <div className="bulletin-duration">{item.duration}</div>
       <div className="bulletin-url"><a href={item.url}>{item.url}</a></div>
       <div className="bulletin-actions">
-        <FontAwesome
-          className="edit-icon"
-          name="pencil"
-          size="1x"
-          style={{ textShadow: '0 1px 0 rgba(0, 0, 0, 0.1)' }}
-        />
-        <FontAwesome
-          className="cancel-icon"
-          name="trash"
-          size="1x"
-          style={{ textShadow: '0 1px 0 rgba(0, 0, 0, 0.1)' }}
+        <EditEntry item={item} refreshList={refreshList}/>
+        <i className="icon ion-trash-b"
           onClick={() => {deleteBulletin(item.id)}}
-        />
+        ></i>
       </div>
     </div>
   );
 });
 
-const SortableList = SortableContainer(({items, deleteBulletin}) => {
+const SortableList = SortableContainer(({items, deleteBulletin, refreshList}) => {
   return (
     <div className="table-body">
       {items.map((item, index) => (
-        <SortableItem key={`item-${index}`} index={index} item={item} deleteBulletin={deleteBulletin}/>
+        <SortableItem key={`item-${index}`} index={index} item={item} deleteBulletin={deleteBulletin}
+          refreshList={refreshList}
+        />
       ))}
     </div>
   );
@@ -113,7 +103,9 @@ class ListEntries extends Component {
               <div className="bulletin-url">URL</div>
               <div className="bulletin-actions">ACTIONS</div>
           </div>
-          <SortableList items={this.state.items} onSortEnd={this.onSortEnd}  useDragHandle={true} deleteBulletin={this.deleteBulletin}/>              
+          <SortableList items={this.state.items} onSortEnd={this.onSortEnd}  useDragHandle={true} 
+          deleteBulletin={this.deleteBulletin}
+          refreshList={this.refreshList}/>              
         </div>
       </div>
     );

@@ -34,7 +34,6 @@ export async function addBulletin(data) {
 }
 
 export async function listBulletin() {
-  debugger;
   let listBulletinUrl = urlConstants.baseUrl + '/bulletins';
   return new Promise((resolve,reject) => {
     let result = httpUtil.get(listBulletinUrl, {}, {});
@@ -43,10 +42,18 @@ export async function listBulletin() {
 }
 
 export async function deleteBulletin(bulletinId) {
-  debugger;
-  let listBulletinUrl = urlConstants.baseUrl + '/bulletins/' + bulletinId;
+  let deleteBulletinUrl = urlConstants.baseUrl + '/bulletins/' + bulletinId;
   return new Promise((resolve,reject) => {
-    let result = httpUtil.remove(listBulletinUrl, {}, {});
+    let result = httpUtil.remove(deleteBulletinUrl, {}, {});
+    resolve(result);
+  });
+}
+
+export async function editBulletin(bulletinId, data) {
+  debugger;
+  let editBulletinUrl = urlConstants.baseUrl + '/bulletins/' + bulletinId;
+  return new Promise((resolve,reject) => {
+    let result = httpUtil.put(editBulletinUrl, data, {});
     resolve(result);
   });
 }

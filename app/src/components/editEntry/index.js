@@ -1,9 +1,8 @@
 import Modal from 'react-modal';
-import React, { Component} from 'react';
+import React, { Component } from 'react';
 import FontAwesome from 'react-fontawesome';
 import * as bulletinService from '../../services/bulletinService';
 import { FormGroup, ControlLabel, FormControl, Button} from 'react-bootstrap';
-
 
 const modalStyle = {
   content : {
@@ -16,34 +15,34 @@ const modalStyle = {
   }
 };
 
-class AddEntry extends Component {
-
-  constructor () {
-    super();
+class EditEntry extends Component {
+  constructor (props) {
+    super(props);
 
     this.state = {
       modalIsOpen : false,
       formdata: {
-        title: "",
-        priority: null,
-        duration: null,
-        url: ""
+        title: this.props.item.title,
+        priority: this.props.item.priority,
+        duration: this.props.item.duration,
+        url: this.props.item.url
       }
     };
 
-    this.openModal = this.openModal.bind(this); 
-    this.afterOpenModal = this.afterOpenModal.bind(this); 
-    this.closeModal = this.closeModal.bind(this); 
-    this.handleSubmit = this.handleSubmit.bind(this); 
-    this.handleChange = this.handleChange.bind(this); 
+    this.openModal = this.openModal.bind(this);
+    this.closeModal = this.closeModal.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+
   }
-  
-  handleSubmit (event) {
+
+  handleSubmit () {
     event.preventDefault();
     let params = this.state.formdata;
-    bulletinService.addBulletin(params).then((response) => {
-      this.props.refreshList();
+    params.owner = this.props.item.owner;
+    bulletinService.editBulletin(this.props.item.id, params).then((response) => {
       this.closeModal();
+      this.props.refreshList();
     });
   }
 
@@ -63,37 +62,26 @@ class AddEntry extends Component {
     });
   }
 
-  afterOpenModal () {
-
-  }
-
   closeModal () {
     this.setState({
       modalIsOpen: false
     });
   }
 
-  render() {
-
+  render () {
     return (
-      <div>
-        <Button className="add-entry-button" bsStyle="primary" onClick={this.openModal}>
-          <span>Add</span>
-          <FontAwesome
-            className="super-crazy-colors"
-            name="plus"
-            size="1x"
-            style={{ textShadow: '0 1px 0 rgba(0, 0, 0, 0.1)' }}
-          />
-        </Button>
+      <div className="edit-entry">
+          <i className="icon ion-edit"
+            onClick={() => {this.openModal()}}
+          ></i>
         <Modal
           isOpen={this.state.modalIsOpen}
           onAfterOpen={this.afterOpenModal}
           onRequestCLose={this.closeModal}
           style={modalStyle}
-          content-label="add entry modal"
+          content-label="edit entry modal"
         >
-          <h2>Add New Entry</h2>
+          <h2>Edit Bulletin</h2>
           <form className="add-entry-form" onSubmit={this.handleSubmit}>
 
             <FormGroup>
@@ -139,4 +127,4 @@ class AddEntry extends Component {
 
 }
 
-export default AddEntry;
+export default EditEntry;

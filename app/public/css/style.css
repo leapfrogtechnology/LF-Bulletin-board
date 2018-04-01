@@ -217,6 +217,7 @@ body {
 .table-row {
   border-radius: 3px;
   border: 2px solid #EFF5F9;
+  background-color: #F7FBFE;  
   margin-bottom: 5px;  
 }
 
@@ -224,7 +225,6 @@ body {
   display: inline-block;
   padding: 10px;
   /* width: 14.2%; */
-  background-color: #F7FBFE;
 }
 .table-head div {
   display: inline-block;
@@ -233,29 +233,28 @@ body {
   margin-bottom: 5px;  
 }
 
-.edit-icon {
-  color: #95ACBC;
-  margin-left: 10px;  
-}
-
-.cancel-icon {
-  color: #95ACBC;
-  margin-left: 10px;
+.bulletin-drag-handle {
+  width: 5%;
+  cursor: move;
 }
 
 .bulletin-drag-handle {
-  width: 5%;
-}
-
-.bulletin-table .table-row .bulletin-drag-handle {
   border-right: 1px solid rgb(227, 236, 241);
 }
-.bulletin-table .table-row .bulletin-actions {
+.bulletin-actions {
   border-left: 1px solid rgb(227, 236, 241);
 }
 .bulletin-table .table-head {
   font-size: 11px;
 }
+
+.bulletin-table .table-head .bulletin-drag-handle{
+  border-right: none;  
+}
+
+.bulletin-table .table-head .bulletin-actions{
+  border-left: none;  
+} 
 
 .bulletin-id {
   width: 7%;
@@ -279,4 +278,21 @@ body {
 
 .bulletin-title {
   font-family: 'montserrat';
+}
+
+.edit-entry {
+  padding: 0px !important;
+}
+
+.icon {
+  font-size: 20px;
+  color: #95ACBC;
+}
+
+.ion-edit {
+  margin-left: 5px;
+}
+
+.ion-trash-b {
+  margin-left: 15px;
 }
