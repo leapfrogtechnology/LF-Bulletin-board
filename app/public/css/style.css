@@ -71,24 +71,12 @@ body {
   font-size: 60px;
 }
 
-.navbar-wrapper {
-  width: 100%;
-  background: rgb(44, 161, 64);
-  padding: 10px 0px;
-}
-
 .left-content {
   float: left;
 }
 
 .right-content {
   float: right;
-}
-
-.clearfix::after {
-  content: "";
-  clear: both;
-  display: table;
 }
 
 .dashboard-text {
@@ -100,19 +88,6 @@ body {
   padding: 5px;
 }
 
-.image-wrapper {
-  width: 40px;
-  height: 40px;
-  border-radius: 20px;
-  overflow: hidden;
-  display: inline-block;
-  vertical-align: middle;
-}
-
-.image-wrapper img {
-  width: 100%;
-}
-
 .sidemenu-wrapper {
   width: 5%;
   height: 100vh;
@@ -121,10 +96,25 @@ body {
   position: relative;
 }
 
+/* ul.side-menu-list {
+  display: block;
+} */
+
+/* ul.side-menu-list li {
+  display: block;
+} */
+
+/* ul.side-menu-list li span {
+  display: table;
+  margin: 0 auto;
+} */
+
+
 .sidemenu-wrapper ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
+  display: block;
 }
 
 .sidemenu-wrapper h3 {
@@ -135,28 +125,11 @@ body {
 .sidemenu-wrapper ul li a{
   text-decoration: none;
   text-align: center;
-  background-color: rgb(73, 66, 80);
   display: block;
-  padding: 10px 15px;;
   cursor: pointer;
-  color: white;
-  font-weight: bolder;
-}
-
-.sidemenu-wrapper ul li a:hover {
-  color: rgb(106, 214, 124);
-}
-
-.activeNav {
-  color: rgb(106, 214, 124) !important;
-}
-
-.sidemenu-wrapper ul li a span {
-  float: left;
-}
-
-.sidemenu-wrapper ul li a span:nth-child(2) {
-  float: right;
+  display: table;
+  margin: 0 auto;
+  color: #4F4F4F
 }
 
 .main-container-wrapper {
@@ -307,19 +280,16 @@ body {
   display: inline-block;
   height: 50px;
   width: 50px;
-  background-color: azure;
+  background-color: white;
   border-radius: 25px;
+  line-height: 50px;
+  text-align: center;
+  font-size: 20px;
+  font-family: 'montserrat';
 }
 
-ul.side-menu-list {
-  display: block;
-}
-
-ul.side-menu-list li {
-  display: block;
-}
-
-ul.side-menu-list li span {
+.clearfix::after {
+  content: "";
+  clear: both;
   display: table;
-  margin: 0 auto;
 }

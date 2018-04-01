@@ -9,10 +9,10 @@ class SideMenu extends Component {
       <div>
         <ul className="side-menu-list">
           <li>
-            <span className="profile-name"></span>
+            <a href="javascript:void(0)" className="profile-name">AA</a>
           </li>
           <li>
-            <span><i className="icon ion-more"></i></span>
+            <a><i href="javascript:void(0)" className="icon ion-more"></i></a>
           </li>
         </ul>
       </div>

@@ -1,3 +1,4 @@
+import swal from 'sweetalert';
 import React, { Component } from 'react';
 import FontAwesome from 'react-fontawesome';
 import * as bulletinService from '../../services/bulletinService';
@@ -78,9 +79,22 @@ class ListEntries extends Component {
   }
 
   deleteBulletin (id) {
-    bulletinService.deleteBulletin(id).then((response) => {
-      this.refreshList();
+    swal({
+      title: "Are you sure?",
+      text: "You will be deleting this bulletin segment! ",
+      type: "warning",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true
+    })
+    .then(function (willDelete) {
+      if (willDelete) {
+        bulletinService.deleteBulletin(id).then((response) => {
+          this.refreshList();
+        });
+      }
     });
+
   }
 
   render () {

@@ -21,12 +21,8 @@ export async function addBulletin(data) {
     username: "ayush",
     password: "ghimire"
   };
-  // let tokenData = await getToken(loginData);
-  // token = tokenData.data.data.tokens.accessToken;
   data.owner = "ayush"
-  // let headers = {
-  //   Authorization: "Bearer " + token
-  // };
+
   return new Promise((resolve,reject) => {
     let result = httpUtil.post(addBulletinUrl, data, {});
     resolve(result);
