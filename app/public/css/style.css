@@ -248,9 +248,14 @@ body {
 .bulletin-duration {
   width: 10%;
 }
-.bulletin-url {
+.bulletin-url{
   width: 30%;
 }
+
+.bulletin-url a {
+  color: #18B0F5;
+}
+
 .bulletin-actions {
   width: 10%;
 }
@@ -270,10 +275,12 @@ body {
 
 .ion-edit {
   margin-left: 5px;
+  cursor: pointer;  
 }
 
 .ion-trash-b {
   margin-left: 15px;
+  cursor: pointer;  
 }
 
 .profile-name {

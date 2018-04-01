@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { Route, Redirect } from 'react-router-dom';
 
-
-import NavBar from './NavBar';
 import SideMenu from './SideMenu';
 import ListEntries from '../listEntries';
 
