@@ -114,9 +114,11 @@ body {
 }
 
 .sidemenu-wrapper {
-  width: 15%;
+  width: 5%;
   height: 100vh;
-  background-color: rgb(73, 66, 80); 
+  background-color: #4F4F4F;
+  padding: 5px;
+  position: relative;
 }
 
 .sidemenu-wrapper ul {
@@ -158,7 +160,7 @@ body {
 }
 
 .main-container-wrapper {
-  width: 85%;
+  width: 95%;
 }
 
 .add-entry-form {
@@ -168,6 +170,7 @@ body {
 .add-entry-form Button {
   display: inline-block;
 }
+
 .add-entry-form button.cancel-button {
   margin-left: 20px;
 }
@@ -185,6 +188,7 @@ body {
 
 .container {
   width: 85% !important;
+  padding-top: 20px;
 }
 
 .section .form-container {
@@ -198,6 +202,8 @@ body {
 .add-entry-button {
   background-color: #30BEFF;
   border: none;
+  margin-top: 20px;
+  margin-bottom: 10px;
 }
 
 .add-entry-button span{
@@ -295,4 +301,25 @@ body {
 
 .ion-trash-b {
   margin-left: 15px;
+}
+
+.profile-name {
+  display: inline-block;
+  height: 50px;
+  width: 50px;
+  background-color: azure;
+  border-radius: 25px;
+}
+
+ul.side-menu-list {
+  display: block;
+}
+
+ul.side-menu-list li {
+  display: block;
+}
+
+ul.side-menu-list li span {
+  display: table;
+  margin: 0 auto;
 }

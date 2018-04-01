@@ -19,7 +19,6 @@ class Dashboard extends Component {
           </div>
 
           <div className="left-content main-container-wrapper">
-            <NavBar/>
             <div className="container">
               <Redirect to="/dashboard/list"/>
               <Route
