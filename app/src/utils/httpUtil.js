@@ -6,7 +6,7 @@ export function get(url, params = {}, headers = {}) {
     url: url,
     params: params
   };
-  if(isObjEmpty(headers)) {
+  if(Object.keys(headers).length) {
     request.headers = headers;
   }
 
@@ -19,7 +19,7 @@ export function post(url, data, headers = {}) {
     url: url,
     data: data
   };
-  if(isObjEmpty(headers)) {
+  if(Object.keys(headers).length) {
     request.headers = headers;
   }
 
@@ -32,7 +32,7 @@ export function put(url, data, headers = {}) {
     url: url,
     data: data
   };
-  if(isObjEmpty(headers)) {
+  if(Object.keys(headers).length) {
     request.headers = headers;
   }
 
@@ -44,13 +44,9 @@ export function remove(url, headers = {}) {
     method: 'delete',
     url: url
   };
-  if(isObjEmpty(headers)) {
+  if(Object.keys(headers).length) {
     request.headers = headers;
   }
   
   return axios(request);
-}
-
-function isObjEmpty(obj) {
-  return Object.keys(obj).length;
 }

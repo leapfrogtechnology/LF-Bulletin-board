@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import {Redirect} from 'react-router-dom';
+
 import * as bulletinService from '../../services/bulletinService';
 
 class Login extends Component {
   constructor () {
     super();
     this.state = {
-      username: "",
-      password: "",
+      username: '',
+      password: '',
       isAuthenticated: false
     };
 
@@ -16,16 +17,27 @@ class Login extends Component {
 
   handleSubmit (event) {
     event.preventDefault();
-    var params = {
-      "username": this.state.username,
-      "password": this.state.password
+
+    let params = {
+      username: this.state.username,
+      password: this.state.password
     };
     let response = bulletinService.checkLogin(this.state).then((result) => {
       this.setState({
         isAuthenticated: true
-      });
-      
+      });      
     });
+  }
+
+  handleChange (event) {
+    event.preventDefault();
+
+    let inputName = event.target.name;
+    let inputValue = event.target.value;
+    let inputObj = {};
+
+    inputObj[inputName] = inputValue;
+    this.setState(inputObj);
   }
 
   render () {

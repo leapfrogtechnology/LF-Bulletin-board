@@ -96,25 +96,15 @@ body {
   position: relative;
 }
 
-/* ul.side-menu-list {
-  display: block;
-} */
-
-/* ul.side-menu-list li {
-  display: block;
-} */
-
-/* ul.side-menu-list li span {
-  display: table;
-  margin: 0 auto;
-} */
-
-
 .sidemenu-wrapper ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
   display: block;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
 }
 
 .sidemenu-wrapper h3 {
@@ -122,7 +112,7 @@ body {
   color: rgb(75, 196, 95);
 }
 
-.sidemenu-wrapper ul li a{
+.sidemenu-wrapper ul li span{
   text-decoration: none;
   text-align: center;
   display: block;
@@ -155,7 +145,6 @@ body {
 }
 
 .navbar {
-  /* border-color: white !important; */
   border-radius: 0px !important;
 }
 
@@ -203,12 +192,11 @@ body {
 .table-row div{
   display: inline-block;
   padding: 10px;
-  /* width: 14.2%; */
+
 }
 .table-head div {
   display: inline-block;
   padding: 10px;
-  /* width: 14.2%; */
   margin-bottom: 5px;  
 }
 
@@ -283,6 +271,11 @@ body {
   cursor: pointer;  
 }
 
+.ion-plus-round {
+  margin-left: 10px;
+  color: white !important;
+} 
+
 .profile-name {
   display: inline-block;
   height: 50px;
@@ -293,6 +286,10 @@ body {
   text-align: center;
   font-size: 20px;
   font-family: 'montserrat';
+}
+
+.SortableHelperWithOverride {
+  pointer-events: auto !important;
 }
 
 .clearfix::after {
