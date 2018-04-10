@@ -36,5 +36,8 @@
     "husky": "^0.14.3",
     "lint-staged": "^6.1.0",
     "prettier": "^1.10.2"
+  },
+  "dependencies": {
+    "sweetalert": "^2.1.0"
   }
 }

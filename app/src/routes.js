@@ -1,11 +1,10 @@
 import React from 'react';
 import { BrowserRouter, Route} from 'react-router-dom';
 
-import routeConstants from './constants/routeConstants';
-
 import Home from './components/home';
 import Login from './components/login';
 import Dashboard from './components/dashboard';
+import routeConstants from './constants/routeConstants';
 
 const baseHref = process.env.BASE_HREF || '/';
 

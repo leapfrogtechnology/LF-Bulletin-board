@@ -7,22 +7,12 @@ class SideMenu extends Component {
   render() {
     return (
       <div>
-        <h3>Bulletin Dashboard</h3>
-        <ul>
+        <ul className="side-menu-list">
           <li>
-            <NavLink
-              className="clearfix"
-              activeClassName="activeNav active"
-              to="/dashboard/list"
-            >
-              <span>List</span>
-              <FontAwesome
-                className="super-crazy-colors"
-                name="list"
-                size="1x"
-                style={{ textShadow: '0 1px 0 rgba(0, 0, 0, 0.1)' }}
-              />
-            </NavLink>
+            <span href="javascript:void(0)" className="profile-name">AA</span>
+          </li>
+          <li>
+            <span><i href="javascript:void(0)" className="icon ion-more"></i></span>
           </li>
         </ul>
       </div>

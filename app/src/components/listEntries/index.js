@@ -1,44 +1,11 @@
+import swal from 'sweetalert';
 import React, { Component } from 'react';
-import FontAwesome from 'react-fontawesome';
-import {arrayMove, SortableElement, SortableContainer} from 'react-sortable-hoc';
+import { arrayMove } from 'react-sortable-hoc';
 
 import AddEntry from '../addEntry';
-
-const SortableItem = SortableElement(({item}) => {
-  return (
-    <tr>
-      <td>{item.id}</td>
-      <td>{item.title}</td>
-      <td>{item.owner}</td>
-      <td>{item.duration}</td>
-      <td><a href={item.url}>{item.url}</a></td>
-      <td>
-        <FontAwesome
-          className="edit-icon"
-          name="edit"
-          size="1x"
-          style={{ textShadow: '0 1px 0 rgba(0, 0, 0, 0.1)' }}
-        />
-        <FontAwesome
-          className="cancel-icon"
-          name="times"
-          size="1x"
-          style={{ textShadow: '0 1px 0 rgba(0, 0, 0, 0.1)' }}
-        />
-      </td>
-    </tr>
-  );
-});
-
-const SortableList = SortableContainer(({items}) => {
-  return (
-    <tbody>
-      {items.map((item, index) => (
-        <SortableItem key={`item-${index}`} index={index} item={item}/>
-      ))}
-    </tbody>
-  );
-});
+import SortableList from './SortableList';
+import * as bulletinService from '../../services/bulletinService';
+import textConstants from '../../constants/textConstants';
 
 class ListEntries extends Component {
 
@@ -46,36 +13,33 @@ class ListEntries extends Component {
     super();
     
     this.state = {
-      items: [
-        {
-          id: 1,
-          owner: 'owner1',
-          duration: '10',
-          url: 'https://www.google.com',
-          title: 'google'
-        }, {
-          id: 2,
-          owner: 'owner1',
-          duration: '5',
-          url: 'https://www.youtube.com',
-          title: 'youtube'
-        }, {
-          id: 3,
-          owner: 'owner2',
-          duration: '10',
-          url: 'https://www.twitter.com',
-          title: 'twitter'
-        }, {
-          id: 4,
-          owner: 'owner1',
-          duration: '5',
-          url: 'https://www.facebook.com',
-          title: 'facebook'
-        }
-      ]
+      items: []
     };
     
     this.onSortEnd = this.onSortEnd.bind(this);
+    this.refreshList = this.refreshList.bind(this);
+    this.deleteBulletin = this.deleteBulletin.bind(this);
+  }
+  
+  componentDidMount () {
+   bulletinService.listBulletin().then((response) => {
+    this.setState({
+      items: response && response.data && response.data.data || []
+    });
+   }).catch((err) => {
+     swal(err.response.data.error.message);
+   });
+    
+  }
+
+  refreshList () {
+    bulletinService.listBulletin().then((response) => {
+      this.setState({
+        items: response && response.data && response.data.data || []
+      });
+    }).catch((err) => {
+      swal(err.response.data.error.message);
+    });
   }
 
   onSortEnd({oldIndex, newIndex}) {
@@ -84,29 +48,52 @@ class ListEntries extends Component {
     });
   }
 
+  deleteBulletin (id) {
+    swal({
+      title: textConstants.deleteWarningMessage,
+      text: textConstants.deleteWarningDescription,
+      type: "warning",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true
+    })
+    .then(function (willDelete) {
+      if (willDelete) {
+        bulletinService.deleteBulletin(id).then((response) => {
+          this.refreshList();
+        });
+      }
+    }).catch((err) => {
+      swal(err.response.data.error.message);
+    });
+  }
+
   render () {
-    
     return (
       <div>
-        <AddEntry/>
-        <h3>Bulletins</h3>
-        <table className="bulletin-table">
-          <thead>
-            <tr>
-              <td>id</td>
-              <td>title</td>
-              <td>owner</td>              
-              <td>duration</td>
-              <td>url</td>
-              <td>actions</td>
-            </tr>
-          </thead>
-          <SortableList items={this.state.items} onSortEnd={this.onSortEnd}/>              
-        </table>
+        <div className="clearfix">
+          <div className="left-content bulletin-title"><h3>Bulletins</h3></div>
+          <div className="right-content">
+            <AddEntry refreshList={() => this.refreshList()}/>
+          </div>
+        </div>
+        <div className="bulletin-table">
+          <div className="table-head">
+              <div className="bulletin-drag-handle"></div>
+              <div className="bulletin-id">ID</div>
+              <div className="bulletin-title">TITLE</div>
+              <div className="bulletin-owner">OWNER</div>              
+              <div className="bulletin-duration">DURATION</div>
+              <div className="bulletin-url">URL</div>
+              <div className="bulletin-actions">ACTIONS</div>
+          </div>
+          <SortableList helperClass={'SortableHelperWithOverride'} items={this.state.items} onSortEnd={this.onSortEnd}  useDragHandle={true} 
+          deleteBulletin={this.deleteBulletin}
+          refreshList={this.refreshList}/>              
+        </div>
       </div>
     );
   }
-
 }
 
 export default ListEntries;
