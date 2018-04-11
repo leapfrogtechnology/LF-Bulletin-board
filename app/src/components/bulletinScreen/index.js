@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import './styles.css';
+
 class BulletinScreen extends Component {
 
   constructor() {
@@ -12,7 +14,7 @@ class BulletinScreen extends Component {
       secondSelectedLink: {}
     };
 
-    this.getDate = this.getData.bind(this);
+    this.getData = this.getData.bind(this);
     this.setData = this.setData.bind(this);
     this.showFrame = this.showFrame.bind(this);
     this.toggleFrame = this.toggleFrame.bind(this);
@@ -108,19 +110,19 @@ class BulletinScreen extends Component {
     let tempObjects = [
       {
         url: 'https://weather.lftechnology.com/',
-        duration: 1000
+        duration: 10000
       },
       {
         url: 'https://sports.lftechnology.com/',
-        duration: 1000
+        duration: 10000
       },
       {
         url: 'https://dev.music.lftechnology.com/',
-        duration: 1000
+        duration: 10000
       },
       {
         url: 'https://sports.lftechnology.com/',
-        duration: 1000
+        duration: 10000
       }
     ];
     localStorage.setItem('data', JSON.stringify(tempObjects));
@@ -189,26 +191,18 @@ class BulletinScreen extends Component {
 
   render() {
     return (
-      <div style={{ height: '100vh' }}>
+      <div className="iframe-holder">
         <iframe
           src={this.state.firstSelectedLink.url}
-          width="100%"
-          height="100%"
-          scrolling="no"
+          className="first-iframe"
           style={{
-            position: 'fixed',
-            border: 0,
             visibility: this.state.firstSelectedLink.show ? 'visible' : 'hidden'
           }}
         />
         <iframe
           src={this.state.secondSelectedLink.url}
-          width="100%"
-          height="100%"
-          scrolling="no"
+          className="second-iframe"
           style={{
-            position: 'absolute',
-            border: 0,
             visibility: this.state.secondSelectedLink.show
               ? 'visible'
               : 'hidden'
