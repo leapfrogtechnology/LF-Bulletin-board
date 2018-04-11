@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
 import './styles.css';
-
 class BulletinScreen extends Component {
 
   constructor() {
