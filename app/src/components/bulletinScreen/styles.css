@@ -1,0 +1,13 @@
+.iframe-holder {
+  height: 100vh;
+}
+
+.first-iframe {
+  border: 0;
+  position: 'fixed';
+}
+
+.second-iframe {
+  border: 0;
+  position: 'absolute';
+}
