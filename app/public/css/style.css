@@ -92,7 +92,7 @@ body {
   width: 5%;
   height: 100vh;
   background-color: #4F4F4F;
-  padding: 5px;
+  padding: 0px;
   position: relative;
 }
 
@@ -162,7 +162,7 @@ body {
 }
 
 .add-entry-button {
-  background-color: #30BEFF;
+  background-color:#29CBE0;
   border: none;
   margin-top: 20px;
   margin-bottom: 10px;
@@ -185,7 +185,7 @@ body {
 .table-row {
   border-radius: 3px;
   border: 2px solid #EFF5F9;
-  background-color: #F7FBFE;  
+  background-color:#F6FBFF;  
   margin-bottom: 5px;  
 }
 
@@ -241,7 +241,7 @@ body {
 }
 
 .bulletin-url a {
-  color: #18B0F5;
+  color: 	#29CBE0;
 }
 
 .bulletin-actions {
@@ -290,6 +290,22 @@ body {
 
 .SortableHelperWithOverride {
   pointer-events: auto !important;
+}
+
+.sidemenu-bulletin-logo {
+  background-color:#29CBE0;
+}
+
+.sidemenu-bulletin-logo img {
+  display: block;
+  margin: 0 auto;
+  padding-top: 10px;
+  padding-bottom: 10px;  
+}
+
+.dashboard-header-wrapper {
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgb(218, 218, 218);
 }
 
 .clearfix::after {

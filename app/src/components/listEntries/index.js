@@ -71,7 +71,7 @@ class ListEntries extends Component {
   render () {
     return (
       <div>
-        <div className="clearfix">
+        <div className="clearfix dashboard-header-wrapper">
           <div className="left-content bulletin-title"><h3>Bulletins</h3></div>
           <div className="right-content">
             <AddEntry refreshList={() => this.refreshList()}/>
