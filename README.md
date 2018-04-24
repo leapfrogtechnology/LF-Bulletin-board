@@ -10,9 +10,14 @@ Leapfrog Bulletin Board is a Web App that helps to build an interactive Kiosk.
 - Embed websites
 
 
+### Requirements
+
+- Heroku account
+
+
 ### Deploy on Heroku
 
-- Click here on [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/leapfrogtechnology/LF-Bulletin-board/tree/master)
+- Click here [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/leapfrogtechnology/LF-Bulletin-board/tree/dev)
 - Enter desired App Name
 - Click on “Deploy for Free” button
 - Click on “Manage App” button
@@ -77,11 +82,13 @@ _Note: If you make changes in slide. Make sure you add new Google Docs URL or ju
 #### How to embed YouTube videos
 
 - Go to Leapfrog bulletin board dashboard
+- Add youtube videos to playlist
 - Click on YouTubes
 - Click on ADD YOUTUBE
 - Paste YouTube video URL
-- Click on save Repeat the steps to add more videos in play list
-- Go back to dashboard
+- Click on save Repeat the steps to add more videos in playlist
+- Set timing to play youtube video
+- Go to dashboard
 - Click on “Schedules”
 - Click on “ADD SCHEDULE”
 - Enter Start time and End time
