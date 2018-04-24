@@ -1,6 +1,7 @@
+import swal from 'sweetalert';
 import Modal from 'react-modal';
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import FontAwesome from 'react-fontawesome';
 import { FormGroup, ControlLabel, FormControl, Button} from 'react-bootstrap';
 
 import * as bulletinService from '../../services/bulletinService';
@@ -17,6 +18,7 @@ const modalStyle = {
 };
 
 class EditEntry extends Component {
+
   constructor (props) {
     super(props);
 
@@ -37,7 +39,7 @@ class EditEntry extends Component {
     let params = this.state.formdata;
     params.owner = this.props.item.owner;
 
-    bulletinService.editBulletin(this.props.item.id, params).then((response) => {
+    bulletinService.editBulletin(this.props.item.id, params).then(() => {
       this.closeModal();
       this.props.refreshList();
     }).catch(err => {
@@ -76,7 +78,6 @@ class EditEntry extends Component {
         ></i>
         <Modal
           isOpen={this.state.modalIsOpen}
-          onAfterOpen={() => this.afterOpenModal()}
           onRequestCLose={() => this.closeModal()}
           style={modalStyle}
           content-label="edit entry modal"
@@ -118,6 +119,12 @@ class EditEntry extends Component {
       </div>
     );
   }
+
 }
+
+EditEntry.propTypes = {
+  item: PropTypes.object,
+  refreshList: PropTypes.func
+};
 
 export default EditEntry;
