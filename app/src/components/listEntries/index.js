@@ -48,7 +48,6 @@ class ListEntries extends Component {
   }
 
   deleteBulletin (id) {
-    var vm = this;
     swal({
       title: textConstants.deleteWarningMessage,
       text: textConstants.deleteWarningDescription,
@@ -57,10 +56,10 @@ class ListEntries extends Component {
       buttons: true,
       dangerMode: true
     })
-      .then(function (willDelete) {
+      .then((willDelete) => {
         if (willDelete) {
           bulletinService.deleteBulletin(id).then(() => {
-            vm.refreshList();
+            this.refreshList();
           });
         }
       }).catch((err) => {
@@ -72,7 +71,7 @@ class ListEntries extends Component {
     return (
       <div>
         <div className="clearfix dashboard-header-wrapper">
-          <div className="left-content bulletin-title"><h3>Bulletins</h3></div>
+          <div className="left-content bulletin-heading"><h3>Bulletins</h3></div>
           <div className="right-content">
             <AddEntry refreshList={() => this.refreshList()}/>
           </div>

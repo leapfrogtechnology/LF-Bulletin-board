@@ -127,7 +127,19 @@ body {
 }
 
 .add-entry-form {
-  width: 500px;;
+  width: 400px;
+  font-family: 'montserrat';
+}
+
+.add-entry-form .form-group label {
+  font-size: 12px;
+  color: #95ACBC;
+}
+
+.add-entry-form .form-group input {
+  background-color: #F6FBFF;
+  border: 1px solid rgb(219, 225, 230); 
+  box-shadow: none;
 }
 
 .add-entry-form Button {
@@ -135,13 +147,14 @@ body {
 }
 
 .add-entry-form button.cancel-button {
-  margin-left: 20px;
+  color: gray;
 }
 
 .add-entry-form button.submit-button {
   border: none;
-  background-color: rgb(58, 156, 74); 
+  background-color: #29CBE0; 
   color: white;
+  margin-left: 20px;
 }
 
 .navbar {
@@ -150,7 +163,7 @@ body {
 
 .container {
   width: 85% !important;
-  padding-top: 20px;
+  padding-top: 40px;
 }
 
 .section .form-container {
@@ -161,11 +174,32 @@ body {
   background-color: #ffffff;
 }
 
+.add-entry-heading {
+  font-family: 'montserrat-bold';
+  font-size: 24px; 
+}
+
 .add-entry-button {
   background-color:#29CBE0;
-  border: none;
+  border: 1px solid #29CBE0;  
   margin-top: 20px;
   margin-bottom: 10px;
+}
+
+.add-entry-button:hover {
+  background-color:#ffffff;
+  color: rgb(44, 170, 187);
+  border: 1px solid rgb(44, 170, 187);
+}
+
+.add-entry-button:hover  .ion-plus-round{
+  color: rgb(44, 170, 187) !important;
+}
+
+.add-entry-button:active, .add-entry-button:visited, .add-entry-button:focus,
+.add-entry-form button.submit-button {
+  background-color: #29CBE0 !important;
+  border: 1px solid rgb(44, 170, 187);
 }
 
 .add-entry-button span{
@@ -248,8 +282,8 @@ body {
   width: 10%;
 }
 
-.bulletin-title {
-  font-family: 'montserrat';
+.bulletin-heading {
+  font-family: 'montserrat-bold';
 }
 
 .edit-entry {
@@ -306,6 +340,21 @@ body {
 .dashboard-header-wrapper {
   padding-bottom: 10px;
   border-bottom: 1px solid rgb(218, 218, 218);
+  margin-bottom: 20px;
+}
+
+.priority-duration-wrapper .form-group{
+  width: 48.5%;
+  float: left;
+}
+
+.priority-duration-wrapper .form-group:nth-child(2) {
+  margin-left: 3%;
+}
+
+.form-buttons-wrapper {
+  clear: both;
+  float: right;
 }
 
 .clearfix::after {
