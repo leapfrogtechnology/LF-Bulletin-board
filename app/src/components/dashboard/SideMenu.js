@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 import logo from '../../../public/images/bulletin-logo-inverse.png';
 
 class SideMenu extends Component {
