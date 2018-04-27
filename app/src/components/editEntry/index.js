@@ -1,6 +1,7 @@
+import swal from 'sweetalert';
 import Modal from 'react-modal';
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import FontAwesome from 'react-fontawesome';
 import { FormGroup, ControlLabel, FormControl, Button} from 'react-bootstrap';
 
 import * as bulletinService from '../../services/bulletinService';
@@ -17,6 +18,7 @@ const modalStyle = {
 };
 
 class EditEntry extends Component {
+
   constructor (props) {
     super(props);
 
@@ -37,7 +39,7 @@ class EditEntry extends Component {
     let params = this.state.formdata;
     params.owner = this.props.item.owner;
 
-    bulletinService.editBulletin(this.props.item.id, params).then((response) => {
+    bulletinService.editBulletin(this.props.item.id, params).then(() => {
       this.closeModal();
       this.props.refreshList();
     }).catch(err => {
@@ -76,7 +78,6 @@ class EditEntry extends Component {
         ></i>
         <Modal
           isOpen={this.state.modalIsOpen}
-          onAfterOpen={() => this.afterOpenModal()}
           onRequestCLose={() => this.closeModal()}
           style={modalStyle}
           content-label="edit entry modal"
@@ -85,39 +86,49 @@ class EditEntry extends Component {
           <form className="add-entry-form" onSubmit={() => this.handleSubmit(event)}>
             <FormGroup>
               <ControlLabel>Segment Title</ControlLabel>
-              <FormControl id="title" name="title" type="text" placeholder="segment title"
+              <FormControl id="title" name="title" type="text" placeholder=""
                 value={this.state.formdata.title}
                 onChange={() => this.handleChange(event)}
               />
             </FormGroup>
-            <FormGroup>
-              <ControlLabel>Priority</ControlLabel>
-              <FormControl id="priority" name="priority" type="text" placeholder="priority"
-                value={this.state.formdata.priority}
-                onChange={() => this.handleChange(event)}
-              />
-            </FormGroup>
-            <FormGroup>
-              <ControlLabel>Duration</ControlLabel>
-              <FormControl id="duration" name="duration" type="text" placeholder="duration"
-                value={this.state.formdata.duration}
-                onChange={() => this.handleChange(event)}                
-              />
-            </FormGroup>
+            <div className="priority-duration-wrapper">
+              <FormGroup>
+                <ControlLabel>Priority</ControlLabel>
+                <FormControl id="priority" name="priority" type="text" placeholder=""
+                  value={this.state.formdata.priority}
+                  onChange={() => this.handleChange(event)}
+                />
+              </FormGroup>
+              <FormGroup>
+                <ControlLabel>Duration</ControlLabel>
+                <FormControl id="duration" name="duration" type="text" placeholder=""
+                  value={this.state.formdata.duration}
+                  onChange={() => this.handleChange(event)}                
+                />
+              </FormGroup>
+            </div>
             <FormGroup>
               <ControlLabel>Url</ControlLabel>
-              <FormControl id="url" name="url" type="text" placeholder="url"
+              <FormControl id="url" name="url" type="text" placeholder=""
                 value={this.state.formdata.url}
                 onChange={() => this.handleChange(event)}                
               />
             </FormGroup>
-            <Button className="submit-button" bsStyle="primary" type="submit">Submit</Button>
-            <Button className="cancel-button" bsStyle="default" onClick={() => this.closeModal()}>Cancel</Button>
+            <div className="form-buttons-wrapper">
+              <Button className="cancel-button" bsStyle="default" onClick={() => this.closeModal()}>CANCEL</Button>
+              <Button className="submit-button" bsStyle="primary" type="submit">EDIT</Button>              
+            </div>
           </form>
         </Modal>    
       </div>
     );
   }
+
 }
+
+EditEntry.propTypes = {
+  item: PropTypes.object,
+  refreshList: PropTypes.func
+};
 
 export default EditEntry;
