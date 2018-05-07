@@ -13,5 +13,8 @@
   "website": "http://bulletin.lftechnology.com/",
   "repository": "https://github.com/leapfrogtechnology/LF-Bulletin-board/tree/master",
   "logo": "http://lftechnology.com/media/images/top_mast_logo.png",
-  "success_url": "/"
+  "success_url": "/",
+  "addons": [
+    "heroku-postgresql"
+  ]
 }
