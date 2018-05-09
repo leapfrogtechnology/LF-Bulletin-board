@@ -18,20 +18,16 @@ Leapfrog Bulletin Board is a Web App that helps to build an interactive Kiosk.
 ### Deploy on Heroku
 
 - Click here [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/leapfrogtechnology/LF-Bulletin-board/tree/dev)
-- Enter desired App Name
+- Enter desired app-name
 - Click on “Deploy for Free” button
-- Click on “Manage App” button
-- Overview of app appears. Click on “Heroku Postgres” link
-- Postgres “Connection Settings” appears. Note down these credentials
-- Go back to bulletin board app on Heroku Dashboard
-- Click on “Settings” tab
-- Click on “Reveal Config Vars”
-- Now enter Postgres Connection Settings of step 7 (DB_HOST, DB_NAME, DB_USER, DB_PASSWORD, DB_PORT) in Key, Value pair
 - Install Heroku Command Line  https://devcenter.heroku.com/articles/heroku-command-line
-- Open Terminal
+```
+$ heroku login
+$ heroku run python manage.py migrate --app [app-name]
+$ heroku run python manage.py createsuperuser --app [app-name]
+```
 
-
-### Install on your computer
+### Install on local
 
 ```bash
 $ heroku login
