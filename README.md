@@ -27,7 +27,7 @@ $ heroku run python manage.py migrate --app [app-name]
 $ heroku run python manage.py createsuperuser --app [app-name]
 ```
 
-### Install on local
+### Setup
 
 ```bash
 $ heroku login
