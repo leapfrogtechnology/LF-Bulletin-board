@@ -1,9 +1,11 @@
 import { Router } from 'express';
 
 import * as CONSTANT from '../const';
+import * as userService from '../services/userService';
 import * as authService from '../services/authService';
 import * as tokenService from '../services/tokenService';
 import validateRefreshToken from '../middlewares/validateToken';
+import validateGoogleToken from '../middlewares/verifyGoogleToken';
 
 const router = Router();
 
@@ -40,5 +42,13 @@ router.delete('/logout', (req, res, next) => {
     .then(data => res.json({ data }))
     .catch(err => next(err));
 });
-
+/**
+ * Authenticate google login /api/auth/google
+ */
+router.post('/auth/google', validateGoogleToken, (req, res, next) => {
+  userService
+    .loginUser(req.user)
+    .then(data=> res.json({data}))
+    .catch(err=> next(err))
+});
 export default router;
