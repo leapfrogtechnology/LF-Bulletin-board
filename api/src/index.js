@@ -6,6 +6,7 @@ import helmet from 'helmet';
 import morgan from 'morgan';
 import express from 'express';
 import routes from './routes';
+import socket from 'socket.io';
 import favicon from 'serve-favicon';
 import logger from './utils/logger';
 import bodyParser from 'body-parser';
@@ -44,8 +45,33 @@ app.use('/api', routes);
 app.use(errorHandler.genericErrorHandler);
 app.use(errorHandler.methodNotAllowed);
 
-app.listen(app.get('port'), app.get('host'), () => {
+let server = app.listen(app.get('port'), app.get('host'), () => {
   logger.log('info', `Server started at http://${app.get('host')}:${app.get('port')}`);
+});
+
+let io = socket(server);
+
+io.on('connection', socket => {
+  let tempObjects = [
+    {
+      url: 'https://weather.lftechnology.com/',
+      duration: 10000
+    },
+    {
+      url: 'https://sports.lftechnology.com/',
+      duration: 10000
+    },
+    {
+      url: 'https://dev.music.lftechnology.com/',
+      duration: 10000
+    },
+    {
+      url: 'https://sports.lftechnology.com/',
+      duration: 10000
+    }
+  ];
+
+  socket.emit('RECEIVE_DATA', tempObjects);
 });
 
 export default app;
