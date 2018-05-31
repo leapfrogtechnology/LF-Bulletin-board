@@ -1,9 +1,9 @@
 const routeConstants = {
   HOME: '/',
-  LOGIN: '/login',  
+  LOGIN: '/login',
   GUIDES: '/guides',
+  BULLETIN: '/bulletin',
   DASHBOARD: '/dashboard'
-  
 };
 
 export default routeConstants;

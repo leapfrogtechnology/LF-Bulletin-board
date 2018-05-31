@@ -17,53 +17,44 @@ const modalStyle = {
   }
 };
 
-class AddEntry extends Component {
+class EditEntry extends Component {
 
-  constructor () {
-    super();
+  constructor (props) {
+    super(props);
 
     this.state = {
       modalIsOpen : false,
       formdata: {
-        url: '',
-        title: '',
-        priority: null,
-        duration: null
+        title: this.props.item.title,
+        priority: this.props.item.priority,
+        duration: this.props.item.duration,
+        url: this.props.item.url
       }
     };
   }
-  
+
   handleSubmit (event) {
     event.preventDefault();
 
     let params = this.state.formdata;
+    params.owner = this.props.item.owner;
 
-    bulletinService.addBulletin(params)
-      .then(() => {
-        this.props.refreshList();
-        this.closeModal();
-        this.setState({
-          formdata: {
-            url: '',
-            title: '',
-            priority: null,
-            duration: null
-          }
-        });
-      }).catch((err) => {
-        swal(err.response.data.error.details[0].message);
-      });
+    bulletinService.editBulletin(this.props.item.id, params).then(() => {
+      this.closeModal();
+      this.props.refreshList();
+    }).catch(err => {
+      swal(err.response.data.error.details[0].message);
+    });
   }
 
   handleChange (el) {
     let inputName = el.target.name;
     let inputValue = el.target.value;
-    let formData = Object.assign({}, this.state.formdata);
+    let tempObj = Object.assign({}, this.state.formdata);
 
-    formData[inputName] = inputValue;
-
+    tempObj[inputName] = inputValue;
     this.setState({
-      formdata: formData
+      formdata: tempObj
     });
   }
 
@@ -79,23 +70,20 @@ class AddEntry extends Component {
     });
   }
 
-  render() {
-
+  render () {
     return (
-      <div>
-        <Button className="add-entry-button" bsStyle="primary" onClick={() => this.openModal()}>
-          <span>Add</span>
-          <i className="icon ion-plus-round"></i>
-        </Button>
+      <div className="edit-entry">
+        <i className="icon ion-edit"
+          onClick={() => this.openModal()}
+        ></i>
         <Modal
           isOpen={this.state.modalIsOpen}
-          onRequestClose={() => this.closeModal()}
+          onRequestCLose={() => this.closeModal()}
           style={modalStyle}
-          content-label="add entry modal"
+          content-label="edit entry modal"
         >
-          <h2 className="add-entry-heading">Add New Entry</h2>
+          <h2>Edit Bulletin</h2>
           <form className="add-entry-form" onSubmit={() => this.handleSubmit(event)}>
-
             <FormGroup>
               <ControlLabel>Segment Title</ControlLabel>
               <FormControl id="title" name="title" type="text" placeholder=""
@@ -111,7 +99,6 @@ class AddEntry extends Component {
                   onChange={() => this.handleChange(event)}
                 />
               </FormGroup>
-
               <FormGroup>
                 <ControlLabel>Duration</ControlLabel>
                 <FormControl id="duration" name="duration" type="text" placeholder=""
@@ -120,7 +107,6 @@ class AddEntry extends Component {
                 />
               </FormGroup>
             </div>
-
             <FormGroup>
               <ControlLabel>Url</ControlLabel>
               <FormControl id="url" name="url" type="text" placeholder=""
@@ -130,20 +116,19 @@ class AddEntry extends Component {
             </FormGroup>
             <div className="form-buttons-wrapper">
               <Button className="cancel-button" bsStyle="default" onClick={() => this.closeModal()}>CANCEL</Button>
-              <Button className="submit-button" bsStyle="primary" type="submit">ADD</Button>
-            </div>            
+              <Button className="submit-button" bsStyle="primary" type="submit">EDIT</Button>              
+            </div>
           </form>
-
-        </Modal>
-        
+        </Modal>    
       </div>
     );
   }
 
 }
 
-AddEntry.propTypes = {
-  refreshList: PropTypes.func.isRequired
+EditEntry.propTypes = {
+  item: PropTypes.object,
+  refreshList: PropTypes.func
 };
 
-export default AddEntry;
+export default EditEntry;

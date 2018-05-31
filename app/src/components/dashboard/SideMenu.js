@@ -1,28 +1,21 @@
 import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom';
-import FontAwesome from 'react-fontawesome';
+
+import logo from '../../../public/images/bulletin-logo-inverse.png';
 
 class SideMenu extends Component {
 
   render() {
     return (
       <div>
-        <h3>Bulletin Dashboard</h3>
-        <ul>
+        <div className="sidemenu-bulletin-logo">
+          <img src={logo} alt="bulletin logo"/>
+        </div>
+        <ul className="side-menu-list">
           <li>
-            <NavLink
-              className="clearfix"
-              activeClassName="activeNav active"
-              to="/dashboard/list"
-            >
-              <span>List</span>
-              <FontAwesome
-                className="super-crazy-colors"
-                name="list"
-                size="1x"
-                style={{ textShadow: '0 1px 0 rgba(0, 0, 0, 0.1)' }}
-              />
-            </NavLink>
+            <span href="javascript:void(0)" className="profile-name">AA</span>
+          </li>
+          <li>
+            <span><i href="javascript:void(0)" className="icon ion-more"></i></span>
           </li>
         </ul>
       </div>

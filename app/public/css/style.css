@@ -3,6 +3,16 @@
   src: url(../fonts/geomanist-regular-webfont.ttf);
 }
 
+@font-face {
+  font-family: 'montserrat';
+  src: url(../fonts/montserrat/Montserrat-Regular.otf);
+}
+
+@font-face {
+  font-family: 'montserrat-bold';
+  src: url(../fonts/montserrat/Montserrat-SemiBold.otf);
+}
+
 body {
   color: rgb(90, 90, 90);
   background: #ffffff;
@@ -61,24 +71,12 @@ body {
   font-size: 60px;
 }
 
-.navbar-wrapper {
-  width: 100%;
-  background: rgb(44, 161, 64);
-  padding: 10px 0px;
-}
-
 .left-content {
   float: left;
 }
 
 .right-content {
   float: right;
-}
-
-.clearfix::after {
-  content: "";
-  clear: both;
-  display: table;
 }
 
 .dashboard-text {
@@ -90,29 +88,23 @@ body {
   padding: 5px;
 }
 
-.image-wrapper {
-  width: 40px;
-  height: 40px;
-  border-radius: 20px;
-  overflow: hidden;
-  display: inline-block;
-  vertical-align: middle;
-}
-
-.image-wrapper img {
-  width: 100%;
-}
-
 .sidemenu-wrapper {
-  width: 15%;
+  width: 5%;
   height: 100vh;
-  background-color: rgb(73, 66, 80); 
+  background-color: #4F4F4F;
+  padding: 0px;
+  position: relative;
 }
 
 .sidemenu-wrapper ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
+  display: block;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
 }
 
 .sidemenu-wrapper h3 {
@@ -120,61 +112,58 @@ body {
   color: rgb(75, 196, 95);
 }
 
-.sidemenu-wrapper ul li a{
+.sidemenu-wrapper ul li span{
   text-decoration: none;
   text-align: center;
-  background-color: rgb(73, 66, 80);
   display: block;
-  padding: 10px 15px;;
   cursor: pointer;
-  color: white;
-  font-weight: bolder;
-}
-
-.sidemenu-wrapper ul li a:hover {
-  color: rgb(106, 214, 124);
-}
-
-.activeNav {
-  color: rgb(106, 214, 124) !important;
-}
-
-.sidemenu-wrapper ul li a span {
-  float: left;
-}
-
-.sidemenu-wrapper ul li a span:nth-child(2) {
-  float: right;
+  display: table;
+  margin: 0 auto;
+  color: #4F4F4F
 }
 
 .main-container-wrapper {
-  width: 85%;
+  width: 95%;
 }
 
 .add-entry-form {
-  width: 500px;;
+  width: 400px;
+  font-family: 'montserrat';
+}
+
+.add-entry-form .form-group label {
+  font-size: 12px;
+  color: #95ACBC;
+}
+
+.add-entry-form .form-group input {
+  background-color: #F6FBFF;
+  border: 1px solid rgb(219, 225, 230); 
+  box-shadow: none;
 }
 
 .add-entry-form Button {
   display: inline-block;
 }
+
 .add-entry-form button.cancel-button {
-  margin-left: 20px;
+  color: gray;
 }
 
 .add-entry-form button.submit-button {
   border: none;
-  background-color: rgb(58, 156, 74); 
+  background-color: #29CBE0; 
   color: white;
+  margin-left: 20px;
 }
 
 .navbar {
-  /* border-color: white !important; */
   border-radius: 0px !important;
 }
 
 .container {
   width: 85% !important;
+  padding-top: 40px;
 }
 
 .section .form-container {
@@ -183,6 +172,34 @@ body {
   height: 300px;
   border-radius: 10px solid rgb(159, 184, 155);
   background-color: #ffffff;
+}
+
+.add-entry-heading {
+  font-family: 'montserrat-bold';
+  font-size: 24px; 
+}
+
+.add-entry-button {
+  background-color:#29CBE0;
+  border: 1px solid #29CBE0;  
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.add-entry-button:hover {
+  background-color:#ffffff;
+  color: rgb(44, 170, 187);
+  border: 1px solid rgb(44, 170, 187);
+}
+
+.add-entry-button:hover  .ion-plus-round{
+  color: rgb(44, 170, 187) !important;
+}
+
+.add-entry-button:active, .add-entry-button:visited, .add-entry-button:focus,
+.add-entry-form button.submit-button {
+  background-color: #29CBE0 !important;
+  border: 1px solid rgb(44, 170, 187);
 }
 
 .add-entry-button span{
@@ -195,32 +212,153 @@ body {
 
 .bulletin-table {
   width: 100%;
+  display: block;
+  font-family: "montserrat";
 }
 
-.bulletin-table thead{
-  border-bottom: 2px solid gray;
+.table-row {
+  border-radius: 3px;
+  border: 2px solid #EFF5F9;
+  background-color:#F6FBFF;  
+  margin-bottom: 5px;  
 }
 
-.bulletin-table tbody tr {
-  border-bottom: 1px solid gray;
-}
-
-.bulletin-table td {
-  padding: 3px 5px;
-}
-
-.bulletin-table td span {
+.table-row div{
   display: inline-block;
+  padding: 10px;
+
+}
+.table-head div {
+  display: inline-block;
+  padding: 10px;
+  margin-bottom: 5px;  
 }
 
-.bulletin-table td span:last-child {
+.bulletin-drag-handle {
+  width: 5%;
+  cursor: move;
+}
+
+.bulletin-drag-handle {
+  border-right: 1px solid rgb(227, 236, 241);
+}
+.bulletin-actions {
+  border-left: 1px solid rgb(227, 236, 241);
+}
+.bulletin-table .table-head {
+  font-size: 11px;
+}
+
+.bulletin-table .table-head .bulletin-drag-handle{
+  border-right: none;  
+}
+
+.bulletin-table .table-head .bulletin-actions{
+  border-left: none;  
+} 
+
+.bulletin-id {
+  width: 7%;
+}
+
+.bulletin-title {
+  width: 25%;
+}
+.bulletin-owner {
+  width: 13%;
+}
+.bulletin-duration {
+  width: 10%;
+}
+.bulletin-url{
+  width: 30%;
+}
+
+.bulletin-url a {
+  color: 	#29CBE0;
+}
+
+.bulletin-actions {
+  width: 10%;
+}
+
+.bulletin-heading {
+  font-family: 'montserrat-bold';
+}
+
+.edit-entry {
+  padding: 0px !important;
+}
+
+.icon {
+  font-size: 20px;
+  color: #95ACBC;
+}
+
+.ion-edit {
+  margin-left: 5px;
+  cursor: pointer;  
+}
+
+.ion-trash-b {
+  margin-left: 15px;
+  cursor: pointer;  
+}
+
+.ion-plus-round {
   margin-left: 10px;
+  color: white !important;
+} 
+
+.profile-name {
+  display: inline-block;
+  height: 50px;
+  width: 50px;
+  background-color: white;
+  border-radius: 25px;
+  line-height: 50px;
+  text-align: center;
+  font-size: 20px;
+  font-family: 'montserrat';
 }
 
-.edit-icon {
-  color: rgb(93, 142, 189);
+.SortableHelperWithOverride {
+  pointer-events: auto !important;
 }
 
-.cancel-icon {
-  color: rgb(182, 35, 60);
+.sidemenu-bulletin-logo {
+  background-color:#29CBE0;
+}
+
+.sidemenu-bulletin-logo img {
+  display: block;
+  margin: 0 auto;
+  padding-top: 10px;
+  padding-bottom: 10px;  
+}
+
+.dashboard-header-wrapper {
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgb(218, 218, 218);
+  margin-bottom: 20px;
+}
+
+.priority-duration-wrapper .form-group{
+  width: 48.5%;
+  float: left;
+}
+
+.priority-duration-wrapper .form-group:nth-child(2) {
+  margin-left: 3%;
+}
+
+.form-buttons-wrapper {
+  clear: both;
+  float: right;
+}
+
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
 }
