@@ -1,11 +1,11 @@
 @font-face {
-  font-family: 'montserrat';
-  src: url(../fonts/montserrat/Montserrat-Regular.otf);
+  font-family: 'IBMPlexSans';
+  src: url(../fonts/IBM_Plex_Sans/IBMPlexSans-Regular.ttf);
 }
 
 @font-face {
-  font-family: 'montserrat-bold';
-  src: url(../fonts/montserrat/Montserrat-SemiBold.otf);
+  font-family: 'IBMPlexSans-bold';
+  src: url(../fonts/IBM_Plex_Sans/IBMPlexSans-SemiBold.ttf);
 }
 
 body, html {
@@ -56,10 +56,9 @@ img {
 
 h3 {
   position: relative;
-  font-size: 24px;
+  font-size: 22px;
   line-height: 54px;
-  text-transform: uppercase;
-  font-family: 'montserrat';
+  font-family: 'IBMPlexSans';
   margin-bottom: 0;
 }
 
@@ -68,15 +67,36 @@ h3, h4 {
   margin-left: 10px;
 }
 
-.datetime, h4 {
-  line-height: 54px;
-  font-size: 24px;
+.datetime{
+  line-height: 50px;
+  font-size: 22px;
   text-align: right;
-  font-family: 'montserrat';
+  font-family: 'IBMPlexSans';
 }
 
-h4 {
-  text-align: right;
+.datetime-wrapper {
+  float: right;
+}
+
+
+.datetime .calendar-wrapper {
+  float: left;
+  padding: 0 10px;
+}
+
+.datetime .time-wrapper {
+  float: left;
+  padding: 0 10px;
+}
+
+.calendar-wrapper span {
+  display: inline-block;
+  margin-left: 10px;
+}
+
+.time-wrapper span {
+  display: inline-block;
+  margin-left: 10px;
 }
 
 .container {

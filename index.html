@@ -10,8 +10,9 @@
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.3.1/css/foundation.min.css" integrity="sha256-itWEYdFWzZPBG78bJOOiQIn06QCgN/F0wMDcC4nOhxY=" crossorigin="anonymous" />
     <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="https://opensource.keycdn.com/fontawesome/4.7.0/font-awesome.min.css" integrity="sha384-dNpIIXE8U05kAbPhy3G1cz+yZmTzA6CY8Vg/u2L9xRnHjJiAK76m2BIEaSEV+/aU" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="https://opensource.keycdn.com/fontawesome/4.7.0/font-awesome.min.css" integrity="sha384-dNpIIXE8U05kAbPhy3G1cz+yZmTzA6CY8Vg/u2L9xRnHjJiAK76m2BIEaSEV+/aU" crossorigin="anonymous"> -->
     <link href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" />
+
   </head>
   <body>
     <!--[if lt IE 8]>
@@ -32,9 +33,13 @@
           <h3 id="title"></h3>
         </div>
         <div class="large-4 columns datetime">
-          <div>
-            <i class="icon ion-calendar" aria-hidden="true"></i><h4 id="date"></h4>
-            <i class="fa fa-clock-o" aria-hidden="true"></i><h4 id="time"></h4>
+          <div class="datetime-wrapper">
+            <div class="calendar-wrapper">
+              <ion-icon name="calendar"></ion-icon><span id="date"></span>
+            </div>
+            <div class="time-wrapper">
+              <ion-icon name="time"></ion-icon><span id="time"></span>
+            </div>
           </div>
         </div>
       </div>
@@ -42,6 +47,7 @@
     <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
     <script>window.jQuery || document.write('<script src="js/vendor/jquery-2.2.4.min.js"><\/script>')</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.3.1/js/foundation.min.js" integrity="sha256-Nd2xznOkrE9HkrAMi4xWy/hXkQraXioBg9iYsBrcFrs=" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/ionicons@4.1.2/dist/ionicons.js"></script>
 
     <script src="config.js"></script>
     <script src="js/Utils.js"></script>
