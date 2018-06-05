@@ -6,13 +6,14 @@ import helmet from 'helmet';
 import morgan from 'morgan';
 import express from 'express';
 import routes from './routes';
-import socket from 'socket.io';
 import favicon from 'serve-favicon';
 import logger from './utils/logger';
 import bodyParser from 'body-parser';
 import compression from 'compression';
 import json from './middlewares/json';
 import * as errorHandler from './middlewares/errorHandler';
+
+import * as socketIO from './utils/socket';
 
 const app = express();
 
@@ -45,33 +46,11 @@ app.use('/api', routes);
 app.use(errorHandler.genericErrorHandler);
 app.use(errorHandler.methodNotAllowed);
 
-let server = app.listen(app.get('port'), app.get('host'), () => {
+const server = app.listen(app.get('port'), app.get('host'), () => {
   logger.log('info', `Server started at http://${app.get('host')}:${app.get('port')}`);
 });
 
-let io = socket(server);
-
-io.on('connection', socket => {
-  let tempObjects = [
-    {
-      url: 'https://weather.lftechnology.com/',
-      duration: 10000
-    },
-    {
-      url: 'https://sports.lftechnology.com/',
-      duration: 10000
-    },
-    {
-      url: 'https://dev.music.lftechnology.com/',
-      duration: 10000
-    },
-    {
-      url: 'https://sports.lftechnology.com/',
-      duration: 10000
-    }
-  ];
-
-  socket.emit('RECEIVE_DATA', tempObjects);
-});
+// initializing the socket instance
+socketIO.initialize(server);
 
 export default app;
