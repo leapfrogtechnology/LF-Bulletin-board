@@ -18,6 +18,9 @@ export function seed(knex, Promise) {
           },
           {
             email: 'ayushghimire@lftechnology.com'
+          },
+          {
+            email: 'aanchaladhikari@lftechnology.com'
           }
         ])
       ]);

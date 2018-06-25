@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+import MoreMenu from '../moreMenu';
 import logo from '../../../public/images/bulletin-logo-inverse.png';
 
 class SideMenu extends Component {
@@ -15,7 +16,7 @@ class SideMenu extends Component {
             <span href="javascript:void(0)" className="profile-name">AA</span>
           </li>
           <li>
-            <span><i href="javascript:void(0)" className="icon ion-more"></i></span>
+            <MoreMenu/>
           </li>
         </ul>
       </div>

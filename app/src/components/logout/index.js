@@ -1,27 +1,24 @@
-import React, {Component} from 'react';
-import Redirect from 'react-router-dom';
+import React, { Component } from 'react';
+
+import routeConstants from '../../constants/routeConstants';
+import * as bulletinService from '../../services/bulletinService';
 
 class Logout extends Component {
 
-  constructor(){
-    super(); 
-    this.state = {
-      authenticate: localStorage.getItem('isAuthenticated')
-    };
-  }
   logoutUser(){
-    this.setState({
-      authenticate: false
+    bulletinService.logOut().then(() => {
+      
+      localStorage.setItem('isAuthenticated', 0);
+      localStorage.removeItem('accessToken');
+      localStorage.removeItem('refreshToken');
+      window.location.href = routeConstants.LOGIN;
     });
-    localStorage.setItem('isAuthenticated', false);
   }
+
   render(){
-    return authenticate=== 'false' ?
-      (
-                <Redirect to= "/"/>
-      ): (
-            <button className = "btn btn-default">Logout</button>
-);
+    return ( 
+      <button className = "btn btn-default" onClick={() => {this.logoutUser();}}>Logout</button>     
+    );
   }
 
 }

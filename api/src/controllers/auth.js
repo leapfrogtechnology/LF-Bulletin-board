@@ -22,7 +22,7 @@ router.post('/login', (req, res, next) => {
 /**
  * GET /api/refresh
  */
-router.get('/refresh', validateRefreshToken, (req, res, next) => {
+router.post('/refresh', validateRefreshToken, (req, res, next) => {
   tokenService
     .verifyRefreshToken(req.token)
     .then(data => res.json({ accessToken: data }))
@@ -33,9 +33,7 @@ router.get('/refresh', validateRefreshToken, (req, res, next) => {
  * DELETE /api/logout
  */
 router.delete('/logout', (req, res, next) => {
-  let requestToken = req.headers.authorization.substring(
-    CONSTANT.BEARER_LENGTH
-  );
+  let requestToken = req.body.authorization.substring(CONSTANT.BEARER_LENGTH);
 
   authService
     .logoutUser(requestToken)
@@ -48,7 +46,7 @@ router.delete('/logout', (req, res, next) => {
 router.post('/auth/google', validateGoogleToken, (req, res, next) => {
   userService
     .loginUser(req.user)
-    .then(data=> res.json({data}))
-    .catch(err=> next(err))
+    .then(data => res.json({ data }))
+    .catch(err => next(err));
 });
 export default router;

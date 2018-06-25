@@ -57,6 +57,6 @@ router.get('/', (req, res) => {
 
 router.use('/', authController);
 router.use('/users', usersController);
-router.use('/bulletins', bulletinsController);
+router.use('/bulletins', ensureToken, bulletinsController);
 
 export default router;

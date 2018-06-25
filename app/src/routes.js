@@ -17,7 +17,6 @@ const Router = () => (
       <Route exact path={routeConstants.LOGIN} component={Login} /> 
       <Route exact path={routeConstants.BULLETIN} component={Bulletin} />       
       <PrivateRoute path={routeConstants.DASHBOARD} component={Dashboard} />
-      {/* <Route path={routeConstants.DASHBOARD} render={(obj) => (<Dashboard obj={obj}/>)} />         */}
     </div>
   </BrowserRouter>
 );

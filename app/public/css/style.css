@@ -356,6 +356,17 @@ body {
   clear: both;
   float: right;
 }
+.more-menu-wrapper {
+  position: relative;
+}
+
+.more-menu {
+  position: absolute;
+  top: -25px;
+  left: 40px;
+}
+
+
 
 .clearfix::after {
   content: "";
