@@ -1,8 +1,9 @@
 import axios from 'axios';
 import React, { Component } from 'react';
-import GoogleLogin from 'react-google-login';
 import { Redirect } from 'react-router-dom';
+import GoogleLogin from 'react-google-login';
 
+import urlConstants from '../../constants/urlConstants';
 import routeConstants from '../../constants/routeConstants';
 import bulletinLogo from '../../../public/images/bulletin-board-login-image.png';
 
@@ -16,7 +17,7 @@ class GoogleLoginComponent extends Component {
     };
   }
   responseGoogle(response){
-    axios.post('http://localhost:8848/api/auth/google', {'tokenId':response.tokenId})
+    axios.post(urlConstants.googleLoginUrl, {'tokenId':response.tokenId})
       .then(res => {
         localStorage.setItem('isAuthenticated', 1);
         localStorage.setItem('accessToken', res.data.data.tokens.accessToken);
