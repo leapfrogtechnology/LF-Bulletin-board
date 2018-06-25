@@ -4,6 +4,8 @@ import GoogleLogin from 'react-google-login';
 import { Redirect } from 'react-router-dom';
 
 import routeConstants from '../../constants/routeConstants';
+import bulletinLogo from '../../../public/images/bulletin-board-login-image.png';
+
 
 class GoogleLoginComponent extends Component {
  
@@ -30,15 +32,19 @@ class GoogleLoginComponent extends Component {
     const isLoggedIn = this.state.isLoggedIn;
     
     return(
-      <div>
+      <div className="login-wrapper">
         { 
           !isLoggedIn ? (
-            <GoogleLogin
-              clientId="78390524090-tp3ro7vea6p67eepqudcv0fcir97nabf.apps.googleusercontent.com"
-              buttonText="Login"
-              onSuccess={this.responseGoogle.bind(this)}
-              onFailure={this.responseGoogle.bind(this)}
-            />
+            <div className="login-dialog">
+              <img src={bulletinLogo} alt="bulletin logo" className="bulletin-logo-big"/>
+              <GoogleLogin
+                clientId="78390524090-tp3ro7vea6p67eepqudcv0fcir97nabf.apps.googleusercontent.com"
+                buttonText="Google Login"
+                className="login-button-style"
+                onSuccess={this.responseGoogle.bind(this)}
+                onFailure={this.responseGoogle.bind(this)}
+              />
+            </div>
           ) :(
             <Redirect
               to={{
