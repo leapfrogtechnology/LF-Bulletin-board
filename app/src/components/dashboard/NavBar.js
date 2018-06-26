@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import {Navbar, Nav, NavDropdown, MenuItem} from 'react-bootstrap';
 
-import placeholder from '../../../public/images/placeholder.png';
 import Logout from './../logout/index';
+import placeholder from '../../../public/images/placeholder.png';
 
 class NavBar extends Component {
 
@@ -15,7 +15,7 @@ class NavBar extends Component {
               <img src={placeholder} alt="placeholder image"/>        
             </div>
           }>
-          <MenuItem><Logout/></MenuItem>              
+            <MenuItem><Logout/></MenuItem>              
           </NavDropdown>
         </Nav>
 
