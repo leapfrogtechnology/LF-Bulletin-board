@@ -1,5 +1,8 @@
 import Boom from 'boom';
+
 import User from '../models/user';
+import * as tokenService from './tokenService';
+import * as sessionService from './sessionService';
 
 /**
  * Get all users.
@@ -55,4 +58,51 @@ export function updateUser(id, user) {
  */
 export function deleteUser(id) {
   return new User({ id }).fetch().then(user => user.destroy());
+}
+
+/**
+ * Check the database to see if user exists and if exists, return token.
+ *
+ * @param {Object} data
+ * @returns {Promise}
+ */
+export async function loginUser(data) {
+  try {
+    let email = data.email;
+    let user = await fetchByEmail(email);
+    if (user) {
+      let { id, name } = data;
+      let tokens = tokenService.generateTokens(id);
+      let userInfo = {
+        user: {
+          id,
+          name
+        },
+        tokens
+      };
+      await sessionService.createSession(userInfo);
+
+      return userInfo;
+    } else {
+      throw new Boom.notFound('User not registered');
+    }
+  } catch (err) {
+    throw err;
+  }
+}
+
+/**
+ * Fetch User by email.
+ *
+ * @param {string} email
+ * @returns {Promise}
+ */
+export async function fetchByEmail(email) {
+  try {
+    let result = await new User({ email }).fetch();
+
+    return result;
+  } catch (err) {
+    throw err;
+  }
 }

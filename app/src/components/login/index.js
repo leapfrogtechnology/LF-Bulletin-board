@@ -1,78 +1,63 @@
+import axios from 'axios';
 import React, { Component } from 'react';
-import {Redirect} from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
+import GoogleLogin from 'react-google-login';
 
-import * as bulletinService from '../../services/bulletinService';
+import urlConstants from '../../constants/urlConstants';
+import routeConstants from '../../constants/routeConstants';
+import bulletinLogo from '../../../public/images/bulletin-board-login-image.png';
 
-class Login extends Component {
-  constructor () {
+
+class GoogleLoginComponent extends Component {
+ 
+  constructor(){
     super();
-    this.state = {
-      username: '',
-      password: '',
-      isAuthenticated: false
+    this.state={
+      isLoggedIn: JSON.parse(localStorage.getItem('isAuthenticated')) ? true : false || false
     };
-
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
-
-  handleSubmit (event) {
-    event.preventDefault();
-
-    let params = {
-      username: this.state.username,
-      password: this.state.password
-    };
-    let response = bulletinService.checkLogin(this.state).then((result) => {
-      this.setState({
-        isAuthenticated: true
-      });      
-    });
+  responseGoogle(response){
+    axios.post(urlConstants.googleLoginUrl, {'tokenId':response.tokenId})
+      .then(res => {
+        localStorage.setItem('isAuthenticated', 1);
+        localStorage.setItem('accessToken', res.data.data.tokens.accessToken);
+        localStorage.setItem('refreshToken', res.data.data.tokens.refreshToken);
+      
+        this.setState({
+          isLoggedIn: true
+        });
+      })
+      .catch(err => err);
   }
-
-  handleChange (event) {
-    event.preventDefault();
-
-    let inputName = event.target.name;
-    let inputValue = event.target.value;
-    let inputObj = {};
-
-    inputObj[inputName] = inputValue;
-    this.setState(inputObj);
-  }
-
-  render () {
-    if(this.state.isAuthenticated === true) {
-      return <Redirect to="/dashboard"/>
-    }
-
-    return (
-      <div className="section">
-        <h2>Login Page</h2>
-        <div className="form-container">
-          <form id="login-form" onSubmit={this.handleSubmit}>
-              <div>
-                <label>Username</label>
-                <input
-                  type="text"
-                  value={this.state.username}
-                  onChange={(event)=> this.setState({username:event.target.value})}
-                />  
-              </div>
-              <div>
-                <label>Password</label>
-                <input
-                  type="password"
-                  value={this.state.password}
-                  onChange={(event)=> this.setState({password:event.target.value})}
-                />  
-              </div>
-              <button type="submit">Login</button>
-          </form>
-        </div>
+  render(){
+    const isLoggedIn = this.state.isLoggedIn;
+    
+    return(
+      <div className="login-wrapper">
+        { 
+          !isLoggedIn ? (
+            <div className="login-dialog">
+              <img src={bulletinLogo} alt="bulletin logo" className="bulletin-logo-big"/>
+              <GoogleLogin
+                clientId="78390524090-tp3ro7vea6p67eepqudcv0fcir97nabf.apps.googleusercontent.com"
+                buttonText="Google Login"
+                className="login-button-style"
+                onSuccess={this.responseGoogle.bind(this)}
+                onFailure={this.responseGoogle.bind(this)}
+              />
+            </div>
+          ) :(
+            <Redirect
+              to={{
+                pathname: routeConstants.DASHBOARD
+              }}
+            />
+          )
+        }
       </div>
     );
   }
 
 }
 
-export default Login;
+export default GoogleLoginComponent;

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { SortableElement } from 'react-sortable-hoc';
 
 import DragHandle from './DragHandle';
@@ -16,7 +16,7 @@ const SortableItem = SortableElement(({item, deleteBulletin, refreshList}) => {
       <div className="bulletin-actions">
         <EditEntry item={item} refreshList={refreshList}/>
         <i className="icon ion-trash-b"
-          onClick={() => {deleteBulletin(item.id)}}
+          onClick={() => {deleteBulletin(item.id);}}
         ></i>
       </div>
     </div>

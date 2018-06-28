@@ -1,9 +1,11 @@
 import { Router } from 'express';
 
 import * as CONSTANT from '../const';
+import * as userService from '../services/userService';
 import * as authService from '../services/authService';
 import * as tokenService from '../services/tokenService';
 import validateRefreshToken from '../middlewares/validateToken';
+import validateGoogleToken from '../middlewares/verifyGoogleToken';
 
 const router = Router();
 
@@ -20,7 +22,7 @@ router.post('/login', (req, res, next) => {
 /**
  * GET /api/refresh
  */
-router.get('/refresh', validateRefreshToken, (req, res, next) => {
+router.post('/refresh', validateRefreshToken, (req, res, next) => {
   tokenService
     .verifyRefreshToken(req.token)
     .then(data => res.json({ accessToken: data }))
@@ -31,14 +33,20 @@ router.get('/refresh', validateRefreshToken, (req, res, next) => {
  * DELETE /api/logout
  */
 router.delete('/logout', (req, res, next) => {
-  let requestToken = req.headers.authorization.substring(
-    CONSTANT.BEARER_LENGTH
-  );
+  let requestToken = req.body.authorization.substring(CONSTANT.BEARER_LENGTH);
 
   authService
     .logoutUser(requestToken)
     .then(data => res.json({ data }))
     .catch(err => next(err));
 });
-
+/**
+ * Authenticate google login /api/auth/google
+ */
+router.post('/auth/google', validateGoogleToken, (req, res, next) => {
+  userService
+    .loginUser(req.user)
+    .then(data => res.json({ data }))
+    .catch(err => next(err));
+});
 export default router;
