@@ -13,6 +13,8 @@ import compression from 'compression';
 import json from './middlewares/json';
 import * as errorHandler from './middlewares/errorHandler';
 
+import * as socketIO from './utils/socket';
+
 const app = express();
 
 const APP_PORT =
@@ -44,8 +46,11 @@ app.use('/api', routes);
 app.use(errorHandler.genericErrorHandler);
 app.use(errorHandler.methodNotAllowed);
 
-app.listen(app.get('port'), app.get('host'), () => {
+const server = app.listen(app.get('port'), app.get('host'), () => {
   logger.log('info', `Server started at http://${app.get('host')}:${app.get('port')}`);
 });
+
+// initializing the socket instance
+socketIO.initialize(server);
 
 export default app;

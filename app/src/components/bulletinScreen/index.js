@@ -1,3 +1,5 @@
+import io from 'socket.io-client';
+
 import React, { Component } from 'react';
 
 import './styles.css';
@@ -12,6 +14,11 @@ class BulletinScreen extends Component {
       firstSelectedLink: {},
       secondSelectedLink: {}
     };
+
+    this.socket = io.connect('localhost:8000');
+    this.socket.on('RECEIVE_DATA', (data) => {
+      this.getData(data);
+    });
 
     this.getData = this.getData.bind(this);
     this.setData = this.setData.bind(this);
@@ -101,45 +108,17 @@ class BulletinScreen extends Component {
     }
   }
 
-  componentDidMount() {
-    this.getData();
-  }
-
-  componentWillMount() {
-    let tempObjects = [
-      {
-        url: 'https://weather.lftechnology.com/',
-        duration: 10000
-      },
-      {
-        url: 'https://sports.lftechnology.com/',
-        duration: 10000
-      },
-      {
-        url: 'https://dev.music.lftechnology.com/',
-        duration: 10000
-      },
-      {
-        url: 'https://sports.lftechnology.com/',
-        duration: 10000
-      }
-    ];
-    localStorage.setItem('data', JSON.stringify(tempObjects));
-  }
-
-  getData() {
+  getData(linksCollection) {
     const index = 0;
-    const linksCollection = JSON.parse(localStorage.getItem('data'));
-
     this.setData(index, linksCollection);
   }
 
   setData(index, linksCollection) {
     this.setState({ dataCollection: linksCollection }, () => {
       if (this.state.dataCollection.length === 0) {
-        // logic still left to be handled
+        // [TODO] logic still left to be handled
       } else if (this.state.dataCollection.length === 1) {
-        // logic still left to be handled
+        // [TODO] logic still left to be handled
       } else {
         this.setState(
           {
