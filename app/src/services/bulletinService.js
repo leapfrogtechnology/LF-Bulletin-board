@@ -2,13 +2,13 @@ import * as httpUtil from '../utils/httpUtil';
 import urlConstants from '../constants/urlConstants';
 
 export function checkLogin(data) {
-  let loginUrl = urlConstants.baseUrl + '/login';
+  let loginUrl = urlConstants.apiBaseUrl + '/login';
 
   return httpUtil.post(loginUrl, data);
 }
 
 export async function addBulletin(data) {
-  let addBulletinUrl = urlConstants.baseUrl + '/bulletins';
+  let addBulletinUrl = urlConstants.apiBaseUrl + '/bulletins';
   data.owner = 'ayush';
 
   return new Promise((resolve) => {
@@ -19,7 +19,7 @@ export async function addBulletin(data) {
 }
 
 export async function listBulletin() {
-  let listBulletinUrl = urlConstants.baseUrl + '/bulletins';
+  let listBulletinUrl = urlConstants.apiBaseUrl + '/get-bulletins';
 
   return new Promise((resolve) => {
     let result = httpUtil.get(listBulletinUrl, {});
@@ -29,7 +29,7 @@ export async function listBulletin() {
 }
 
 export async function deleteBulletin(bulletinId) {
-  let deleteBulletinUrl = urlConstants.baseUrl + '/bulletins/' + bulletinId;
+  let deleteBulletinUrl = urlConstants.apiBaseUrl + '/bulletins/' + bulletinId;
 
   return new Promise((resolve) => {
     let result = httpUtil.remove(deleteBulletinUrl);
@@ -39,7 +39,7 @@ export async function deleteBulletin(bulletinId) {
 }
 
 export async function editBulletin(bulletinId, data) {
-  let editBulletinUrl = urlConstants.baseUrl + '/bulletins/' + bulletinId;
+  let editBulletinUrl = urlConstants.apiBaseUrl + '/bulletins/' + bulletinId;
 
   return new Promise((resolve) => {
     let result = httpUtil.put(editBulletinUrl, data);
@@ -50,7 +50,7 @@ export async function editBulletin(bulletinId, data) {
 
 export async function logOut () {
   
-  let logoutUrl = urlConstants.baseUrl + '/logout';
+  let logoutUrl = urlConstants.apiBaseUrl + '/logout';
   let refreshToken = localStorage.getItem('refreshToken');
   let data = {
     authorization: 'Bearer ' + refreshToken

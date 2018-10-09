@@ -288,6 +288,13 @@ body {
   color: 	#29CBE0;
 }
 
+.bulletin-url a span {
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .bulletin-actions {
   width: 10%;
 }

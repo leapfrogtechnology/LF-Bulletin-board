@@ -12,7 +12,7 @@ const SortableItem = SortableElement(({item, deleteBulletin, refreshList}) => {
       <div className="bulletin-title">{item.title}</div>
       <div className="bulletin-owner">{item.owner}</div>
       <div className="bulletin-duration">{item.duration}</div>
-      <div className="bulletin-url"><a href={item.url}>{item.url}</a></div>
+      <div className="bulletin-url"><a href={item.url}><span>{item.url}</span></a></div>
       <div className="bulletin-actions">
         <EditEntry item={item} refreshList={refreshList}/>
         <i className="icon ion-trash-b"

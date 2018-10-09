@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 import urlConstants from '../constants/urlConstants';
+import textConstants from '../constants/textConstants';
 import routeConstants from '../constants/routeConstants';
 
 export function get(url, params = {}) {
@@ -50,11 +51,11 @@ axios.interceptors.response.use(response => {
 }, (error) => {
   let originalRequest = error.config;
 
-  if(error.response.status === 401) {
+  if(error.response.status === 401 && error.response.data.error.message == textConstants.accessTokenExpire) {
     const refreshToken = localStorage.getItem('refreshToken');
     let tokenRequest = {
       method: 'post',
-      url: urlConstants.baseUrl + '/refresh',
+      url: urlConstants.apiBaseUrl + '/refresh',
       data: {
         authorization: 'Bearer ' + refreshToken
       }
@@ -65,7 +66,7 @@ axios.interceptors.response.use(response => {
       originalRequest.headers.Authorization = 'Bearer ' + data.accessToken;
       return axios(originalRequest);
     });
-  } else if (error.response.status === 404) {
+  } else if (error.response.status === 401 && error.response.data.error.message == textConstants.refreshTokenExpire) {
     localStorage.removeItem('accessToken');
     localStorage.removeItem('refreshToken');
     localStorage.removeItem('isAuthenticated', 0);

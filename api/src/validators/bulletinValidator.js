@@ -4,7 +4,7 @@ import validate from '../utils/validate';
 const SCHEMA = {
   title: Joi.string()
     .label('title')
-    .max(90)
+    .max(255)
     .required(),
   owner: Joi.string()
     .label('owner')
@@ -19,7 +19,7 @@ const SCHEMA = {
     .required(),
   url: Joi.string()
     .label('url')
-    .max(90)
+    .max(300)
     .required()
 };
 
