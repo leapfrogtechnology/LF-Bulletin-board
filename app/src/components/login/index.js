@@ -4,6 +4,7 @@ import { Redirect } from 'react-router-dom';
 import GoogleLogin from 'react-google-login';
 
 import urlConstants from '../../constants/urlConstants';
+import textConstants from '../../constants/textConstants';
 import routeConstants from '../../constants/routeConstants';
 import bulletinLogo from '../../../public/images/bulletin-board-login-image.png';
 
@@ -19,10 +20,11 @@ class GoogleLoginComponent extends Component {
   responseGoogle(response){
     axios.post(urlConstants.googleLoginUrl, {'tokenId':response.tokenId})
       .then(res => {
+        const {tokens, user} = res.data.data;
         localStorage.setItem('isAuthenticated', 1);
-        localStorage.setItem('accessToken', res.data.data.tokens.accessToken);
-        localStorage.setItem('refreshToken', res.data.data.tokens.refreshToken);
-        localStorage.setItem('user', JSON.stringify(res.data.data.user));
+        localStorage.setItem('accessToken', tokens.accessToken);
+        localStorage.setItem('refreshToken', tokens.refreshToken);
+        localStorage.setItem('user', JSON.stringify(user));
       
         this.setState({
           isLoggedIn: true
@@ -40,7 +42,7 @@ class GoogleLoginComponent extends Component {
             <div className="login-dialog">
               <img src={bulletinLogo} alt="bulletin logo" className="bulletin-logo-big"/>
               <GoogleLogin
-                clientId="78390524090-tp3ro7vea6p67eepqudcv0fcir97nabf.apps.googleusercontent.com"
+                clientId={textConstants.googleClientId}
                 buttonText="Google Login"
                 className="login-button-style"
                 onSuccess={this.responseGoogle.bind(this)}
