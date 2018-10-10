@@ -37,11 +37,9 @@ export function put(url, data) {
 export function remove(url, data = {}) {
   let request = {
     method: 'delete',
-    url: url
+    data,
+    url
   };
-  if (Object.keys(data).length) {
-    request.data = data;
-  }
   
   return axios(request);
 }
@@ -69,6 +67,7 @@ axios.interceptors.response.use(response => {
   } else if (error.response.status === 401 && error.response.data.error.message == textConstants.refreshTokenExpire) {
     localStorage.removeItem('accessToken');
     localStorage.removeItem('refreshToken');
+    localStorage.removeItem('user');
     localStorage.removeItem('isAuthenticated', 0);
     window.location.href = routeConstants.LOGIN;
   }
