@@ -9,7 +9,8 @@ export function checkLogin(data) {
 
 export async function addBulletin(data) {
   let addBulletinUrl = urlConstants.apiBaseUrl + '/bulletins';
-  data.owner = 'ayush';
+  let user = JSON.parse(localStorage.getItem('user'));
+  data.owner = user.name;
 
   return new Promise((resolve) => {
     let result = httpUtil.post(addBulletinUrl, data);

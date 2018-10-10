@@ -22,6 +22,7 @@ class GoogleLoginComponent extends Component {
         localStorage.setItem('isAuthenticated', 1);
         localStorage.setItem('accessToken', res.data.data.tokens.accessToken);
         localStorage.setItem('refreshToken', res.data.data.tokens.refreshToken);
+        localStorage.setItem('user', JSON.stringify(res.data.data.user));
       
         this.setState({
           isLoggedIn: true
