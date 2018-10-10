@@ -20,7 +20,7 @@ export async function addBulletin(data) {
 }
 
 export async function listBulletin() {
-  let listBulletinUrl = urlConstants.apiBaseUrl + '/get-bulletins';
+  let listBulletinUrl = urlConstants.apiBaseUrl + '/bulletins';
 
   return new Promise((resolve) => {
     let result = httpUtil.get(listBulletinUrl, {});

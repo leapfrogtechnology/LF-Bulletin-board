@@ -35,7 +35,7 @@ class ContributerList extends Component {
           {!this.state.isLoading ?
             this.state.contributers.map(contributer =>
               <ContributerItem
-                a    key={contributer.id}
+                key={contributer.id}
                 profileUrl={contributer.html_url}
                 imageUrl={contributer.avatar_url}
               />

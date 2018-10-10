@@ -70,6 +70,7 @@ export async function loginUser(data) {
   try {
     let email = data.email;
     let user = await fetchByEmail(email);
+
     if (user) {
       let { id, name } = data;
       let tokens = tokenService.generateTokens(id);
@@ -80,12 +81,13 @@ export async function loginUser(data) {
         },
         tokens
       };
+
       await sessionService.createSession(userInfo);
 
       return userInfo;
-    } else {
-      throw new Boom.notFound('User not registered');
     }
+
+    throw new Boom.notFound('User not registered');
   } catch (err) {
     throw err;
   }

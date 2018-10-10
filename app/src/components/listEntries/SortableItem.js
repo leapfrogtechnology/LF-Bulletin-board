@@ -16,7 +16,7 @@ const SortableItem = SortableElement(({item, deleteBulletin, refreshList}) => {
       <div className="bulletin-actions">
         <EditEntry item={item} refreshList={refreshList}/>
         <i className="icon ion-trash-b"
-          onClick={() => {deleteBulletin(item.id);}}
+          onClick={() => deleteBulletin(item.id)}
         ></i>
       </div>
     </div>

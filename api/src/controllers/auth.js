@@ -20,7 +20,7 @@ router.post('/login', (req, res, next) => {
 });
 
 /**
- * GET /api/refresh
+ * POST /api/refresh
  */
 router.post('/refresh', validateRefreshToken, (req, res, next) => {
   tokenService

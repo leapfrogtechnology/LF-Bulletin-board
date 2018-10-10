@@ -30,11 +30,11 @@ export default async function validateGoogleToken(req, res, next) {
       req.user = data;
 
       return next();
-    } else {
-      return res.status(HttpStatus.UNAUTHORIZED).json({
-        message: 'Unauthorized access'
-      });
     }
+
+    return res.status(HttpStatus.UNAUTHORIZED).json({
+      message: 'Unauthorized access'
+    });
   } catch (err) {
     throw err;
   }

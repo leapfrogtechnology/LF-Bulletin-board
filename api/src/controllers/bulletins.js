@@ -1,8 +1,10 @@
 import { Router } from 'express';
 import HttpStatus from 'http-status-codes';
+
+import * as socketIO from '../utils/socket';
+import ensureToken from '../middlewares/ensureToken';
 import * as bulletinService from '../services/bulletinService';
 import { bulletinValidator } from '../validators/bulletinValidator';
-import * as socketIO from '../utils/socket';
 
 const router = Router();
 
@@ -29,7 +31,7 @@ router.get('/:id', (req, res, next) => {
 /**
  * POST /api/bulletins
  */
-router.post('/', bulletinValidator, (req, res, next) => {
+router.post('/', ensureToken, bulletinValidator, (req, res, next) => {
   bulletinService
     .createBulletin(req.body)
     .then(data => {
@@ -43,7 +45,7 @@ router.post('/', bulletinValidator, (req, res, next) => {
 /**
  * PUT /api/bulletins/:id
  */
-router.put('/:id', bulletinValidator, (req, res, next) => {
+router.put('/:id', ensureToken, bulletinValidator, (req, res, next) => {
   bulletinService
     .updateBulletin(req.params.id, req.body)
     .then(data => {
@@ -57,7 +59,7 @@ router.put('/:id', bulletinValidator, (req, res, next) => {
 /**
  * DELETE /api/bulletins/:id
  */
-router.delete('/:id', (req, res, next) => {
+router.delete('/:id', ensureToken, (req, res, next) => {
   bulletinService
     .deleteBulletin(req.params.id)
     .then(data => {

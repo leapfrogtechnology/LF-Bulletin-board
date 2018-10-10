@@ -3,6 +3,7 @@ import io from 'socket.io-client';
 import React, { Component } from 'react';
 
 import urlConstants from '../../constants/urlConstants';
+import textConstants from '../../constants/textConstants';
 import * as bulletinService from '../../services/bulletinService';
 
 import './styles.css';
@@ -13,7 +14,7 @@ class BulletinScreen extends Component {
     this.state = {
       dataCollection: [],
       newDataCollection: [],
-      choosenDuration: 10,
+      choosenDuration: textConstants.defaultSlideDuration,
       firstSelectedLink: {},
       secondSelectedLink: {}
     };
@@ -131,7 +132,9 @@ class BulletinScreen extends Component {
   fetchBulletinList () {
     bulletinService.listBulletin()
       .then((response) => {
-        this.setData(0, response.data.data);
+        const {data} = response.data;
+        
+        this.setData(0, data);
       })
       .catch((err) => {
         swal(err.response.data.error.message);

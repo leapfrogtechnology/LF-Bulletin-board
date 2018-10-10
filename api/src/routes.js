@@ -1,11 +1,11 @@
 import { Router } from 'express';
 
 import swaggerSpec from './utils/swagger';
+
 import authController from './controllers/auth';
 import usersController from './controllers/users';
-import ensureToken from './middlewares/ensureToken';
 import bulletinsController from './controllers/bulletins';
-import getBulletinsController from './controllers/getBulletins';
+
 /**
  * Contains all API routes for the application.
  */
@@ -58,7 +58,6 @@ router.get('/', (req, res) => {
 
 router.use('/', authController);
 router.use('/users', usersController);
-router.use('/get-bulletins', getBulletinsController);
-router.use('/bulletins', ensureToken, bulletinsController);
+router.use('/bulletins', bulletinsController);
 
 export default router;
