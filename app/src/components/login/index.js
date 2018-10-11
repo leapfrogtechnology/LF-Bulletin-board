@@ -14,14 +14,13 @@ class GoogleLoginComponent extends Component {
   constructor(){
     super();
     this.state={
-      isLoggedIn: JSON.parse(localStorage.getItem('isAuthenticated')) ? true : false || false
+      isLoggedIn: JSON.parse(localStorage.getItem('user')) ? true : false
     };
   }
   responseGoogle(response){
     axios.post(urlConstants.googleLoginUrl, {'tokenId':response.tokenId})
       .then(res => {
         const {tokens, user} = res.data.data;
-        localStorage.setItem('isAuthenticated', 1);
         localStorage.setItem('accessToken', tokens.accessToken);
         localStorage.setItem('refreshToken', tokens.refreshToken);
         localStorage.setItem('user', JSON.stringify(user));

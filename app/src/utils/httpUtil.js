@@ -1,8 +1,8 @@
 import axios from 'axios';
 
+import * as bulletinUtil from './bulletinUtil';
 import urlConstants from '../constants/urlConstants';
 import textConstants from '../constants/textConstants';
-import routeConstants from '../constants/routeConstants';
 
 export function get(url, params = {}) {
   let request = {
@@ -65,11 +65,8 @@ axios.interceptors.response.use(response => {
       return axios(originalRequest);
     });
   } else if (error.response.status === textConstants.unauthorizedCode && error.response.data.error.message == textConstants.refreshTokenExpire) {
-    localStorage.removeItem('accessToken');
-    localStorage.removeItem('refreshToken');
-    localStorage.removeItem('user');
-    localStorage.removeItem('isAuthenticated', 0);
-    window.location.href = routeConstants.LOGIN;
+    bulletinUtil.logout();
+
   }
 
   return Promise.reject(error);  

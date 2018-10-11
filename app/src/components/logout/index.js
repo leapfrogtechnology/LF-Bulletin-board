@@ -1,18 +1,13 @@
 import React, { Component } from 'react';
 
-import routeConstants from '../../constants/routeConstants';
+import * as bulletinUtil from '../../utils/bulletinUtil';
 import * as bulletinService from '../../services/bulletinService';
 
 class Logout extends Component {
 
   logoutUser(){
     bulletinService.logOut().then(() => {
-      
-      localStorage.setItem('isAuthenticated', 0);
-      localStorage.removeItem('accessToken');
-      localStorage.removeItem('refreshToken');
-      localStorage.removeItem('user');
-      window.location.href = routeConstants.LOGIN;
+      bulletinUtil.logout();      
     });
   }
 
