@@ -1,10 +1,11 @@
 import { Router } from 'express';
 
 import swaggerSpec from './utils/swagger';
+
 import authController from './controllers/auth';
 import usersController from './controllers/users';
-import ensureToken from './middlewares/ensureToken';
 import bulletinsController from './controllers/bulletins';
+
 /**
  * Contains all API routes for the application.
  */

@@ -1,4 +1,10 @@
+import swal from 'sweetalert';
+import io from 'socket.io-client';
 import React, { Component } from 'react';
+
+import urlConstants from '../../constants/urlConstants';
+import textConstants from '../../constants/textConstants';
+import * as bulletinService from '../../services/bulletinService';
 
 import './styles.css';
 class BulletinScreen extends Component {
@@ -8,18 +14,31 @@ class BulletinScreen extends Component {
     this.state = {
       dataCollection: [],
       newDataCollection: [],
-      choosenDuration: 1000,
+      choosenDuration: textConstants.defaultSlideDuration,
       firstSelectedLink: {},
       secondSelectedLink: {}
     };
 
-    this.getData = this.getData.bind(this);
+    this.socket = io.connect(urlConstants.baseUrl);
+    
+    this.socket.on('IS_LIST_UPDATED', (data) => {
+      if (data.status) {
+        this.getNewCollection();
+      }
+    });
+
     this.setData = this.setData.bind(this);
     this.showFrame = this.showFrame.bind(this);
     this.toggleFrame = this.toggleFrame.bind(this);
     this.checkNewLink = this.checkNewLink.bind(this);
     this.changeDuration = this.changeDuration.bind(this);
+    this.getNewCollection = this.getNewCollection.bind(this);
+    this.fetchBulletinList = this.fetchBulletinList.bind(this);
     this.changeSelectedLink = this.changeSelectedLink.bind(this);
+  }
+
+  componentDidMount () {
+    this.fetchBulletinList();
   }
 
   changeDuration() {
@@ -101,45 +120,33 @@ class BulletinScreen extends Component {
     }
   }
 
-  componentDidMount() {
-    this.getData();
+  getNewCollection() {
+    bulletinService.listBulletin()
+      .then((response) => {
+        this.setState({
+          newDataCollection: response.data.data
+        });
+      });
   }
 
-  componentWillMount() {
-    let tempObjects = [
-      {
-        url: 'https://weather.lftechnology.com/',
-        duration: 10000
-      },
-      {
-        url: 'https://sports.lftechnology.com/',
-        duration: 10000
-      },
-      {
-        url: 'https://dev.music.lftechnology.com/',
-        duration: 10000
-      },
-      {
-        url: 'https://sports.lftechnology.com/',
-        duration: 10000
-      }
-    ];
-    localStorage.setItem('data', JSON.stringify(tempObjects));
-  }
-
-  getData() {
-    const index = 0;
-    const linksCollection = JSON.parse(localStorage.getItem('data'));
-
-    this.setData(index, linksCollection);
+  fetchBulletinList () {
+    bulletinService.listBulletin()
+      .then((response) => {
+        const {data} = response.data;
+        
+        this.setData(0, data);
+      })
+      .catch((err) => {
+        swal(err.response.data.error.message);
+      });
   }
 
   setData(index, linksCollection) {
     this.setState({ dataCollection: linksCollection }, () => {
       if (this.state.dataCollection.length === 0) {
-        // logic still left to be handled
+        // [TODO] logic still left to be handled
       } else if (this.state.dataCollection.length === 1) {
-        // logic still left to be handled
+        // [TODO] logic still left to be handled
       } else {
         this.setState(
           {
@@ -167,7 +174,7 @@ class BulletinScreen extends Component {
   }
 
   showFrame() {
-    setTimeout(() => this.toggleFrame(), this.state.choosenDuration);
+    setTimeout(() => this.toggleFrame(), this.state.choosenDuration*1000);
   }
 
   toggleFrame() {

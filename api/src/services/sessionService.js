@@ -10,7 +10,7 @@ import Session from '../models/session';
 export function createSession(userParams) {
   return new Session({
     user_id: userParams.user.id,
-    username: userParams.user.username,
+    username: userParams.user.name,
     refresh_token: userParams.tokens.refreshToken
   })
     .save()

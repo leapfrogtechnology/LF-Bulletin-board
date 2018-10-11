@@ -58,3 +58,4 @@ api/*.swp
 
 # DB file
 api/bulletin-board.db
+api/src/bulletin_board.db

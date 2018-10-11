@@ -7,13 +7,7 @@
 export function up(knex) {
   return knex.schema.createTable('users', table => {
     table.increments();
-    table.timestamps();
-    table.string('name').notNull();
-    table
-      .string('username')
-      .notNull()
-      .unique();
-    table.string('password').notNull();
+    table.string('email').notNull()
   });
 }
 
