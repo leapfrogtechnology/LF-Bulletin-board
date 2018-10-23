@@ -1,11 +1,10 @@
-import axios from 'axios';
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import GoogleLogin from 'react-google-login';
 
-import urlConstants from '../../constants/urlConstants';
 import textConstants from '../../constants/textConstants';
 import routeConstants from '../../constants/routeConstants';
+import * as bulletinService from '../../services/bulletinService';
 import bulletinLogo from '../../../public/images/bulletin-board-login-image.png';
 
 
@@ -17,13 +16,20 @@ class GoogleLoginComponent extends Component {
       isLoggedIn: JSON.parse(localStorage.getItem('user')) ? true : false
     };
   }
+
   responseGoogle(response){
-    axios.post(urlConstants.googleLoginUrl, {'tokenId':response.tokenId})
+    let profileObj = response.profileObj;
+    let data = {
+      tokenId: response.tokenId
+    };
+
+    bulletinService.validateAdmin(data)
       .then(res => {
-        const {tokens, user} = res.data.data;
+        const {tokens} = res.data.data;
+
         localStorage.setItem('accessToken', tokens.accessToken);
         localStorage.setItem('refreshToken', tokens.refreshToken);
-        localStorage.setItem('user', JSON.stringify(user));
+        localStorage.setItem('user', JSON.stringify(profileObj));
       
         this.setState({
           isLoggedIn: true
@@ -31,6 +37,7 @@ class GoogleLoginComponent extends Component {
       })
       .catch(err => err);
   }
+
   render(){
     const isLoggedIn = this.state.isLoggedIn;
     

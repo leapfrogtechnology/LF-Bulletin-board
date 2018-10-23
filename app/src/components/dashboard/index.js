@@ -6,14 +6,20 @@ import ListEntries from '../listEntries';
 
 class Dashboard extends Component {
 
+  constructor () {
+    super();
+
+    this.user = JSON.parse(localStorage.getItem('user')) || '';
+  }
+
   render () {
 
     return (
       <div>
         <div className="clearfix">
-
+        
           <div className="left-content sidemenu-wrapper">
-            <SideMenu/>
+            <SideMenu user={this.user}/>
           </div>
 
           <div className="left-content main-container-wrapper">
