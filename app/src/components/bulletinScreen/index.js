@@ -2,6 +2,7 @@ import swal from 'sweetalert';
 import io from 'socket.io-client';
 import React, { Component } from 'react';
 
+import BulletinFooter from '../bulletinFooter';
 import urlConstants from '../../constants/urlConstants';
 import textConstants from '../../constants/textConstants';
 import * as bulletinService from '../../services/bulletinService';
@@ -15,6 +16,7 @@ class BulletinScreen extends Component {
       dataCollection: [],
       newDataCollection: [],
       choosenDuration: textConstants.defaultSlideDuration,
+      activeBulletinTitle: 'Leapfrog Bulletin',
       firstSelectedLink: {},
       secondSelectedLink: {}
     };
@@ -76,6 +78,7 @@ class BulletinScreen extends Component {
           firstSelectedLink: {
             ...this.state.firstSelectedLink,
             url: this.state.dataCollection[index].url,
+            title: this.state.dataCollection[index].title,
             duration: this.state.dataCollection[index].duration,
             index: index
           }
@@ -96,6 +99,7 @@ class BulletinScreen extends Component {
           secondSelectedLink: {
             ...this.state.secondSelectedLink,
             url: this.state.dataCollection[index].url,
+            title: this.state.dataCollection[index].title,
             duration: this.state.dataCollection[index].duration,
             index: index
           }
@@ -153,12 +157,14 @@ class BulletinScreen extends Component {
             firstSelectedLink: {
               url: this.state.dataCollection[0].url,
               duration: this.state.dataCollection[0].duration,
+              title: this.state.dataCollection[0].title,
               index: index,
               show: true
             },
             secondSelectedLink: {
               url: this.state.dataCollection[1].url,
               duration: this.state.dataCollection[1].duration,
+              title: this.state.dataCollection[1].title,
               index: index + 1,
               show: false
             },
@@ -187,9 +193,12 @@ class BulletinScreen extends Component {
         secondSelectedLink: {
           ...this.state.secondSelectedLink,
           show: !this.state.secondSelectedLink.show
-        }
+        }  
       },
       () => {
+        this.setState({
+          activeBulletinTitle: this.state.secondSelectedLink.show? this.state.secondSelectedLink.title : this.state.firstSelectedLink.title
+        });
         this.changeDuration();
       }
     );
@@ -197,24 +206,28 @@ class BulletinScreen extends Component {
 
   render() {
     return (
-      <div className="iframe-holder">
-        <iframe
-          src={this.state.firstSelectedLink.url}
-          className="first-iframe"
-          style={{
-            visibility: this.state.firstSelectedLink.show ? 'visible' : 'hidden'
-          }}
-        />
-        <iframe
-          src={this.state.secondSelectedLink.url}
-          className="second-iframe"
-          style={{
-            visibility: this.state.secondSelectedLink.show
-              ? 'visible'
-              : 'hidden'
-          }}
-        />
+      <div>
+        <div className="iframe-holder">
+          <iframe
+            src={this.state.firstSelectedLink.url}
+            className="first-iframe"
+            style={{
+              visibility: this.state.firstSelectedLink.show ? 'visible' : 'hidden'
+            }}
+          />
+          <iframe
+            src={this.state.secondSelectedLink.url}
+            className="second-iframe"
+            style={{
+              visibility: this.state.secondSelectedLink.show
+                ? 'visible'
+                : 'hidden'
+            }}
+          />
+        </div>
+        <BulletinFooter title={this.state.activeBulletinTitle}/>
       </div>
+
     );
   }
 

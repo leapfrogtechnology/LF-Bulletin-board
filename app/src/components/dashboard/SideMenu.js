@@ -1,9 +1,18 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import MoreMenu from '../moreMenu';
 import logo from '../../../public/images/bulletin-logo-inverse.png';
 
 class SideMenu extends Component {
+
+  constructor (props) {
+    super(props);
+
+    this.state = {
+      userInitials: props.user && props.user.givenName && props.user.familyName && props.user.givenName[0] + props.user.familyName[0]
+    };
+  }
 
   render() {
     return (
@@ -13,7 +22,7 @@ class SideMenu extends Component {
         </div>
         <ul className="side-menu-list">
           <li>
-            <span href="javascript:void(0)" className="profile-name">AA</span>
+            <span href="javascript:void(0)" className="profile-name">{this.state.userInitials}</span>
           </li>
           <li>
             <MoreMenu/>
@@ -24,5 +33,10 @@ class SideMenu extends Component {
   }
 
 }
+
+SideMenu.propTypes = {
+  user: PropTypes.object
+};
+
 
 export default SideMenu;

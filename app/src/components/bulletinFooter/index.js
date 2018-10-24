@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import * as timeIcon from '../../../public/images/time.png';
 import * as dateIcon from '../../../public/images/date.png';
@@ -6,8 +7,8 @@ import img from '../../../public/images/bulletin-logo-footer.png';
 
 class BulletinFooter extends React.Component {
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.timeInterval;
     this.state = {
       date: '',
@@ -17,7 +18,7 @@ class BulletinFooter extends React.Component {
     this.getDateTime = this.getDateTime.bind(this);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.timeInterval = setInterval(this.getDateTime, 1000);
   }
 
@@ -70,7 +71,7 @@ class BulletinFooter extends React.Component {
               alt="bulletin logo"
             />
           </span>
-          <span>PROJECT UPDATES</span>
+          <span>{this.props.title}</span>
         </div>
         <div style={{ float: 'right', padding: '0px 16.5px 0px 16.5px' }}>
           <div style={{ float: 'left' }}>
@@ -99,5 +100,9 @@ class BulletinFooter extends React.Component {
   }
 
 }
+
+BulletinFooter.propTypes = {
+  title: PropTypes.string
+};
 
 export default BulletinFooter;

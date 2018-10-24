@@ -49,6 +49,16 @@ export async function editBulletin(bulletinId, data) {
   });
 }
 
+export function validateAdmin (data) {
+  let valiDateAdminUrl = urlConstants.googleLoginUrl;
+
+  return new Promise((resolve) => {
+    let result = httpUtil.post(valiDateAdminUrl, data);
+
+    resolve(result);
+  });
+}
+
 export async function logOut () {
   
   let logoutUrl = urlConstants.apiBaseUrl + '/logout';

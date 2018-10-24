@@ -1,23 +1,24 @@
 import React from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
-import Home from './components/home';
-import Login from './components/login';
-import Bulletin from './components/bulletin';
-import Dashboard from './components/dashboard';
+import PageNotFound from './components/commons/PageNotFound';
+import BulletinScreen from './components/bulletinScreen';
 import PrivateRoute from './components/privateroute';
+import Dashboard from './components/dashboard';
+import Login from './components/login';
+
 import routeConstants from './constants/routeConstants';
 
 const baseHref = process.env.BASE_HREF || '/';
 
 const Router = () => (
   <BrowserRouter basename={baseHref}>
-    <div>
-      <Route exact path={routeConstants.HOME} component={Home} />
+    <Switch>
       <Route exact path={routeConstants.LOGIN} component={Login} /> 
-      <Route exact path={routeConstants.BULLETIN} component={Bulletin} />       
+      <Route exact path={routeConstants.BULLETIN} component={BulletinScreen} />       
       <PrivateRoute path={routeConstants.DASHBOARD} component={Dashboard} />
-    </div>
+      <Route component={PageNotFound}/>
+    </Switch>
   </BrowserRouter>
 );
 
