@@ -1,20 +1,15 @@
+# top-most EditorConfig file
 root = true
 
+# Unix-style newlines with a newline ending every file
 [*]
-charset = utf-8
 end_of_line = lf
+charset = utf-8
 indent_style = space
 insert_final_newline = true
-trim_trailing_whitespace = true
 
-[*.css]
-indent_size = 4
-
-[*]
+# Indentation override for all JS
 indent_size = 2
-
-[*.md]
-trim_trailing_whitespace = false
 
 # Matches the exact files either package.json or .travis.yml
 [{package.json,.travis.yml}]

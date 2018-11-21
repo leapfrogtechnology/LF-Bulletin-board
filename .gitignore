@@ -1,6 +1,61 @@
-config.js
-*~
-logs/
-Capfile
-config/
-log/
+# Project
+node_modules
+
+# Dependencies #
+app/node_modules
+
+# Distribution folder #
+app/dist
+
+# Test Coverage folder #
+coverage
+
+# Log files #
+app/*.log
+
+# Environment variables #
+app/.env
+
+# IDE Configurations
+app/.idea/
+
+
+# Logs
+api/logs
+api/*.log
+api/npm-debug.log*
+
+# Dependency directories
+api/node_modules
+
+# Optional npm cache directory
+api/.npm
+
+# Optional REPL history
+api/.node_repl_history
+
+# Yarn integrity file
+api/.yarn-integrity
+
+# IntelliJ IDE
+api/.idea
+
+# Build directory
+api/dist
+
+# Dotenv configuration
+api/.env
+
+# Visual Studio Code
+api/.vscode
+
+# Tests
+api/coverage
+api/.nyc_output
+
+# Vim swp files
+api/*.swp
+
+# DB file
+api/bulletin-board.db
+api/src/bulletin_board.db
