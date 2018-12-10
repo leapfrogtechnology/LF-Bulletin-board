@@ -5,9 +5,23 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 // Initialize environment variables
-dotenv.config();
+// dotenv.config();
+// const env = console.log(process.env)
+
+const env = dotenv.config().parsed;
+  
+// reduce it to a nice object, the same as before
+const envKeys = Object.keys(env).reduce((prev, next) => {
+  prev[`process.env.${next}`] = JSON.stringify(env[next]);
+  return prev;
+}, {
+  'process.env.NODE_ENV': JSON.stringify('production')
+});
+
+console.log(envKeys)
 
 module.exports = {
+  target: 'web',
   entry: [
     'react-hot-loader/patch',
     'webpack-dev-server/client?http://localhost:8181', // WebpackDevServer host and port
@@ -63,9 +77,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: resolve(__dirname, 'public/index.html')
     }),
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('production')
-    }),
+    new webpack.DefinePlugin(envKeys),
     new webpack.NamedModulesPlugin(), // prints more readable module names in the browser console on HMR updates
     new webpack.NoEmitOnErrorsPlugin(), // do not emit compiled assets that include errors
     new webpack.HotModuleReplacementPlugin() // enable HMR globally

@@ -7,7 +7,7 @@ import { AppContainer } from 'react-hot-loader';
 import Router from './routes';
 
 const mountNode = document.getElementById('app-container');
-
+console.log(process.env)
 const renderApp = () => {
   render(
     <AppContainer>

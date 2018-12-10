@@ -4,4 +4,6 @@ const urlConstants = {
   googleLoginUrl: 'http://localhost:8000/api/auth/google'
 };
 
+console.log(process.env.BASE_HREF)
+
 export default urlConstants;
