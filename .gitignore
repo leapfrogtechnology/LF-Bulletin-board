@@ -13,6 +13,7 @@
 
 # app
 app/.env
+app/node_modules
 
 # misc
 .DS_Store
