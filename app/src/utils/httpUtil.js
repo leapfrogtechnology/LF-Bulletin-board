@@ -49,7 +49,7 @@ axios.interceptors.response.use(response => {
 }, (error) => {
   let originalRequest = error.config;
 
-  if(error.response.status === textConstants.unauthorizedCode && error.response.data.error.message == textConstants.accessTokenExpire) {
+  if(error.response.status === textConstants.unauthorizedCode && error.response.data.error.message === textConstants.accessTokenExpire) {
     const refreshToken = localStorage.getItem('refreshToken');
     let tokenRequest = {
       method: 'post',
@@ -64,7 +64,7 @@ axios.interceptors.response.use(response => {
       originalRequest.headers.Authorization = 'Bearer ' + data.accessToken;
       return axios(originalRequest);
     });
-  } else if (error.response.status === textConstants.unauthorizedCode && error.response.data.error.message == textConstants.refreshTokenExpire) {
+  } else if (error.response.status === textConstants.unauthorizedCode && error.response.data.error.message === textConstants.refreshTokenExpire) {
     bulletinUtil.logout();
 
   }
@@ -75,7 +75,7 @@ axios.interceptors.response.use(response => {
 axios.interceptors.request.use((config) => {
   let accessToken = localStorage.getItem('accessToken') || null;
 
-  if (accessToken != null || accessToken != undefined) {
+  if (accessToken !== null || accessToken !== undefined) {
     config.headers.Authorization = `Bearer ${accessToken}`;
   }
 

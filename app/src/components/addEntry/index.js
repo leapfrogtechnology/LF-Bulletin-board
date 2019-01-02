@@ -27,8 +27,8 @@ class AddEntry extends Component {
       formdata: {
         url: '',
         title: '',
-        priority: null,
-        duration: null
+        priority: '',
+        duration: ''
       }
     };
   }
@@ -46,8 +46,8 @@ class AddEntry extends Component {
           formdata: {
             url: '',
             title: '',
-            priority: null,
-            duration: null
+            priority: '',
+            duration: ''
           }
         });
       }).catch((err) => {
@@ -89,18 +89,19 @@ class AddEntry extends Component {
         </Button>
         <Modal
           isOpen={this.state.modalIsOpen}
+          ariaHideApp={false}
           onRequestClose={() => this.closeModal()}
           style={modalStyle}
           content-label="add entry modal"
         >
           <h2 className="add-entry-heading">Add New Entry</h2>
-          <form className="add-entry-form" onSubmit={this.handleSubmit}>
+          <form className="add-entry-form" onSubmit={(event) => this.handleSubmit(event)}>
 
             <FormGroup>
               <ControlLabel>Segment Title</ControlLabel>
               <FormControl id="title" name="title" type="text" placeholder=""
                 value={this.state.formdata.title}
-                onChange={this.handleChange}
+                onChange={(el) => this.handleChange(el)}
               />
             </FormGroup>
             <div className="priority-duration-wrapper">
@@ -108,7 +109,7 @@ class AddEntry extends Component {
                 <ControlLabel>Priority</ControlLabel>
                 <FormControl id="priority" name="priority" type="text" placeholder=""
                   value={this.state.formdata.priority}
-                  onChange={this.handleChange}
+                  onChange={(el) => this.handleChange(el)}
                 />
               </FormGroup>
 
@@ -116,7 +117,7 @@ class AddEntry extends Component {
                 <ControlLabel>Duration</ControlLabel>
                 <FormControl id="duration" name="duration" type="text" placeholder=""
                   value={this.state.formdata.duration}
-                  onChange={this.handleChange}                
+                  onChange={(el) => this.handleChange(el)}                
                 />
               </FormGroup>
             </div>
@@ -125,7 +126,7 @@ class AddEntry extends Component {
               <ControlLabel>Url</ControlLabel>
               <FormControl id="url" name="url" type="text" placeholder=""
                 value={this.state.formdata.url}
-                onChange={this.handleChange}                
+                onChange={(el) => this.handleChange(el)}                
               />
             </FormGroup>
             <div className="form-buttons-wrapper">

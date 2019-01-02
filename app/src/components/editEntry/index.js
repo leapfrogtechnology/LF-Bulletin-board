@@ -78,17 +78,18 @@ class EditEntry extends Component {
         ></i>
         <Modal
           isOpen={this.state.modalIsOpen}
+          ariaHideApp={false}
           onRequestCLose={() => this.closeModal()}
           style={modalStyle}
           content-label="edit entry modal"
         >
           <h2>Edit Bulletin</h2>
-          <form className="add-entry-form" onSubmit={this.handleSubmit}>
+          <form className="add-entry-form" onSubmit={(event) => this.handleSubmit(event)}>
             <FormGroup>
               <ControlLabel>Segment Title</ControlLabel>
               <FormControl id="title" name="title" type="text" placeholder=""
                 value={this.state.formdata.title}
-                onChange={this.handleChange}
+                onChange={(el) => this.handleChange(el)}
               />
             </FormGroup>
             <div className="priority-duration-wrapper">
@@ -96,14 +97,14 @@ class EditEntry extends Component {
                 <ControlLabel>Priority</ControlLabel>
                 <FormControl id="priority" name="priority" type="text" placeholder=""
                   value={this.state.formdata.priority}
-                  onChange={this.handleChange}
+                  onChange={(el) => this.handleChange(el)}
                 />
               </FormGroup>
               <FormGroup>
                 <ControlLabel>Duration</ControlLabel>
                 <FormControl id="duration" name="duration" type="text" placeholder=""
                   value={this.state.formdata.duration}
-                  onChange={this.handleChange}                
+                  onChange={(el) => this.handleChange(el)}                
                 />
               </FormGroup>
             </div>
@@ -111,7 +112,7 @@ class EditEntry extends Component {
               <ControlLabel>Url</ControlLabel>
               <FormControl id="url" name="url" type="text" placeholder=""
                 value={this.state.formdata.url}
-                onChange={this.handleChange}                
+                onChange={(el) => this.handleChange(el)}                
               />
             </FormGroup>
             <div className="form-buttons-wrapper">

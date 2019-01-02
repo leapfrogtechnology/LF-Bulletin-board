@@ -22,7 +22,7 @@ class SideMenu extends Component {
         </div>
         <ul className="side-menu-list">
           <li>
-            <span href="javascript:void(0)" className="profile-name">{this.state.userInitials}</span>
+            <span className="profile-name">{this.state.userInitials}</span>
           </li>
           <li>
             <MoreMenu/>

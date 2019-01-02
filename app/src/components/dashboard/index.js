@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Redirect } from 'react-router-dom';
+import { Route, Redirect, Switch } from 'react-router-dom';
 
 import SideMenu from './SideMenu';
 import ListEntries from '../listEntries';
@@ -23,13 +23,15 @@ class Dashboard extends Component {
 
           <div className="left-content main-container-wrapper">
             <div className="container">
-              <Redirect to="/dashboard/list"/>
-              <Route
-                exact path="/dashboard/list"
-                render={() => (                  
-                  <ListEntries/>                                   
-                )}
-              />
+              <Switch>
+                <Route
+                  exact path="/dashboard/list"
+                  render={() => (                  
+                    <ListEntries/>                                   
+                  )}
+                />
+                <Redirect to="/dashboard/list"/>
+              </Switch>
             </div>
           </div>
 
