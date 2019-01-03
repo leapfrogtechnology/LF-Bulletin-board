@@ -71,7 +71,7 @@ class BulletinScreen extends Component {
         (this.state.firstSelectedLink.index + 2) %
         this.state.dataCollection.length;
 
-      index == 0 ||  await this.checkNewLink();
+      index === 0 ||  await this.checkNewLink();
 
       this.setState(
         {
@@ -92,7 +92,7 @@ class BulletinScreen extends Component {
         (this.state.secondSelectedLink.index + 2) %
         this.state.dataCollection.length;
 
-      index == 0 || await this.checkNewLink();
+      index === 0 || await this.checkNewLink();
 
       this.setState(
         {

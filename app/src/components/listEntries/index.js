@@ -23,7 +23,7 @@ class ListEntries extends Component {
   componentDidMount () {
     bulletinService.listBulletin().then((response) => {
       this.setState({
-        items: response && response.data && response.data.data || []
+        items: (response && response.data && response.data.data) || []
       });
     }).catch((err) => {
       swal(err.response.data.error.message);
@@ -34,7 +34,7 @@ class ListEntries extends Component {
   refreshList () {
     bulletinService.listBulletin().then((response) => {
       this.setState({
-        items: response && response.data && response.data.data || []
+        items: (response && response.data && response.data.data) || []
       });
     }).catch((err) => {
       swal(err.response.data.error.message);
