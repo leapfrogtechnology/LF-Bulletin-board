@@ -29,3 +29,5 @@ yarn-error.log*
 
 # build
 app/build
+
+api/src/db/bulletin_board.db
