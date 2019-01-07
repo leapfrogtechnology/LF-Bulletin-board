@@ -1,3 +1,5 @@
+import Boom from 'boom';
+
 import Session from '../models/session';
 
 /**
@@ -27,5 +29,12 @@ export function createSession(userParams) {
 export function deleteSession(refreshToken) {
   return new Session({ refresh_token: refreshToken })
     .fetch()
-    .then(session => session.destroy());
+    .then(session => {
+      if (!session) {
+        throw new Boom.notFound('Session not found');
+      }
+
+      session.destroy()
+    
+    });
 }
