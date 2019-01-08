@@ -1,4 +1,3 @@
-import swal from 'sweetalert';
 import React, { Component } from 'react';
 
 

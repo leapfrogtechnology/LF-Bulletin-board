@@ -33,6 +33,3 @@ coverage
 
 # Vim swp files
 *.swp
-
-# DB file
-src/db/bulletin_board.db

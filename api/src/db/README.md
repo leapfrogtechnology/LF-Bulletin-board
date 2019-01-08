@@ -1,0 +1,1 @@
+The db folder is required for storing the database file created after running migration.
