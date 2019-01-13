@@ -17,7 +17,7 @@ Leapfrog Bulletin Board is a Web App that helps to build an interactive Kiosk.
 
 ### Deploy on Heroku
 
-- Click here [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/leapfrogtechnology/LF-Bulletin-board/tree/tree)
+- Click here [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/leapfrogtechnology/LF-Bulletin-board/tree/master)
 - Enter desired app-name
 - Click on “Deploy for Free” button
 - Install Heroku Command Line  https://devcenter.heroku.com/articles/heroku-command-line
