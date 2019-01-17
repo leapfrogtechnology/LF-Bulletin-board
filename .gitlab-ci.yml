@@ -70,7 +70,7 @@ app-build:
     - cd ../
     - cd app    
     - npm install
-    - npm run build:production
+    - npm run build
 
   only:
     - test
