@@ -128,7 +128,7 @@ deploy-to-dev:
     - cd devops
     # Prepare
     - export TAG=latest
-    - export APP_PORT=5502
+    - export APP_PORT=5504
     - export API_PORT=5503
     - fab makeWorkdir
     - fab updateImage
