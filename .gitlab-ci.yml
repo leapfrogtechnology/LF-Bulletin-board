@@ -66,7 +66,7 @@ app-build:
   script:
     - echo "Building artifact"
     - cd devops
-    - ./compile_env
+    - ./compile_env.sh
     - cd ../
     - cd app    
     - npm install
