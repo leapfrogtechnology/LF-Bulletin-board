@@ -1,0 +1,156 @@
+# list of stages
+stages:
+
+# list of environment for CI
+  # - deploy 
+  - build
+  - package
+  - deploy
+
+before_script:
+  - |
+    if [ $CI_COMMIT_REF_SLUG == "dev" ]
+    then
+    	export STAGE=dev
+    elif [ $CI_COMMIT_REF_SLUG == "add-backend-files" ] || [ $CI_COMMIT_REF_SLUG == "node-react" ]
+    then
+    	export STAGE=dev
+    elif [ $CI_COMMIT_REF_SLUG == "master" ]
+    then
+    	export STAGE=prod
+    else
+    	echo "Undefine stage"
+    fi
+
+# list of tasks
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+  - api/node_modules/ 
+  - app/node_modules/ 
+
+api-build:
+  image: 'node:8.14.0-alpine'
+  artifacts:
+    name: "$CI_JOB_NAME-$CI_COMMIT_REF_NAME"
+    paths:
+    - api/dist/
+    - api/node_modules/
+    expire_in: 1 week
+  stage: build
+  tags:
+    - docker
+  script:
+    - echo "Building artifact"
+    - cd api
+    - npm install
+    - npm run build
+    - ls -al
+   
+  only:
+    - test
+    - node-react
+    - add-backend-files
+    - master
+
+app-build:
+  image: 'node:8.14.0-alpine'
+  artifacts:
+    name: "$CI_JOB_NAME-$CI_COMMIT_REF_NAME"
+    paths:
+    - app/dist/    
+    expire_in: 1 week
+  stage: build
+  tags:
+    - docker
+  script:
+    - echo "Building artifact"
+    - cd devops
+    - ./compile_env.sh
+    - cd ../
+    - cd app    
+    - npm install
+    - npm run build
+
+  only:
+    - test
+    - node-react
+    - add-backend-files
+    - master
+
+pakage-app:
+  stage: package
+  services:
+    - docker:dind
+  image: docker:latest
+  tags:
+    - docker
+  script:    
+    - docker login -u "$REGISTRY_USER" -p "$REGISTRY_PASSWORD" $REGISTRY_URL
+    - docker build --pull -t $REGISTRY_URL/bulletin-app:latest -f ./devops/App.Dockerfile .
+    - docker push $REGISTRY_URL/bulletin-app:latest
+
+  dependencies:
+    - app-build
+  only:
+    - test
+    - node-react
+    - add-backend-files
+    - master
+
+pakage-api:
+  stage: package
+  services:
+    - docker:dind
+  image: docker:latest
+  tags:
+    - docker
+  script:
+    - docker login -u "$REGISTRY_USER" -p "$REGISTRY_PASSWORD" $REGISTRY_URL
+    - docker build --pull -t $REGISTRY_URL/bulletin-api:latest -f ./devops/Api.Dockerfile .
+    - docker push $REGISTRY_URL/bulletin-api:latest
+    
+  dependencies:
+    - api-build
+  only:
+    - test
+    - node-react
+    - add-backend-files
+    - master
+
+deploy-to-dev:
+  stage: deploy
+  image: pravashupreti/fabric-deploy
+  tags:
+    - docker
+  script:
+    - echo "Deploying to Developer environment"
+    - cd devops
+    # Prepare
+    - export TAG=latest
+    - export APP_PORT=5502
+    - export API_PORT=5503
+    - fab makeWorkdir
+    - fab updateImage
+    - fab compileConfig    
+    
+    # deploy
+    - fab stopServer    
+    - fab uploadConfig    
+    - fab deploy
+    
+
+  only:
+    - node-react
+    - add-backend-files
+
+deploy-to-production:
+  stage: deploy
+  tags:
+    - docker
+  script:
+    - echo "Deploying to Production environment"
+  when: manual
+  only:
+    - tags
+    
