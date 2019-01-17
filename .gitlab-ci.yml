@@ -7,6 +7,21 @@ stages:
   - package
   - deploy
 
+before_script:
+  - |
+    if [ $CI_COMMIT_REF_SLUG == "dev" ]
+    then
+    	export STAGE=dev
+    elif [ $CI_COMMIT_REF_SLUG == "add-backend-files" ] || [ $CI_COMMIT_REF_SLUG == "node-react" ]
+    then
+    	export STAGE=dev
+    elif [ $CI_COMMIT_REF_SLUG == "master" ]
+    then
+    	export STAGE=prod
+    else
+    	echo "Undefine stage"
+    fi
+
 # list of tasks
 cache:
   key: ${CI_COMMIT_REF_SLUG}
@@ -50,8 +65,10 @@ app-build:
     - docker
   script:
     - echo "Building artifact"
-    - cd app
-    - mv dev.env.example .env
+    - cd devops
+    - ./compile_env
+    - cd ../
+    - cd app    
     - npm install
     - npm run build:production
 
