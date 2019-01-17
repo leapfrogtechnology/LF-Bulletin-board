@@ -22,7 +22,7 @@ class BulletinScreen extends Component {
     };
 
     this.socket = io.connect(urlConstants.baseUrl);
-    
+
     this.socket.on('IS_LIST_UPDATED', (data) => {
       if (data.status) {
         this.getNewCollection();
@@ -39,7 +39,7 @@ class BulletinScreen extends Component {
     this.changeSelectedLink = this.changeSelectedLink.bind(this);
   }
 
-  componentDidMount () {
+  componentDidMount() {
     this.fetchBulletinList();
   }
 
@@ -71,7 +71,7 @@ class BulletinScreen extends Component {
         (this.state.firstSelectedLink.index + 2) %
         this.state.dataCollection.length;
 
-      index === 0 ||  await this.checkNewLink();
+      index === 0 || await this.checkNewLink();
 
       this.setState(
         {
@@ -133,14 +133,15 @@ class BulletinScreen extends Component {
       });
   }
 
-  fetchBulletinList () {
+  fetchBulletinList() {
     bulletinService.listBulletin()
       .then((response) => {
-        const {data} = response.data;
-        
+        const { data } = response.data;
+
         this.setData(0, data);
       })
       .catch((err) => {
+        debugger;
         swal(err.response.data.error.message);
       });
   }
@@ -181,7 +182,7 @@ class BulletinScreen extends Component {
   }
 
   showFrame() {
-    setTimeout(() => this.toggleFrame(), this.state.choosenDuration*1000);
+    setTimeout(() => this.toggleFrame(), this.state.choosenDuration * 1000);
   }
 
   toggleFrame() {
@@ -194,11 +195,11 @@ class BulletinScreen extends Component {
         secondSelectedLink: {
           ...this.state.secondSelectedLink,
           show: !this.state.secondSelectedLink.show
-        }  
+        }
       },
       () => {
         this.setState({
-          activeBulletinTitle: this.state.secondSelectedLink.show? this.state.secondSelectedLink.title : this.state.firstSelectedLink.title
+          activeBulletinTitle: this.state.secondSelectedLink.show ? this.state.secondSelectedLink.title : this.state.firstSelectedLink.title
         });
         this.changeDuration();
       }
@@ -210,6 +211,7 @@ class BulletinScreen extends Component {
       <div>
         <div className="iframe-holder">
           <iframe
+            title="first frame"
             src={this.state.firstSelectedLink.url}
             className="first-iframe"
             style={{
@@ -217,6 +219,7 @@ class BulletinScreen extends Component {
             }}
           />
           <iframe
+            title="second frame"
             src={this.state.secondSelectedLink.url}
             className="second-iframe"
             style={{
@@ -226,7 +229,7 @@ class BulletinScreen extends Component {
             }}
           />
         </div>
-        <BulletinFooter title={this.state.activeBulletinTitle}/>
+        <BulletinFooter title={this.state.activeBulletinTitle} />
       </div>
 
     );

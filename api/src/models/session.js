@@ -13,7 +13,6 @@ class Session extends bookshelf.Model {
   get hasTimestamps() {
     return true;
   }
-
-};
+}
 
 export default Session;
