@@ -11,5 +11,5 @@ export function emitUpdate() {
 }
 
 export function initialize(server) {
-  io = socketio(server);
+  io = socketio.listen(server);
 }

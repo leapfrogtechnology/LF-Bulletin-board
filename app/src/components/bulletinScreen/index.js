@@ -20,7 +20,7 @@ class BulletinScreen extends Component {
       firstSelectedLink: {},
       secondSelectedLink: {}
     };
-
+    
     this.socket = io.connect(urlConstants.baseUrl);
 
     this.socket.on('IS_LIST_UPDATED', (data) => {
@@ -141,8 +141,11 @@ class BulletinScreen extends Component {
         this.setData(0, data);
       })
       .catch((err) => {
-        debugger;
-        swal(err.response.data.error.message);
+        if (err.response && err.response.data && err.response.data.error.message) {
+          swal(err.response.data.error.message);
+        } else {
+          swal("Server error");
+        }
       });
   }
 
