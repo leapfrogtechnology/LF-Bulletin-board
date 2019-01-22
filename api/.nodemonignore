@@ -1,9 +1,0 @@
-# Build directory
-dist
-
-# Test directory
-test
-
-# Other directories
-src/seeds
-src/migrations
