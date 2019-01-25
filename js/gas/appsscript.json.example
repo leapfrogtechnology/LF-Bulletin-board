@@ -1,0 +1,10 @@
+{
+  "timeZone": "Asia/Katmandu",
+  "dependencies": {
+  },
+  "webapp": {
+    "access": "DOMAIN",
+    "executeAs": "USER_DEPLOYING"
+  },
+  "exceptionLogging": "STACKDRIVER"
+}

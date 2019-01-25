@@ -4,3 +4,5 @@ logs/
 Capfile
 config/
 log/
+js/gas/appsscript.json
+js/gas/.clasp.json
