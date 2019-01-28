@@ -1,0 +1,10 @@
+version: '3'
+services:
+  api:
+    build: .
+    volumes:
+      - .env.docker:/app/.env
+    ports:
+      - "8848:8848"
+    entrypoint: /bin/sh
+    command: -c "yarn --force && yarn migrate && yarn seed && yarn start:dev"

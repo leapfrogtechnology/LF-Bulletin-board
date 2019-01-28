@@ -1,0 +1,23 @@
+version: '3'
+services:
+  bullletin-app:
+    image: {{REGISTRY_URL}}/bulletin-app:{{TAG}}
+    restart: always
+    ports:
+      - "127.0.0.1:{{APP_PORT}}:80"
+    command: nginx -g 'daemon off;'
+  
+  bulletin-api:
+    image: {{REGISTRY_URL}}/bulletin-api:{{TAG}}
+    restart: always
+    volumes:
+      - db:/app/dist/db
+      - logs:/app/logs
+    ports:
+      - "127.0.0.1:{{API_PORT}}:8000"
+    environment:
+      - "VAULT_TOKEN=${BULLETIN_DEV_VAULT_TOKEN}"      
+
+volumes:
+  db:
+  logs:

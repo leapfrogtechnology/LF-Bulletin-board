@@ -50,9 +50,9 @@ export async function editBulletin(bulletinId, data) {
 }
 
 export function validateAdmin (data) {
-  const {apiBaseUrl} = urlConstants;
+  const {googleLoginUrl} = urlConstants;
 
-  let valiDateAdminUrl = apiBaseUrl + '/auth/google';
+  let valiDateAdminUrl = googleLoginUrl;
 
   return new Promise((resolve) => {
     let result = httpUtil.post(valiDateAdminUrl, data);

@@ -22,12 +22,10 @@ class GoogleLoginComponent extends Component {
     let data = {
       tokenId: response.tokenId
     };
-    debugger;
     
     bulletinService.validateAdmin(data)
       .then(res => {
         const {tokens} = res.data.data;
-        debugger;
         localStorage.setItem('accessToken', tokens.accessToken);
         localStorage.setItem('refreshToken', tokens.refreshToken);
         localStorage.setItem('user', JSON.stringify(profileObj));
