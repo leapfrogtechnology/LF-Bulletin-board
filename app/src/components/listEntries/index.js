@@ -79,7 +79,6 @@ class ListEntries extends Component {
         <div className="bulletin-table">
           <div className="table-head">
             <div className="bulletin-drag-handle"></div>
-            <div className="bulletin-id">ID</div>
             <div className="bulletin-title">TITLE</div>
             <div className="bulletin-owner">OWNER</div>              
             <div className="bulletin-duration">DURATION</div>

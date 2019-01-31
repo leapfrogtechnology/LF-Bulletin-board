@@ -17,3 +17,35 @@
   overflow: hidden;
   position: absolute;
 }
+
+.footer-wrapper {
+  width: 100%;
+  bottom: 0;
+  color: #fff;
+  height: 48px;
+  font-size: 24px;
+  position: absolute;
+  background-color: #000;
+  font-family: Montserrat;
+}
+
+.left-content {
+  float: left;
+}
+
+.right-content {
+  float: right;
+  padding: 0px 16px 0px 16px;
+}
+
+.footer-logo {
+  padding: 0px 24px 0px 24px;
+}
+
+.footer-icon {
+  padding: 0px 16px 0px 16px;
+}
+
+.footer-text {
+  line-height: 48px;
+}
