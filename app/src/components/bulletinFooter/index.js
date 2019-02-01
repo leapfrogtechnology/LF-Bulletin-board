@@ -50,50 +50,27 @@ class BulletinFooter extends React.Component {
 
   render() {
     return (
-      <div
-        style={{
-          width: '100%',
-          bottom: '0',
-          zIndex: '10',
-          color: '#fff',
-          height: '5vh',
-          fontSize: '24',
-          lineHeight: '50px',
-          position: 'absolute',
-          backgroundColor: '#000',
-          fontFamily: 'Montserrat'
-        }}
-      >
-        <div style={{ float: 'left' }}>
+      <div className="footer-wrapper">
+        <div className="left-content">
           <span>
             <img
-              style={{ padding: '0px 24px 0px 24px' }}
+              className="footer-logo"
               src={img}
               alt="bulletin logo"
             />
           </span>
-          <span>{this.props.title}</span>
+          <span className="footer-text">{this.props.title}</span>
         </div>
-        <div style={{ float: 'right', padding: '0px 16.5px 0px 16.5px' }}>
-          <div style={{ float: 'left' }}>
-            <span>
-              <img
-                style={{ padding: '0px 16.5px 0px 16.5px' }}
-                src={timeIcon}
-                alt="time icon"
-              />
+        <div className="right-content">
+          <div className="left-content">
+            <span className="footer-text">
+              <i className="footer-icon ion-md-calendar"></i>{this.state.date}
             </span>
-            <span>{this.state.date}</span>
           </div>
-          <div style={{ float: 'right' }}>
-            <span>
-              <img
-                style={{ padding: '0px 16.5px 0px 16.5px' }}
-                src={dateIcon}
-                alt="date icon"
-              />
+          <div className="right-content">
+            <span className="footer-text">
+              <i className="footer-icon ion-md-time"></i>{this.state.time}
             </span>
-            <span>{this.state.time}</span>
           </div>
         </div>
       </div>

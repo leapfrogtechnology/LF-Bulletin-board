@@ -202,7 +202,7 @@ body {
   border: 1px solid rgb(44, 170, 187);
 }
 
-.add-entry-button:hover  .ion-plus-round{
+.add-entry-button:hover  .ion-md-add{
   color: rgb(44, 170, 187) !important;
 }
 
@@ -244,14 +244,12 @@ body {
   margin-bottom: 5px;  
 }
 
-.bulletin-drag-handle {
+.table-row .bulletin-drag-handle {
   width: 5%;
-  cursor: move;
+  border-right: 1px solid rgb(227, 236, 241);
+  padding-left: 15px;
 }
 
-.bulletin-drag-handle {
-  border-right: 1px solid rgb(227, 236, 241);
-}
 .bulletin-actions {
   border-left: 1px solid rgb(227, 236, 241);
 }
@@ -261,18 +259,15 @@ body {
 
 .bulletin-table .table-head .bulletin-drag-handle{
   border-right: none;  
+  min-width: 5%;
 }
 
 .bulletin-table .table-head .bulletin-actions{
   border-left: none;  
 } 
 
-.bulletin-id {
-  width: 7%;
-}
-
 .bulletin-title {
-  width: 25%;
+  width: 27%;
 }
 .bulletin-owner {
   width: 13%;
@@ -281,7 +276,7 @@ body {
   width: 10%;
 }
 .bulletin-url{
-  width: 30%;
+  width: 35%;
 }
 
 .bulletin-url a {
@@ -312,20 +307,23 @@ body {
   color: #95ACBC;
 }
 
-.ion-edit {
+.ion-md-create {
   margin-left: 5px;
   cursor: pointer;  
 }
 
-.ion-trash-b {
+.ion-md-trash {
   margin-left: 15px;
   cursor: pointer;  
 }
 
-.ion-plus-round {
+.ion-md-add {
   margin-left: 10px;
   color: white !important;
-} 
+}
+.ion-md-reorder {
+  cursor: move;
+}
 
 .profile-name {
   display: inline-block;

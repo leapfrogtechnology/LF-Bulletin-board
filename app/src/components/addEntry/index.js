@@ -85,7 +85,7 @@ class AddEntry extends Component {
       <div>
         <Button className="add-entry-button" bsStyle="primary" onClick={() => this.openModal()}>
           <span>Add</span>
-          <i className="icon ion-plus-round"></i>
+          <i className="icon ion-md-add"></i>
         </Button>
         <Modal
           isOpen={this.state.modalIsOpen}

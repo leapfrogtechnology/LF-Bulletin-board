@@ -73,7 +73,7 @@ class EditEntry extends Component {
   render () {
     return (
       <div className="edit-entry">
-        <i className="icon ion-edit"
+        <i className="icon ion-md-create"
           onClick={() => this.openModal()}
         ></i>
         <Modal
