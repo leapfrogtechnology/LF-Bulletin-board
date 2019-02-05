@@ -21,7 +21,7 @@ export async function addBulletin(data) {
 
 export async function listBulletin() {
   let listBulletinUrl = urlConstants.apiBaseUrl + '/bulletins';
-
+  console.log(urlConstants)
   return new Promise((resolve) => {
     let result = httpUtil.get(listBulletinUrl, {});
 

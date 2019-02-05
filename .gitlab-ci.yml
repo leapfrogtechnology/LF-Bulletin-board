@@ -12,7 +12,7 @@ before_script:
     if [ $CI_COMMIT_REF_SLUG == "dev" ]
     then
     	export STAGE=dev
-    elif [ $CI_COMMIT_REF_SLUG == "add-backend-files" ] || [ $CI_COMMIT_REF_SLUG == "node-react" ]
+    elif [ $CI_COMMIT_REF_SLUG == "add-backend-files" ] || [ $CI_COMMIT_REF_SLUG == "node-react" ] || [ $CI_COMMIT_REF_SLUG == "v3-master" ]
     then
     	export STAGE=dev
     elif [ $CI_COMMIT_REF_SLUG == "master" ]
@@ -51,6 +51,7 @@ api-build:
     - test
     - node-react
     - add-backend-files
+    - v3-master
     - master
 
 app-build:
@@ -76,6 +77,7 @@ app-build:
     - test
     - node-react
     - add-backend-files
+    - v3-master
     - master
 
 pakage-app:
@@ -96,6 +98,7 @@ pakage-app:
     - test
     - node-react
     - add-backend-files
+    - v3-master
     - master
 
 pakage-api:
@@ -116,6 +119,7 @@ pakage-api:
     - test
     - node-react
     - add-backend-files
+    - v3-master
     - master
 
 deploy-to-dev:
@@ -142,6 +146,7 @@ deploy-to-dev:
 
   only:
     - node-react
+    - v3-master
     - add-backend-files
 
 deploy-to-production:
