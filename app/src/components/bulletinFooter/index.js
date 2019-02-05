@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import * as timeIcon from '../../assets/images/time.png';
-import * as dateIcon from '../../assets/images/date.png';
 import * as img from '../../assets/images/bulletin-logo-inverse.png';
 
 class BulletinFooter extends React.Component {
