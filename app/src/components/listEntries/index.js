@@ -1,3 +1,4 @@
+import {each} from 'lodash';
 import swal from 'sweetalert';
 import React, { Component } from 'react';
 import { arrayMove } from 'react-sortable-hoc';
@@ -18,6 +19,7 @@ class ListEntries extends Component {
     this.onSortEnd = this.onSortEnd.bind(this);
     this.refreshList = this.refreshList.bind(this);
     this.deleteBulletin = this.deleteBulletin.bind(this);
+    this.toggleActive = this.toggleActive.bind(this);
   }
   
   componentDidMount () {
@@ -67,6 +69,16 @@ class ListEntries extends Component {
       });
   }
 
+  toggleActive (id) {
+    let tempList = this.state.items;
+    each(tempList, (item) => {
+      item.active = item.id === id? !item.active: item.active;
+    });
+    this.setState({
+      items: tempList
+    });
+  }
+
   render () {
     return (
       <div>
@@ -83,11 +95,13 @@ class ListEntries extends Component {
             <div className="bulletin-owner">OWNER</div>              
             <div className="bulletin-duration">DURATION</div>
             <div className="bulletin-url">URL</div>
+            <div className="bulletin-toggle"></div>
             <div className="bulletin-actions">ACTIONS</div>
           </div>
           <SortableList helperClass={'SortableHelperWithOverride'} items={this.state.items} onSortEnd={this.onSortEnd}  useDragHandle={true} 
             deleteBulletin={this.deleteBulletin}
-            refreshList={this.refreshList}/>              
+            refreshList={this.refreshList}
+            toggleActive={this.toggleActive}/>              
         </div>
       </div>
     );

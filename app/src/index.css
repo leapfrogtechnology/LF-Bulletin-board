@@ -267,7 +267,7 @@ body {
 } 
 
 .bulletin-title {
-  width: 27%;
+  width: 20%;
 }
 .bulletin-owner {
   width: 13%;
@@ -275,8 +275,14 @@ body {
 .bulletin-duration {
   width: 10%;
 }
+.bulletin-toggle{
+  width: 8%;
+}
+.bulletin-actions {
+  width: 10%;
+}
 .bulletin-url{
-  width: 35%;
+  width: 32%;
 }
 
 .bulletin-url a {
@@ -290,9 +296,6 @@ body {
   text-overflow: ellipsis;
 }
 
-.bulletin-actions {
-  width: 10%;
-}
 
 .bulletin-heading {
   font-family: 'IBMPlexSans-bold';
@@ -416,6 +419,59 @@ body {
 img.bulletin-logo-big {
   display: block;
 }
+
+/*-----Toggle button style for active/inactive status-------*/
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 30px;
+  height: 17px;
+  outline: none;
+  margin-bottom: 0px;
+}
+.switch input {
+  display: none;
+}
+div.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+  border-radius: 17px;
+  padding: 0;
+}
+div.slider:before {
+  position: absolute;
+  content: "";
+  height: 13px;
+  width: 13px;
+  left: 2px;
+  bottom: 2px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+  border-radius: 50%;
+  padding: 0;
+}
+.switch input:checked + .slider {
+  background-color: #2196F3;
+}
+.switch input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+.switch input:checked + .slider:before {
+  -webkit-transform: translateX(13px);
+  -ms-transform: translateX(13px);
+  transform: translateX(13px);
+}
+
+/*-----END: Toggle button style for active/inactive status-------*/
 
 .clearfix::after {
   content: "";

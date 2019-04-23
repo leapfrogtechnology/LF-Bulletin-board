@@ -5,7 +5,8 @@ const textConstants = {
   refreshTokenExpire: 'Refresh Token Unauthorized',
   accessTokenExpire: 'Access Token Unauthorized',
   defaultSlideDuration: 10,
-  unauthorizedCode: 401
+  unauthorizedCode: 401,
+  notFound: 404
 };
 
 export default textConstants;

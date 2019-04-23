@@ -64,7 +64,7 @@ axios.interceptors.response.use(response => {
       originalRequest.headers.Authorization = 'Bearer ' + data.accessToken;
       return axios(originalRequest);
     });
-  } else if (error.response.status === textConstants.unauthorizedCode && error.response.data.error.message === textConstants.refreshTokenExpire) {
+  } else if ((error.response.status === textConstants.unauthorizedCode && error.response.data.error.message === textConstants.refreshTokenExpire) || error.response.status === textConstants.notFound) {
     bulletinUtil.logout();
 
   }
