@@ -38,6 +38,7 @@ export function createBulletin(bulletin) {
     owner: bulletin.owner,
     priority: bulletin.priority,
     duration: bulletin.duration,
+    active_status: bulletin.activeStatus,
     url: bulletin.url
   })
     .save()
@@ -58,6 +59,7 @@ export function updateBulletin(id, bulletin) {
       owner: bulletin.owner,
       priority: bulletin.priority,
       duration: bulletin.duration,
+      active_status: bulletin.activeStatus,
       url: bulletin.url
     })
     .then(bulletin => bulletin.refresh());

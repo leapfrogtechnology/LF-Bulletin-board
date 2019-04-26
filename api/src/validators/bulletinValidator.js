@@ -13,6 +13,9 @@ const SCHEMA = {
   priority: Joi.number()
     .label('priority')
     .required(),
+  activeStatus: Joi.bool()
+    .label('active status')
+    .required(),
   duration: Joi.number()
     .label('duration')
     .min(1)
