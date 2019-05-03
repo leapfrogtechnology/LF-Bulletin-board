@@ -1,4 +1,4 @@
-import {each} from 'lodash';
+import {find, isEmpty} from 'lodash';
 import swal from 'sweetalert';
 import React, { Component } from 'react';
 import { arrayMove } from 'react-sortable-hoc';
@@ -71,12 +71,28 @@ class ListEntries extends Component {
 
   toggleActive (id) {
     let tempList = this.state.items;
-    each(tempList, (item) => {
-      item.active = item.id === id? !item.active: item.active;
-    });
-    this.setState({
-      items: tempList
-    });
+    let toggleItem = find(tempList, (item) => item.id === id) || {};
+    if(!isEmpty(toggleItem)) {
+
+      toggleItem.activeStatus = !toggleItem.activeStatus;
+      let data = {
+        title: toggleItem.title,
+        owner: toggleItem.owner,
+        priority: toggleItem.priority,
+        duration: toggleItem.duration,
+        activeStatus: toggleItem.activeStatus,
+        url: toggleItem.url
+      };
+
+      bulletinService.editBulletin(id, data).then((response) => {
+        if (response.status === textConstants.httpCodeOk) { 
+          this.setState({
+            items: tempList
+          });      
+        }
+      });
+    }
+
   }
 
   render () {
