@@ -28,7 +28,12 @@ class ListEntries extends Component {
         items: (response && response.data && response.data.data) || []
       });
     }).catch((err) => {
-      swal(err.response.data.error.message);
+      let errorMsg = find([err], "response.data.error.message");
+      if(!!errorMsg) {
+        swal(errorMsg.response.data.error.message);
+      } else {
+        swal("Server Error");
+      }
     });
     
   }
