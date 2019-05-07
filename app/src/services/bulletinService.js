@@ -1,3 +1,5 @@
+import {filter, each} from 'lodash';
+
 import * as httpUtil from '../utils/httpUtil';
 import urlConstants from '../constants/urlConstants';
 
@@ -21,11 +23,13 @@ export async function addBulletin(data) {
 
 export async function listBulletin() {
   let listBulletinUrl = urlConstants.apiBaseUrl + '/bulletins';
-  return new Promise((resolve) => {
-    let result = httpUtil.get(listBulletinUrl, {});
+  let result = await httpUtil.get(listBulletinUrl, {});
 
-    resolve(result);
+  each(result.data.data, (item) => {
+    item.activeStatus = item.activeStatus? true:false;
   });
+
+  return result;
 }
 
 export async function deleteBulletin(bulletinId) {
@@ -73,4 +77,10 @@ export async function logOut () {
 
     resolve(result);
   });
+}
+
+export function filterActiveList (list) {
+  let activeList = filter(list, (item) => item.activeStatus);
+  
+  return activeList;
 }

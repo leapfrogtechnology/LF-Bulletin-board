@@ -125,26 +125,31 @@ class BulletinScreen extends Component {
   }
 
   getNewCollection() {
+    let newList;
+
     bulletinService.listBulletin()
       .then((response) => {
+        newList = bulletinService.filterActiveList(response.data.data);
         this.setState({
-          newDataCollection: response.data.data
+          newDataCollection: newList
         });
       });
   }
 
   fetchBulletinList() {
+    let newList;
+
     bulletinService.listBulletin()
       .then((response) => {
-        const { data } = response.data;
+        newList = bulletinService.filterActiveList(response.data.data);
 
-        this.setData(0, data);
+        this.setData(0, newList);
       })
       .catch((err) => {
         if (err.response && err.response.data && err.response.data.error.message) {
           swal(err.response.data.error.message);
         } else {
-          swal("Server error");
+          swal("Server Error");
         }
       });
   }

@@ -5,7 +5,7 @@ import {isUndefined} from 'lodash';
 const Toggle = ({active, toggleActive}) => {
   return (
     <label className="switch">
-      <input type="checkbox" checked={isUndefined(active) ? 0: active} onChange={() => toggleActive()}/>
+      <input type="checkbox" checked={isUndefined(active) ? false: active} onChange={() => toggleActive()}/>
       <div className="slider"></div>
     </label>
   );
@@ -13,7 +13,7 @@ const Toggle = ({active, toggleActive}) => {
 
 Toggle.propTypes = {
   toggleActive: PropTypes.func,
-  active: PropTypes.number
+  active: PropTypes.bool
 };
 
 export default Toggle;
