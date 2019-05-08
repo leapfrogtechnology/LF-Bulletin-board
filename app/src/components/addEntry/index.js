@@ -17,7 +17,7 @@ const modalStyle = {
   }
 };
 
-const emptyFormData = {
+const defaultFormData = {
   url: '',
   title: '',
   priority: '',
@@ -32,7 +32,7 @@ class AddEntry extends Component {
 
     this.state = {
       modalIsOpen : false,
-      formdata: emptyFormData
+      formdata: defaultFormData
     };
   }
   
@@ -46,7 +46,7 @@ class AddEntry extends Component {
         this.props.refreshList();
         this.closeModal();
         this.setState({
-          formdata: emptyFormData
+          formdata: defaultFormData
         });
       }).catch((err) => {
         swal(err.response.data.error.details[0].message);
