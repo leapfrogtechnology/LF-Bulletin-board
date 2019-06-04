@@ -14,12 +14,13 @@ class BulletinScreen extends Component {
     super();
     this.state = {
       dataCollection: [],
-      newDataCollection: [],
       choosenDuration: textConstants.defaultSlideDuration,
       activeBulletinTitle: 'Leapfrog Bulletin',
       firstSelectedLink: {},
       secondSelectedLink: {}
     };
+
+    this.newDataCollection = [];
     
     this.socket = io.connect(urlConstants.baseUrl);
 
@@ -65,14 +66,20 @@ class BulletinScreen extends Component {
 
   async changeSelectedLink() {
     let index;
-
+    let newCollectionFlag = false;
     if (!this.state.firstSelectedLink.show) {
       index =
         (this.state.firstSelectedLink.index + 2) %
         this.state.dataCollection.length;
 
-      index === 0 || await this.checkNewLink();
-
+      newCollectionFlag = index === 0 && this.checkNewLink();
+      
+      if(newCollectionFlag) {
+        this.setData(this.newDataCollection);
+        this.newDataCollection = [];
+        return;
+      }
+      
       this.setState(
         {
           firstSelectedLink: {
@@ -91,8 +98,14 @@ class BulletinScreen extends Component {
       index =
         (this.state.secondSelectedLink.index + 2) %
         this.state.dataCollection.length;
-
-      index === 0 || await this.checkNewLink();
+      
+      newCollectionFlag = index === 0 && this.checkNewLink();
+      
+      if(newCollectionFlag) {
+        this.setData(this.newDataCollection);
+        this.newDataCollection = [];
+        return;
+      }
 
       this.setState(
         {
@@ -112,16 +125,7 @@ class BulletinScreen extends Component {
   }
 
   checkNewLink() {
-    if (this.state.newDataCollection.length) {
-      this.setState(
-        {
-          dataCollection: this.state.newDataCollection
-        },
-        () => {
-          this.setState({ newDataCollection: [] });
-        }
-      );
-    }
+    return this.newDataCollection.length ? true: false;  
   }
 
   getNewCollection() {
@@ -130,9 +134,15 @@ class BulletinScreen extends Component {
     bulletinService.listBulletin()
       .then((response) => {
         newList = bulletinService.filterActiveList(response.data.data);
-        this.setState({
-          newDataCollection: newList
-        });
+
+        this.newDataCollection = newList;
+        
+        //if currently active datacollection list has only one item, call the setData() function now
+        
+        if(this.state.dataCollection.length === 1) {
+          debugger;
+          this.setData(this.newDataCollection);
+        }
       });
   }
 
@@ -143,7 +153,7 @@ class BulletinScreen extends Component {
       .then((response) => {
         newList = bulletinService.filterActiveList(response.data.data);
 
-        this.setData(0, newList);
+        this.setData(newList);
       })
       .catch((err) => {
         if (err.response && err.response.data && err.response.data.error.message) {
@@ -154,13 +164,29 @@ class BulletinScreen extends Component {
       });
   }
 
-  setData(index, linksCollection) {
+  setData(linksCollection) {
     this.setState({ dataCollection: linksCollection }, () => {
       if (this.state.dataCollection.length === 0) {
         // [TODO] logic still left to be handled
       } else if (this.state.dataCollection.length === 1) {
-        // [TODO] logic still left to be handled
-        console.error("TODO: Only one link still to handled");
+        this.setState({
+          firstSelectedLink: {
+            url: this.state.dataCollection[0].url,
+            duration: this.state.dataCollection[0].duration,
+            title: this.state.dataCollection[0].title,
+            index: 0,
+            show: true
+          },
+          secondSelectedLink: {
+            url: '',
+            duration: 0,
+            title: '',
+            index: 0,
+            show: false
+          },
+          choosenDuration: this.state.dataCollection[0].duration,
+          activeBulletinTitle: this.state.dataCollection[0].title
+        })
       } else {
         this.setState(
           {
@@ -168,17 +194,18 @@ class BulletinScreen extends Component {
               url: this.state.dataCollection[0].url,
               duration: this.state.dataCollection[0].duration,
               title: this.state.dataCollection[0].title,
-              index: index,
+              index: 0,
               show: true
             },
             secondSelectedLink: {
               url: this.state.dataCollection[1].url,
               duration: this.state.dataCollection[1].duration,
               title: this.state.dataCollection[1].title,
-              index: index + 1,
+              index: 1,
               show: false
             },
-            choosenDuration: this.state.dataCollection[index].duration
+            choosenDuration: this.state.dataCollection[0].duration,
+            activeBulletinTitle: this.state.dataCollection[0].title
           },
 
           () => {
