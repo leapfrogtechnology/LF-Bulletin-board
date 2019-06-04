@@ -56,8 +56,8 @@ class ListEntries extends Component {
 
   deleteBulletin (id) {
     swal({
-      title: textConstants.deleteWarningMessage,
-      text: textConstants.deleteWarningDescription,
+      title: textConstants.DELETE_WARNING_MESSAGE,
+      text: textConstants.DELETE_WARNING_DESCRIPTION,
       type: 'warning',
       icon: 'warning',
       buttons: true,
@@ -90,7 +90,7 @@ class ListEntries extends Component {
       };
 
       bulletinService.editBulletin(id, data).then((response) => {
-        if (response.status === textConstants.httpCodeOk) { 
+        if (response.status === textConstants.HTTP_OK) { 
           this.setState({
             items: tempList
           });      

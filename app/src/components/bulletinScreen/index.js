@@ -14,7 +14,7 @@ class BulletinScreen extends Component {
     super();
     this.state = {
       dataCollection: [],
-      choosenDuration: textConstants.defaultSlideDuration,
+      choosenDuration: textConstants.DEFAULT_SLIDE_DURATION,
       activeBulletinTitle: 'Leapfrog Bulletin',
       firstSelectedLink: {},
       secondSelectedLink: {}
