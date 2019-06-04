@@ -8,6 +8,15 @@ import textConstants from '../../constants/textConstants';
 import * as bulletinService from '../../services/bulletinService';
 
 import './styles.css';
+
+const dummyBulletinSegment = {
+  url: '',
+  duration: 0,
+  title: '',
+  index: 0,
+  show: false
+};
+
 class BulletinScreen extends Component {
 
   constructor() {
@@ -138,8 +147,7 @@ class BulletinScreen extends Component {
         this.newDataCollection = newList;
         
         //if currently active datacollection list has only one item, call the setData() function now
-        
-        if(this.state.dataCollection.length === 1) {
+        if(this.state.dataCollection.length === 0 || this.state.dataCollection.length === 1) {
           this.setData(this.newDataCollection);
         }
       });
@@ -166,7 +174,12 @@ class BulletinScreen extends Component {
   setData(linksCollection) {
     this.setState({ dataCollection: linksCollection }, () => {
       if (this.state.dataCollection.length === 0) {
-        // [TODO] logic still left to be handled
+        this.setState({
+          firstSelectedLink: dummyBulletinSegment,
+          secondSelectedLink: dummyBulletinSegment,
+          choosenDuration: 0,
+          activeBulletinTitle: 'Leapfrog Bulletin'
+        });
       } else if (this.state.dataCollection.length === 1) {
         this.setState({
           firstSelectedLink: {
@@ -176,16 +189,10 @@ class BulletinScreen extends Component {
             index: 0,
             show: true
           },
-          secondSelectedLink: {
-            url: '',
-            duration: 0,
-            title: '',
-            index: 0,
-            show: false
-          },
+          secondSelectedLink: dummyBulletinSegment,
           choosenDuration: this.state.dataCollection[0].duration,
           activeBulletinTitle: this.state.dataCollection[0].title
-        })
+        });
       } else {
         this.setState(
           {
