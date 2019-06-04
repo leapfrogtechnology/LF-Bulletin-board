@@ -140,7 +140,6 @@ class BulletinScreen extends Component {
         //if currently active datacollection list has only one item, call the setData() function now
         
         if(this.state.dataCollection.length === 1) {
-          debugger;
           this.setData(this.newDataCollection);
         }
       });
