@@ -3,6 +3,8 @@ import {filter, each} from 'lodash';
 import * as httpUtil from '../utils/httpUtil';
 import urlConstants from '../constants/urlConstants';
 
+import defaultImage from '../assets/images/logo_leapfrog.svg';
+
 export function checkLogin(data) {
   let loginUrl = urlConstants.apiBaseUrl + '/login';
 
@@ -83,4 +85,16 @@ export function filterActiveList (list) {
   let activeList = filter(list, (item) => item.activeStatus);
   
   return activeList;
+}
+
+export function removeIframeBackgroundImage () {
+  let iframeHolderDiv = document.getElementsByClassName('iframe-holder')[0];
+  iframeHolderDiv.style.background = 'none';
+  iframeHolderDiv.style.backgroundSize = "none";
+}
+
+export function addIframeBackgroundImage () {
+  let iframeHolderDiv = document.getElementsByClassName('iframe-holder')[0];
+  iframeHolderDiv.style.background = "url('"+ defaultImage +"') center center no-repeat";
+  iframeHolderDiv.style.backgroundSize = "50%";
 }

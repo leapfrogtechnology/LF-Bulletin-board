@@ -177,13 +177,18 @@ class BulletinScreen extends Component {
   setData(linksCollection) {
     this.setState({ dataCollection: linksCollection }, () => {
       if (this.state.dataCollection.length === 0) {
+        bulletinService.addIframeBackgroundImage();
+        
         this.setState({
           firstSelectedLink: dummyBulletinSegment,
           secondSelectedLink: dummyBulletinSegment,
           choosenDuration: 0,
           activeBulletinTitle: 'Leapfrog Bulletin'
         });
+
       } else if (this.state.dataCollection.length === 1) {
+        bulletinService.removeIframeBackgroundImage();
+        
         this.setState({
           firstSelectedLink: {
             url: this.state.dataCollection[0].url,
@@ -197,6 +202,8 @@ class BulletinScreen extends Component {
           activeBulletinTitle: this.state.dataCollection[0].title
         });
       } else {
+        bulletinService.removeIframeBackgroundImage();
+
         this.setState(
           {
             firstSelectedLink: {
