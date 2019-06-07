@@ -1,6 +1,7 @@
 import swal from 'sweetalert';
 import io from 'socket.io-client';
 import React, { Component } from 'react';
+import {cloneDeep} from 'lodash';
 
 import BulletinFooter from '../bulletinFooter';
 import urlConstants from '../../constants/urlConstants';
@@ -30,6 +31,7 @@ class BulletinScreen extends Component {
     };
 
     this.newDataCollection = [];
+    this.isnewDataCollection = false;
     
     this.socket = io.connect(urlConstants.baseUrl);
 
@@ -42,7 +44,6 @@ class BulletinScreen extends Component {
     this.setData = this.setData.bind(this);
     this.showFrame = this.showFrame.bind(this);
     this.toggleFrame = this.toggleFrame.bind(this);
-    this.checkNewLink = this.checkNewLink.bind(this);
     this.changeDuration = this.changeDuration.bind(this);
     this.getNewCollection = this.getNewCollection.bind(this);
     this.fetchBulletinList = this.fetchBulletinList.bind(this);
@@ -81,11 +82,13 @@ class BulletinScreen extends Component {
         (this.state.firstSelectedLink.index + 2) %
         this.state.dataCollection.length;
 
-      newCollectionFlag = index === 0 && this.checkNewLink();
+      newCollectionFlag = index === 0 && this.isnewDataCollection;
       
       if(newCollectionFlag) {
-        this.setData(this.newDataCollection);
+        this.setData(cloneDeep(this.newDataCollection));
+        
         this.newDataCollection = [];
+        this.isnewDataCollection = false;
         return;
       }
       
@@ -108,11 +111,13 @@ class BulletinScreen extends Component {
         (this.state.secondSelectedLink.index + 2) %
         this.state.dataCollection.length;
       
-      newCollectionFlag = index === 0 && this.checkNewLink();
+      newCollectionFlag = index === 0 && this.isnewDataCollection;
       
       if(newCollectionFlag) {
-        this.setData(this.newDataCollection);
+        this.setData(cloneDeep(this.newDataCollection));
+        
         this.newDataCollection = [];
+        this.isnewDataCollection = false;
         return;
       }
 
@@ -133,22 +138,20 @@ class BulletinScreen extends Component {
     }
   }
 
-  checkNewLink() {
-    return this.newDataCollection.length ? true: false;  
-  }
-
   getNewCollection() {
     let newList;
 
     bulletinService.listBulletin()
       .then((response) => {
         newList = bulletinService.filterActiveList(response.data.data);
-
         this.newDataCollection = newList;
+        this.isnewDataCollection = true;
         
-        //if currently active datacollection list has only one item, call the setData() function now
+        //call the setData() function immediately only if currently active datacollection list is empty or has only one item
         if(this.state.dataCollection.length === 0 || this.state.dataCollection.length === 1) {
-          this.setData(this.newDataCollection);
+          this.setData(cloneDeep(this.newDataCollection));
+          this.newDataCollection = [];
+          this.isnewDataCollection = false;
         }
       });
   }
