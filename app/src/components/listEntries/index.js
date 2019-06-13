@@ -1,3 +1,4 @@
+import {find, isEmpty} from 'lodash';
 import swal from 'sweetalert';
 import React, { Component } from 'react';
 import { arrayMove } from 'react-sortable-hoc';
@@ -18,6 +19,7 @@ class ListEntries extends Component {
     this.onSortEnd = this.onSortEnd.bind(this);
     this.refreshList = this.refreshList.bind(this);
     this.deleteBulletin = this.deleteBulletin.bind(this);
+    this.toggleActive = this.toggleActive.bind(this);
   }
   
   componentDidMount () {
@@ -26,7 +28,12 @@ class ListEntries extends Component {
         items: (response && response.data && response.data.data) || []
       });
     }).catch((err) => {
-      swal(err.response.data.error.message);
+      let errorMsg = find([err], "response.data.error.message");
+      if(!!errorMsg) {
+        swal(errorMsg.response.data.error.message);
+      } else {
+        swal("Server Error");
+      }
     });
     
   }
@@ -49,8 +56,8 @@ class ListEntries extends Component {
 
   deleteBulletin (id) {
     swal({
-      title: textConstants.deleteWarningMessage,
-      text: textConstants.deleteWarningDescription,
+      title: textConstants.DELETE_WARNING_MESSAGE,
+      text: textConstants.DELETE_WARNING_DESCRIPTION,
       type: 'warning',
       icon: 'warning',
       buttons: true,
@@ -65,6 +72,32 @@ class ListEntries extends Component {
       }).catch((err) => {
         swal(err.response.data.error.message);
       });
+  }
+
+  toggleActive (id) {
+    let tempList = this.state.items;
+    let toggleItem = find(tempList, (item) => item.id === id) || {};
+    if(!isEmpty(toggleItem)) {
+
+      toggleItem.activeStatus = !toggleItem.activeStatus;
+      let data = {
+        title: toggleItem.title,
+        owner: toggleItem.owner,
+        priority: toggleItem.priority,
+        duration: toggleItem.duration,
+        activeStatus: toggleItem.activeStatus,
+        url: toggleItem.url
+      };
+
+      bulletinService.editBulletin(id, data).then((response) => {
+        if (response.status === textConstants.HTTP_OK) { 
+          this.setState({
+            items: tempList
+          });      
+        }
+      });
+    }
+
   }
 
   render () {
@@ -83,11 +116,13 @@ class ListEntries extends Component {
             <div className="bulletin-owner">OWNER</div>              
             <div className="bulletin-duration">DURATION</div>
             <div className="bulletin-url">URL</div>
+            <div className="bulletin-toggle"></div>
             <div className="bulletin-actions">ACTIONS</div>
           </div>
           <SortableList helperClass={'SortableHelperWithOverride'} items={this.state.items} onSortEnd={this.onSortEnd}  useDragHandle={true} 
             deleteBulletin={this.deleteBulletin}
-            refreshList={this.refreshList}/>              
+            refreshList={this.refreshList}
+            toggleActive={this.toggleActive}/>              
         </div>
       </div>
     );

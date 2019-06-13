@@ -2,7 +2,7 @@ import swal from 'sweetalert';
 import Modal from 'react-modal';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { FormGroup, ControlLabel, FormControl, Button} from 'react-bootstrap';
+import { FormGroup, ControlLabel, FormControl, Button, Checkbox} from 'react-bootstrap';
 
 import * as bulletinService from '../../services/bulletinService';
 
@@ -21,14 +21,14 @@ class EditEntry extends Component {
 
   constructor (props) {
     super(props);
-
     this.state = {
       modalIsOpen : false,
       formdata: {
         title: this.props.item.title,
         priority: this.props.item.priority,
         duration: this.props.item.duration,
-        url: this.props.item.url
+        url: this.props.item.url,
+        activeStatus: this.props.item.activeStatus
       }
     };
   }
@@ -58,6 +58,15 @@ class EditEntry extends Component {
     });
   }
 
+  handleCheckboxChange (el) {
+    let formData = Object.assign({}, this.state.formdata);
+    formData.activeStatus = el.target.checked;
+
+    this.setState({
+      formdata: formData
+    });
+  }
+
   openModal () {
     this.setState({
       modalIsOpen: true
@@ -68,6 +77,21 @@ class EditEntry extends Component {
     this.setState({
       modalIsOpen: false
     });
+  }
+
+  componentDidUpdate (prevProps, prevState) {
+    if(prevState.formdata.activeStatus !== this.props.item.activeStatus) {
+      this.setState({
+        formdata: {
+          title: this.props.item.title,
+          priority: this.props.item.priority,
+          duration: this.props.item.duration,
+          url: this.props.item.url,
+          activeStatus: this.props.item.activeStatus
+        }
+      });
+    }
+
   }
 
   render () {
@@ -114,6 +138,13 @@ class EditEntry extends Component {
                 value={this.state.formdata.url}
                 onChange={(el) => this.handleChange(el)}                
               />
+            </FormGroup>
+            <FormGroup>
+            <ControlLabel>Active Status</ControlLabel>
+            <Checkbox 
+              checked={this.state.formdata.activeStatus}
+              onChange={(el) => this.handleCheckboxChange(el)}
+            />
             </FormGroup>
             <div className="form-buttons-wrapper">
               <Button className="cancel-button" bsStyle="default" onClick={() => this.closeModal()}>CANCEL</Button>

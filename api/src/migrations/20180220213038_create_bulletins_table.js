@@ -11,6 +11,7 @@ export function up(knex) {
     table.string('title').notNull();
     table.string('owner');
     table.integer('priority');
+    table.boolean('active_status').notNull();
     table.integer('duration').notNull();
     table.string('url').notNull();
   });

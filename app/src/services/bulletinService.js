@@ -1,5 +1,9 @@
+import {filter, each} from 'lodash';
+
 import * as httpUtil from '../utils/httpUtil';
 import urlConstants from '../constants/urlConstants';
+
+import defaultImage from '../assets/images/logo_leapfrog.svg';
 
 export function checkLogin(data) {
   let loginUrl = urlConstants.apiBaseUrl + '/login';
@@ -21,12 +25,13 @@ export async function addBulletin(data) {
 
 export async function listBulletin() {
   let listBulletinUrl = urlConstants.apiBaseUrl + '/bulletins';
-  console.log(urlConstants)
-  return new Promise((resolve) => {
-    let result = httpUtil.get(listBulletinUrl, {});
+  let result = await httpUtil.get(listBulletinUrl, {});
 
-    resolve(result);
+  each(result.data.data, (item) => {
+    item.activeStatus = item.activeStatus? true:false;
   });
+
+  return result;
 }
 
 export async function deleteBulletin(bulletinId) {
@@ -74,4 +79,22 @@ export async function logOut () {
 
     resolve(result);
   });
+}
+
+export function filterActiveList (list) {
+  let activeList = filter(list, (item) => item.activeStatus);
+  
+  return activeList;
+}
+
+export function removeIframeBackgroundImage () {
+  let iframeHolderDiv = document.getElementsByClassName('iframe-holder')[0];
+  iframeHolderDiv.style.background = 'none';
+  iframeHolderDiv.style.backgroundSize = "none";
+}
+
+export function addIframeBackgroundImage () {
+  let iframeHolderDiv = document.getElementsByClassName('iframe-holder')[0];
+  iframeHolderDiv.style.background = "url('"+ defaultImage +"') center center no-repeat";
+  iframeHolderDiv.style.backgroundSize = "50%";
 }
