@@ -1,5 +1,5 @@
 FROM node:8.14.0-alpine
-RUN apk update && apk upgrade && apk add zip unzip
+RUN apk update && apk upgrade && apk add zip unzip && apk add ca-certificates
 RUN wget https://releases.hashicorp.com/envconsul/0.7.3/envconsul_0.7.3_linux_amd64.zip && unzip envconsul_0.7.3_linux_amd64.zip\
 && ln -sf $PWD/envconsul /usr/local/bin
 
