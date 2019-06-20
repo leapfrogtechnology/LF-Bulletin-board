@@ -5,7 +5,7 @@ syslog {
 
 upcase = true
 vault {
-    address = "http://registry.lftechnology.com:5601"
+    address = "https://dev.vault.lftechnology.com"
     # grace = "15s"
     renew_token = false
     # unwrap_token = true
