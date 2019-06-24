@@ -16,7 +16,9 @@ services:
     ports:
       - "127.0.0.1:{{API_PORT}}:8000"
     environment:
-      - "VAULT_TOKEN=${BULLETIN_DEV_VAULT_TOKEN}"      
+      - "REGION_NAME=${BULLETIN_REGION_NAME}"    
+      - "AWS_ACCESS_KEY_ID=${BULLETIN_AWS_ACCESS_KEY_ID}"    
+      - "AWS_SECRET_ACCESS_KEY=${BULLETIN_AWS_SECRET_ACCESS_KEY}"
 
 volumes:
   db:
