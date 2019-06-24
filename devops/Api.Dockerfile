@@ -21,5 +21,5 @@ COPY api/.babelrc /app/.babelrc
 COPY api/.env.example /app/.env
 COPY api/node_modules/ /app/node_modules/
 
-ENTRYPOINT [ "envault", "run" ]
+ENTRYPOINT [ "envault", "run" ,"-secret=bulletin-board/api/dev"]
 CMD ["node dist"]
