@@ -33,6 +33,9 @@ export function seed(knex, Promise) {
           },
           {
             email: 'yankeemaharjan@lftechnology.com'
+          },
+          {
+            email: 'sarojshahi@lftechnology.com'
           }
         ])
       ]);
