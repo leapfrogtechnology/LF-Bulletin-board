@@ -361,12 +361,12 @@ body {
   margin-bottom: 20px;
 }
 
-.priority-duration-wrapper .form-group{
+.two-col-fields-wrapper .form-group{
   width: 48.5%;
   float: left;
 }
 
-.priority-duration-wrapper .form-group:nth-child(2) {
+.two-col-fields-wrapper .form-group:nth-child(2) {
   margin-left: 3%;
 }
 

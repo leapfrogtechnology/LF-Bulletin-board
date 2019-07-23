@@ -25,7 +25,6 @@ class EditEntry extends Component {
       modalIsOpen : false,
       formdata: {
         title: this.props.item.title,
-        priority: this.props.item.priority,
         duration: this.props.item.duration,
         url: this.props.item.url,
         activeStatus: this.props.item.activeStatus
@@ -84,7 +83,6 @@ class EditEntry extends Component {
       this.setState({
         formdata: {
           title: this.props.item.title,
-          priority: this.props.item.priority,
           duration: this.props.item.duration,
           url: this.props.item.url,
           activeStatus: this.props.item.activeStatus
@@ -116,19 +114,19 @@ class EditEntry extends Component {
                 onChange={(el) => this.handleChange(el)}
               />
             </FormGroup>
-            <div className="priority-duration-wrapper">
-              <FormGroup>
-                <ControlLabel>Priority</ControlLabel>
-                <FormControl id="priority" name="priority" type="text" placeholder=""
-                  value={this.state.formdata.priority}
-                  onChange={(el) => this.handleChange(el)}
-                />
-              </FormGroup>
+            <div className="two-col-fields-wrapper">
               <FormGroup>
                 <ControlLabel>Duration</ControlLabel>
                 <FormControl id="duration" name="duration" type="text" placeholder=""
                   value={this.state.formdata.duration}
                   onChange={(el) => this.handleChange(el)}                
+                />
+              </FormGroup>
+              <FormGroup>
+                <ControlLabel>Active Status</ControlLabel>
+                <Checkbox 
+                  checked={this.state.formdata.activeStatus}
+                  onChange={(el) => this.handleCheckboxChange(el)}
                 />
               </FormGroup>
             </div>
@@ -139,13 +137,7 @@ class EditEntry extends Component {
                 onChange={(el) => this.handleChange(el)}                
               />
             </FormGroup>
-            <FormGroup>
-            <ControlLabel>Active Status</ControlLabel>
-            <Checkbox 
-              checked={this.state.formdata.activeStatus}
-              onChange={(el) => this.handleCheckboxChange(el)}
-            />
-            </FormGroup>
+      
             <div className="form-buttons-wrapper">
               <Button className="cancel-button" bsStyle="default" onClick={() => this.closeModal()}>CANCEL</Button>
               <Button className="submit-button" bsStyle="primary" type="submit">EDIT</Button>              

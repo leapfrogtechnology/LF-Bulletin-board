@@ -1,4 +1,4 @@
-import {find, isEmpty} from 'lodash';
+import {find, isEmpty, orderBy} from 'lodash';
 import swal from 'sweetalert';
 import React, { Component } from 'react';
 import { arrayMove } from 'react-sortable-hoc';
@@ -25,7 +25,7 @@ class ListEntries extends Component {
   componentDidMount () {
     bulletinService.listBulletin().then((response) => {
       this.setState({
-        items: (response && response.data && response.data.data) || []
+        items: (response && response.data && response.data.data && orderBy(response.data.data, 'priority', 'asc')) || []
       });
     }).catch((err) => {
       let errorMsg = find([err], "response.data.error.message");
@@ -41,7 +41,7 @@ class ListEntries extends Component {
   refreshList () {
     bulletinService.listBulletin().then((response) => {
       this.setState({
-        items: (response && response.data && response.data.data) || []
+        items: (response && response.data && response.data.data && orderBy(response.data.data, 'priority', 'asc')) || []
       });
     }).catch((err) => {
       swal(err.response.data.error.message);
@@ -49,8 +49,35 @@ class ListEntries extends Component {
   }
 
   onSortEnd({oldIndex, newIndex}) {
+    let lowerIndex = oldIndex < newIndex ? oldIndex: newIndex; 
+    let higherIndex = oldIndex > newIndex ? oldIndex: newIndex;
+
+    let oldBulletinList = this.state.items.map((item) => {
+      return {
+        id: item.id,
+        title: item.title,
+        priority: item.priority,
+        owner: item.owner,
+        duration: item.duration,
+        activeStatus: item.activeStatus,
+        url: item.url
+      }
+    });
+    
+    let newBulletinList = bulletinService.reassignBulletinPriorities(oldIndex, newIndex, oldBulletinList);
+    let data = newBulletinList.slice(lowerIndex, higherIndex + 1);
+    
     this.setState({
-      items: arrayMove(this.state.items, oldIndex, newIndex)
+      items: arrayMove(newBulletinList, oldIndex, newIndex)
+    }, () => {
+      bulletinService.updateBulletinsBulk(data)
+      .catch((err) => {
+        this.setState({
+          items: oldBulletinList
+        });
+        
+        swal(err.response.data.error.message);
+      })
     });
   }
 
@@ -83,7 +110,6 @@ class ListEntries extends Component {
       let data = {
         title: toggleItem.title,
         owner: toggleItem.owner,
-        priority: toggleItem.priority,
         duration: toggleItem.duration,
         activeStatus: toggleItem.activeStatus,
         url: toggleItem.url

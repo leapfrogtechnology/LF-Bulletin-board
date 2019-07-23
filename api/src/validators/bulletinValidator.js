@@ -11,8 +11,7 @@ const SCHEMA = {
     .max(90)
     .required(),
   priority: Joi.number()
-    .label('priority')
-    .required(),
+    .label('priority'),
   activeStatus: Joi.bool()
     .label('active status')
     .required(),
