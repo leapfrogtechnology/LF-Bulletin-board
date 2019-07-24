@@ -14,14 +14,13 @@ class Dashboard extends Component {
 
   render () {
     return (
-      <div>
         <div className="clearfix">
         
-          <div className="left-content sidemenu-wrapper">
+          <div className="sidemenu-wrapper">
             <SideMenu user={this.user}/>
           </div>
 
-          <div className="left-content main-container-wrapper">
+          <div>
             <div className="container">
               <Switch>
                 <Route
@@ -36,7 +35,6 @@ class Dashboard extends Component {
           </div>
 
         </div>
-      </div>
     );
   }
 }

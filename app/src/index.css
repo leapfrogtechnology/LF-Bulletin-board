@@ -99,11 +99,11 @@ body {
 }
 
 .sidemenu-wrapper {
-  width: 5%;
+  width: 70px;
   height: 100vh;
   background-color: #4F4F4F;
   padding: 0px;
-  position: relative;
+  position: fixed;
 }
 
 .sidemenu-wrapper ul {
@@ -132,9 +132,6 @@ body {
   color: #4F4F4F
 }
 
-.main-container-wrapper {
-  width: 95%;
-}
 
 .add-entry-form {
   width: 400px;
@@ -174,6 +171,7 @@ body {
 .container {
   width: 85% !important;
   padding-top: 40px;
+  padding-left: 70px;
 }
 
 .section .form-container {
@@ -236,8 +234,12 @@ body {
 .table-row div{
   display: inline-block;
   padding: 10px;
-
 }
+
+.table-row:last-child {
+  margin-bottom: 50px;
+}
+
 .table-head div {
   display: inline-block;
   padding: 10px;
