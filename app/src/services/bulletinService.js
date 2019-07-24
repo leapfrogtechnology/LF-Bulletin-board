@@ -1,4 +1,4 @@
-import {filter, each} from 'lodash';
+import {filter, each, orderBy, cloneDeep} from 'lodash';
 
 import * as httpUtil from '../utils/httpUtil';
 import urlConstants from '../constants/urlConstants';
@@ -54,6 +54,16 @@ export async function editBulletin(bulletinId, data) {
   });
 }
 
+export function updateBulletinsBulk(data) {
+  let updateBulletinsBulkUrl = urlConstants.apiBaseUrl + '/bulletins/bulk';
+
+  return new Promise((resolve) => {
+    let result = httpUtil.put(updateBulletinsBulkUrl, data);
+
+    resolve(result);
+  });
+}
+
 export function validateAdmin (data) {
   const {googleLoginUrl} = urlConstants;
 
@@ -84,7 +94,27 @@ export async function logOut () {
 export function filterActiveList (list) {
   let activeList = filter(list, (item) => item.activeStatus);
   
-  return activeList;
+  return orderBy(activeList, 'priority', 'asc');
+}
+
+export function reassignBulletinPriorities (oldIndex, newIndex, list) {
+  let newList = cloneDeep(list);
+
+  let newPriority = newList[newIndex].priority; 
+    
+  if(oldIndex > newIndex) {
+    for(let i = newIndex; i < oldIndex; i ++) {
+      newList[i].priority = newList[i+1].priority;
+    } 
+    newList[oldIndex].priority = newPriority;
+  } else {
+    for(let i = newIndex; i > oldIndex; i --) {
+      newList[i].priority = newList[i-1].priority;
+    }
+    newList[oldIndex].priority = newPriority;
+  }
+
+  return newList;
 }
 
 export function removeIframeBackgroundImage () {

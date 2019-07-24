@@ -5,6 +5,7 @@ import * as socketIO from '../utils/socket';
 import ensureToken from '../middlewares/ensureToken';
 import * as bulletinService from '../services/bulletinService';
 import { bulletinValidator } from '../validators/bulletinValidator';
+import { bulletinsValidator } from '../validators/bulletinsValidator';
 
 const router = Router();
 
@@ -38,6 +39,21 @@ router.post('/', ensureToken, bulletinValidator, (req, res, next) => {
       socketIO.emitUpdate();
 
       return res.status(HttpStatus.CREATED).json({ data });
+    })
+    .catch(err => next(err));
+});
+
+/**
+ * PUT /api/bulk/
+ */
+
+router.put('/bulk', ensureToken, bulletinsValidator, (req, res, next) => {
+  bulletinService
+    .updateBulletins(req.body)
+    .then(data => {
+      socketIO.emitUpdate();
+
+      return res.json({ data });
     })
     .catch(err => next(err));
 });

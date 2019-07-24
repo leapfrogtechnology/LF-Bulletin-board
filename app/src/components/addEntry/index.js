@@ -20,7 +20,6 @@ const modalStyle = {
 const defaultFormData = {
   url: '',
   title: '',
-  priority: '',
   activeStatus: true,
   duration: ''
 };
@@ -111,20 +110,20 @@ class AddEntry extends Component {
                 onChange={(el) => this.handleChange(el)}
               />
             </FormGroup>
-            <div className="priority-duration-wrapper">
-              <FormGroup>
-                <ControlLabel>Priority</ControlLabel>
-                <FormControl id="priority" name="priority" type="text" placeholder=""
-                  value={this.state.formdata.priority}
-                  onChange={(el) => this.handleChange(el)}
-                />
-              </FormGroup>
-
+            <div className="two-col-fields-wrapper">
               <FormGroup>
                 <ControlLabel>Duration</ControlLabel>
                 <FormControl id="duration" name="duration" type="text" placeholder=""
                   value={this.state.formdata.duration}
                   onChange={(el) => this.handleChange(el)}                
+                />
+              </FormGroup>
+
+              <FormGroup>
+                <ControlLabel>Active Status</ControlLabel>
+                <Checkbox 
+                  checked={this.state.formdata.activeStatus}
+                  onChange={(el) => this.handleCheckboxChange(el)}
                 />
               </FormGroup>
             </div>
@@ -135,13 +134,6 @@ class AddEntry extends Component {
                 value={this.state.formdata.url}
                 onChange={(el) => this.handleChange(el)}                
               />
-            </FormGroup>
-            <FormGroup>
-            <ControlLabel>Active Status</ControlLabel>
-            <Checkbox 
-              checked={this.state.formdata.activeStatus}
-              onChange={(el) => this.handleCheckboxChange(el)}
-            />
             </FormGroup>
             <div className="form-buttons-wrapper">
               <Button className="cancel-button" bsStyle="default" onClick={() => this.closeModal()}>CANCEL</Button>
