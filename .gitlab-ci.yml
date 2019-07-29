@@ -65,10 +65,7 @@ app-build:
   tags:
     - docker
   script:
-    - echo "Building artifact"
-    - cd devops
-    - ./compile_env.sh
-    - cd ../
+    - echo "Building artifact"    
     - cd app    
     - npm install
     - npm run build
