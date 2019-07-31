@@ -1,6 +1,6 @@
 {
   "ACCESS_TOKEN_SALT": "bulletin access top secret",
-  "ACCESS_EXPIRY_TIME": 20,
+  "ACCESS_EXPIRY_TIME": "20h",
   "REFRESH_TOKEN_SALT": "bullentin refresh top secret",
-  "REFRESH_EXPIRY_TIME": 8000
+  "REFRESH_EXPIRY_TIME": "2d"
 }

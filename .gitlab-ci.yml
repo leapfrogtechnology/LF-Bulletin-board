@@ -65,10 +65,7 @@ app-build:
   tags:
     - docker
   script:
-    - echo "Building artifact"
-    - cd devops
-    - ./compile_env.sh
-    - cd ../
+    - echo "Building artifact"    
     - cd app    
     - npm install
     - npm run build
@@ -83,7 +80,7 @@ app-build:
 pakage-app:
   stage: package
   services:
-    - docker:dind
+    - docker:18-dind
   image: docker:latest
   tags:
     - docker
@@ -104,7 +101,7 @@ pakage-app:
 pakage-api:
   stage: package
   services:
-    - docker:dind
+    - docker:18-dind
   image: docker:latest
   tags:
     - docker

@@ -1,7 +1,10 @@
 import Joi from 'joi';
 import validate from '../utils/validate';
 
-const SCHEMA = {
+const SCHEMA = Joi.array().items({
+  id: Joi.number()
+    .label('id')
+    .required(),
   title: Joi.string()
     .label('title')
     .max(255)
@@ -11,7 +14,8 @@ const SCHEMA = {
     .max(90)
     .required(),
   priority: Joi.number()
-    .label('priority'),
+    .label('priority')
+    .required(),
   activeStatus: Joi.bool()
     .label('active status')
     .required(),
@@ -23,17 +27,17 @@ const SCHEMA = {
     .label('url')
     .max(300)
     .required()
-};
+});
 
 /**
- * Validate create/update bulletin request.
+ * Validate update bulletins-bulk request.
  *
- * @param  {object}   req
+ * @param  {array}   req
  * @param  {object}   res
  * @param  {function} next
  * @return {Promise}
  */
-export function bulletinValidator(req, res, next) {
+export function bulletinsValidator(req, res, next) {
   return validate(req.body, SCHEMA)
     .then(() => next())
     .catch(err => next(err));
