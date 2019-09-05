@@ -17,7 +17,7 @@ export function seed(knex, Promise) {
             email: 'basantamaharjan@lftechnology.com'
           },
           {
-            email: 'ayushghimire@lftechnology.com'
+            email: 'aleshdulal@lftechnology.com'
           },
           {
             email: 'aanchaladhikari@lftechnology.com'
