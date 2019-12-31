@@ -14,22 +14,6 @@
     "prettier": "prettier \"{src,api}/**/*.js\"",
     "prettier:fix": "prettier --write \"{src,api}/**/*.js\""
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "*.js": [
-      "eslint --fix",
-      "prettier --write",
-      "git add"
-    ],
-    "*.{md,yml,yml,json}": [
-      "prettier --write",
-      "git add"
-    ]
-  },
   "dependencies": {
     "axios": "^0.18.1",
     "lodash": "^4.17.13",
@@ -50,8 +34,6 @@
     "eslint-config-leapfrog": "^2.0.1",
     "eslint-config-prettier": "^6.9.0",
     "eslint-plugin-prettier": "^3.1.2",
-    "husky": "^3.1.0",
-    "lint-staged": "^9.5.0",
     "mocha": "^6.2.2",
     "prettier": "^1.19.1"
   },

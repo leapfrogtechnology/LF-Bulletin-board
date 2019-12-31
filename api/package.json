@@ -22,22 +22,6 @@
     "lint": "yarn prettier && eslint src test; exit 0",
     "lint:fix": "yarn prettier:fix && eslint src test --fix; exit 0"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "*.js": [
-      "eslint --fix",
-      "prettier --write",
-      "git add"
-    ],
-    "*.{md,yml,yml,json}": [
-      "prettier --write",
-      "git add"
-    ]
-  },
   "keywords": [
     "api",
     "bulletin"
@@ -77,8 +61,6 @@
     "eslint-config-leapfrog": "^2.0.1",
     "eslint-config-prettier": "^6.9.0",
     "eslint-plugin-prettier": "^3.1.2",
-    "husky": "^3.1.0",
-    "lint-staged": "^9.5.0",
     "mocha": "^6.2.2",
     "nodemon": "^1.18.4",
     "nyc": "^11.4.1",
