@@ -1,4 +1,5 @@
-let path = require('path');
+const path = require('path');
+
 require('babel-register');
 require('dotenv').config({ path: __dirname + '/../.env' });
 console.log(path.join(__dirname, '/db', process.env.DB_FILE)); // eslint-disable-line no-console

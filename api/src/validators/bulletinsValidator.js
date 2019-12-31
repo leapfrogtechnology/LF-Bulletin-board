@@ -35,7 +35,7 @@ const SCHEMA = Joi.array().items({
  * @param  {array}   req
  * @param  {object}   res
  * @param  {function} next
- * @return {Promise}
+ * @returns {Promise}
  */
 export function bulletinsValidator(req, res, next) {
   return validate(req.body, SCHEMA)

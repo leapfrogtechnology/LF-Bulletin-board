@@ -33,7 +33,7 @@ router.post('/refresh', validateRefreshToken, (req, res, next) => {
  * DELETE /api/logout
  */
 router.delete('/logout', (req, res, next) => {
-  let requestToken = req.body.authorization.substring(CONSTANT.BEARER_LENGTH);
+  const requestToken = req.body.authorization.substring(CONSTANT.BEARER_LENGTH);
 
   authService
     .logoutUser(requestToken)

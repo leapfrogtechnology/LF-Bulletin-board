@@ -3,7 +3,7 @@
  *
  * @param  {object} knex
  * @param  {object} Promise
- * @return {Promise}
+ * @returns {Promise}
  */
 export function seed(knex, Promise) {
   // Deletes all existing entries

@@ -13,13 +13,14 @@ export default async function validateGoogleToken(req, res, next) {
   try {
     const client = new googleAuth.OAuth2Client(process.env.GOOGLE_CLIENT_ID);
     let data;
-    let token = req.body.tokenId;
+    const token = req.body.tokenId;
     const ticket = await client.verifyIdToken({
       idToken: token,
       audience: process.env.GOOGLE_CLIENT_ID
     });
     const payload = ticket.getPayload();
     const userId = payload['sub'];
+
     if (payload) {
       data = {
         id: userId,
