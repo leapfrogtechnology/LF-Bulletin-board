@@ -2,18 +2,31 @@
   "env": {
     "es6": true,
     "node": true,
-    "jasmine": true,
+    "mocha": true,
     "browser": true
   },
   "parser": "babel-eslint",
+  "extends": ["prettier", "eslint:recommended", "eslint-config-leapfrog/react"],
   "parserOptions": {
     "ecmaVersion": 2018,
     "sourceType": "module"
   },
-  "extends": ["eslint-config-leapfrog/react"],
-  "plugins": ["react"],
+  "plugins": ["prettier"],
+
   "rules": {
-    "eqeqeq": "off"
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "require-jsdoc": [
+      "error",
+      {
+        "require": {
+          "FunctionDeclaration": true,
+          "MethodDefinition": false,
+          "ClassDeclaration": false,
+          "ArrowFunctionExpression": true,
+          "FunctionExpression": false
+        }
+      }
+    ]
   },
   "settings": {
     "react": {
