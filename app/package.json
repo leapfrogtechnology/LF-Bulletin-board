@@ -2,6 +2,18 @@
   "name": "bulletin-board-v3",
   "version": "0.1.0",
   "private": true,
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "eslint": "eslint src",
+    "eslint:fix": "eslint --fix src",
+    "lint": "yarn prettier && yarn eslint",
+    "lint:fix": "yarn prettier:fix && yarn eslint:fix",
+    "prettier": "prettier \"{src,api}/**/*.js\"",
+    "prettier:fix": "prettier --write \"{src,api}/**/*.js\""
+  },
   "dependencies": {
     "axios": "^0.18.1",
     "lodash": "^4.17.13",
@@ -17,22 +29,13 @@
     "socket.io-client": "^2.1.1",
     "sweetalert": "^2.1.2"
   },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
+  "devDependencies": {
+    "eslint-config-leapfrog": "^2.0.1"
   },
   "browserslist": [
     ">0.2%",
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ],
-  "devDependencies": {
-    "eslint-config-leapfrog": "^2.0.1"
-  }
+  ]
 }
