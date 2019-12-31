@@ -1,0 +1,24 @@
+{
+  "env": {
+    "es6": true,
+    "node": true,
+    "jasmine": true,
+    "browser": true
+  },
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "ecmaVersion": 2018,
+    "sourceType": "module"
+  },
+  "extends": ["eslint-config-leapfrog/react"],
+  "plugins": ["react"],
+  "rules": {
+    "eqeqeq": "off"
+  },
+  "settings": {
+    "react": {
+      "pragma": "React", // Pragma to use, default to "React"
+      "version": "detect" // React version. "detect" automatically picks the version you have installed.
+    }
+  }
+}
