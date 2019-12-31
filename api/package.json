@@ -5,8 +5,6 @@
   "scripts": {
     "start": "node dist",
     "prestart": "npm run build",
-    "lint": "eslint src test; exit 0",
-    "lint:fix": "eslint src test --fix; exit 0",
     "codecov": "cat coverage/*/lcov.info | codecov",
     "seed": "knex seed:run --knexfile src/knexfile.js",
     "build": "rimraf dist && babel src -D --out-dir dist",
@@ -15,9 +13,14 @@
     "make:seeder": "knex seed:make --knexfile src/knexfile.js",
     "make:migration": "knex migrate:make --knexfile src/knexfile.js",
     "test": "NODE_ENV=test mocha --recursive --require babel-register test",
-    "prettify": "prettier --single-quote --print-width 120 --write \"src/**/*.js\" \"test/**/*.js\"",
     "start:dev": "nodemon --watch .env --watch src --exec babel-node src --source-maps",
-    "test:coverage": "NODE_ENV=test nyc --require babel-register --reporter lcov --reporter text mocha --recursive test"
+    "test:coverage": "NODE_ENV=test nyc --require babel-register --reporter lcov --reporter text mocha --recursive test",
+    "eslint": "eslint src",
+    "eslint:fix": "eslint --fix src",
+    "prettier": "prettier --single-quote --print-width 120 --write \"src/**/*.js\" \"test/**/*.js\"",
+    "prettier:fix": "prettier --write \"{src,api}/**/*.js\"",
+    "lint": "yarn prettier && eslint src test; exit 0",
+    "lint:fix": "yarn prettier:fix && eslint src test --fix; exit 0"
   },
   "husky": {
     "hooks": {
