@@ -82,7 +82,7 @@
     "mocha": "^3.4.2",
     "nodemon": "^1.18.4",
     "nyc": "^11.4.1",
-    "prettier": "^1.7.4",
+    "prettier": "^1.19.1",
     "rimraf": "^2.6.1",
     "supertest": "^3.0.0"
   },
