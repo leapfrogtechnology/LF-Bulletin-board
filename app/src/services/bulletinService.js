@@ -1,115 +1,177 @@
-import {filter, each, orderBy, cloneDeep} from 'lodash';
+/* eslint-disable require-await */
+import { filter, each, orderBy, cloneDeep } from 'lodash';
 
 import * as httpUtil from '../utils/httpUtil';
 import urlConstants from '../constants/urlConstants';
 
 import defaultImage from '../assets/images/logo_leapfrog.svg';
 
+/**
+ * Check Login.
+ *
+ * @param {*} data
+ * @returns {Promise}
+ */
 export function checkLogin(data) {
-  let loginUrl = urlConstants.apiBaseUrl + '/login';
+  const loginUrl = urlConstants.apiBaseUrl + '/login';
 
   return httpUtil.post(loginUrl, data);
 }
 
+/**
+ * Add Bulletin.
+ *
+ * @param {*} data
+ * @returns {Promise}
+ */
 export async function addBulletin(data) {
-  let addBulletinUrl = urlConstants.apiBaseUrl + '/bulletins';
-  let user = JSON.parse(localStorage.getItem('user'));
+  const addBulletinUrl = urlConstants.apiBaseUrl + '/bulletins';
+  const user = JSON.parse(localStorage.getItem('user'));
+
   data.owner = (user && user.name) || '';
 
-  return new Promise((resolve) => {
-    let result = httpUtil.post(addBulletinUrl, data);
-    
+  return new Promise(resolve => {
+    const result = httpUtil.post(addBulletinUrl, data);
+
     resolve(result);
   });
 }
 
+/**
+ * List Bulletin.
+ *
+ * @returns {Promise}
+ */
 export async function listBulletin() {
-  let listBulletinUrl = urlConstants.apiBaseUrl + '/bulletins';
-  let result = await httpUtil.get(listBulletinUrl, {});
+  const listBulletinUrl = urlConstants.apiBaseUrl + '/bulletins';
+  const result = await httpUtil.get(listBulletinUrl, {});
 
-  each(result.data.data, (item) => {
-    item.activeStatus = item.activeStatus? true:false;
+  each(result.data.data, item => {
+    item.activeStatus = item.activeStatus ? true : false;
   });
 
   return result;
 }
 
+/**
+ * Delete Bulletin.
+ *
+ * @param {*} bulletinId
+ * @returns {Promise}
+ */
 export async function deleteBulletin(bulletinId) {
-  let deleteBulletinUrl = urlConstants.apiBaseUrl + '/bulletins/' + bulletinId;
+  const deleteBulletinUrl = urlConstants.apiBaseUrl + '/bulletins/' + bulletinId;
 
-  return new Promise((resolve) => {
-    let result = httpUtil.remove(deleteBulletinUrl);
+  return new Promise(resolve => {
+    const result = httpUtil.remove(deleteBulletinUrl);
 
     resolve(result);
   });
 }
 
+/**
+ * Edit Bulletin.
+ *
+ * @param {*} bulletinId
+ * @param {*} data
+ * @returns {Promise}
+ */
 export async function editBulletin(bulletinId, data) {
-  let editBulletinUrl = urlConstants.apiBaseUrl + '/bulletins/' + bulletinId;
+  const editBulletinUrl = urlConstants.apiBaseUrl + '/bulletins/' + bulletinId;
 
-  return new Promise((resolve) => {
-    let result = httpUtil.put(editBulletinUrl, data);
+  return new Promise(resolve => {
+    const result = httpUtil.put(editBulletinUrl, data);
 
     resolve(result);
   });
 }
 
+/**
+ * Update Bulletins Bulk.
+ *
+ * @param {*} data
+ * @returns {Promise}
+ */
 export function updateBulletinsBulk(data) {
-  let updateBulletinsBulkUrl = urlConstants.apiBaseUrl + '/bulletins/bulk';
+  const updateBulletinsBulkUrl = urlConstants.apiBaseUrl + '/bulletins/bulk';
 
-  return new Promise((resolve) => {
-    let result = httpUtil.put(updateBulletinsBulkUrl, data);
-
-    resolve(result);
-  });
-}
-
-export function validateAdmin (data) {
-  const {googleLoginUrl} = urlConstants;
-
-  let valiDateAdminUrl = googleLoginUrl;
-
-  return new Promise((resolve) => {
-    let result = httpUtil.post(valiDateAdminUrl, data);
+  return new Promise(resolve => {
+    const result = httpUtil.put(updateBulletinsBulkUrl, data);
 
     resolve(result);
   });
 }
 
-export async function logOut () {
-  
-  let logoutUrl = urlConstants.apiBaseUrl + '/logout';
-  let refreshToken = localStorage.getItem('refreshToken');
-  let data = {
+/**
+ * Validate Admin.
+ *
+ * @param {*} data
+ * @returns {Promise}
+ */
+export function validateAdmin(data) {
+  const { googleLoginUrl } = urlConstants;
+
+  const valiDateAdminUrl = googleLoginUrl;
+
+  return new Promise(resolve => {
+    const result = httpUtil.post(valiDateAdminUrl, data);
+
+    resolve(result);
+  });
+}
+
+/**
+ * Log Out.
+ *
+ * @returns {Promise}
+ */
+export async function logOut() {
+  const logoutUrl = urlConstants.apiBaseUrl + '/logout';
+  const refreshToken = localStorage.getItem('refreshToken');
+  const data = {
     authorization: 'Bearer ' + refreshToken
   };
 
-  return new Promise((resolve) => {
-    let result = httpUtil.remove(logoutUrl, data);
+  return new Promise(resolve => {
+    const result = httpUtil.remove(logoutUrl, data);
 
     resolve(result);
   });
 }
 
-export function filterActiveList (list) {
-  let activeList = filter(list, (item) => item.activeStatus);
-  
+/**
+ * Filter Active List.
+ *
+ * @param {*} list
+ * @returns {Promise}
+ */
+export function filterActiveList(list) {
+  const activeList = filter(list, item => item.activeStatus);
+
   return orderBy(activeList, 'priority', 'asc');
 }
 
-export function reassignBulletinPriorities (oldIndex, newIndex, list) {
-  let newList = cloneDeep(list);
+/**
+ * Reassign Bulletin Priorities.
+ *
+ * @param {*} oldIndex
+ * @param {*} newIndex
+ * @param {*} list
+ * @returns {Promise}
+ */
+export function reassignBulletinPriorities(oldIndex, newIndex, list) {
+  const newList = cloneDeep(list);
 
-  let newPriority = newList[newIndex].priority; 
-    
-  if(oldIndex > newIndex) {
-    for(let i = newIndex; i < oldIndex; i ++) {
-      newList[i].priority = newList[i+1].priority;
-    } 
+  const newPriority = newList[newIndex].priority;
+
+  if (oldIndex > newIndex) {
+    for (let i = newIndex; i < oldIndex; i++) {
+      newList[i].priority = newList[i + 1].priority;
+    }
     newList[oldIndex].priority = newPriority;
   } else {
-    for(let i = newIndex; i > oldIndex; i --) {
-      newList[i].priority = newList[i-1].priority;
+    for (let i = newIndex; i > oldIndex; i--) {
+      newList[i].priority = newList[i - 1].priority;
     }
     newList[oldIndex].priority = newPriority;
   }
@@ -117,14 +179,24 @@ export function reassignBulletinPriorities (oldIndex, newIndex, list) {
   return newList;
 }
 
-export function removeIframeBackgroundImage () {
-  let iframeHolderDiv = document.getElementsByClassName('iframe-holder')[0];
+/**
+ * Remove Iframe Background Image.
+ *
+ */
+export function removeIframeBackgroundImage() {
+  const iframeHolderDiv = document.getElementsByClassName('iframe-holder')[0];
+
   iframeHolderDiv.style.background = 'none';
-  iframeHolderDiv.style.backgroundSize = "none";
+  iframeHolderDiv.style.backgroundSize = 'none';
 }
 
-export function addIframeBackgroundImage () {
-  let iframeHolderDiv = document.getElementsByClassName('iframe-holder')[0];
-  iframeHolderDiv.style.background = "url('"+ defaultImage +"') center center no-repeat";
-  iframeHolderDiv.style.backgroundSize = "50%";
+/**
+ * Add Iframe Background Image.
+ *
+ */
+export function addIframeBackgroundImage() {
+  const iframeHolderDiv = document.getElementsByClassName('iframe-holder')[0];
+
+  iframeHolderDiv.style.background = "url('" + defaultImage + "') center center no-repeat";
+  iframeHolderDiv.style.backgroundSize = '50%';
 }

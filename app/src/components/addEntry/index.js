@@ -2,12 +2,12 @@ import swal from 'sweetalert';
 import Modal from 'react-modal';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { FormGroup, ControlLabel, FormControl, Button, Checkbox} from 'react-bootstrap';
+import { FormGroup, ControlLabel, FormControl, Button, Checkbox } from 'react-bootstrap';
 
 import * as bulletinService from '../../services/bulletinService';
 
 const modalStyle = {
-  content : {
+  content: {
     top: '50%',
     left: '50%',
     right: 'auto',
@@ -24,38 +24,56 @@ const defaultFormData = {
   duration: ''
 };
 
+/**
+ *
+ * @class AddEntry
+ * @extends {Component}
+ */
 class AddEntry extends Component {
-
-  constructor () {
+  constructor() {
     super();
 
     this.state = {
-      modalIsOpen : false,
+      modalIsOpen: false,
       formdata: defaultFormData
     };
   }
-  
-  handleSubmit (event) {
+
+  /**
+   * Handle Submit.
+   *
+   * @param {*} event
+   * @memberof AddEntry
+   */
+  handleSubmit(event) {
     event.preventDefault();
 
-    let params = this.state.formdata;
+    const params = this.state.formdata;
 
-    bulletinService.addBulletin(params)
+    bulletinService
+      .addBulletin(params)
       .then(() => {
         this.props.refreshList();
         this.closeModal();
         this.setState({
           formdata: defaultFormData
         });
-      }).catch((err) => {
+      })
+      .catch(err => {
         swal(err.response.data.error.details[0].message);
       });
   }
 
-  handleChange (el) {
-    let inputName = el.target.name;
-    let inputValue = el.target.value;
-    let formData = Object.assign({}, this.state.formdata);
+  /**
+   * Handle Change.
+   *
+   * @param {*} el
+   * @memberof AddEntry
+   */
+  handleChange(el) {
+    const inputName = el.target.name;
+    const inputValue = el.target.value;
+    const formData = Object.assign({}, this.state.formdata);
 
     formData[inputName] = inputValue;
 
@@ -64,8 +82,15 @@ class AddEntry extends Component {
     });
   }
 
-  handleCheckboxChange (el) {
-    let formData = Object.assign({}, this.state.formdata);
+  /**
+   * Handle Checkbox Change.
+   *
+   * @param {*} el
+   * @memberof AddEntry
+   */
+  handleCheckboxChange(el) {
+    const formData = Object.assign({}, this.state.formdata);
+
     formData.activeStatus = el.target.checked;
 
     this.setState({
@@ -73,20 +98,29 @@ class AddEntry extends Component {
     });
   }
 
-  openModal () {
+  /**
+   * Open Modal.
+   *
+   * @memberof AddEntry
+   */
+  openModal() {
     this.setState({
       modalIsOpen: true
     });
   }
 
-  closeModal () {
+  /**
+   * Close Modal.
+   *
+   * @memberof AddEntry
+   */
+  closeModal() {
     this.setState({
       modalIsOpen: false
     });
   }
 
   render() {
-
     return (
       <div>
         <Button className="add-entry-button" bsStyle="primary" onClick={() => this.openModal()}>
@@ -101,52 +135,61 @@ class AddEntry extends Component {
           content-label="add entry modal"
         >
           <h2 className="add-entry-heading">Add New Entry</h2>
-          <form className="add-entry-form" onSubmit={(event) => this.handleSubmit(event)}>
-
+          <form className="add-entry-form" onSubmit={event => this.handleSubmit(event)}>
             <FormGroup>
               <ControlLabel>Segment Title</ControlLabel>
-              <FormControl id="title" name="title" type="text" placeholder=""
+              <FormControl
+                id="title"
+                name="title"
+                type="text"
+                placeholder=""
                 value={this.state.formdata.title}
-                onChange={(el) => this.handleChange(el)}
+                onChange={el => this.handleChange(el)}
               />
             </FormGroup>
             <div className="two-col-fields-wrapper">
               <FormGroup>
                 <ControlLabel>Duration</ControlLabel>
-                <FormControl id="duration" name="duration" type="text" placeholder=""
+                <FormControl
+                  id="duration"
+                  name="duration"
+                  type="text"
+                  placeholder=""
                   value={this.state.formdata.duration}
-                  onChange={(el) => this.handleChange(el)}                
+                  onChange={el => this.handleChange(el)}
                 />
               </FormGroup>
 
               <FormGroup>
                 <ControlLabel>Active Status</ControlLabel>
-                <Checkbox 
-                  checked={this.state.formdata.activeStatus}
-                  onChange={(el) => this.handleCheckboxChange(el)}
-                />
+                <Checkbox checked={this.state.formdata.activeStatus} onChange={el => this.handleCheckboxChange(el)} />
               </FormGroup>
             </div>
 
             <FormGroup>
               <ControlLabel>Url</ControlLabel>
-              <FormControl id="url" name="url" type="text" placeholder=""
+              <FormControl
+                id="url"
+                name="url"
+                type="text"
+                placeholder=""
                 value={this.state.formdata.url}
-                onChange={(el) => this.handleChange(el)}                
+                onChange={el => this.handleChange(el)}
               />
             </FormGroup>
             <div className="form-buttons-wrapper">
-              <Button className="cancel-button" bsStyle="default" onClick={() => this.closeModal()}>CANCEL</Button>
-              <Button className="submit-button" bsStyle="primary" type="submit">ADD</Button>
-            </div>            
+              <Button className="cancel-button" bsStyle="default" onClick={() => this.closeModal()}>
+                CANCEL
+              </Button>
+              <Button className="submit-button" bsStyle="primary" type="submit">
+                ADD
+              </Button>
+            </div>
           </form>
-
         </Modal>
-        
       </div>
     );
   }
-
 }
 
 AddEntry.propTypes = {

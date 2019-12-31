@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
 class PageNotFound extends Component {
-
   render() {
     return (
       <div className="not-found-container">
@@ -10,7 +9,6 @@ class PageNotFound extends Component {
       </div>
     );
   }
-
 }
 
 export default PageNotFound;
