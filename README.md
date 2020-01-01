@@ -1,6 +1,6 @@
 <div align="center">
   <a href="https://github.com/leapfrogtechnology/bulletin-board">
-    <img width="128px" src="logo_leapfrog.svg"/> 
+    <img width="128px" src="app/src/assets/images/bulletin-board-login-image.png"/> 
   </a>
   <br/>
   
