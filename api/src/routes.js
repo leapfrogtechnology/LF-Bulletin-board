@@ -9,7 +9,7 @@ import bulletinsController from './controllers/bulletins';
 /**
  * Contains all API routes for the application.
  */
-let router = Router();
+const router = Router();
 
 /**
  * GET /api/swagger.json

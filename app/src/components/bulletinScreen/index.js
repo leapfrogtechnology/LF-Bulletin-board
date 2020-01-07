@@ -1,7 +1,7 @@
 import swal from 'sweetalert';
 import io from 'socket.io-client';
 import React, { Component } from 'react';
-import {cloneDeep} from 'lodash';
+import { cloneDeep } from 'lodash';
 
 import BulletinFooter from '../bulletinFooter';
 import urlConstants from '../../constants/urlConstants';
@@ -19,7 +19,6 @@ const dummyBulletinSegment = {
 };
 
 class BulletinScreen extends Component {
-
   constructor() {
     super();
     this.state = {
@@ -32,10 +31,10 @@ class BulletinScreen extends Component {
 
     this.newDataCollection = [];
     this.isnewDataCollection = false;
-    
+
     this.socket = io.connect(urlConstants.baseUrl);
 
-    this.socket.on('IS_LIST_UPDATED', (data) => {
+    this.socket.on('IS_LIST_UPDATED', data => {
       if (data.status) {
         this.getNewCollection();
       }
@@ -56,12 +55,9 @@ class BulletinScreen extends Component {
 
   changeDuration() {
     if (this.state.firstSelectedLink.show) {
-      this.setState(
-        { choosenDuration: this.state.firstSelectedLink.duration },
-        () => {
-          this.changeSelectedLink();
-        }
-      );
+      this.setState({ choosenDuration: this.state.firstSelectedLink.duration }, () => {
+        this.changeSelectedLink();
+      });
     } else {
       this.setState(
         {
@@ -74,24 +70,24 @@ class BulletinScreen extends Component {
     }
   }
 
-  async changeSelectedLink() {
+  changeSelectedLink() {
     let index;
     let newCollectionFlag = false;
+
     if (!this.state.firstSelectedLink.show) {
-      index =
-        (this.state.firstSelectedLink.index + 2) %
-        this.state.dataCollection.length;
+      index = (this.state.firstSelectedLink.index + 2) % this.state.dataCollection.length;
 
       newCollectionFlag = index === 0 && this.isnewDataCollection;
-      
-      if(newCollectionFlag) {
+
+      if (newCollectionFlag) {
         this.setData(cloneDeep(this.newDataCollection));
-        
+
         this.newDataCollection = [];
         this.isnewDataCollection = false;
+
         return;
       }
-      
+
       this.setState(
         {
           firstSelectedLink: {
@@ -107,17 +103,16 @@ class BulletinScreen extends Component {
         }
       );
     } else if (!this.state.secondSelectedLink.show) {
-      index =
-        (this.state.secondSelectedLink.index + 2) %
-        this.state.dataCollection.length;
-      
+      index = (this.state.secondSelectedLink.index + 2) % this.state.dataCollection.length;
+
       newCollectionFlag = index === 0 && this.isnewDataCollection;
-      
-      if(newCollectionFlag) {
+
+      if (newCollectionFlag) {
         this.setData(cloneDeep(this.newDataCollection));
-        
+
         this.newDataCollection = [];
         this.isnewDataCollection = false;
+
         return;
       }
 
@@ -141,35 +136,35 @@ class BulletinScreen extends Component {
   getNewCollection() {
     let newList;
 
-    bulletinService.listBulletin()
-      .then((response) => {
-        newList = bulletinService.filterActiveList(response.data.data);
-        this.newDataCollection = newList;
-        this.isnewDataCollection = true;
-        
-        //call the setData() function immediately only if currently active datacollection list is empty or has only one item
-        if(this.state.dataCollection.length === 0 || this.state.dataCollection.length === 1) {
-          this.setData(cloneDeep(this.newDataCollection));
-          this.newDataCollection = [];
-          this.isnewDataCollection = false;
-        }
-      });
+    bulletinService.listBulletin().then(response => {
+      newList = bulletinService.filterActiveList(response.data.data);
+      this.newDataCollection = newList;
+      this.isnewDataCollection = true;
+
+      // call the setData() function immediately only if currently active datacollection list is empty or has only one item
+      if (this.state.dataCollection.length === 0 || this.state.dataCollection.length === 1) {
+        this.setData(cloneDeep(this.newDataCollection));
+        this.newDataCollection = [];
+        this.isnewDataCollection = false;
+      }
+    });
   }
 
   fetchBulletinList() {
     let newList;
 
-    bulletinService.listBulletin()
-      .then((response) => {
+    bulletinService
+      .listBulletin()
+      .then(response => {
         newList = bulletinService.filterActiveList(response.data.data);
 
         this.setData(newList);
       })
-      .catch((err) => {
+      .catch(err => {
         if (err.response && err.response.data && err.response.data.error.message) {
           swal(err.response.data.error.message);
         } else {
-          swal("Server Error");
+          swal('Server Error');
         }
       });
   }
@@ -178,17 +173,16 @@ class BulletinScreen extends Component {
     this.setState({ dataCollection: linksCollection }, () => {
       if (this.state.dataCollection.length === 0) {
         bulletinService.addIframeBackgroundImage();
-        
+
         this.setState({
           firstSelectedLink: dummyBulletinSegment,
           secondSelectedLink: dummyBulletinSegment,
           choosenDuration: 0,
           activeBulletinTitle: 'Leapfrog Bulletin'
         });
-
       } else if (this.state.dataCollection.length === 1) {
         bulletinService.removeIframeBackgroundImage();
-        
+
         this.setState({
           firstSelectedLink: {
             url: this.state.dataCollection[0].url,
@@ -250,7 +244,9 @@ class BulletinScreen extends Component {
       },
       () => {
         this.setState({
-          activeBulletinTitle: this.state.secondSelectedLink.show ? this.state.secondSelectedLink.title : this.state.firstSelectedLink.title
+          activeBulletinTitle: this.state.secondSelectedLink.show
+            ? this.state.secondSelectedLink.title
+            : this.state.firstSelectedLink.title
         });
         this.changeDuration();
       }
@@ -274,18 +270,14 @@ class BulletinScreen extends Component {
             src={this.state.secondSelectedLink.url}
             className="second-iframe"
             style={{
-              visibility: this.state.secondSelectedLink.show
-                ? 'visible'
-                : 'hidden'
+              visibility: this.state.secondSelectedLink.show ? 'visible' : 'hidden'
             }}
           />
         </div>
         <BulletinFooter title={this.state.activeBulletinTitle} />
       </div>
-
     );
   }
-
 }
 
 export default BulletinScreen;

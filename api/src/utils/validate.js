@@ -5,7 +5,7 @@ import Joi from 'joi';
  *
  * @param  {object}  data
  * @param  {object}  schema
- * @return {Promise}
+ * @returns {Promise}
  */
 function validate(data, schema) {
   return Joi.validate(data, schema, { abortEarly: false }, err => {
