@@ -1,17 +1,19 @@
 import React from 'react';
-import {
-  Route,
-  Redirect,
-} from 'react-router-dom';
+import { Route, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-const PrivateRoute = ({ component: Component, ...rest}) => (
-  <Route  
-    {...rest} 
+/**
+ * Check Is User Logged And Only render Component else Redirect To Login.
+ *
+ * @param {*} { Component: Component, ...rest }.
+ */
+const PrivateRoute = ({ component: Component, ...rest }) => (
+  <Route
+    {...rest}
     render={props => {
-      const isAuthenticated = JSON.parse(localStorage.getItem('user'))? true: false;
+      const isAuthenticated = JSON.parse(localStorage.getItem('user')) ? true : false;
 
-      return isAuthenticated? (
+      return isAuthenticated ? (
         <Component {...props} />
       ) : (
         <Redirect

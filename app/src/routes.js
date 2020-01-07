@@ -11,13 +11,17 @@ import routeConstants from './constants/routeConstants';
 
 const baseHref = process.env.BASE_HREF || '/';
 
+/**
+ * Route User Request Based on Routes.
+ *
+ */
 const Router = () => (
   <BrowserRouter basename={baseHref}>
     <Switch>
-      <Route  path={routeConstants.LOGIN} component={Login} /> 
-      <Route exact path={routeConstants.BULLETIN} component={BulletinScreen} />       
+      <Route path={routeConstants.LOGIN} component={Login} />
+      <Route exact path={routeConstants.BULLETIN} component={BulletinScreen} />
       <PrivateRoute path={routeConstants.DASHBOARD} component={Dashboard} />
-      <Route component={PageNotFound}/>
+      <Route component={PageNotFound} />
     </Switch>
   </BrowserRouter>
 );

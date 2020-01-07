@@ -5,12 +5,15 @@ import MoreMenu from '../moreMenu';
 import logo from '../../assets/images/bulletin-logo-inverse.png';
 
 class SideMenu extends Component {
-
-  constructor (props) {
+  constructor(props) {
     super(props);
 
     this.state = {
-      userInitials: props.user && props.user.givenName && props.user.familyName && props.user.givenName[0] + props.user.familyName[0]
+      userInitials:
+        props.user &&
+        props.user.givenName &&
+        props.user.familyName &&
+        props.user.givenName[0] + props.user.familyName[0]
     };
   }
 
@@ -18,25 +21,23 @@ class SideMenu extends Component {
     return (
       <div>
         <div className="sidemenu-bulletin-logo">
-          <img src={logo} alt="bulletin logo"/>
+          <img src={logo} alt="bulletin logo" />
         </div>
         <ul className="side-menu-list">
           <li>
             <span className="profile-name">{this.state.userInitials}</span>
           </li>
           <li>
-            <MoreMenu/>
+            <MoreMenu />
           </li>
         </ul>
       </div>
     );
   }
-
 }
 
 SideMenu.propTypes = {
   user: PropTypes.object
 };
-
 
 export default SideMenu;

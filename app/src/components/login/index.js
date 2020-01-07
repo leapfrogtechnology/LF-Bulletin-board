@@ -7,29 +7,29 @@ import routeConstants from '../../constants/routeConstants';
 import * as bulletinService from '../../services/bulletinService';
 import bulletinLogo from '../../assets/images/bulletin-board-login-image.png';
 
-
 class GoogleLoginComponent extends Component {
- 
-  constructor(){
+  constructor() {
     super();
-    this.state={
+    this.state = {
       isLoggedIn: JSON.parse(localStorage.getItem('user')) ? true : false
     };
   }
 
-  responseGoogle(response){
-    let profileObj = response.profileObj;
-    let data = {
+  responseGoogle(response) {
+    const profileObj = response.profileObj;
+    const data = {
       tokenId: response.tokenId
     };
-    
-    bulletinService.validateAdmin(data)
+
+    bulletinService
+      .validateAdmin(data)
       .then(res => {
-        const {tokens} = res.data.data;
+        const { tokens } = res.data.data;
+
         localStorage.setItem('accessToken', tokens.accessToken);
         localStorage.setItem('refreshToken', tokens.refreshToken);
         localStorage.setItem('user', JSON.stringify(profileObj));
-      
+
         this.setState({
           isLoggedIn: true
         });
@@ -37,35 +37,32 @@ class GoogleLoginComponent extends Component {
       .catch(err => err);
   }
 
-  render(){
+  render() {
     const isLoggedIn = this.state.isLoggedIn;
-    
-    return(
+
+    return (
       <div className="login-wrapper">
-        { 
-          !isLoggedIn ? (
-            <div className="login-dialog">
-              <img src={bulletinLogo} alt="bulletin logo" className="bulletin-logo-big"/>
-              <GoogleLogin
-                clientId={textConstants.GOOGLE_CLIENT_ID}
-                buttonText="Google Login"
-                className="login-button-style"
-                onSuccess={this.responseGoogle.bind(this)}
-                onFailure={this.responseGoogle.bind(this)}
-              />
-            </div>
-          ) :(
-            <Redirect
-              to={{
-                pathname: routeConstants.DASHBOARD
-              }}
+        {!isLoggedIn ? (
+          <div className="login-dialog">
+            <img src={bulletinLogo} alt="bulletin logo" className="bulletin-logo-big" />
+            <GoogleLogin
+              clientId={textConstants.GOOGLE_CLIENT_ID}
+              buttonText="Google Login"
+              className="login-button-style"
+              onSuccess={this.responseGoogle.bind(this)}
+              onFailure={this.responseGoogle.bind(this)}
             />
-          )
-        }
+          </div>
+        ) : (
+          <Redirect
+            to={{
+              pathname: routeConstants.DASHBOARD
+            }}
+          />
+        )}
       </div>
     );
   }
-
 }
 
 export default GoogleLoginComponent;

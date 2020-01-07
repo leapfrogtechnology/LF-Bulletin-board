@@ -3,7 +3,7 @@
  *
  * @param  {object} knex
  * @param  {object} Promise
- * @return {Promise}
+ * @returns {Promise}
  */
 export function seed(knex, Promise) {
   // Deletes all existing entries
@@ -15,6 +15,9 @@ export function seed(knex, Promise) {
         knex('users').insert([
           {
             email: 'basantamaharjan@lftechnology.com'
+          },
+          {
+            email: 'biplapbhattarai@lftechnology.com'
           },
           {
             email: 'aleshdulal@lftechnology.com'

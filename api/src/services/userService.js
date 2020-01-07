@@ -7,7 +7,7 @@ import * as sessionService from './sessionService';
 /**
  * Get all users.
  *
- * @return {Promise}
+ * @returns {Promise}
  */
 export function getAllUsers() {
   return User.fetchAll();
@@ -17,7 +17,7 @@ export function getAllUsers() {
  * Get a user.
  *
  * @param  {Number|String}  id
- * @return {Promise}
+ * @returns {Promise}
  */
 export function getUser(id) {
   return new User({ id }).fetch().then(user => {
@@ -33,7 +33,7 @@ export function getUser(id) {
  * Create new user.
  *
  * @param  {Object}  user
- * @return {Promise}
+ * @returns {Promise}
  */
 export function createUser(user) {
   return new User({ name: user.name }).save().then(user => user.refresh());
@@ -44,7 +44,7 @@ export function createUser(user) {
  *
  * @param  {Number|String}  id
  * @param  {Object}         user
- * @return {Promise}
+ * @returns {Promise}
  */
 export function updateUser(id, user) {
   return new User({ id }).save({ name: user.name }).then(user => user.refresh());
@@ -54,7 +54,7 @@ export function updateUser(id, user) {
  * Delete a user.
  *
  * @param  {Number|String}  id
- * @return {Promise}
+ * @returns {Promise}
  */
 export function deleteUser(id) {
   return new User({ id }).fetch().then(user => user.destroy());
@@ -68,13 +68,13 @@ export function deleteUser(id) {
  */
 export async function loginUser(data) {
   try {
-    let email = data.email;
-    let user = await fetchByEmail(email);
+    const email = data.email;
+    const user = await fetchByEmail(email);
 
     if (user) {
-      let { id, name } = data;
-      let tokens = tokenService.generateTokens(id);
-      let userInfo = {
+      const { id, name } = data;
+      const tokens = tokenService.generateTokens(id);
+      const userInfo = {
         user: {
           id,
           name
@@ -101,7 +101,7 @@ export async function loginUser(data) {
  */
 export async function fetchByEmail(email) {
   try {
-    let result = await new User({ email }).fetch();
+    const result = await new User({ email }).fetch();
 
     return result;
   } catch (err) {

@@ -5,36 +5,28 @@ import SideMenu from './SideMenu';
 import ListEntries from '../listEntries';
 
 class Dashboard extends Component {
-
-  constructor () {
+  constructor() {
     super();
 
     this.user = JSON.parse(localStorage.getItem('user')) || '';
   }
 
-  render () {
+  render() {
     return (
-        <div className="clearfix">
-        
-          <div className="sidemenu-wrapper">
-            <SideMenu user={this.user}/>
-          </div>
-
-          <div>
-            <div className="container">
-              <Switch>
-                <Route
-                  exact path="/dashboard/list"
-                  render={() => (                  
-                    <ListEntries/>                                   
-                  )}
-                />
-                <Redirect to="/dashboard/list"/>
-              </Switch>
-            </div>
-          </div>
-
+      <div className="clearfix">
+        <div className="sidemenu-wrapper">
+          <SideMenu user={this.user} />
         </div>
+
+        <div>
+          <div className="container">
+            <Switch>
+              <Route exact path="/dashboard/list" render={() => <ListEntries />} />
+              <Redirect to="/dashboard/list" />
+            </Switch>
+          </div>
+        </div>
+      </div>
     );
   }
 }

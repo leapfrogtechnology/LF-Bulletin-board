@@ -15,7 +15,7 @@ const SCHEMA = {
  * @param  {object}   req
  * @param  {object}   res
  * @param  {function} next
- * @return {Promise}
+ * @returns {Promise}
  */
 function userValidator(req, res, next) {
   return validate(req.body, SCHEMA)
@@ -29,7 +29,7 @@ function userValidator(req, res, next) {
  * @param  {object}   req
  * @param  {object}   res
  * @param  {function} next
- * @return {Promise}
+ * @returns {Promise}
  */
 function findUser(req, res, next) {
   return userService

@@ -1,12 +1,12 @@
 import Boom from 'boom';
 import jwt from 'jsonwebtoken';
 
-let CONFIG = require('../config.json');
+const CONFIG = require('../config.json');
 
 /**
- * Generate both Access Token and Refresh Token
- * 
- * @param {*} userData 
+ * Generate both Access Token and Refresh Token.
+ *
+ * @param {*} userData
  * @returns {Promise}
  */
 export function generateTokens(userData) {
@@ -17,10 +17,10 @@ export function generateTokens(userData) {
 }
 
 /**
- * Generate Access Token
- * 
- * @param {*} data 
- * @return {Promise}
+ * Generate Access Token.
+ *
+ * @param {*} data
+ * @returns {Promise}
  */
 export function generateAccessToken(data) {
   return jwt.sign({ encryptedData: data }, CONFIG.ACCESS_TOKEN_SALT, {
@@ -29,10 +29,10 @@ export function generateAccessToken(data) {
 }
 
 /**
- * Generate Refresh Token
- * 
- * @param {*} data 
- * @return {Promise}
+ * Generate Refresh Token.
+ *
+ * @param {*} data
+ * @returns {Promise}
  */
 export function generateRefreshToken(data) {
   return jwt.sign(
@@ -47,10 +47,10 @@ export function generateRefreshToken(data) {
 }
 
 /**
- * Verify Access Token
- * 
- * @param {*} token 
- * @return {Promise}
+ * Verify Access Token.
+ *
+ * @param {*} token
+ * @returns {Promise}
  */
 export function verifyAccessToken(token) {
   return jwt.verify(token, CONFIG.ACCESS_TOKEN_SALT, (err, decode) => {
@@ -63,10 +63,10 @@ export function verifyAccessToken(token) {
 }
 
 /**
- * Verify Refresh Token
- * 
- * @param {*} token 
- * @return {Promise}
+ * Verify Refresh Token.
+ *
+ * @param {*} token
+ * @returns {Promise}
  */
 export function verifyRefreshToken(token) {
   return jwt.verify(token, CONFIG.REFRESH_TOKEN_SALT, (err, decode) => {
