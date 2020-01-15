@@ -23,6 +23,7 @@ class BulletinScreen extends Component {
     super();
     this.state = {
       dataCollection: [],
+      startSecondSlide: false,
       choosenDuration: textConstants.DEFAULT_SLIDE_DURATION,
       activeBulletinTitle: 'Leapfrog Bulletin',
       firstSelectedLink: {},
@@ -40,6 +41,7 @@ class BulletinScreen extends Component {
       }
     });
 
+    this.getLink = this.getLink.bind(this);
     this.setData = this.setData.bind(this);
     this.showFrame = this.showFrame.bind(this);
     this.toggleFrame = this.toggleFrame.bind(this);
@@ -231,26 +233,59 @@ class BulletinScreen extends Component {
   }
 
   toggleFrame() {
-    this.setState(
-      {
-        firstSelectedLink: {
-          ...this.state.firstSelectedLink,
-          show: !this.state.firstSelectedLink.show
-        },
-        secondSelectedLink: {
-          ...this.state.secondSelectedLink,
-          show: !this.state.secondSelectedLink.show
+    // Autoplays second slide before first has sended
+    this.setState({ startSecondSlide: true }, () => {
+      setTimeout(() => {
+        this.setState(
+          {
+            startSecondSlide: false,
+            firstSelectedLink: {
+              ...this.state.firstSelectedLink,
+              show: !this.state.firstSelectedLink.show
+            },
+            secondSelectedLink: {
+              ...this.state.secondSelectedLink,
+              show: !this.state.secondSelectedLink.show
+            }
+          },
+          () => {
+            this.setState({
+              activeBulletinTitle: this.state.secondSelectedLink.show
+                ? this.state.secondSelectedLink.title
+                : this.state.firstSelectedLink.title
+            });
+            this.changeDuration();
+          }
+        );
+      }, 3000);
+    });
+  }
+
+  /**
+   * Get link based on visibility.
+   *
+   * @param {*} link
+   * @param {*} visibility
+   *
+   * @returns
+   * @memberof BulletinScreen
+   */
+  getLink(link, visibility) {
+    if (link) {
+      if (!visibility) {
+        if (link.includes('start=true')) {
+          link = link.replace('start=true', 'start=false');
         }
-      },
-      () => {
-        this.setState({
-          activeBulletinTitle: this.state.secondSelectedLink.show
-            ? this.state.secondSelectedLink.title
-            : this.state.firstSelectedLink.title
-        });
-        this.changeDuration();
       }
-    );
+
+      if (visibility || this.state.startSecondSlide) {
+        if (link.includes('start=false')) {
+          link = link.replace('start=false', 'start=true');
+        }
+      }
+    }
+
+    return link;
   }
 
   render() {
@@ -259,7 +294,7 @@ class BulletinScreen extends Component {
         <div className="iframe-holder">
           <iframe
             title="first frame"
-            src={this.state.firstSelectedLink.url}
+            src={this.getLink(this.state.firstSelectedLink.url, this.state.firstSelectedLink.show)}
             className="first-iframe"
             style={{
               visibility: this.state.firstSelectedLink.show ? 'visible' : 'hidden'
@@ -267,7 +302,7 @@ class BulletinScreen extends Component {
           />
           <iframe
             title="second frame"
-            src={this.state.secondSelectedLink.url}
+            src={this.getLink(this.state.secondSelectedLink.url, this.state.secondSelectedLink.show)}
             className="second-iframe"
             style={{
               visibility: this.state.secondSelectedLink.show ? 'visible' : 'hidden'
