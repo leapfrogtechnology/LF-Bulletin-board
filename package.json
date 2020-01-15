@@ -8,18 +8,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": "npx lerna run --concurrency 1 --stream precommit"
     }
-  },
-  "lint-staged": {
-    "*.js": [
-      "eslint --fix",
-      "prettier --write",
-      "git add"
-    ],
-    "*.{md,yml,yml,json}": [
-      "prettier --write",
-      "git add"
-    ]
   }
 }
