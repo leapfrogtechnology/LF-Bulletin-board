@@ -422,6 +422,13 @@ img.bulletin-logo-big {
   display: block;
 }
 
+.circular-img {
+  border-radius: 50%;
+  max-width: 100%;
+  max-height: 100%;
+  display: block;
+}
+
 /*-----Toggle button style for active/inactive status-------*/
 
 .switch {
