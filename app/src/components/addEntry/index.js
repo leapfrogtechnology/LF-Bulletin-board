@@ -5,6 +5,7 @@ import React, { Component } from 'react';
 import { FormGroup, ControlLabel, FormControl, Button, Checkbox } from 'react-bootstrap';
 
 import * as bulletinService from '../../services/bulletinService';
+import regex from '../../constants/regex';
 
 const modalStyle = {
   content: {
@@ -49,6 +50,17 @@ class AddEntry extends Component {
     event.preventDefault();
 
     const params = this.state.formdata;
+
+    if (params && params.url) {
+      const youtubeFound = params.url.match(regex.YOUTUBE_REGEX);
+
+      if (youtubeFound !== null) {
+        const youtubeId = youtubeFound[2];
+        const newYoutubeURL = `https://www.youtube.com/embed/${youtubeId}?controls=0&autoplay=1&mute=1&loop=1&playlist=${youtubeId}`;
+
+        params.url = newYoutubeURL;
+      }
+    }
 
     bulletinService
       .addBulletin(params)
