@@ -488,7 +488,11 @@ img.bulletin-logo-big {
 }
 
 .circular-img {
+  border-style: solid;
   border-radius: 50%;
+  border-width: 2px;
+  border-color: #fff;
+
   max-width: 80%;
   max-height: 80%;
   display: block;
