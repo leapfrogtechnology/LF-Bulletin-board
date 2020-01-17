@@ -405,6 +405,12 @@ body {
   position: relative;
 }
 
+.side-menu-list li {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
 .more-menu {
   position: absolute;
   top: -25px;
@@ -479,6 +485,13 @@ body {
 img.bulletin-logo-big {
   display: block;
   margin: 15px 0;
+}
+
+.circular-img {
+  border-radius: 50%;
+  max-width: 80%;
+  max-height: 80%;
+  display: block;
 }
 
 /*-----Toggle button style for active/inactive status-------*/

@@ -18,6 +18,10 @@ class SideMenu extends Component {
     };
   }
 
+  getUserImage() {
+    return this.props.user && this.props.user.imageUrl ? this.props.user.imageUrl : null;
+  }
+
   render() {
     return (
       <div className="sidemenu-container">
@@ -37,7 +41,11 @@ class SideMenu extends Component {
         </Link>
         <ul className="side-menu-list">
           <li>
-            <span className="profile-name">{this.state.userInitials}</span>
+            {this.getUserImage() ? (
+              <img src={this.getUserImage()} alt={this.state.userInitials} className="circular-img" />
+            ) : (
+              <span className="profile-name">{this.state.userInitials}</span>
+            )}
           </li>
           <li>
             <MoreMenu />
