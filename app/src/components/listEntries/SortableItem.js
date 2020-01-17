@@ -13,9 +13,9 @@ const SortableItem = SortableElement(({ item, deleteBulletin, refreshList, toggl
       </div>
       <div className="bulletin-title">{item.title}</div>
       <div className="bulletin-owner">{item.owner}</div>
-      <div className="bulletin-duration">{item.duration}</div>
+      <div className="bulletin-duration">{item.duration}s</div>
       <div className="bulletin-url">
-        <a href={item.url}>
+        <a href={item.url} target="_blank" rel="noopener noreferrer">
           <span>{item.url}</span>
         </a>
       </div>
