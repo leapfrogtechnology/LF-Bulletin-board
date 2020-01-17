@@ -47,7 +47,10 @@ class MoreMenu extends Component {
           this.dropDownMenu = element;
         }}
       >
-        <span onClick={event => this.showMenu(event)}>
+        <span
+          onClick={event => this.showMenu(event)}
+          style={{ paddingLeft: 20, paddingRight: 20, paddingTop: 10, paddingBottom: 10 }}
+        >
           <i className="icon ion-md-more"></i>
         </span>
         {this.state.showMenu ? (
