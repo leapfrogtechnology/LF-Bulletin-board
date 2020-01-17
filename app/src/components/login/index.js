@@ -45,9 +45,15 @@ class GoogleLoginComponent extends Component {
         {!isLoggedIn ? (
           <div className="login-dialog">
             <img src={bulletinLogo} alt="bulletin logo" className="bulletin-logo-big" />
+
             <GoogleLogin
               clientId={textConstants.GOOGLE_CLIENT_ID}
-              buttonText="Google Login"
+              buttonText={
+                <div className="google-button">
+                  <i className="fa fa-google"></i>
+                  <span>Sign in with Google</span>
+                </div>
+              }
               className="login-button-style"
               onSuccess={this.responseGoogle.bind(this)}
               onFailure={this.responseGoogle.bind(this)}
