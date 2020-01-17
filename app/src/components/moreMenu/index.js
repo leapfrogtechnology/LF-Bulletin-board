@@ -47,8 +47,8 @@ class MoreMenu extends Component {
           this.dropDownMenu = element;
         }}
       >
-        <span onClick={event => this.showMenu(event)}>
-          <i className="icon ion-md-more"></i>
+        <span onClick={event => this.showMenu(event)} className="sidemenu-icons log-out">
+          <i className="fa fa-sign-out" ></i>
         </span>
         {this.state.showMenu ? (
           <div className="more-menu">
