@@ -17,8 +17,8 @@
     "test:coverage": "NODE_ENV=test nyc --require babel-register --reporter lcov --reporter text mocha --recursive test",
     "eslint": "eslint src",
     "eslint:fix": "eslint --fix src",
-    "prettier": "prettier --single-quote --print-width 120 --write \"src/**/*.js\" \"test/**/*.js\"",
-    "prettier:fix": "prettier --write \"{src,api}/**/*.js\"",
+    "prettier": "prettier --single-quote --print-width 120 --write \"src/**/*.js\" \"src/**/*.css\" \"test/**/*.js\"",
+    "prettier:fix": "prettier --write \"{src,api}/**/*.js\" \"{src,api}/**/*.css\"",
     "lint": "yarn prettier && eslint src test; exit 0",
     "lint:fix": "yarn prettier:fix && eslint src test --fix; exit 0",
     "precommit": "lint-staged"
@@ -29,7 +29,7 @@
       "prettier --write",
       "git add"
     ],
-    "*.{md,yml,yml,json}": [
+    "*.{md,yml,yml,json,css}": [
       "prettier --write",
       "git add"
     ]
