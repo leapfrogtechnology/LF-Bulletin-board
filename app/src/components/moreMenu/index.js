@@ -42,14 +42,13 @@ class MoreMenu extends Component {
   render() {
     return (
       <div
-        className="more-menu-wrapper"
+        className="more-menu-wrapper sidemenu-icons"
         ref={element => {
           this.dropDownMenu = element;
         }}
+        onClick={event => this.showMenu(event)}
       >
-        <span onClick={event => this.showMenu(event)} className="sidemenu-icons log-out">
-          <i className="fa fa-sign-out" ></i>
-        </span>
+        <i className="fa fa-sign-out"></i>
         {this.state.showMenu ? (
           <div className="more-menu">
             <Logout />
