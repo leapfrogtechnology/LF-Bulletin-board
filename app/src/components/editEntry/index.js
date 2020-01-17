@@ -5,17 +5,7 @@ import React, { Component } from 'react';
 import { FormGroup, ControlLabel, FormControl, Button, Checkbox } from 'react-bootstrap';
 
 import * as bulletinService from '../../services/bulletinService';
-
-const modalStyle = {
-  content: {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)'
-  }
-};
+import modalStyle from '../../assets/modalStyle.css';
 
 class EditEntry extends Component {
   constructor(props) {
