@@ -1,6 +1,5 @@
 import HttpStatus from 'http-status-codes';
 import * as googleAuth from 'google-auth-library';
-
 /**
  * Validate the users' google id using google-auth-library.
  *
@@ -36,6 +35,8 @@ export default async function validateGoogleToken(req, res, next) {
       message: 'Unauthorized access'
     });
   } catch (err) {
+    console.error(err);
+
     throw err;
   }
 }
