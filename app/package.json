@@ -11,8 +11,8 @@
     "eslint:fix": "eslint --fix src",
     "lint": "yarn prettier && yarn eslint",
     "lint:fix": "yarn prettier:fix && yarn eslint:fix",
-    "prettier": "prettier \"{src,api}/**/*.js\"",
-    "prettier:fix": "prettier --write \"{src,api}/**/*.js\"",
+    "prettier": "prettier \"{src,api}/**/*.js\" \"{src,api}/**/*.css\"",
+    "prettier:fix": "prettier --write \"{src,api}/**/*.js\" \"{src,api}/**/*.css\"",
     "precommit": "lint-staged"
   },
   "lint-staged": {
@@ -21,7 +21,7 @@
       "prettier --write",
       "git add"
     ],
-    "*.{md,yml,yml,json}": [
+    "*.{md,yml,yml,json,css}": [
       "prettier --write",
       "git add"
     ]
