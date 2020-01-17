@@ -139,7 +139,7 @@ class AddEntry extends Component {
             </FormGroup>
             <div className="two-col-fields-wrapper">
               <FormGroup>
-                <ControlLabel>Duration</ControlLabel>
+                <ControlLabel>Duration (In Second)</ControlLabel>
                 <FormControl
                   id="duration"
                   name="duration"
@@ -152,7 +152,11 @@ class AddEntry extends Component {
 
               <FormGroup>
                 <ControlLabel>Active Status</ControlLabel>
-                <Checkbox checked={this.state.formdata.activeStatus} onChange={el => this.handleCheckboxChange(el)} />
+                <Checkbox
+                  checked={this.state.formdata.activeStatus}
+                  onChange={el => this.handleCheckboxChange(el)}
+                  className="scale-checkbox"
+                />
               </FormGroup>
             </div>
 
