@@ -20,7 +20,7 @@ class SideMenu extends Component {
 
   render() {
     return (
-      <div>
+      <div className="sidemenu-container">
         <div className="sidemenu-bulletin-logo">
           <img src={logo} alt="bulletin logo" />
         </div>

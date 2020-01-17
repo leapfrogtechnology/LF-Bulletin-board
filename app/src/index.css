@@ -364,6 +364,12 @@ body {
   pointer-events: auto !important;
 }
 
+.sidemenu-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 .sidemenu-bulletin-logo {
   background-color: #29cbe0;
 }
@@ -395,6 +401,7 @@ body {
   float: right;
 }
 .more-menu-wrapper {
+  margin-top: 10px;
   position: relative;
 }
 
@@ -407,19 +414,11 @@ body {
 .sidemenu-icons {
   color: #fff !important;
   font-size: xx-large;
-  padding: 20px;
+  padding: 10px 20px;
 }
 
 .sidemenu-icons:hover {
   background: rgba(255, 255, 255, 0.17);
-}
-
-.more-menu-wrapper .log-out {
-  font-size: x-large;
-}
-
-.more-menu-wrapper .log-out:hover {
-  background: rgba(255, 255, 255, 0);
 }
 
 .login-wrapper {
