@@ -106,29 +106,15 @@ body {
   position: fixed;
 }
 
-.sidemenu-wrapper ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  display: block;
+.sidemenu-wrapper .side-menu-list {
   position: absolute;
   left: 0;
   right: 0;
   bottom: 0;
 }
 
-.sidemenu-wrapper h3 {
-  text-align: center;
-  color: rgb(75, 196, 95);
-}
-
-.sidemenu-wrapper ul li span {
-  text-decoration: none;
-  text-align: center;
-  display: block;
+.sidemenu-wrapper .side-menu-list span {
   cursor: pointer;
-  display: table;
-  margin: 0 auto;
   color: #4f4f4f;
 }
 
@@ -195,6 +181,9 @@ body {
   margin-bottom: 10px;
   display: flex;
   align-items: center;
+
+  transition: background 0.5s ease-in-out;
+  -webkit-transition: background 0.5s ease-in-out;
 }
 
 .add-entry-button:hover {
@@ -401,14 +390,14 @@ body {
   float: right;
 }
 .more-menu-wrapper {
-  margin-top: 10px;
+  margin: 10px 0;
   position: relative;
 }
 
-.side-menu-list li {
+.side-menu-list div {
   display: flex;
-  align-items: center;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: center;
 }
 
 .more-menu {
@@ -421,10 +410,20 @@ body {
   color: #fff !important;
   font-size: xx-large;
   padding: 10px 20px;
+
+  transition: background 0.3s ease-in-out;
+  -webkit-transition: background 0.3s ease-in-out;
 }
 
 .sidemenu-icons:hover {
   background: rgba(255, 255, 255, 0.17);
+}
+
+.sidemenu-icons img {
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
 }
 
 .login-wrapper {

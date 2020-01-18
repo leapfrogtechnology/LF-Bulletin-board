@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import Logout from '../logout';
+import logoutIcon from '../../assets/images/logout_icon.svg';
 
 class MoreMenu extends Component {
   constructor() {
@@ -48,7 +49,7 @@ class MoreMenu extends Component {
         }}
         onClick={event => this.showMenu(event)}
       >
-        <i className="fa fa-sign-out"></i>
+        <img src={logoutIcon} alt="Log Out" />
         {this.state.showMenu ? (
           <div className="more-menu">
             <Logout />
