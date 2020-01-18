@@ -498,6 +498,10 @@ img.bulletin-logo-big {
   display: block;
 }
 
+.swal-overlay {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
 /*-----Toggle button style for active/inactive status-------*/
 
 .switch {
