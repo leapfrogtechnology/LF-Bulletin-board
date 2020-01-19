@@ -102,6 +102,9 @@ export async function loginUser(data) {
 export async function fetchByEmail(email) {
   try {
     const result = await new User({ email }).fetch();
+    if (!result) {
+      throw new Boom.notFound('User not found');
+    }
 
     return result;
   } catch (err) {
