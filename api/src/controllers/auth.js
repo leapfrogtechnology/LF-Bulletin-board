@@ -6,8 +6,17 @@ import * as authService from '../services/authService';
 import * as tokenService from '../services/tokenService';
 import validateRefreshToken from '../middlewares/validateToken';
 import validateGoogleToken from '../middlewares/verifyGoogleToken';
+import ensureToken from '../middlewares/ensureToken';
+import { checkUserExistsByEmail } from '../validators/userValidator';
 
 const router = Router();
+
+/**
+ * GET /api/validateuser
+ */
+router.get('/validateuser', ensureToken, checkUserExistsByEmail, (req, res, next) => {
+  res.json({ userValidated: true });
+});
 
 /**
  * POST /api/login
