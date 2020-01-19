@@ -12,7 +12,7 @@ const router = Router();
 /**
  * GET /api/bulletins
  */
-router.get('/', ensureToken, (req, res, next) => {
+router.get('/', (req, res, next) => {
   bulletinService
     .getAllBulletins()
     .then(data => res.json({ data }))
@@ -22,7 +22,7 @@ router.get('/', ensureToken, (req, res, next) => {
 /**
  * GET /api/bulletins/:id
  */
-router.get('/:id', ensureToken, (req, res, next) => {
+router.get('/:id', (req, res, next) => {
   bulletinService
     .getBulletin(req.params.id)
     .then(data => res.json({ data }))
