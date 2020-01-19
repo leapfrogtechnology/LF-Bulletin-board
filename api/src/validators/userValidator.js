@@ -10,7 +10,7 @@ const SCHEMA = {
 };
 
 /**
- * Check user exists
+ * Check user exists.
  *
  * @param  {object}   req
  * @param  {object}   res
