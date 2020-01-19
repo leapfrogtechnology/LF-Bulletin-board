@@ -23,12 +23,12 @@ class GoogleLoginComponent extends Component {
 
     bulletinService
       .validateAdmin(data)
-      .then(res => {
+      .then(async res => {
         const { tokens } = res.data.data;
 
-        localStorage.setItem('accessToken', tokens.accessToken);
-        localStorage.setItem('refreshToken', tokens.refreshToken);
-        localStorage.setItem('user', JSON.stringify(profileObj));
+        await localStorage.setItem('accessToken', tokens.accessToken);
+        await localStorage.setItem('refreshToken', tokens.refreshToken);
+        await localStorage.setItem('user', JSON.stringify(profileObj));
 
         this.setState({
           isLoggedIn: true
