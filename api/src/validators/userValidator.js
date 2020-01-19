@@ -10,6 +10,21 @@ const SCHEMA = {
 };
 
 /**
+ * Check user exists
+ *
+ * @param  {object}   req
+ * @param  {object}   res
+ * @param  {function} next
+ * @returns {Promise}
+ */
+function checkUserExistsByEmail(req, res, next) {
+  return userService
+    .fetchByEmail(req.query.email)
+    .then(() => next())
+    .catch(err => next(err));
+}
+
+/**
  * Validate create/update user request.
  *
  * @param  {object}   req
@@ -38,4 +53,4 @@ function findUser(req, res, next) {
     .catch(err => next(err));
 }
 
-export { findUser, userValidator };
+export { findUser, userValidator, checkUserExistsByEmail };
