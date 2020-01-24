@@ -5,18 +5,8 @@ import React, { Component } from 'react';
 import { FormGroup, ControlLabel, FormControl, Button, Checkbox } from 'react-bootstrap';
 
 import * as bulletinService from '../../services/bulletinService';
+import modalStyle from '../../assets/modalStyle.css';
 import regex from '../../constants/regex';
-
-const modalStyle = {
-  content: {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)'
-  }
-};
 
 const defaultFormData = {
   url: '',
@@ -161,7 +151,7 @@ class AddEntry extends Component {
             </FormGroup>
             <div className="two-col-fields-wrapper">
               <FormGroup>
-                <ControlLabel>Duration</ControlLabel>
+                <ControlLabel>Duration (In Second)</ControlLabel>
                 <FormControl
                   id="duration"
                   name="duration"
@@ -174,7 +164,11 @@ class AddEntry extends Component {
 
               <FormGroup>
                 <ControlLabel>Active Status</ControlLabel>
-                <Checkbox checked={this.state.formdata.activeStatus} onChange={el => this.handleCheckboxChange(el)} />
+                <Checkbox
+                  checked={this.state.formdata.activeStatus}
+                  onChange={el => this.handleCheckboxChange(el)}
+                  className="scale-checkbox"
+                />
               </FormGroup>
             </div>
 

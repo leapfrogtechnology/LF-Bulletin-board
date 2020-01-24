@@ -28,6 +28,8 @@ export async function loginUser(loginParams) {
 
     return userInfo;
   } catch (err) {
+    console.error(err);
+
     throw err;
   }
 }

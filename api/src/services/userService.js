@@ -89,6 +89,8 @@ export async function loginUser(data) {
 
     throw new Boom.notFound('User not registered');
   } catch (err) {
+    console.error(err);
+
     throw err;
   }
 }
@@ -103,8 +105,14 @@ export async function fetchByEmail(email) {
   try {
     const result = await new User({ email }).fetch();
 
+    if (!result) {
+      throw new Boom.notFound('User not found');
+    }
+
     return result;
   } catch (err) {
+    console.error(err);
+
     throw err;
   }
 }

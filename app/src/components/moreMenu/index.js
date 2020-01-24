@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import Logout from '../logout';
+import logoutIcon from '../../assets/images/logout_icon.svg';
 
 class MoreMenu extends Component {
   constructor() {
@@ -42,14 +43,13 @@ class MoreMenu extends Component {
   render() {
     return (
       <div
-        className="more-menu-wrapper"
+        className="more-menu-wrapper sidemenu-icons"
         ref={element => {
           this.dropDownMenu = element;
         }}
+        onClick={event => this.showMenu(event)}
       >
-        <span onClick={event => this.showMenu(event)}>
-          <i className="icon ion-md-more"></i>
-        </span>
+        <img src={logoutIcon} alt="Log Out" />
         {this.state.showMenu ? (
           <div className="more-menu">
             <Logout />
