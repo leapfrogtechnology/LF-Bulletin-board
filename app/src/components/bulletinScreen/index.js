@@ -230,6 +230,18 @@ class BulletinScreen extends Component {
   }
 
   showFrame() {
+    /**
+     *
+     * As we have got two iframes in bulletin board, both iframes were autoplaying.
+     * By this fix and getLink function only one iframe is autoplaying and other iframe stops from autoplay.
+     * But when changing the link in iframe or simply changing parameters in iframe the iframe auto reloads
+     * and refetches the data from network.
+     *
+     * This fix of -3s in duration calls toogle frame before 3 sec of original duration ended and changes the
+     * link/autoplays the second iframe also.
+     * In which on 3sec network is resolved and new slides data are fetched properly.
+     *
+     */
     setTimeout(() => this.toggleFrame(), (this.state.choosenDuration - 3) * 1000);
   }
 
