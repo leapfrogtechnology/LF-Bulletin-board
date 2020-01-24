@@ -3,6 +3,7 @@ import io from 'socket.io-client';
 import React, { Component } from 'react';
 import { cloneDeep } from 'lodash';
 
+import regex from '../../constants/regex';
 import BulletinFooter from '../bulletinFooter';
 import urlConstants from '../../constants/urlConstants';
 import textConstants from '../../constants/textConstants';
@@ -229,7 +230,19 @@ class BulletinScreen extends Component {
   }
 
   showFrame() {
-    setTimeout(() => this.toggleFrame(), this.state.choosenDuration * 1000);
+    /**
+     *
+     * As we have got two iframes in bulletin board, both iframes were autoplaying.
+     * By this fix and getLink function only one iframe is autoplaying and other iframe stops from autoplay.
+     * But when changing the link in iframe or simply changing parameters in iframe the iframe auto reloads
+     * and refetches the data from network.
+     *
+     * This fix of -3s in duration calls toogle frame before 3 sec of original duration ended and changes the
+     * link/autoplays the second iframe also.
+     * In which on 3sec network is resolved and new slides data are fetched properly.
+     *
+     */
+    setTimeout(() => this.toggleFrame(), (this.state.choosenDuration - 3) * 1000);
   }
 
   toggleFrame() {
@@ -273,14 +286,32 @@ class BulletinScreen extends Component {
   getLink(link, visibility) {
     if (link) {
       if (!visibility) {
-        if (link.includes('start=true')) {
-          link = link.replace('start=true', 'start=false');
+        if (link.search('docs.google.com') > -1) {
+          if (link.includes('start=true')) {
+            link = link.replace('start=true', 'start=false');
+          }
+        } else if (link.match(regex.YOUTUBE_REGEX) !== null) {
+          if (link.includes('autoplay=1')) {
+            link = link.replace('autoplay=1', 'autoplay=0');
+          }
+          if (link.includes('mute=1')) {
+            link = link.replace('mute=1', 'mute=0');
+          }
         }
       }
 
       if (visibility || this.state.startSecondSlide) {
-        if (link.includes('start=false')) {
-          link = link.replace('start=false', 'start=true');
+        if (link.search('docs.google.com') > -1) {
+          if (link.includes('start=false')) {
+            link = link.replace('start=false', 'start=true');
+          }
+        } else if (link.match(regex.YOUTUBE_REGEX) !== null) {
+          if (link.includes('autoplay=0')) {
+            link = link.replace('autoplay=0', 'autoplay=1');
+          }
+          if (link.includes('mute=0')) {
+            link = link.replace('mute=0', 'mute=1');
+          }
         }
       }
     }
