@@ -5,17 +5,7 @@ import React, { Component } from 'react';
 import { FormGroup, ControlLabel, FormControl, Button, Checkbox } from 'react-bootstrap';
 
 import * as bulletinService from '../../services/bulletinService';
-
-const modalStyle = {
-  content: {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)'
-  }
-};
+import modalStyle from '../../assets/modalStyle.css';
 
 class EditEntry extends Component {
   constructor(props) {
@@ -106,7 +96,7 @@ class EditEntry extends Component {
           style={modalStyle}
           content-label="edit entry modal"
         >
-          <h2>Edit Bulletin</h2>
+          <h2 className="add-entry-heading">Edit Bulletin</h2>
           <form className="add-entry-form" onSubmit={event => this.handleSubmit(event)}>
             <FormGroup>
               <ControlLabel>Segment Title</ControlLabel>
@@ -121,7 +111,7 @@ class EditEntry extends Component {
             </FormGroup>
             <div className="two-col-fields-wrapper">
               <FormGroup>
-                <ControlLabel>Duration</ControlLabel>
+                <ControlLabel>Duration (In Second)</ControlLabel>
                 <FormControl
                   id="duration"
                   name="duration"
@@ -133,7 +123,11 @@ class EditEntry extends Component {
               </FormGroup>
               <FormGroup>
                 <ControlLabel>Active Status</ControlLabel>
-                <Checkbox checked={this.state.formdata.activeStatus} onChange={el => this.handleCheckboxChange(el)} />
+                <Checkbox
+                  checked={this.state.formdata.activeStatus}
+                  onChange={el => this.handleCheckboxChange(el)}
+                  className="scale-checkbox"
+                />
               </FormGroup>
             </div>
             <FormGroup>
