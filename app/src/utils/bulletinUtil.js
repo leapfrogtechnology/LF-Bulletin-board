@@ -24,7 +24,7 @@ export function getUserLocalStorageData() {
     if (localStorageUser && user && user.email) {
       return user;
     } else {
-      throw 'User Data Not Found';
+      throw new Error('User Data Not Found');
     }
   } catch (err) {
     return null;
