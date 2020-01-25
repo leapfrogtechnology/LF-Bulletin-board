@@ -1,5 +1,6 @@
 import * as httpUtil from '../utils/httpUtil';
 import urlConstants from '../constants/urlConstants';
+import { getUserLocalStorageData } from '../utils/bulletinUtil';
 
 /**
  * Check Login.
@@ -7,10 +8,14 @@ import urlConstants from '../constants/urlConstants';
  * @returns {Promise}
  */
 export async function checkLogin() {
-  const user = JSON.parse(localStorage.getItem('user')) || {};
+  const user = getUserLocalStorageData();
 
-  const validateUserUrl = `${urlConstants.apiBaseUrl}/validateuser?email=${user.email}`;
-  const result = await httpUtil.get(validateUserUrl, {});
+  if (user) {
+    const validateUserUrl = `${urlConstants.apiBaseUrl}/validateuser?email=${user.email}`;
+    const result = await httpUtil.get(validateUserUrl, {});
 
-  return result;
+    return result;
+  }
+
+  return null;
 }
