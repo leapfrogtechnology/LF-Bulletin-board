@@ -21,7 +21,7 @@ export function getUserLocalStorageData() {
     const localStorageUser = localStorage.getItem('user') || null;
     const user = JSON.parse(localStorageUser);
 
-    if (localStorageUser && user && user.email) {
+    if (user && user.email) {
       return user;
     } else {
       throw new Error('User Data Not Found');
