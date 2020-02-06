@@ -14,34 +14,46 @@ export function seed(knex, Promise) {
         // Inserts seed entries
         knex('users').insert([
           {
-            email: 'basantamaharjan@lftechnology.com'
+            email: 'basantamaharjan@lftechnology.com',
+            role: 'super_admin',
+            created_at: Date.now(),
+            updated_at: Date.now()
           },
           {
-            email: 'biplapbhattarai@lftechnology.com'
+            email: 'biplapbhattarai@lftechnology.com',
+            role: 'super_admin',
+            created_at: Date.now(),
+            updated_at: Date.now()
           },
           {
-            email: 'aleshdulal@lftechnology.com'
+            email: 'aleshdulal@lftechnology.com',
+            role: 'super_admin',
+            created_at: Date.now(),
+            updated_at: Date.now()
           },
           {
-            email: 'aanchaladhikari@lftechnology.com'
+            email: 'aanchaladhikari@lftechnology.com',
+            role: 'admin',
+            created_at: Date.now(),
+            updated_at: Date.now()
           },
           {
-            email: 'pravashupreti@lftechnology.com'
+            email: 'ypradhan@lftechnology.com',
+            role: 'admin',
+            created_at: Date.now(),
+            updated_at: Date.now()
           },
           {
-            email: 'aishwaryapradhan@lftechnology.com'
+            email: 'yankeemaharjan@lftechnology.com',
+            role: 'admin',
+            created_at: Date.now(),
+            updated_at: Date.now()
           },
           {
-            email: 'ypradhan@lftechnology.com'
-          },
-          {
-            email: 'yankeemaharjan@lftechnology.com'
-          },
-          {
-            email: 'sarojshahi@lftechnology.com'
-          },
-          {
-            email: 'sanjeevpandit@lftechnology.com'
+            email: 'sarojshahi@lftechnology.com',
+            role: 'admin',
+            created_at: Date.now(),
+            updated_at: Date.now()
           }
         ])
       ]);

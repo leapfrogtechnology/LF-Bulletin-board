@@ -5,6 +5,7 @@ import * as httpUtil from '../utils/httpUtil';
 import urlConstants from '../constants/urlConstants';
 
 import defaultImage from '../assets/images/logo_leapfrog.svg';
+import { getUserLocalStorageData } from '../utils/bulletinUtil';
 
 /**
  * Check Login.
@@ -26,7 +27,7 @@ export function checkLogin(data) {
  */
 export async function addBulletin(data) {
   const addBulletinUrl = urlConstants.apiBaseUrl + '/bulletins';
-  const user = JSON.parse(localStorage.getItem('user'));
+  const user = getUserLocalStorageData();
 
   data.owner = (user && user.name) || '';
 

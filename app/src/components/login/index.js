@@ -5,13 +5,14 @@ import GoogleLogin from 'react-google-login';
 import textConstants from '../../constants/textConstants';
 import routeConstants from '../../constants/routeConstants';
 import * as bulletinService from '../../services/bulletinService';
+import { getUserLocalStorageData } from '../../utils/bulletinUtil';
 import bulletinLogo from '../../assets/images/bulletin-board-login-image.png';
 
 class GoogleLoginComponent extends Component {
   constructor() {
     super();
     this.state = {
-      isLoggedIn: JSON.parse(localStorage.getItem('user')) ? true : false
+      isLoggedIn: getUserLocalStorageData() ? true : false
     };
   }
 

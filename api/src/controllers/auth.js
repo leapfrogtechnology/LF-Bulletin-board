@@ -15,7 +15,7 @@ const router = Router();
  * GET /api/validateuser
  */
 router.get('/validateuser', ensureToken, checkUserExistsByEmail, (req, res, next) => {
-  res.json({ userValidated: true });
+  res.json({ user: req.userObj });
 });
 
 /**

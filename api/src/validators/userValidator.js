@@ -3,9 +3,10 @@ import validate from '../utils/validate';
 import * as userService from '../services/userService';
 
 const SCHEMA = {
-  name: Joi.string()
-    .label('Name')
-    .max(90)
+  email: Joi.string()
+    .email()
+    .label('email')
+    .max(50)
     .required()
 };
 
@@ -20,7 +21,11 @@ const SCHEMA = {
 function checkUserExistsByEmail(req, res, next) {
   return userService
     .fetchByEmail(req.query.email)
-    .then(() => next())
+    .then(userObj => {
+      req.userObj = userObj;
+
+      return next();
+    })
     .catch(err => next(err));
 }
 
