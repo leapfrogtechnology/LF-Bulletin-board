@@ -1,34 +1,28 @@
-import fs from 'fs';
-import winston from 'winston';
-import 'winston-daily-rotate-file';
-
-const tsFormat = () => new Date().toISOString();
-const logDir = process.env.LOGGING_DIR || 'logs';
-const logLevel = process.env.LOGGING_LEVEL || 'info';
-
-// Create log directory if it does not exist
-if (!fs.existsSync(logDir)) {
-  fs.mkdirSync(logDir);
-}
-
+import winston, { format } from 'winston';
+const LOG_LEVEL = 'debug';
 /**
- * Create new winston logger instance.
+ * Create a new winston logger.
  */
-const logger = new winston.Logger({
+const logger = winston.createLogger({
   transports: [
     new winston.transports.Console({
-      timestamp: tsFormat,
-      colorize: true,
-      level: 'info'
-    }),
-    new winston.transports.DailyRotateFile({
-      filename: `${logDir}/-debug.log`,
-      timestamp: tsFormat,
-      datePattern: 'yyyy-MM-dd',
-      prepend: true,
-      level: logLevel
+      format:
+        process.env.NODE_ENV === 'production'
+          ? format.combine(format.timestamp(), format.json())
+          : format.combine(format.colorize(), format.simple()),
+      level: LOG_LEVEL
     })
   ]
 });
 
+export const logStream = {
+  /**
+   * A writable stream for winston logger.
+   *
+   * @param {any} message
+   */
+  write(message) {
+    logger.info(message.toString());
+  }
+};
 export default logger;
