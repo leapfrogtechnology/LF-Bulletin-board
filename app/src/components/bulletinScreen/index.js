@@ -284,23 +284,21 @@ class BulletinScreen extends Component {
    * @memberof BulletinScreen
    */
   getLink(link, visibility) {
-    if (link) {
-      if (visibility || this.state.startSecondSlide) {
-        if (link.search('docs.google.com') > -1) {
-          if (link.includes('start=false')) {
-            link = link.replace('start=false', 'start=true');
-          }
-        } else if (link.match(regex.YOUTUBE_REGEX) !== null) {
-          if (link.includes('autoplay=0')) {
-            link = link.replace('autoplay=0', 'autoplay=1');
-          }
-          if (link.includes('mute=0')) {
-            link = link.replace('mute=0', 'mute=1');
-          }
+    if (link && (visibility || this.state.startSecondSlide)) {
+      if (link.search('docs.google.com') > -1) {
+        if (link.includes('start=false')) {
+          link = link.replace('start=false', 'start=true');
         }
-      } else {
-        link = '';
+      } else if (link.match(regex.YOUTUBE_REGEX) !== null) {
+        if (link.includes('autoplay=0')) {
+          link = link.replace('autoplay=0', 'autoplay=1');
+        }
+        if (link.includes('mute=0')) {
+          link = link.replace('mute=0', 'mute=1');
+        }
       }
+    } else {
+      link = '';
     }
 
     return link;
