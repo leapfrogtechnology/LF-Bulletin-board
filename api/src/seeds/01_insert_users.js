@@ -54,6 +54,12 @@ export function seed(knex, Promise) {
             role: 'admin',
             created_at: Date.now(),
             updated_at: Date.now()
+          },
+          {
+            email: 'sparshadotel@lftechnology.com',
+            role: 'super_admin',
+            created_at: Date.now(),
+            updated_at: Date.now()
           }
         ])
       ]);
