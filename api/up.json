@@ -10,10 +10,10 @@
   },
   "stages": {
     "dev": {
-	    "domain": "dev-test.bulletin.lftechnology.com"
+	    "domain": "dev-api.bulletin.lftechnology.com"
     },
     "production": {
-	    "domain": "test.bulletin.lftechnology.com"
+	    "domain": "api.bulletin.lftechnology.com"
     },
     "staging": {}
   },
