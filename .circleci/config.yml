@@ -34,10 +34,9 @@ jobs:
           name: Up Deploy API to the Given Stage
           command: |
             source ~/.bashrc;
-            cd server;
+            cd api;
             yarn;
             envault list -e $STAGE  > .env;
-            yarn db-migrate;
             up deploy $STAGE;
   aws_s3_deploy:
     docker:
@@ -85,12 +84,12 @@ workflows:
                 - dev
                 - CI
                 - master
-  deploy_app:
-    jobs:
-      - aws_s3_deploy:
-          filters:
-            branches:
-              only:
-                - dev
-                - CI
-                - master
+  # deploy_app:
+  #   jobs:
+  #     - aws_s3_deploy:
+  #         filters:
+  #           branches:
+  #             only:
+  #               - dev
+  #               - CI
+  #               - master
