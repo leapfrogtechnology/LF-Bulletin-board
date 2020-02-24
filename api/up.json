@@ -1,0 +1,29 @@
+{
+  "name": "leapforg-bulletin-api",
+  "regions": ["ap-south-1"],
+  "lambda": {
+    "role": "arn:aws:iam::009409476372:role/vyaguta-production-LambdaExecutionRole-10N98L5V49MTQ",
+    "vpc": {
+      "subnets": ["subnet-0f58a09403abb4c6b", "subnet-05d176d6cd31c100c"],
+      "security_groups": ["sg-0bf483895327eb3a0"]
+    }
+  },
+  "stages": {
+    "dev": {
+	    "domain": "dev-api.bulletin.lftechnology.com"
+    },
+    "production": {
+	    "domain": "api.bulletin.lftechnology.com"
+    },
+    "staging": {}
+  },
+  "cors": {
+    "enable": true,
+    "allowed_methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
+
+    "allowed_headers": ["*"]
+  },
+  "error_pages": {
+    "disable": true
+  }
+}
