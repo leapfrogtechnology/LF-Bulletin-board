@@ -68,12 +68,11 @@ export function deleteUser(id) {
  */
 export async function loginUser(data) {
   try {
-    const email = data.email;
+    const { email, id, name } = data;
     const user = await fetchByEmail(email);
 
     if (user) {
-      const { id, name } = data;
-      const tokens = tokenService.generateTokens(id);
+      const tokens = tokenService.generateTokens(user);
       const userInfo = {
         user: {
           id,

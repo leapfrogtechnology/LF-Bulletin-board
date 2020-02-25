@@ -14,6 +14,7 @@ export default function ensureToken(req, res, next) {
   tokenService
     .verifyAccessToken(req.token)
     .then(response => {
+      req.userRole = response.encryptedData.role;
       req.id = response.encryptedData.id;
       next();
     })

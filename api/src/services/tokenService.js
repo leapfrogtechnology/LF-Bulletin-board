@@ -3,11 +3,11 @@ import * as jwt from '../utils/jwt';
 /**
  * Generate both Access Token and Refresh Token.
  *
- * @param {*} id
+ * @param {*} userData
  * @returns {Promise}
  */
-export function generateTokens(id) {
-  return jwt.generateTokens(id);
+export function generateTokens(userData) {
+  return jwt.generateTokens(userData);
 }
 
 /**
