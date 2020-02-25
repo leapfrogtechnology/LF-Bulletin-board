@@ -1,5 +1,5 @@
 const textConstants = {
-  GOOGLE_CLIENT_ID: '78390524090-tp3ro7vea6p67eepqudcv0fcir97nabf.apps.googleusercontent.com',
+  GOOGLE_CLIENT_ID: process.env.REACT_APP_GOOGLE_CLIENT_ID,
   DELETE_WARNING_DESCRIPTION: 'You will be deleting this bulletin segment!',
   DELETE_USER_WARNING_DESCRIPTION: 'You will be deleting this User !',
   DELETE_WARNING_MESSAGE: 'Are you sure?',
