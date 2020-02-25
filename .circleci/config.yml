@@ -72,7 +72,7 @@ jobs:
             cd app;
             yarn;
             envault run -e $STAGE 'yarn build';
-            aws s3 sync build s3://com.lftechnology.bulletin.$STAGE/leave --delete;
+            aws s3 sync build s3://com.lftechnology.bulletin.$STAGE --delete;
 workflows:
   version: 2
   deploy_api:
@@ -84,12 +84,12 @@ workflows:
                 - dev
                 - CI
                 - master
-  # deploy_app:
-  #   jobs:
-  #     - aws_s3_deploy:
-  #         filters:
-  #           branches:
-  #             only:
-  #               - dev
-  #               - CI
-  #               - master
+  deploy_app:
+    jobs:
+      - aws_s3_deploy:
+          filters:
+            branches:
+              only:
+                - dev
+                - CI
+                - master

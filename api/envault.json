@@ -1,8 +1,8 @@
 {
   "profile": "default",
-  "region": "ap-south-1",
+  "region": "us-east-1",
   "environments": {
     "dev": "bulletin-board/api/dev",
-    "prod": "bulletin-board/api/production"
+    "production": "bulletin-board/api/production"
   }
 }

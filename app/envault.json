@@ -1,0 +1,8 @@
+{
+  "profile": "default",
+  "region": "us-east-1",
+  "environments": {
+    "dev": "bulletin-board/app/dev",
+    "production": "bulletin-board/app/production"
+  }
+}
