@@ -1,7 +1,7 @@
 import { userRoles } from '../const';
 
 /**
- * Verifies access token.
+ * Validate Super Admin Access.
  *
  * @param {*} req
  * @param {*} res
