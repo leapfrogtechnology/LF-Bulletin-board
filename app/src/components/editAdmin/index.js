@@ -2,10 +2,11 @@ import swal from 'sweetalert';
 import Modal from 'react-modal';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { FormGroup, ControlLabel, FormControl, Button } from 'react-bootstrap';
+import { FormGroup, ControlLabel, FormControl, Button, DropdownButton, MenuItem } from 'react-bootstrap';
 
-import * as userService from '../../services/userService';
 import modalStyle from '../../assets/modalStyle.css';
+import { userRoles } from '../../constants/userRoles';
+import * as userService from '../../services/userService';
 
 class EditAdmin extends Component {
   constructor(props) {
@@ -13,7 +14,8 @@ class EditAdmin extends Component {
     this.state = {
       modalIsOpen: false,
       formdata: {
-        email: this.props.item.email
+        email: this.props.item.email,
+        userRole: this.props.item.role
       }
     };
   }
@@ -62,6 +64,8 @@ class EditAdmin extends Component {
   }
 
   render() {
+    const { userRole } = this.state.formdata;
+
     return (
       <div className="edit-entry">
         <i className="icon ion-md-create" onClick={() => this.openModal()}></i>
@@ -84,6 +88,31 @@ class EditAdmin extends Component {
                 value={this.state.formdata.email}
                 onChange={el => this.handleChange(el)}
               />
+            </FormGroup>
+
+            <FormGroup>
+              <ControlLabel>User Role</ControlLabel>
+              <div>
+                <DropdownButton
+                  id="userRole"
+                  title={userRole === userRoles.superAdmin ? 'Super Admin' : 'Admin'}
+                  onSelect={selectedValue => {
+                    const target = {
+                      name: 'userRole',
+                      value: selectedValue
+                    };
+
+                    this.handleChange({ target });
+                  }}
+                >
+                  <MenuItem eventKey={userRoles.admin} active={userRole === userRoles.admin}>
+                    Admin
+                  </MenuItem>
+                  <MenuItem eventKey={userRoles.superAdmin} active={userRole === userRoles.superAdmin}>
+                    Super Admin
+                  </MenuItem>
+                </DropdownButton>
+              </div>
             </FormGroup>
 
             <div className="form-buttons-wrapper">
