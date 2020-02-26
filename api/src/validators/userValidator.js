@@ -1,4 +1,6 @@
 import Joi from 'joi';
+
+import { userRoles } from '../const';
 import validate from '../utils/validate';
 import * as userService from '../services/userService';
 
@@ -6,6 +8,11 @@ const SCHEMA = {
   email: Joi.string()
     .email()
     .label('email')
+    .max(50)
+    .required(),
+  userRole: Joi.string()
+    .valid(userRoles.admin, userRoles.superAdmin)
+    .label('userRole')
     .max(50)
     .required()
 };
