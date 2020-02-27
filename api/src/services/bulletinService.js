@@ -1,6 +1,8 @@
 import Boom from 'boom';
-import Bulletin from '../models/bulletin';
+
 import Bookshelf from '../db';
+import knexConfig from '../knexfile';
+import Bulletin from '../models/bulletin';
 
 /**
  * Get all bulletins.
@@ -34,8 +36,7 @@ export function getBulletin(id) {
  * @returns {Promise}
  */
 export async function createBulletin(bulletin) {
-  const model = await getMaxPriorityValue();
-  const newPriority = model.get('maxPriority') + 1;
+  const newPriority = await getMaxPriorityValue();
 
   return new Bulletin({
     title: bulletin.title,
@@ -120,6 +121,17 @@ export function deleteBulletin(id) {
  *
  * @returns
  */
-function getMaxPriorityValue() {
-  return Bulletin.query('max', 'priority').fetch();
+async function getMaxPriorityValue() {
+  const query = await Bulletin.query('max', 'priority').fetch();
+  const { client } = knexConfig;
+
+  let newPriority = 1;
+
+  if (client === 'pg') {
+    newPriority = query.get('max');
+  } else {
+    newPriority = query.get('maxPriority');
+  }
+
+  return newPriority + 1;
 }
