@@ -8,5 +8,5 @@ import { userRoles } from '../const';
  * @param {*} next
  */
 export default function validateSuperAdmin(req, res, next) {
-  req.userRole === userRoles.superAdmin ? next() : next('User Not Authorized');
+  req.userRole === userRoles.superAdmin ? next() : next('User does not have Super Admin Authorization');
 }
