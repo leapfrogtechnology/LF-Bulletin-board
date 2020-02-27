@@ -35,7 +35,7 @@ export function getBulletin(id) {
  */
 export async function createBulletin(bulletin) {
   const model = await getMaxPriorityValue();
-  const newPriority = model.get('priority') + 1;
+  const newPriority = model.get('maxPriority') + 1;
 
   return new Bulletin({
     title: bulletin.title,
@@ -121,5 +121,5 @@ export function deleteBulletin(id) {
  * @returns
  */
 function getMaxPriorityValue() {
-  return Bulletin.query('max', 'priority').fetch({ columns: ['priority'] });
+  return Bulletin.query('max', 'priority').fetch();
 }
