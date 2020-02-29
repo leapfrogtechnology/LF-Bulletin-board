@@ -1,10 +1,11 @@
 import swal from 'sweetalert';
 import io from 'socket.io-client';
-import React, { Component } from 'react';
 import { cloneDeep } from 'lodash';
+import React, { Component } from 'react';
 
 import regex from '../../constants/regex';
 import BulletinFooter from '../bulletinFooter';
+import { getErrorMessage } from '../../utils/utils';
 import urlConstants from '../../constants/urlConstants';
 import textConstants from '../../constants/textConstants';
 import * as bulletinService from '../../services/bulletinService';
@@ -163,13 +164,7 @@ class BulletinScreen extends Component {
 
         this.setData(newList);
       })
-      .catch(err => {
-        if (err.response && err.response.data && err.response.data.error.message) {
-          swal(err.response.data.error.message);
-        } else {
-          swal('Server Error');
-        }
-      });
+      .catch(err => swal(getErrorMessage(err)));
   }
 
   setData(linksCollection) {
