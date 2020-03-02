@@ -106,7 +106,7 @@ export async function fetchByEmail(email) {
     const result = await new User({ email }).fetch();
 
     if (!result) {
-      throw new Boom.notFound('User not found');
+      throw new Boom.notFound('User not registered');
     }
 
     return result;

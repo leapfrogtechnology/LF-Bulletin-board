@@ -1,12 +1,13 @@
-import { find, isEmpty, orderBy } from 'lodash';
 import swal from 'sweetalert';
 import React, { Component } from 'react';
 import { arrayMove } from 'react-sortable-hoc';
+import { find, isEmpty, orderBy } from 'lodash';
 
 import AddEntry from '../addEntry';
 import SortableList from './SortableList';
-import * as bulletinService from '../../services/bulletinService';
+import { getErrorMessage } from '../../utils/utils';
 import textConstants from '../../constants/textConstants';
+import * as bulletinService from '../../services/bulletinService';
 
 class ListEntries extends Component {
   constructor() {
@@ -30,15 +31,7 @@ class ListEntries extends Component {
             (response && response.data && response.data.data && orderBy(response.data.data, 'priority', 'asc')) || []
         });
       })
-      .catch(err => {
-        const errorMsg = find([err], 'response.data.error.message');
-
-        if (errorMsg) {
-          swal(errorMsg.response.data.error.message);
-        } else {
-          swal('Server Error');
-        }
-      });
+      .catch(err => swal(getErrorMessage(err)));
   }
 
   refreshList() {
@@ -50,9 +43,7 @@ class ListEntries extends Component {
             (response && response.data && response.data.data && orderBy(response.data.data, 'priority', 'asc')) || []
         });
       })
-      .catch(err => {
-        swal(err.response.data.error.message);
-      });
+      .catch(err => swal(getErrorMessage(err)));
   }
 
   onSortEnd({ oldIndex, newIndex }) {
@@ -84,7 +75,7 @@ class ListEntries extends Component {
             items: oldBulletinList
           });
 
-          swal(err.response.data.error.message);
+          swal(getErrorMessage(err));
         });
       }
     );
@@ -106,9 +97,7 @@ class ListEntries extends Component {
           });
         }
       })
-      .catch(err => {
-        swal(err.response.data.error.message);
-      });
+      .catch(err => swal(getErrorMessage(err)));
   }
 
   toggleActive(id) {

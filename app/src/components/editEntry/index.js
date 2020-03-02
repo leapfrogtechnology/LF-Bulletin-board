@@ -4,8 +4,9 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { FormGroup, ControlLabel, FormControl, Button, Checkbox } from 'react-bootstrap';
 
-import * as bulletinService from '../../services/bulletinService';
+import { getErrorMessage } from '../../utils/utils';
 import modalStyle from '../../assets/modalStyle.css';
+import * as bulletinService from '../../services/bulletinService';
 
 class EditEntry extends Component {
   constructor(props) {
@@ -34,9 +35,7 @@ class EditEntry extends Component {
         this.closeModal();
         this.props.refreshList();
       })
-      .catch(err => {
-        swal(err.response.data.error.details[0].message);
-      });
+      .catch(err => swal(getErrorMessage(err)));
   }
 
   handleChange(el) {
