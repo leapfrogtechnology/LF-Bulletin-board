@@ -4,9 +4,10 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { FormGroup, ControlLabel, FormControl, Button, Checkbox } from 'react-bootstrap';
 
-import * as bulletinService from '../../services/bulletinService';
-import modalStyle from '../../assets/modalStyle.css';
 import regex from '../../constants/regex';
+import { getErrorMessage } from '../../utils/utils';
+import modalStyle from '../../assets/modalStyle.css';
+import * as bulletinService from '../../services/bulletinService';
 
 const defaultFormData = {
   url: '',
@@ -61,9 +62,7 @@ class AddEntry extends Component {
           formdata: defaultFormData
         });
       })
-      .catch(err => {
-        swal(err.response.data.error.details[0].message);
-      });
+      .catch(err => swal(getErrorMessage(err)));
   }
 
   /**

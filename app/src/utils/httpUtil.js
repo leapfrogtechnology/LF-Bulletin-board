@@ -99,9 +99,11 @@ axios.interceptors.response.use(
         return axios(originalRequest);
       });
     } else if (
-      (error.response.status === textConstants.UNAUTHORIZED_CODE &&
+      originalRequest.url !== urlConstants.googleLoginUrl &&
+      ((error.response.status === textConstants.UNAUTHORIZED_CODE &&
         error.response.data.error.message === textConstants.REFRESH_TOKEN_EXPIRE) ||
-      error.response.status === textConstants.NOT_FOUND
+        (error.response.status === textConstants.NOT_FOUND &&
+          error.response.data.error.message === textConstants.USER_NOT_REGISTERED))
     ) {
       bulletinUtil.logout();
     }

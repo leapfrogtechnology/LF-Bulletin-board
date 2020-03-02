@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { FormGroup, ControlLabel, FormControl, Button, DropdownButton, MenuItem } from 'react-bootstrap';
 
+import { getErrorMessage } from '../../utils/utils';
 import modalStyle from '../../assets/modalStyle.css';
 import { userRoles } from '../../constants/userRoles';
 import * as userService from '../../services/userService';
@@ -30,14 +31,7 @@ class EditAdmin extends Component {
         this.closeModal();
         this.props.refreshList();
       })
-      .catch(err => {
-        const error =
-          err && err.response && err.response.data && err.response.data.details
-            ? err.response.data.error.details[0].message
-            : 'Internal Server Error';
-
-        swal(error);
-      });
+      .catch(err => swal(getErrorMessage(err)));
   }
 
   handleChange(el) {
