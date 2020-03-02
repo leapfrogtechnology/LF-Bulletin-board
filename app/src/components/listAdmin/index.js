@@ -1,9 +1,10 @@
-import { find, orderBy } from 'lodash';
 import swal from 'sweetalert';
+import { orderBy } from 'lodash';
 import React, { Component } from 'react';
 
 import AddAdmin from '../addAdmin';
 import SortableList from './SortableList';
+import { getErrorMessage } from '../../utils/utils';
 import * as userService from '../../services/userService';
 import textConstants from '../../constants/textConstants';
 
@@ -27,15 +28,7 @@ class ListAdmin extends Component {
           items: (response && response.data && response.data.data && orderBy(response.data.data, 'email', 'asc')) || []
         });
       })
-      .catch(err => {
-        const errorMsg = find([err], 'response.data.error.message');
-
-        if (errorMsg) {
-          swal(errorMsg.response.data.error.message);
-        } else {
-          swal('Server Error');
-        }
-      });
+      .catch(err => swal(getErrorMessage(err)));
   }
 
   refreshList() {
@@ -46,9 +39,7 @@ class ListAdmin extends Component {
           items: (response && response.data && response.data.data && orderBy(response.data.data, 'email', 'asc')) || []
         });
       })
-      .catch(err => {
-        swal(err.response.data.error.message);
-      });
+      .catch(err => swal(getErrorMessage(err)));
   }
 
   deleteUser(id) {
@@ -67,9 +58,7 @@ class ListAdmin extends Component {
           });
         }
       })
-      .catch(err => {
-        swal(err.response.data.error.message);
-      });
+      .catch(err => swal(getErrorMessage(err)));
   }
 
   render() {

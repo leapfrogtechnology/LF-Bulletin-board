@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import GoogleLogin from 'react-google-login';
 
+import { getErrorMessage } from '../../utils/utils';
 import textConstants from '../../constants/textConstants';
 import routeConstants from '../../constants/routeConstants';
 import * as bulletinService from '../../services/bulletinService';
@@ -12,6 +13,7 @@ class GoogleLoginComponent extends Component {
   constructor() {
     super();
     this.state = {
+      loginErrorMessage: null,
       isLoggedIn: getUserLocalStorageData() ? true : false
     };
   }
@@ -32,14 +34,21 @@ class GoogleLoginComponent extends Component {
         await localStorage.setItem('user', JSON.stringify(profileObj));
 
         this.setState({
+          loginErrorMessage: null,
           isLoggedIn: true
         });
       })
-      .catch(err => err);
+      .catch(err => {
+        const loginErrorMessage = getErrorMessage(err);
+
+        this.setState({
+          loginErrorMessage
+        });
+      });
   }
 
   render() {
-    const isLoggedIn = this.state.isLoggedIn;
+    const { isLoggedIn, loginErrorMessage } = this.state;
 
     return (
       <div className="login-wrapper">
@@ -59,6 +68,7 @@ class GoogleLoginComponent extends Component {
               onSuccess={this.responseGoogle.bind(this)}
               onFailure={this.responseGoogle.bind(this)}
             />
+            {loginErrorMessage && <div className="login-error">{loginErrorMessage}</div>}
           </div>
         ) : (
           <Redirect

@@ -415,7 +415,8 @@ body {
   -webkit-transition: background 0.3s ease-in-out;
 }
 
-.sidemenu-icons:hover {
+.sidemenu-icons:hover,
+.sidemenu-icons-active {
   background: rgba(255, 255, 255, 0.17);
 }
 
@@ -499,6 +500,14 @@ img.bulletin-logo-big {
 
 .swal-overlay {
   background-color: rgba(0, 0, 0, 0.8);
+}
+
+.login-error {
+  text-align: center;
+  color: red;
+  font-size: 14px;
+  padding-top: 20px;
+  text-transform: capitalize;
 }
 
 /*-----Toggle button style for active/inactive status-------*/

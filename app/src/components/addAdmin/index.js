@@ -4,8 +4,9 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { FormGroup, ControlLabel, FormControl, Button } from 'react-bootstrap';
 
-import * as userService from '../../services/userService';
+import { getErrorMessage } from '../../utils/utils';
 import modalStyle from '../../assets/modalStyle.css';
+import * as userService from '../../services/userService';
 
 const defaultFormData = {
   email: ''
@@ -46,14 +47,7 @@ class AddAdmin extends Component {
           formdata: defaultFormData
         });
       })
-      .catch(err => {
-        const error =
-          err && err.response && err.response.data && err.response.data.details
-            ? err.response.data.error.details[0].message
-            : 'Internal Server Error';
-
-        swal(error);
-      });
+      .catch(err => swal(getErrorMessage(err)));
   }
 
   /**
