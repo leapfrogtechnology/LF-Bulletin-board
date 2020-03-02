@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import React, { Component } from 'react';
+import { NavLink } from 'react-router-dom';
 
 import MoreMenu from '../moreMenu';
 
-import logo from '../../assets/images/bulletin-logo-inverse.png';
-import screenIcon from '../../assets/images/screen_icon.svg';
 import userIcon from '../../assets/images/user_icon.svg';
+import screenIcon from '../../assets/images/screen_icon.svg';
+import logo from '../../assets/images/bulletin-logo-inverse.png';
 
 class SideMenu extends Component {
   constructor(props) {
@@ -26,23 +26,26 @@ class SideMenu extends Component {
   }
 
   render() {
+    const { role: userRole } = this.props.user;
+
     return (
       <div className="sidemenu-container">
         <div className="sidemenu-bulletin-logo">
           <img src={logo} alt="bulletin logo" />
         </div>
-        <Link to="/dashboard/list">
+        <NavLink activeClassName="sidemenu-icons-active" to="/dashboard/list">
           <div className="sidemenu-icons">
             <img src={screenIcon} alt="Screen" />
           </div>
-        </Link>
+        </NavLink>
 
-        <Link to="/dashboard/admin">
-          <div className="sidemenu-icons">
-            <img src={userIcon} alt="User" />
-          </div>
-        </Link>
-
+        {userRole && userRole === 'super_admin' && (
+          <NavLink activeClassName="sidemenu-icons-active" to="/dashboard/admin">
+            <div className="sidemenu-icons">
+              <img src={userIcon} alt="User" />
+            </div>
+          </NavLink>
+        )}
         <div className="side-menu-list">
           <div>
             {this.getUserImage() ? (

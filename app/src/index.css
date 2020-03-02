@@ -415,7 +415,8 @@ body {
   -webkit-transition: background 0.3s ease-in-out;
 }
 
-.sidemenu-icons:hover {
+.sidemenu-icons:hover,
+.sidemenu-icons-active {
   background: rgba(255, 255, 255, 0.17);
 }
 
