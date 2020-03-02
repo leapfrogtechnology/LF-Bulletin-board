@@ -54,10 +54,10 @@ export async function deleteUser(userId) {
  * @returns {Promise}
  */
 export async function editUser(userId, data) {
-  const editBulletinUrl = urlConstants.apiBaseUrl + '/users/' + userId;
+  const editUserUrl = urlConstants.apiBaseUrl + '/users/' + userId;
 
   return new Promise(resolve => {
-    const result = httpUtil.put(editBulletinUrl, data);
+    const result = httpUtil.put(editUserUrl, data);
 
     resolve(result);
   });
