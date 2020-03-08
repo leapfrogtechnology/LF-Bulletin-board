@@ -3,10 +3,13 @@ import { Redirect } from 'react-router-dom';
 import GoogleLogin from 'react-google-login';
 
 import { getErrorMessage } from '../../utils/utils';
+import { getUserLocalStorageData } from '../../utils/bulletinUtil';
+
 import textConstants from '../../constants/textConstants';
 import routeConstants from '../../constants/routeConstants';
+
 import * as bulletinService from '../../services/bulletinService';
-import { getUserLocalStorageData } from '../../utils/bulletinUtil';
+
 import bulletinLogo from '../../assets/images/bulletin-board-login-image.png';
 
 class GoogleLoginComponent extends Component {

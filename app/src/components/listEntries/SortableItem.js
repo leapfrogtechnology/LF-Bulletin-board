@@ -2,8 +2,9 @@ import React from 'react';
 import { SortableElement } from 'react-sortable-hoc';
 
 import DragHandle from './DragHandle';
-import EditEntry from '../editEntry';
+
 import Toggle from '../toggle';
+import EditEntry from '../editEntry';
 
 const SortableItem = SortableElement(({ item, deleteBulletin, refreshList, toggleActive }) => {
   return (

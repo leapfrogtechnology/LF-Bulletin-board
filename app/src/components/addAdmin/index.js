@@ -5,8 +5,11 @@ import React, { Component } from 'react';
 import { FormGroup, ControlLabel, FormControl, Button, DropdownButton, MenuItem } from 'react-bootstrap';
 
 import { getErrorMessage } from '../../utils/utils';
+
 import modalStyle from '../../assets/modalStyle.css';
+
 import { userRoles } from '../../constants/userRoles';
+
 import * as userService from '../../services/userService';
 
 const defaultFormData = {

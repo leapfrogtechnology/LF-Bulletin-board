@@ -3,9 +3,13 @@ import { orderBy } from 'lodash';
 import React, { Component } from 'react';
 
 import AddAdmin from '../addAdmin';
+
 import SortableList from './SortableList';
+
 import { getErrorMessage } from '../../utils/utils';
+
 import * as userService from '../../services/userService';
+
 import textConstants from '../../constants/textConstants';
 
 class ListAdmin extends Component {

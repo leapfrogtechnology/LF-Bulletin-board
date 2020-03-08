@@ -4,10 +4,13 @@ import { cloneDeep } from 'lodash';
 import React, { Component } from 'react';
 
 import regex from '../../constants/regex';
-import BulletinFooter from '../bulletinFooter';
-import { getErrorMessage } from '../../utils/utils';
 import urlConstants from '../../constants/urlConstants';
 import textConstants from '../../constants/textConstants';
+
+import BulletinFooter from '../bulletinFooter';
+
+import { getErrorMessage } from '../../utils/utils';
+
 import * as bulletinService from '../../services/bulletinService';
 
 import './styles.css';

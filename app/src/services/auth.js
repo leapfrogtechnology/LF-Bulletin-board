@@ -1,6 +1,7 @@
 import * as httpUtil from '../utils/httpUtil';
-import urlConstants from '../constants/urlConstants';
 import { getUserLocalStorageData } from '../utils/bulletinUtil';
+
+import urlConstants from '../constants/urlConstants';
 
 /**
  * Check Login.

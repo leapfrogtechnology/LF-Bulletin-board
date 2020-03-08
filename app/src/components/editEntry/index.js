@@ -5,7 +5,9 @@ import React, { Component } from 'react';
 import { FormGroup, ControlLabel, FormControl, Button, Checkbox } from 'react-bootstrap';
 
 import { getErrorMessage } from '../../utils/utils';
+
 import modalStyle from '../../assets/modalStyle.css';
+
 import * as bulletinService from '../../services/bulletinService';
 
 class EditEntry extends Component {

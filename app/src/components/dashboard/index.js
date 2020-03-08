@@ -2,9 +2,12 @@ import React, { Component } from 'react';
 import { Route, Redirect, Switch } from 'react-router-dom';
 
 import SideMenu from './SideMenu';
+
 import ListAdmin from '../listAdmin';
 import ListEntries from '../listEntries';
+
 import { checkLogin } from '../../services/auth';
+
 import { getUserLocalStorageData } from '../../utils/bulletinUtil';
 
 class Dashboard extends Component {
