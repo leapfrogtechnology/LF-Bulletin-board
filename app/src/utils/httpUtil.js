@@ -103,7 +103,9 @@ axios.interceptors.response.use(
       ((error.response.status === textConstants.UNAUTHORIZED_CODE &&
         error.response.data.error.message === textConstants.REFRESH_TOKEN_EXPIRE) ||
         (error.response.status === textConstants.NOT_FOUND &&
-          error.response.data.error.message === textConstants.USER_NOT_REGISTERED))
+          error.response.data.error.message === textConstants.USER_NOT_REGISTERED) ||
+        (error.response.status === textConstants.NOT_FOUND &&
+          error.response.data.error.message === textConstants.TOKEN_NOT_FOUND))
     ) {
       bulletinUtil.logout();
     }
