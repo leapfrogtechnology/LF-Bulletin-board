@@ -1,12 +1,15 @@
 import { Router } from 'express';
 
 import * as CONSTANT from '../const';
+
 import * as userService from '../services/userService';
 import * as authService from '../services/authService';
 import * as tokenService from '../services/tokenService';
+
+import ensureToken from '../middlewares/ensureToken';
 import validateRefreshToken from '../middlewares/validateToken';
 import validateGoogleToken from '../middlewares/verifyGoogleToken';
-import ensureToken from '../middlewares/ensureToken';
+
 import { checkUserExistsByEmail } from '../validators/userValidator';
 
 const router = Router();

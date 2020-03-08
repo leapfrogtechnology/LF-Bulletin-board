@@ -2,8 +2,11 @@ import { Router } from 'express';
 import HttpStatus from 'http-status-codes';
 
 import * as socketIO from '../utils/socket';
+
 import ensureToken from '../middlewares/ensureToken';
+
 import * as bulletinService from '../services/bulletinService';
+
 import { bulletinValidator } from '../validators/bulletinValidator';
 import { bulletinsValidator } from '../validators/bulletinsValidator';
 

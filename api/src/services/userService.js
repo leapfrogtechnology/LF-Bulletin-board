@@ -1,6 +1,7 @@
 import Boom from 'boom';
 
 import User from '../models/user';
+
 import * as tokenService from './tokenService';
 import * as sessionService from './sessionService';
 

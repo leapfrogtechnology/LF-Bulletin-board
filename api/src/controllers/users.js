@@ -1,6 +1,8 @@
 import { Router } from 'express';
 import HttpStatus from 'http-status-codes';
+
 import * as userService from '../services/userService';
+
 import { findUser, userValidator } from '../validators/userValidator';
 
 const router = Router();

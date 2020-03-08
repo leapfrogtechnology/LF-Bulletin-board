@@ -2,6 +2,7 @@ import Boom from 'boom';
 
 import Bookshelf from '../db';
 import knexConfig from '../knexfile';
+
 import Bulletin from '../models/bulletin';
 
 /**

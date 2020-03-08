@@ -1,7 +1,9 @@
 import Joi from 'joi';
 
 import { userRoles } from '../const';
+
 import validate from '../utils/validate';
+
 import * as userService from '../services/userService';
 
 const SCHEMA = {
