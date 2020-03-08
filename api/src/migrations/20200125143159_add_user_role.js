@@ -1,3 +1,5 @@
+import { userRoles } from '../const';
+
 /**
  * @param  {object} knex
  * @returns {Promise}
@@ -5,7 +7,7 @@
 export function up(knex) {
   return knex.schema.table('users', table => {
     table.unique('email');
-    table.string('role').defaultTo('admin');
+    table.string('role').defaultTo(userRoles.admin);
     table
       .string('created_at')
       .nullable()
