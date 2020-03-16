@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { Navbar, Nav, NavDropdown, MenuItem } from 'react-bootstrap';
 
-import Logout from './../logout/index';
 import placeholder from 'public/images/placeholder.png';
+
+import Logout from './../logout/index';
 
 class NavBar extends Component {
   render() {

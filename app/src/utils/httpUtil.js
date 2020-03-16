@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 import * as bulletinUtil from './bulletinUtil';
+
 import urlConstants from '../constants/urlConstants';
 import textConstants from '../constants/textConstants';
 

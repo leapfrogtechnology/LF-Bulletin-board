@@ -8,6 +8,8 @@ import userIcon from '../../assets/images/user_icon.svg';
 import screenIcon from '../../assets/images/screen_icon.svg';
 import logo from '../../assets/images/bulletin-logo-inverse.png';
 
+import { userRoles } from '../../constants/userRoles';
+
 class SideMenu extends Component {
   constructor(props) {
     super(props);
@@ -39,7 +41,7 @@ class SideMenu extends Component {
           </div>
         </NavLink>
 
-        {userRole && userRole === 'super_admin' && (
+        {userRole && userRole === userRoles.superAdmin && (
           <NavLink activeClassName="sidemenu-icons-active" to="/dashboard/admin">
             <div className="sidemenu-icons">
               <img src={userIcon} alt="User" />

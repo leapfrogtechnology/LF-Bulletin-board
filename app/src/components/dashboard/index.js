@@ -2,10 +2,15 @@ import React, { Component } from 'react';
 import { Route, Redirect, Switch } from 'react-router-dom';
 
 import SideMenu from './SideMenu';
+
 import ListAdmin from '../listAdmin';
 import ListEntries from '../listEntries';
+
 import { checkLogin } from '../../services/auth';
+
 import { getUserLocalStorageData } from '../../utils/bulletinUtil';
+
+import { userRoles } from '../../constants/userRoles';
 
 class Dashboard extends Component {
   constructor() {
@@ -53,7 +58,7 @@ class Dashboard extends Component {
             <Switch>
               <Route exact path="/dashboard/list" render={() => <ListEntries />} />
               <Route exact path="/dashboard/admin">
-                {this.state.user.role === 'super_admin' ? <ListAdmin /> : <Redirect to="/dashboard/list" />}
+                {this.state.user.role === userRoles.superAdmin ? <ListAdmin /> : <Redirect to="/dashboard/list" />}
               </Route>
               <Redirect to="/dashboard/list" />
             </Switch>

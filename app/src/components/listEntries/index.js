@@ -4,9 +4,13 @@ import { arrayMove } from 'react-sortable-hoc';
 import { find, isEmpty, orderBy } from 'lodash';
 
 import AddEntry from '../addEntry';
+
 import SortableList from './SortableList';
+
 import { getErrorMessage } from '../../utils/utils';
+
 import textConstants from '../../constants/textConstants';
+
 import * as bulletinService from '../../services/bulletinService';
 
 class ListEntries extends Component {

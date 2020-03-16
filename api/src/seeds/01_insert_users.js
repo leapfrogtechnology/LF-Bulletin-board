@@ -1,3 +1,5 @@
+import { userRoles } from '../const';
+
 /**
  * Seed users table.
  *
@@ -15,49 +17,49 @@ export function seed(knex, Promise) {
         knex('users').insert([
           {
             email: 'basantamaharjan@lftechnology.com',
-            role: 'super_admin',
+            role: userRoles.superAdmin,
             created_at: Date.now(),
             updated_at: Date.now()
           },
           {
             email: 'biplapbhattarai@lftechnology.com',
-            role: 'super_admin',
+            role: userRoles.superAdmin,
             created_at: Date.now(),
             updated_at: Date.now()
           },
           {
             email: 'aleshdulal@lftechnology.com',
-            role: 'super_admin',
+            role: userRoles.superAdmin,
             created_at: Date.now(),
             updated_at: Date.now()
           },
           {
             email: 'aanchaladhikari@lftechnology.com',
-            role: 'admin',
+            role: userRoles.superAdmin,
             created_at: Date.now(),
             updated_at: Date.now()
           },
           {
             email: 'ypradhan@lftechnology.com',
-            role: 'admin',
+            role: userRoles.superAdmin,
             created_at: Date.now(),
             updated_at: Date.now()
           },
           {
             email: 'yankeemaharjan@lftechnology.com',
-            role: 'admin',
+            role: userRoles.superAdmin,
             created_at: Date.now(),
             updated_at: Date.now()
           },
           {
             email: 'sarojshahi@lftechnology.com',
-            role: 'admin',
+            role: userRoles.superAdmin,
             created_at: Date.now(),
             updated_at: Date.now()
           },
           {
             email: 'sparshadotel@lftechnology.com',
-            role: 'super_admin',
+            role: userRoles.superAdmin,
             created_at: Date.now(),
             updated_at: Date.now()
           }

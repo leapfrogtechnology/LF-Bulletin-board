@@ -1,19 +1,22 @@
-import './env';
 import './db';
+import './env';
+
 import cors from 'cors';
 import path from 'path';
 import helmet from 'helmet';
 import morgan from 'morgan';
 import express from 'express';
-import routes from './routes';
 import favicon from 'serve-favicon';
-import logger from './utils/logger';
 import bodyParser from 'body-parser';
 import compression from 'compression';
+
+import routes from './routes';
+
+import logger from './utils/logger';
+import * as socketIO from './utils/socket';
+
 import json from './middlewares/json';
 import * as errorHandler from './middlewares/errorHandler';
-
-import * as socketIO from './utils/socket';
 
 const app = express();
 

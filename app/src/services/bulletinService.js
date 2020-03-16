@@ -2,10 +2,11 @@
 import { filter, each, orderBy, cloneDeep } from 'lodash';
 
 import * as httpUtil from '../utils/httpUtil';
+import { getUserLocalStorageData } from '../utils/bulletinUtil';
+
 import urlConstants from '../constants/urlConstants';
 
 import defaultImage from '../assets/images/logo_leapfrog.svg';
-import { getUserLocalStorageData } from '../utils/bulletinUtil';
 
 /**
  * Check Login.
