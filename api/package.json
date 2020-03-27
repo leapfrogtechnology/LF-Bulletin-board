@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "REST API for the Bulletin-Board Kiosk application",
   "scripts": {
-    "start": "node dist/index.js",
+    "start": "BABEL_CACHE_PATH=/tmp/my-cache.json node dist/index.js",
     "codecov": "cat coverage/*/lcov.info | codecov",
     "seed": "knex seed:run --knexfile src/knexfile.js",
     "build": "rimraf dist && babel src -D --out-dir dist",
