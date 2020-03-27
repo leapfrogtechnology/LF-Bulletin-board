@@ -1,6 +1,8 @@
 import HttpStatus from 'http-status-codes';
 import * as googleAuth from 'google-auth-library';
 
+const OAuth2Client = new googleAuth.OAuth2Client(process.env.GOOGLE_CLIENT_ID, process.env.GOOGLE_SECRET);
+
 /**
  * Validate the users' google id using google-auth-library.
  *
@@ -11,15 +13,11 @@ import * as googleAuth from 'google-auth-library';
  */
 export default async function validateGoogleToken(req, res, next) {
   try {
-    const client = new googleAuth.OAuth2Client(process.env.GOOGLE_CLIENT_ID);
-    let data;
-    const token = req.body.tokenId;
-    const ticket = await client.verifyIdToken({
-      idToken: token,
-      audience: process.env.GOOGLE_CLIENT_ID
-    });
+    const ticket = await OAuth2Client.verifyIdToken({ idToken: req.body.tokenId });
     const payload = ticket.getPayload();
     const userId = payload['sub'];
+
+    let data;
 
     if (payload) {
       data = {
