@@ -134,6 +134,10 @@ class ListEntries extends Component {
         <div className="clearfix dashboard-header-wrapper">
           <div className="left-content bulletin-heading">
             <h3>Bulletins</h3>
+            <strong>
+              Note: The Bulletins will take around {process.env.REACT_APP_BULLETIN_FETCH_INTERVAL} minutes to be Updated
+              automatically.
+            </strong>
           </div>
           <div className="right-content">
             <AddEntry refreshList={() => this.refreshList()} />
