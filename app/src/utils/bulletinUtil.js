@@ -1,5 +1,7 @@
 import routeConstants from '../constants/routeConstants';
 
+import defaultImage from '../assets/images/logo_leapfrog.svg';
+
 /**
  * Logout User and Remove Data from Browser Storage.
  *
@@ -29,4 +31,26 @@ export function getUserLocalStorageData() {
   } catch (err) {
     return null;
   }
+}
+
+/**
+ * Add Iframe Background Image.
+ *
+ */
+export function addIframeBackgroundImage() {
+  const iframeHolderDiv = document.getElementsByClassName('iframe-holder')[0];
+
+  iframeHolderDiv.style.background = "url('" + defaultImage + "') center center no-repeat";
+  iframeHolderDiv.style.backgroundSize = '50%';
+}
+
+/**
+ * Remove Iframe Background Image.
+ *
+ */
+export function removeIframeBackgroundImage() {
+  const iframeHolderDiv = document.getElementsByClassName('iframe-holder')[0];
+
+  iframeHolderDiv.style.background = 'none';
+  iframeHolderDiv.style.backgroundSize = 'none';
 }
