@@ -7,8 +7,8 @@ import textConstants from '../constants/textConstants';
  * @returns
  */
 export function getErrorMessage(error) {
-  console.error('Error Occured', error);
-  let errorMessage = 'Server Error Occured';
+  console.error('Error Occurred', error);
+  let errorMessage = 'Server Error Occurred';
 
   try {
     if (error.response && error.response.data) {
@@ -28,4 +28,21 @@ export function getErrorMessage(error) {
   }
 
   return errorMessage;
+}
+
+/**
+ * Get Bulletin Fetch Interval in MilliSeconds.
+ *
+ * @returns {Number}
+ */
+export function getBulletinFetchInterval() {
+  let fetchInterval = null;
+
+  try {
+    fetchInterval = Math.abs(parseInt(process.env.REACT_APP_BULLETIN_FETCH_INTERVAL));
+  } catch (err) {
+    fetchInterval = 15;
+  }
+
+  return fetchInterval * 1000 * 60;
 }
