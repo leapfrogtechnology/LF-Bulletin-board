@@ -135,8 +135,7 @@ class ListEntries extends Component {
           <div className="left-content bulletin-heading">
             <h3>Bulletins</h3>
             <strong>
-              Note: The Bulletins will take around {process.env.REACT_APP_BULLETIN_FETCH_INTERVAL} minutes to be Updated
-              automatically.
+              Note: The Bulletins will be refreshed every {process.env.REACT_APP_BULLETIN_FETCH_INTERVAL} minutes.
             </strong>
           </div>
           <div className="right-content">
