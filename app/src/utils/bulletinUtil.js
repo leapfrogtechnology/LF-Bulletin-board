@@ -1,3 +1,4 @@
+import textConstants from '../constants/textConstants';
 import routeConstants from '../constants/routeConstants';
 
 import defaultImage from '../assets/images/logo_leapfrog.svg';
@@ -57,8 +58,8 @@ export function removeIframeBackgroundImage() {
 
 const dummyBulletinSegment = {
   url: '',
-  duration: 0,
-  title: '',
+  duration: textConstants.DEFAULT_SLIDE_DURATION,
+  title: textConstants.DEFAULT_BULLETIN_TITLE,
   index: 0,
   show: false
 };
@@ -78,10 +79,10 @@ export function getBulletinList(bulletinList = []) {
     addIframeBackgroundImage();
 
     selectedData = {
-      firstSelectedLink: dummyBulletinSegment,
-      secondSelectedLink: dummyBulletinSegment,
-      chosenDuration: 0,
-      activeBulletinTitle: 'Leapfrog Bulletin'
+      firstSelectedLink: { ...dummyBulletinSegment },
+      secondSelectedLink: { ...dummyBulletinSegment },
+      chosenDuration: textConstants.DEFAULT_SLIDE_DURATION,
+      activeBulletinTitle: textConstants.DEFAULT_BULLETIN_TITLE
     };
   } else if (bulletinListLength === 1) {
     removeIframeBackgroundImage();
@@ -94,7 +95,7 @@ export function getBulletinList(bulletinList = []) {
         index: 0,
         show: true
       },
-      secondSelectedLink: dummyBulletinSegment,
+      secondSelectedLink: { ...dummyBulletinSegment },
       chosenDuration: bulletinList[0].duration,
       activeBulletinTitle: bulletinList[0].title
     };
