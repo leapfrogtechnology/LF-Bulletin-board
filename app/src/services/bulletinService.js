@@ -6,8 +6,6 @@ import { getUserLocalStorageData } from '../utils/bulletinUtil';
 
 import urlConstants from '../constants/urlConstants';
 
-import defaultImage from '../assets/images/logo_leapfrog.svg';
-
 /**
  * Check Login.
  *
@@ -179,26 +177,4 @@ export function reassignBulletinPriorities(oldIndex, newIndex, list) {
   }
 
   return newList;
-}
-
-/**
- * Remove Iframe Background Image.
- *
- */
-export function removeIframeBackgroundImage() {
-  const iframeHolderDiv = document.getElementsByClassName('iframe-holder')[0];
-
-  iframeHolderDiv.style.background = 'none';
-  iframeHolderDiv.style.backgroundSize = 'none';
-}
-
-/**
- * Add Iframe Background Image.
- *
- */
-export function addIframeBackgroundImage() {
-  const iframeHolderDiv = document.getElementsByClassName('iframe-holder')[0];
-
-  iframeHolderDiv.style.background = "url('" + defaultImage + "') center center no-repeat";
-  iframeHolderDiv.style.backgroundSize = '50%';
 }
