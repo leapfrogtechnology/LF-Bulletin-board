@@ -41,8 +41,9 @@ export function getBulletinFetchInterval() {
 
   try {
     fetchInterval = Math.abs(parseInt(process.env.REACT_APP_BULLETIN_FETCH_INTERVAL));
+    fetchInterval = fetchInterval ? fetchInterval : textConstants.DEFAULT_FETCH_INTERVAL;
   } catch (err) {
-    fetchInterval = 15;
+    fetchInterval = textConstants.DEFAULT_FETCH_INTERVAL;
   }
 
   return fetchInterval * 1000 * 60;
