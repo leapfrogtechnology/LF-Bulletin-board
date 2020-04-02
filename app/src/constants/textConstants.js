@@ -9,6 +9,7 @@ const textConstants = {
   USER_NOT_REGISTERED: 'User not registered',
   DELETE_WARNING_MESSAGE: 'Are you sure?',
   TOKEN_NOT_FOUND: 'Token Not Found',
+  DEFAULT_FETCH_INTERVAL: 15,
   DEFAULT_SLIDE_DURATION: 0,
   EMPTY_JSON: 'Empty JSON',
   UNAUTHORIZED_CODE: 401,
