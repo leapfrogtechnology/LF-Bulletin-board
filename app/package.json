@@ -1,7 +1,13 @@
 {
-  "name": "bulletin-board-v3",
-  "version": "0.1.0",
-  "private": true,
+  "name": "bulletin-board-app",
+  "license": "MIT",
+  "keywords": [
+    "app",
+    "bulletin",
+    "bulletin-board",
+    "lf-bb",
+    "leapfrog-bulletin-board"
+  ],
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
