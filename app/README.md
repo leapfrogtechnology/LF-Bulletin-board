@@ -1,23 +1,87 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<h1 align="center">Bulletin Board APP</h1>
 
-## Available Scripts
+## Prerequisites
 
-In the project directory, you can run:
+- [Node.js](https://yarnpkg.com/en/docs/install)
+- [Yarn](https://yarnpkg.com/en/docs/install)
+- [NPM](https://docs.npmjs.com/getting-started/installing-node)
 
-### `npm start`
+## File structure
+
+```
+src/
+├── assets/        => represents fonts images
+├── components/    => all react components
+├── constants/     => constant data
+├── services/      => http request services
+└── utils/         => helper functions
+```
+
+## Setup
+
+### Install dependencies for `APP`
+
+```bash
+# Using npm
+$ cd app
+$ npm install
+
+# Or using yarn
+$ cd app
+$ yarn
+```
+
+#### Make a copy of `.env.example` as `.env` and update your application details and database credentials.
+
+```bash
+$ cp .env.example .env
+```
+
+#### Adjust the following information on the `.env`
+
+```
+# API URL
+REACT_APP_BASE_API="http://localhost:8848"
+REACT_APP_BASE_API_URL="http://localhost:8848/api"
+REACT_APP_GOOGLE_LOGIN_URL="http://localhost:8848/api/auth/google"
+
+# Interval Time To Fetch The Bulletin List (Interval In Minute)
+REACT_APP_BULLETIN_FETCH_INTERVAL=${REACT_APP_BULLETIN_FETCH_INTERVAL}
+
+# Google Client ID KEY
+REACT_APP_GOOGLE_CLIENT_ID=${REACT_APP_GOOGLE_CLIENT_ID}
+```
+
+## For Development
+
+```bash
+# Using npm
+$ cd app
+$ npm start
+
+# Or using yarn
+$ cd app
+$ yarn start
+```
 
 Runs the app in the development mode.<br>
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+<br>
 
-### `npm test`
+## For Production
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```bash
+# Using npm
+$ cd app
+$ npm run build
+$ serve -s build
 
-### `npm run build`
+# Or using yarn
+$ cd app
+$ yarn build
+$ serve -s build
+```
 
 Builds the app for production to the `build` folder.<br>
 It correctly bundles React in production mode and optimizes the build for the best performance.
@@ -25,20 +89,20 @@ It correctly bundles React in production mode and optimizes the build for the be
 The build is minified and the filenames include the hashes.<br>
 Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+<br>
 
-### `npm run eject`
+**Note: Serve is just for illustration purpose for running build file, requires separate serve package to be installed as global for running**
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+<br>
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Contributing
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Read our [contributing guide](../CONTRIBUTING.md) to learn about our development process, how to propose bugs and improvements.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Change Log
 
-## Learn More
+Check the [CHANGELOG](../CHANGELOG.md) for full release history.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## License
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Licensed under [The MIT License](../LICENSE).
