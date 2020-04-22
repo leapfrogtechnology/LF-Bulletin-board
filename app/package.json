@@ -1,10 +1,40 @@
 {
-  "name": "bulletin-board-v3",
-  "version": "0.1.0",
-  "private": true,
+  "name": "bulletin-board-app",
+  "license": "MIT",
+  "keywords": [
+    "app",
+    "bulletin",
+    "bulletin-board",
+    "lf-bb",
+    "leapfrog-bulletin-board"
+  ],
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "eslint": "eslint src",
+    "eslint:fix": "eslint --fix src",
+    "lint": "yarn prettier && yarn eslint",
+    "lint:fix": "yarn prettier:fix && yarn eslint:fix",
+    "prettier": "prettier \"{src,api}/**/*.js\" \"{src,api}/**/*.css\"",
+    "prettier:fix": "prettier --write \"{src,api}/**/*.js\" \"{src,api}/**/*.css\"",
+    "precommit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "prettier --write",
+      "git add"
+    ],
+    "*.{md,yml,yml,json,css}": [
+      "prettier --write",
+      "git add"
+    ]
+  },
   "dependencies": {
-    "axios": "^0.15.3",
-    "lodash": "^4.17.11",
+    "axios": "^0.18.1",
+    "lodash": "^4.17.13",
     "react": "^16.6.3",
     "react-bootstrap": "^0.32.1",
     "react-dom": "^16.6.3",
@@ -14,17 +44,16 @@
     "react-router-dom": "^4.0.0",
     "react-scripts": "2.1.1",
     "react-sortable-hoc": "^0.6.8",
-    "socket.io-client": "^2.1.1",
     "sweetalert": "^2.1.2"
   },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
+  "devDependencies": {
+    "eslint": "5.6.0",
+    "eslint-config-leapfrog": "^2.0.1",
+    "eslint-config-prettier": "^6.9.0",
+    "eslint-plugin-prettier": "^3.1.2",
+    "lint-staged": "^9.5.0",
+    "mocha": "^6.2.2",
+    "prettier": "^1.19.1"
   },
   "browserslist": [
     ">0.2%",

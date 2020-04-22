@@ -1,50 +1,37 @@
-import swal from 'sweetalert';
-import io from 'socket.io-client';
-import React, { Component } from 'react';
-import {cloneDeep} from 'lodash';
-
-import BulletinFooter from '../bulletinFooter';
-import urlConstants from '../../constants/urlConstants';
-import textConstants from '../../constants/textConstants';
-import * as bulletinService from '../../services/bulletinService';
-
 import './styles.css';
 
-const dummyBulletinSegment = {
-  url: '',
-  duration: 0,
-  title: '',
-  index: 0,
-  show: false
-};
+import swal from 'sweetalert';
+import React, { Component } from 'react';
+import { cloneDeep, isEqual } from 'lodash';
+
+import textConstants from '../../constants/textConstants';
+
+import BulletinFooter from '../bulletinFooter';
+
+import * as bulletinUtil from '../../utils/bulletinUtil';
+import { getErrorMessage, getLink, getBulletinFetchInterval } from '../../utils/utils';
+
+import * as bulletinService from '../../services/bulletinService';
 
 class BulletinScreen extends Component {
-
   constructor() {
     super();
     this.state = {
       dataCollection: [],
-      choosenDuration: textConstants.DEFAULT_SLIDE_DURATION,
-      activeBulletinTitle: 'Leapfrog Bulletin',
+      startHiddenSlide: false,
+      chosenDuration: textConstants.DEFAULT_SLIDE_DURATION,
+      activeBulletinTitle: textConstants.DEFAULT_BULLETIN_TITLE,
       firstSelectedLink: {},
       secondSelectedLink: {}
     };
 
     this.newDataCollection = [];
     this.isnewDataCollection = false;
-    
-    this.socket = io.connect(urlConstants.baseUrl);
-
-    this.socket.on('IS_LIST_UPDATED', (data) => {
-      if (data.status) {
-        this.getNewCollection();
-      }
-    });
+    this.newCollectionIntervalKey = null;
 
     this.setData = this.setData.bind(this);
     this.showFrame = this.showFrame.bind(this);
     this.toggleFrame = this.toggleFrame.bind(this);
-    this.changeDuration = this.changeDuration.bind(this);
     this.getNewCollection = this.getNewCollection.bind(this);
     this.fetchBulletinList = this.fetchBulletinList.bind(this);
     this.changeSelectedLink = this.changeSelectedLink.bind(this);
@@ -52,240 +39,188 @@ class BulletinScreen extends Component {
 
   componentDidMount() {
     this.fetchBulletinList();
+
+    this.newCollectionIntervalKey = setInterval(this.getNewCollection, getBulletinFetchInterval());
   }
 
-  changeDuration() {
-    if (this.state.firstSelectedLink.show) {
-      this.setState(
-        { choosenDuration: this.state.firstSelectedLink.duration },
-        () => {
-          this.changeSelectedLink();
-        }
-      );
+  componentWillUnmount() {
+    clearInterval(this.newCollectionIntervalKey);
+  }
+
+  /**
+   * Filter and Set Iframe Data based on Number Of Bulletin List.
+   *
+   * @param {*} [bulletinList=[]]
+   * @memberof BulletinScreen
+   */
+  setData(bulletinList = []) {
+    const selectedData = bulletinUtil.getBulletinList(bulletinList);
+
+    if (bulletinList.length === 0 || bulletinList.length === 1) {
+      this.setState({ ...selectedData });
     } else {
-      this.setState(
-        {
-          choosenDuration: this.state.secondSelectedLink.duration
-        },
-        () => {
-          this.changeSelectedLink();
-        }
-      );
+      this.setState({ ...selectedData }, this.showFrame);
     }
-  }
-
-  async changeSelectedLink() {
-    let index;
-    let newCollectionFlag = false;
-    if (!this.state.firstSelectedLink.show) {
-      index =
-        (this.state.firstSelectedLink.index + 2) %
-        this.state.dataCollection.length;
-
-      newCollectionFlag = index === 0 && this.isnewDataCollection;
-      
-      if(newCollectionFlag) {
-        this.setData(cloneDeep(this.newDataCollection));
-        
-        this.newDataCollection = [];
-        this.isnewDataCollection = false;
-        return;
-      }
-      
-      this.setState(
-        {
-          firstSelectedLink: {
-            ...this.state.firstSelectedLink,
-            url: this.state.dataCollection[index].url,
-            title: this.state.dataCollection[index].title,
-            duration: this.state.dataCollection[index].duration,
-            index: index
-          }
-        },
-        () => {
-          this.showFrame();
-        }
-      );
-    } else if (!this.state.secondSelectedLink.show) {
-      index =
-        (this.state.secondSelectedLink.index + 2) %
-        this.state.dataCollection.length;
-      
-      newCollectionFlag = index === 0 && this.isnewDataCollection;
-      
-      if(newCollectionFlag) {
-        this.setData(cloneDeep(this.newDataCollection));
-        
-        this.newDataCollection = [];
-        this.isnewDataCollection = false;
-        return;
-      }
-
-      this.setState(
-        {
-          secondSelectedLink: {
-            ...this.state.secondSelectedLink,
-            url: this.state.dataCollection[index].url,
-            title: this.state.dataCollection[index].title,
-            duration: this.state.dataCollection[index].duration,
-            index: index
-          }
-        },
-        () => {
-          this.showFrame();
-        }
-      );
-    }
-  }
-
-  getNewCollection() {
-    let newList;
-
-    bulletinService.listBulletin()
-      .then((response) => {
-        newList = bulletinService.filterActiveList(response.data.data);
-        this.newDataCollection = newList;
-        this.isnewDataCollection = true;
-        
-        //call the setData() function immediately only if currently active datacollection list is empty or has only one item
-        if(this.state.dataCollection.length === 0 || this.state.dataCollection.length === 1) {
-          this.setData(cloneDeep(this.newDataCollection));
-          this.newDataCollection = [];
-          this.isnewDataCollection = false;
-        }
-      });
   }
 
   fetchBulletinList() {
-    let newList;
+    bulletinService
+      .listBulletin()
+      .then(response => {
+        const bulletinList = bulletinService.filterActiveList(response.data.data);
 
-    bulletinService.listBulletin()
-      .then((response) => {
-        newList = bulletinService.filterActiveList(response.data.data);
-
-        this.setData(newList);
+        this.setData(bulletinList);
       })
-      .catch((err) => {
-        if (err.response && err.response.data && err.response.data.error.message) {
-          swal(err.response.data.error.message);
-        } else {
-          swal("Server Error");
-        }
-      });
+      .catch(err => swal(getErrorMessage(err)));
   }
 
-  setData(linksCollection) {
-    this.setState({ dataCollection: linksCollection }, () => {
-      if (this.state.dataCollection.length === 0) {
-        bulletinService.addIframeBackgroundImage();
-        
-        this.setState({
-          firstSelectedLink: dummyBulletinSegment,
-          secondSelectedLink: dummyBulletinSegment,
-          choosenDuration: 0,
-          activeBulletinTitle: 'Leapfrog Bulletin'
-        });
+  getNewCollection() {
+    bulletinService.listBulletin().then(response => {
+      const bulletinList = bulletinService.filterActiveList(response.data.data);
+      const isBulletinListUpdated = !isEqual(bulletinList, this.state.dataCollection);
 
-      } else if (this.state.dataCollection.length === 1) {
-        bulletinService.removeIframeBackgroundImage();
-        
-        this.setState({
-          firstSelectedLink: {
-            url: this.state.dataCollection[0].url,
-            duration: this.state.dataCollection[0].duration,
-            title: this.state.dataCollection[0].title,
-            index: 0,
-            show: true
-          },
-          secondSelectedLink: dummyBulletinSegment,
-          choosenDuration: this.state.dataCollection[0].duration,
-          activeBulletinTitle: this.state.dataCollection[0].title
-        });
-      } else {
-        bulletinService.removeIframeBackgroundImage();
-
-        this.setState(
-          {
-            firstSelectedLink: {
-              url: this.state.dataCollection[0].url,
-              duration: this.state.dataCollection[0].duration,
-              title: this.state.dataCollection[0].title,
-              index: 0,
-              show: true
-            },
-            secondSelectedLink: {
-              url: this.state.dataCollection[1].url,
-              duration: this.state.dataCollection[1].duration,
-              title: this.state.dataCollection[1].title,
-              index: 1,
-              show: false
-            },
-            choosenDuration: this.state.dataCollection[0].duration,
-            activeBulletinTitle: this.state.dataCollection[0].title
-          },
-
-          () => {
-            this.showFrame();
-          }
-        );
+      // Check if Bulletin List is Updated Otherwise Don't Update the state.
+      if (isBulletinListUpdated) {
+        // Call the setData() function immediately only if currently active dataCollection list is empty or has only one item
+        if (this.state.dataCollection.length === 0 || this.state.dataCollection.length === 1) {
+          this.setData(cloneDeep(bulletinList));
+          this.newDataCollection = [];
+          this.isnewDataCollection = false;
+        } else {
+          this.newDataCollection = bulletinList;
+          this.isnewDataCollection = true;
+        }
       }
     });
   }
 
   showFrame() {
-    setTimeout(() => this.toggleFrame(), this.state.choosenDuration * 1000);
+    /**
+     *
+     * As we have got two iframes in bulletin board, both iframes were autoplaying.
+     * By this fix and getLink function only one iframe is autoplaying and other iframe stops from autoplay.
+     * But when changing the link in iframe or simply changing parameters in iframe the iframe auto reloads
+     * and refetches the data from network.
+     *
+     * This fix of -3s in duration calls toogle frame before 3 sec of original duration ended and changes the
+     * link/autoplays the second iframe also.
+     * In which on 3sec network is resolved and new slides data are fetched properly.
+     *
+     */
+    const waitTime = this.state.chosenDuration - 3 > 0 ? this.state.chosenDuration - 3 : 0;
+
+    setTimeout(() => {
+      this.setState({ startHiddenSlide: true }, this.toggleFrame);
+    }, waitTime * 1000);
   }
 
+  /**
+   * Toggle Which Frame To show now between First and Second One.
+   *
+   * @memberof BulletinScreen
+   */
   toggleFrame() {
-    this.setState(
-      {
+    // Set Timeout 3000ms is used as in showFrame() 3000ms is reduced when showing second iFrame.
+    setTimeout(() => {
+      const { firstSelectedLink, secondSelectedLink } = this.state;
+      const showFirstSelectedLink = !firstSelectedLink.show;
+
+      const toggledData = {
+        startHiddenSlide: false,
+        activeBulletinTitle: showFirstSelectedLink ? firstSelectedLink.title : secondSelectedLink.title,
+        chosenDuration: showFirstSelectedLink ? firstSelectedLink.duration : secondSelectedLink.duration,
         firstSelectedLink: {
-          ...this.state.firstSelectedLink,
-          show: !this.state.firstSelectedLink.show
+          ...firstSelectedLink,
+          show: showFirstSelectedLink
         },
         secondSelectedLink: {
-          ...this.state.secondSelectedLink,
-          show: !this.state.secondSelectedLink.show
+          ...secondSelectedLink,
+          show: !secondSelectedLink.show
         }
-      },
-      () => {
-        this.setState({
-          activeBulletinTitle: this.state.secondSelectedLink.show ? this.state.secondSelectedLink.title : this.state.firstSelectedLink.title
-        });
-        this.changeDuration();
+      };
+
+      this.setState({ ...toggledData }, this.changeSelectedLink);
+    }, 3000);
+  }
+
+  /**
+   * It Updates the state if New Bulletin Data is available and it switches between 1st,2nd 3rd .... Bulletins.
+   *
+   * @memberof BulletinScreen
+   */
+  changeSelectedLink() {
+    const { firstSelectedLink, secondSelectedLink } = this.state;
+
+    const firstSelectedLinkShowing = !firstSelectedLink.show;
+    const secondSelectedLinkShowing = !secondSelectedLink.show;
+
+    // The condition is false when there are no bulletins.
+    if (firstSelectedLinkShowing !== secondSelectedLinkShowing) {
+      const currentSelected = firstSelectedLinkShowing ? firstSelectedLink : secondSelectedLink;
+
+      const index = (currentSelected.index + 2) % this.state.dataCollection.length;
+      const newCollectionFlag = index === 0 && this.isnewDataCollection;
+
+      if (newCollectionFlag) {
+        this.setData(cloneDeep(this.newDataCollection));
+
+        this.newDataCollection = [];
+        this.isnewDataCollection = false;
+
+        return;
       }
-    );
+
+      const updatedData = firstSelectedLinkShowing
+        ? {
+            firstSelectedLink: {
+              ...this.state.firstSelectedLink,
+              url: this.state.dataCollection[index].url,
+              title: this.state.dataCollection[index].title,
+              duration: this.state.dataCollection[index].duration,
+              index: index
+            }
+          }
+        : {
+            secondSelectedLink: {
+              ...this.state.secondSelectedLink,
+              url: this.state.dataCollection[index].url,
+              title: this.state.dataCollection[index].title,
+              duration: this.state.dataCollection[index].duration,
+              index: index
+            }
+          };
+
+      this.setState({ ...updatedData }, this.showFrame);
+    }
   }
 
   render() {
+    const { firstSelectedLink, secondSelectedLink } = this.state;
+
     return (
       <div>
         <div className="iframe-holder">
           <iframe
             title="first frame"
-            src={this.state.firstSelectedLink.url}
+            src={getLink(firstSelectedLink.url, firstSelectedLink.show, this.state.startHiddenSlide)}
             className="first-iframe"
             style={{
-              visibility: this.state.firstSelectedLink.show ? 'visible' : 'hidden'
+              visibility: firstSelectedLink.show ? 'visible' : 'hidden'
             }}
           />
           <iframe
             title="second frame"
-            src={this.state.secondSelectedLink.url}
+            src={getLink(secondSelectedLink.url, secondSelectedLink.show, this.state.startHiddenSlide)}
             className="second-iframe"
             style={{
-              visibility: this.state.secondSelectedLink.show
-                ? 'visible'
-                : 'hidden'
+              visibility: secondSelectedLink.show ? 'visible' : 'hidden'
             }}
           />
         </div>
         <BulletinFooter title={this.state.activeBulletinTitle} />
       </div>
-
     );
   }
-
 }
 
 export default BulletinScreen;

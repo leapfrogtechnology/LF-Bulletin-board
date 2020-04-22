@@ -1,22 +1,23 @@
 import Boom from 'boom';
 
 import User from '../models/user';
+
 import * as tokenService from './tokenService';
 import * as sessionService from './sessionService';
 
 /**
- * Login Users
- * 
- * @param {*} loginParams 
- * @return {Object}
+ * Login Users.
+ *
+ * @param {*} loginParams
+ * @returns {Object}
  */
 export async function loginUser(loginParams) {
   try {
-    let userDetails = await verifyUser(loginParams);
+    const userDetails = await verifyUser(loginParams);
 
-    let { id, username } = userDetails.toJSON();
-    let tokens = tokenService.generateTokens(id);
-    let userInfo = {
+    const { id, username } = userDetails.toJSON();
+    const tokens = tokenService.generateTokens(id);
+    const userInfo = {
       user: {
         id,
         username
@@ -28,24 +29,27 @@ export async function loginUser(loginParams) {
 
     return userInfo;
   } catch (err) {
+    console.error(err);
+
     throw err;
   }
 }
 
 /**
- * Log Out User
- * 
+ * Log Out User.
+ *
  * @param {*} id
- * @return {Promise} 
+ * @returns {Promise}
  */
 export function logoutUser(id) {
   return sessionService.deleteSession(id);
 }
 
 /**
- * Verify Users
- * @param {*} loginParams 
- * @return {Promise}
+ * Verify Users.
+ *
+ * @param {*} loginParams
+ * @returns {Promise}
  */
 export function verifyUser(loginParams) {
   return new User({

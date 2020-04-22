@@ -1,13 +1,42 @@
 import Joi from 'joi';
+
+import { userRoles } from '../const';
+
 import validate from '../utils/validate';
+
 import * as userService from '../services/userService';
 
 const SCHEMA = {
-  name: Joi.string()
-    .label('Name')
-    .max(90)
+  email: Joi.string()
+    .email()
+    .label('email')
+    .max(50)
+    .required(),
+  userRole: Joi.string()
+    .valid(userRoles.admin, userRoles.superAdmin)
+    .label('userRole')
+    .max(50)
     .required()
 };
+
+/**
+ * Check user exists.
+ *
+ * @param  {object}   req
+ * @param  {object}   res
+ * @param  {function} next
+ * @returns {Promise}
+ */
+function checkUserExistsByEmail(req, res, next) {
+  return userService
+    .fetchByEmail(req.query.email)
+    .then(userObj => {
+      req.userObj = userObj;
+
+      return next();
+    })
+    .catch(err => next(err));
+}
 
 /**
  * Validate create/update user request.
@@ -15,7 +44,7 @@ const SCHEMA = {
  * @param  {object}   req
  * @param  {object}   res
  * @param  {function} next
- * @return {Promise}
+ * @returns {Promise}
  */
 function userValidator(req, res, next) {
   return validate(req.body, SCHEMA)
@@ -29,7 +58,7 @@ function userValidator(req, res, next) {
  * @param  {object}   req
  * @param  {object}   res
  * @param  {function} next
- * @return {Promise}
+ * @returns {Promise}
  */
 function findUser(req, res, next) {
   return userService
@@ -38,4 +67,4 @@ function findUser(req, res, next) {
     .catch(err => next(err));
 }
 
-export { findUser, userValidator };
+export { findUser, userValidator, checkUserExistsByEmail };

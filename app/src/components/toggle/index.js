@@ -1,11 +1,17 @@
-import PropTypes from 'prop-types';
 import React from 'react';
-import {isUndefined} from 'lodash';
+import PropTypes from 'prop-types';
+import { isUndefined } from 'lodash';
 
-const Toggle = ({active, toggleActive}) => {
+/**
+ *
+ *
+ * @param {*} Params { active, toggleActive }.
+ * @returns
+ */
+const Toggle = ({ active, toggleActive }) => {
   return (
     <label className="switch">
-      <input type="checkbox" checked={isUndefined(active) ? false: active} onChange={() => toggleActive()}/>
+      <input type="checkbox" checked={isUndefined(active) ? false : active} onChange={() => toggleActive()} />
       <div className="slider"></div>
     </label>
   );

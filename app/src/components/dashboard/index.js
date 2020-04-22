@@ -2,40 +2,70 @@ import React, { Component } from 'react';
 import { Route, Redirect, Switch } from 'react-router-dom';
 
 import SideMenu from './SideMenu';
+
+import ListAdmin from '../listAdmin';
 import ListEntries from '../listEntries';
 
-class Dashboard extends Component {
+import { checkLogin } from '../../services/auth';
 
-  constructor () {
+import { getUserLocalStorageData } from '../../utils/bulletinUtil';
+
+import { userRoles } from '../../constants/userRoles';
+
+class Dashboard extends Component {
+  constructor() {
     super();
 
-    this.user = JSON.parse(localStorage.getItem('user')) || '';
+    this.state = {
+      user: null
+    };
   }
 
-  render () {
-    return (
-        <div className="clearfix">
-        
-          <div className="sidemenu-wrapper">
-            <SideMenu user={this.user}/>
-          </div>
+  componentDidMount() {
+    this.getUser();
+  }
 
-          <div>
-            <div className="container">
-              <Switch>
-                <Route
-                  exact path="/dashboard/list"
-                  render={() => (                  
-                    <ListEntries/>                                   
-                  )}
-                />
-                <Redirect to="/dashboard/list"/>
-              </Switch>
-            </div>
-          </div>
+  /**
+   * This function checks for refresh and access token expiration,
+   * this function saves user object with data from server with the id
+   * and roles, as well as user data tamper in browser.
+   *
+   * @memberof Dashboard
+   */
+  async getUser() {
+    let user = getUserLocalStorageData();
+    const loggedInUser = await checkLogin();
 
+    if (loggedInUser && user) {
+      user = { ...user, ...loggedInUser.data.user };
+      localStorage.setItem('user', JSON.stringify(user));
+
+      this.setState({
+        user
+      });
+    }
+  }
+
+  render() {
+    return this.state.user ? (
+      <div className="clearfix">
+        <div className="sidemenu-wrapper">
+          <SideMenu user={this.state.user} />
         </div>
-    );
+
+        <div>
+          <div className="container">
+            <Switch>
+              <Route exact path="/dashboard/list" render={() => <ListEntries />} />
+              <Route exact path="/dashboard/admin">
+                {this.state.user.role === userRoles.superAdmin ? <ListAdmin /> : <Redirect to="/dashboard/list" />}
+              </Route>
+              <Redirect to="/dashboard/list" />
+            </Switch>
+          </div>
+        </div>
+      </div>
+    ) : null;
   }
 }
 

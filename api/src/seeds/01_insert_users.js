@@ -1,9 +1,11 @@
+import { userRoles } from '../const';
+
 /**
  * Seed users table.
  *
  * @param  {object} knex
  * @param  {object} Promise
- * @return {Promise}
+ * @returns {Promise}
  */
 export function seed(knex, Promise) {
   // Deletes all existing entries
@@ -14,31 +16,52 @@ export function seed(knex, Promise) {
         // Inserts seed entries
         knex('users').insert([
           {
-            email: 'basantamaharjan@lftechnology.com'
+            email: 'basantamaharjan@lftechnology.com',
+            role: userRoles.superAdmin,
+            created_at: Date.now(),
+            updated_at: Date.now()
           },
           {
-            email: 'ayushghimire@lftechnology.com'
+            email: 'biplapbhattarai@lftechnology.com',
+            role: userRoles.superAdmin,
+            created_at: Date.now(),
+            updated_at: Date.now()
           },
           {
-            email: 'aanchaladhikari@lftechnology.com'
+            email: 'aleshdulal@lftechnology.com',
+            role: userRoles.superAdmin,
+            created_at: Date.now(),
+            updated_at: Date.now()
           },
           {
-            email: 'pravashupreti@lftechnology.com'
+            email: 'aanchaladhikari@lftechnology.com',
+            role: userRoles.superAdmin,
+            created_at: Date.now(),
+            updated_at: Date.now()
           },
           {
-            email: 'aishwaryapradhan@lftechnology.com'
+            email: 'ypradhan@lftechnology.com',
+            role: userRoles.superAdmin,
+            created_at: Date.now(),
+            updated_at: Date.now()
           },
           {
-            email: 'ypradhan@lftechnology.com'
+            email: 'yankeemaharjan@lftechnology.com',
+            role: userRoles.superAdmin,
+            created_at: Date.now(),
+            updated_at: Date.now()
           },
           {
-            email: 'yankeemaharjan@lftechnology.com'
+            email: 'sarojshahi@lftechnology.com',
+            role: userRoles.superAdmin,
+            created_at: Date.now(),
+            updated_at: Date.now()
           },
           {
-            email: 'sarojshahi@lftechnology.com'
-          },
-          {
-            email: 'sanjeevpandit@lftechnology.com'
+            email: 'sparshadotel@lftechnology.com',
+            role: userRoles.superAdmin,
+            created_at: Date.now(),
+            updated_at: Date.now()
           }
         ])
       ]);

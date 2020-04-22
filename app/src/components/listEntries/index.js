@@ -1,18 +1,22 @@
-import {find, isEmpty, orderBy} from 'lodash';
 import swal from 'sweetalert';
 import React, { Component } from 'react';
 import { arrayMove } from 'react-sortable-hoc';
+import { find, isEmpty, orderBy } from 'lodash';
 
 import AddEntry from '../addEntry';
+
 import SortableList from './SortableList';
-import * as bulletinService from '../../services/bulletinService';
+
+import { getErrorMessage } from '../../utils/utils';
+
 import textConstants from '../../constants/textConstants';
 
-class ListEntries extends Component {
+import * as bulletinService from '../../services/bulletinService';
 
-  constructor () {
+class ListEntries extends Component {
+  constructor() {
     super();
-    
+
     this.state = {
       items: []
     };
@@ -21,38 +25,36 @@ class ListEntries extends Component {
     this.deleteBulletin = this.deleteBulletin.bind(this);
     this.toggleActive = this.toggleActive.bind(this);
   }
-  
-  componentDidMount () {
-    bulletinService.listBulletin().then((response) => {
-      this.setState({
-        items: (response && response.data && response.data.data && orderBy(response.data.data, 'priority', 'asc')) || []
-      });
-    }).catch((err) => {
-      let errorMsg = find([err], "response.data.error.message");
-      if(!!errorMsg) {
-        swal(errorMsg.response.data.error.message);
-      } else {
-        swal("Server Error");
-      }
-    });
-    
+
+  componentDidMount() {
+    bulletinService
+      .listBulletin()
+      .then(response => {
+        this.setState({
+          items:
+            (response && response.data && response.data.data && orderBy(response.data.data, 'priority', 'asc')) || []
+        });
+      })
+      .catch(err => swal(getErrorMessage(err)));
   }
 
-  refreshList () {
-    bulletinService.listBulletin().then((response) => {
-      this.setState({
-        items: (response && response.data && response.data.data && orderBy(response.data.data, 'priority', 'asc')) || []
-      });
-    }).catch((err) => {
-      swal(err.response.data.error.message);
-    });
+  refreshList() {
+    bulletinService
+      .listBulletin()
+      .then(response => {
+        this.setState({
+          items:
+            (response && response.data && response.data.data && orderBy(response.data.data, 'priority', 'asc')) || []
+        });
+      })
+      .catch(err => swal(getErrorMessage(err)));
   }
 
-  onSortEnd({oldIndex, newIndex}) {
-    let lowerIndex = oldIndex < newIndex ? oldIndex: newIndex; 
-    let higherIndex = oldIndex > newIndex ? oldIndex: newIndex;
+  onSortEnd({ oldIndex, newIndex }) {
+    const lowerIndex = oldIndex < newIndex ? oldIndex : newIndex;
+    const higherIndex = oldIndex > newIndex ? oldIndex : newIndex;
 
-    let oldBulletinList = this.state.items.map((item) => {
+    const oldBulletinList = this.state.items.map(item => {
       return {
         id: item.id,
         title: item.title,
@@ -61,27 +63,29 @@ class ListEntries extends Component {
         duration: item.duration,
         activeStatus: item.activeStatus,
         url: item.url
-      }
+      };
     });
-    
-    let newBulletinList = bulletinService.reassignBulletinPriorities(oldIndex, newIndex, oldBulletinList);
-    let data = newBulletinList.slice(lowerIndex, higherIndex + 1);
-    
-    this.setState({
-      items: arrayMove(newBulletinList, oldIndex, newIndex)
-    }, () => {
-      bulletinService.updateBulletinsBulk(data)
-      .catch((err) => {
-        this.setState({
-          items: oldBulletinList
+
+    const newBulletinList = bulletinService.reassignBulletinPriorities(oldIndex, newIndex, oldBulletinList);
+    const data = newBulletinList.slice(lowerIndex, higherIndex + 1);
+
+    this.setState(
+      {
+        items: arrayMove(newBulletinList, oldIndex, newIndex)
+      },
+      () => {
+        bulletinService.updateBulletinsBulk(data).catch(err => {
+          this.setState({
+            items: oldBulletinList
+          });
+
+          swal(getErrorMessage(err));
         });
-        
-        swal(err.response.data.error.message);
-      })
-    });
+      }
+    );
   }
 
-  deleteBulletin (id) {
+  deleteBulletin(id) {
     swal({
       title: textConstants.DELETE_WARNING_MESSAGE,
       text: textConstants.DELETE_WARNING_DESCRIPTION,
@@ -90,24 +94,23 @@ class ListEntries extends Component {
       buttons: true,
       dangerMode: true
     })
-      .then((willDelete) => {
+      .then(willDelete => {
         if (willDelete) {
           bulletinService.deleteBulletin(id).then(() => {
             this.refreshList();
           });
         }
-      }).catch((err) => {
-        swal(err.response.data.error.message);
-      });
+      })
+      .catch(err => swal(getErrorMessage(err)));
   }
 
-  toggleActive (id) {
-    let tempList = this.state.items;
-    let toggleItem = find(tempList, (item) => item.id === id) || {};
-    if(!isEmpty(toggleItem)) {
+  toggleActive(id) {
+    const tempList = this.state.items;
+    const toggleItem = find(tempList, item => item.id === id) || {};
 
+    if (!isEmpty(toggleItem)) {
       toggleItem.activeStatus = !toggleItem.activeStatus;
-      let data = {
+      const data = {
         title: toggleItem.title,
         owner: toggleItem.owner,
         duration: toggleItem.duration,
@@ -115,45 +118,53 @@ class ListEntries extends Component {
         url: toggleItem.url
       };
 
-      bulletinService.editBulletin(id, data).then((response) => {
-        if (response.status === textConstants.HTTP_OK) { 
+      bulletinService.editBulletin(id, data).then(response => {
+        if (response.status === textConstants.HTTP_OK) {
           this.setState({
             items: tempList
-          });      
+          });
         }
       });
     }
-
   }
 
-  render () {
+  render() {
     return (
       <div>
         <div className="clearfix dashboard-header-wrapper">
-          <div className="left-content bulletin-heading"><h3>Bulletins</h3></div>
+          <div className="left-content bulletin-heading">
+            <h3>Bulletins</h3>
+            <strong>
+              Note: The Bulletins will be refreshed every {process.env.REACT_APP_BULLETIN_FETCH_INTERVAL} minutes.
+            </strong>
+          </div>
           <div className="right-content">
-            <AddEntry refreshList={() => this.refreshList()}/>
+            <AddEntry refreshList={() => this.refreshList()} />
           </div>
         </div>
         <div className="bulletin-table">
           <div className="table-head">
             <div className="bulletin-drag-handle"></div>
             <div className="bulletin-title">TITLE</div>
-            <div className="bulletin-owner">OWNER</div>              
+            <div className="bulletin-owner">OWNER</div>
             <div className="bulletin-duration">DURATION</div>
             <div className="bulletin-url">URL</div>
             <div className="bulletin-toggle"></div>
             <div className="bulletin-actions">ACTIONS</div>
           </div>
-          <SortableList helperClass={'SortableHelperWithOverride'} items={this.state.items} onSortEnd={this.onSortEnd}  useDragHandle={true} 
+          <SortableList
+            helperClass={'SortableHelperWithOverride'}
+            items={this.state.items}
+            onSortEnd={this.onSortEnd}
+            useDragHandle={true}
             deleteBulletin={this.deleteBulletin}
             refreshList={this.refreshList}
-            toggleActive={this.toggleActive}/>              
+            toggleActive={this.toggleActive}
+          />
         </div>
       </div>
     );
   }
-
 }
 
 export default ListEntries;

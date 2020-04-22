@@ -1,13 +1,25 @@
 import { Router } from 'express';
 
 import * as CONSTANT from '../const';
+
 import * as userService from '../services/userService';
 import * as authService from '../services/authService';
 import * as tokenService from '../services/tokenService';
+
+import ensureToken from '../middlewares/ensureToken';
 import validateRefreshToken from '../middlewares/validateToken';
 import validateGoogleToken from '../middlewares/verifyGoogleToken';
 
+import { checkUserExistsByEmail } from '../validators/userValidator';
+
 const router = Router();
+
+/**
+ * GET /api/validateuser
+ */
+router.get('/validateuser', ensureToken, checkUserExistsByEmail, (req, res, next) => {
+  res.json({ user: req.userObj });
+});
 
 /**
  * POST /api/login
@@ -33,7 +45,7 @@ router.post('/refresh', validateRefreshToken, (req, res, next) => {
  * DELETE /api/logout
  */
 router.delete('/logout', (req, res, next) => {
-  let requestToken = req.body.authorization.substring(CONSTANT.BEARER_LENGTH);
+  const requestToken = req.body.authorization.substring(CONSTANT.BEARER_LENGTH);
 
   authService
     .logoutUser(requestToken)

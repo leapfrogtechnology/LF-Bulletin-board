@@ -4,7 +4,7 @@ import HttpStatus from 'http-status-codes';
  * Build error response for validation errors.
  *
  * @param  {Error} err
- * @return {Object}
+ * @returns {Object}
  */
 function buildError(err) {
   // Validation errors

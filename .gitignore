@@ -4,6 +4,7 @@
 /node_modules
 /.pnp
 .pnp.js
+package-lock.json
 
 # testing
 /coverage
@@ -14,6 +15,13 @@
 # app
 app/.env
 app/node_modules
+app/package-lock.json
+
+# api
+api/node_modules
+api/dist
+api/logs
+api/package-lock.json
 
 # misc
 .DS_Store

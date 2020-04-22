@@ -1,5 +1,6 @@
-import logger from '../utils/logger';
 import HttpStatus from 'http-status-codes';
+
+import logger from '../utils/logger';
 import buildError from '../utils/buildError';
 
 /**
@@ -37,7 +38,7 @@ export function methodNotAllowed(req, res) {
  * To handle errors from body parser for cases such as invalid JSON sent through
  * the body.
  *
- * https://github.com/expressjs/body-parser#errors
+ * Https://github.com/expressjs/body-parser#errors.
  *
  * @param  {Object}   err
  * @param  {Object}   req
@@ -66,6 +67,7 @@ export function bodyParser(err, req, res, next) {
 export function genericErrorHandler(err, req, res, next) {
   logger.error(err);
 
-  let error = buildError(err);
+  const error = buildError(err);
+
   res.status(error.code).json({ error });
 }

@@ -1,4 +1,5 @@
 import Joi from 'joi';
+
 import validate from '../utils/validate';
 
 const SCHEMA = {
@@ -10,8 +11,7 @@ const SCHEMA = {
     .label('owner')
     .max(90)
     .required(),
-  priority: Joi.number()
-    .label('priority'),
+  priority: Joi.number().label('priority'),
   activeStatus: Joi.bool()
     .label('active status')
     .required(),
@@ -31,7 +31,7 @@ const SCHEMA = {
  * @param  {object}   req
  * @param  {object}   res
  * @param  {function} next
- * @return {Promise}
+ * @returns {Promise}
  */
 export function bulletinValidator(req, res, next) {
   return validate(req.body, SCHEMA)

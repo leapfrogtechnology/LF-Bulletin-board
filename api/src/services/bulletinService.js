@@ -1,11 +1,14 @@
 import Boom from 'boom';
-import Bulletin from '../models/bulletin';
+
 import Bookshelf from '../db';
+import knexConfig from '../knexfile';
+
+import Bulletin from '../models/bulletin';
 
 /**
  * Get all bulletins.
  *
- * @return {Promise}
+ * @returns {Promise}
  */
 export function getAllBulletins() {
   return Bulletin.fetchAll();
@@ -15,7 +18,7 @@ export function getAllBulletins() {
  * Get a bulletin.
  *
  * @param  {Number|String}  id
- * @return {Promise}
+ * @returns {Promise}
  */
 export function getBulletin(id) {
   return new Bulletin({ id }).fetch().then(bulletin => {
@@ -30,12 +33,11 @@ export function getBulletin(id) {
 /**
  * Create new bulletin.
  *
- * @param  {Object} bulletin 
- * @return {Promise}
+ * @param  {Object} bulletin
+ * @returns {Promise}
  */
 export async function createBulletin(bulletin) {
-  let model = await getMaxPriorityValue();
-  let newPriority = model.get('priority') + 1;
+  const newPriority = await getMaxPriorityValue();
 
   return new Bulletin({
     title: bulletin.title,
@@ -54,7 +56,7 @@ export async function createBulletin(bulletin) {
  *
  * @param  {Number|String}  id
  * @param  {Object}         bulletin
- * @return {Promise}
+ * @returns {Promise}
  */
 export function updateBulletin(id, bulletin) {
   return new Bulletin({ id })
@@ -73,16 +75,16 @@ export function updateBulletin(id, bulletin) {
  * Bulk update bulletins.
  *
  * @param  {Array}         bulletins
- * @return {Object}
+ * @returns {Object}
  */
 export async function updateBulletins(bulletins) {
-  let knex = Bookshelf.knex;
+  const knex = Bookshelf.knex;
 
   await knex.transaction(trx => {
-    let queries = [];
+    const queries = [];
 
     bulletins.map(bulletin => {
-      let query = knex('bulletins')
+      const query = knex('bulletins')
         .where('id', bulletin.id)
         .update({
           title: bulletin.title,
@@ -93,6 +95,7 @@ export async function updateBulletins(bulletins) {
           url: bulletin.url
         })
         .transacting(trx);
+
       queries.push(query);
     });
 
@@ -108,13 +111,28 @@ export async function updateBulletins(bulletins) {
  * Delete a bulletin.
  *
  * @param  {Number|String}  id
- * @return {Promise}
+ * @returns {Promise}
  */
 export function deleteBulletin(id) {
   return new Bulletin({ id }).fetch().then(bulletin => bulletin.destroy());
 }
 
-function getMaxPriorityValue() {
-  return Bulletin.query('max', 'priority')
-    .fetch({ columns: ['priority'] });
+/**
+ * Get Max Priority Value.
+ *
+ * @returns
+ */
+async function getMaxPriorityValue() {
+  const query = await Bulletin.query('max', 'priority').fetch();
+  const { client } = knexConfig;
+
+  let newPriority = 1;
+
+  if (client === 'pg') {
+    newPriority = query.get('max');
+  } else {
+    newPriority = query.get('maxPriority');
+  }
+
+  return newPriority + 1;
 }

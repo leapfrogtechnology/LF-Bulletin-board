@@ -1,0 +1,95 @@
+---
+version: 2
+jobs:
+  up_deploy:
+    docker:
+      - image: leapfrogtechnology/envault:0.4.6-node10.16.0-stretch-slim
+    steps:
+      - checkout
+      - run:
+          name: Setup Stage
+          command: |
+            if [ $CIRCLE_BRANCH == "dev" ] || [ $CIRCLE_BRANCH == "LL-38" ] || [ $CIRCLE_BRANCH = "CI" ]
+            then
+              echo 'export STAGE=dev' >> ~/.bashrc
+            elif [ $CIRCLE_BRANCH == "uat" ]
+            then
+              echo 'export STAGE=uat' >> ~/.bashrc
+            elif [ $CIRCLE_BRANCH == "qa" ]
+            then
+              echo 'export STAGE=qa' >> ~/.bashrc
+            elif [ $CIRCLE_BRANCH == "release" ]
+            then
+              echo 'export STAGE=staging' >> ~/.bashrc
+            elif [ $CIRCLE_BRANCH == "master" ]
+            then
+              echo 'export STAGE=production' >> ~/.bashrc
+            else
+              echo "Undefined stage"
+            fi
+      - run:
+          name: Install Up
+          command: "curl -sf https://up.apex.sh/install | sh"
+      - run:
+          name: Up Deploy API to the Given Stage
+          command: |
+            source ~/.bashrc;
+            cd api;
+            yarn;
+            envault list -e $STAGE  > .env;
+            up deploy $STAGE;
+  aws_s3_deploy:
+    docker:
+      - image: leapfrogtechnology/envault:0.4.6-node10.16.0-stretch-slim
+    steps:
+      - checkout
+      - run:
+          name: Setup Stage
+          command: |
+            if [ $CIRCLE_BRANCH == "dev" ] || [ $CIRCLE_BRANCH == "CI" ]
+            then
+              echo 'export STAGE=dev' >> ~/.bashrc
+            elif [ $CIRCLE_BRANCH == "uat" ]
+            then
+              echo 'export STAGE=uat' >> ~/.bashrc
+            elif [ $CIRCLE_BRANCH == "qa" ]
+            then
+              echo 'export STAGE=qa' >> ~/.bashrc
+            elif [ $CIRCLE_BRANCH == "release" ]
+            then
+              echo 'export STAGE=staging' >> ~/.bashrc
+            elif [ $CIRCLE_BRANCH == "master" ]
+            then
+              echo 'export STAGE=production' >> ~/.bashrc
+            else
+              echo "Undefined stage"
+            fi
+            echo 'export CI=false' >> ~/.bashrc
+      - run:
+          name: Copy Dist Files to AWS S3 Buckets
+          command: |
+            source ~/.bashrc;
+            cd app;
+            yarn;
+            envault run -e $STAGE 'yarn build';
+            aws s3 sync build s3://com.lftechnology.bulletin.$STAGE --delete;
+workflows:
+  version: 2
+  deploy_api:
+    jobs:
+      - up_deploy:
+          filters:
+            branches:
+              only:
+                - dev
+                - CI
+                - master
+  deploy_app:
+    jobs:
+      - aws_s3_deploy:
+          filters:
+            branches:
+              only:
+                - dev
+                - CI
+                - master
