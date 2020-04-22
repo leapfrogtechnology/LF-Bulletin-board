@@ -18,7 +18,7 @@ The Bulletin Board acts as a platform for sharing useful information regarding o
 
 ## Setup
 
-### Clone this repository.
+### Clone the repository
 
 ```bash
 # Clone with SSH
@@ -28,9 +28,7 @@ $ git clone git@github.com:leapfrogtechnology/bulletin-board.git
 $ git clone https://github.com/leapfrogtechnology/bulletin-board.git
 ```
 
-<br>
-
-#### Install dependencies ( Root folder also Requires Package installation for proper functionality )
+#### Install dependencies (Root folder also requires package installation for proper functionality)
 
 ```bash
 # Using npm
@@ -40,19 +38,13 @@ $ npm install
 $ yarn
 ```
 
-<br>
-
 ## For API
 
 Read our [installation guide for API](api/README.md) for the development guide.
 
-<br>
-
 ## For APP
 
 Read our [installation guide for APP](app/README.md) for the development guide.
-
-<br>
 
 ## Release
 
@@ -68,7 +60,7 @@ $ NEXT=v4.0.1 yarn release
 
 Read our [contributing guide](CONTRIBUTING.md) to learn about our development process, how to propose bugs and improvements.
 
-## Change Log
+## Changelog
 
 Check the [CHANGELOG](CHANGELOG.md) for full release history.
 
