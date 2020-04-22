@@ -3,20 +3,24 @@
 ### Table Of Contents
 
 [What should I know before I get started?](#what-should-i-know-before-i-get-started)
-  * [Code of Conduct](#code-of-conduct)
-  * [Installation](#installation)
+
+- [Code of Conduct](#code-of-conduct)
+- [Installation](#installation)
 
 [How Can I Contribute?](#how-can-i-contribute)
-  * [Reporting Bugs](#reporting-bugs)
-  * [Feature Requests](#feature-requests)
+
+- [Reporting Bugs](#reporting-bugs)
+- [Feature Requests](#feature-requests)
 
 [Style Guidelines](#style-guidelines)
-  * [Git Commit Messages](#git-commit-messages)
-  * [Code Format](#code-format)
-  * [Documentation](#documentation)
+
+- [Git Commit Messages](#git-commit-messages)
+- [Code Format](#code-format)
+- [Documentation](#documentation)
 
 [Additional Stuff](#additional-stuff)
-  * [Tests](#tests)
+
+- [Tests](#tests)
 
 ## What should I know before I get started?
 
@@ -29,24 +33,6 @@ Please report unacceptable behavior to [opensource@lftechnology.com](mailto:open
 ### Installation
 
 To setup bulletin-board on your machine go through the [installation guide](INSTALL.md).
-
-### Generate Changelog
-
-Generate changelog using the following command:
-
-```bash
-$ NEXT=VERSION scripts/release.sh changelog
-```
-
-**Note**: This requires [`github_changelog_generator`](https://github.com/skywinder/github-changelog-generator) to be installed.
-
-### Release
-
-Generate changelog and publish a new tag using the following command:
-
-```bash
-$ NEXT=VERSION scripts/release.sh bump
-```
 
 ## How Can I Contribute?
 
@@ -64,8 +50,8 @@ If you have any suggestions or new feature requests, create an [issue](https://g
 
 ### Git Commit Messages
 
-* Use the present tense ("Add feature" not "Added feature")
-* Use the imperative mood ("Move file to..." not "Moves file to...")
+- Use the present tense ("Add feature" not "Added feature")
+- Use the imperative mood ("Move file to..." not "Moves file to...")
 
 ### Code Format
 
@@ -75,7 +61,7 @@ If the code you add to a file looks drastically different from the existing code
 
 We suggest you to `yarn lint:fix` your code before commit. This command will try to fix common linter issues automatically.
 
-[Here](.eslintrc.yml) are some linting rules we enforce.
+Here are some linting rules we enforce for [APP](app/.eslintrc) and [API](api/.eslintrc) .
 
 ### Documentation
 
@@ -100,3 +86,7 @@ function sendNotification(payload) {
 ### Tests
 
 We recommend you to write tests for any changes you've made. If you are not good at writing tests feel free to start a discussion. We will be happy to help.
+
+## License
+
+Licensed under [The MIT License](LICENSE).

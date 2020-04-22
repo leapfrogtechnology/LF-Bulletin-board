@@ -1,7 +1,14 @@
 {
-  "name": "bulletin-rest-api",
-  "version": "1.0.0",
-  "description": "REST API for the Bulletin-Board Kiosk application",
+  "name": "bulletin-board-api",
+  "description": "REST API for the Bulletin-Board",
+  "license": "MIT",
+  "keywords": [
+    "api",
+    "bulletin",
+    "bulletin-board",
+    "lf-bb",
+    "leapfrog-bulletin-board"
+  ],
   "scripts": {
     "start": "BABEL_CACHE_PATH=/tmp/my-cache.json node dist/index.js",
     "codecov": "cat coverage/*/lcov.info | codecov",
@@ -33,11 +40,6 @@
       "git add"
     ]
   },
-  "keywords": [
-    "api",
-    "bulletin"
-  ],
-  "license": "MIT",
   "dependencies": {
     "body-parser": "^1.17.2",
     "bookshelf": "^0.10.3",
