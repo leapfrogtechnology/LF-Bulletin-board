@@ -4,7 +4,7 @@
 
 Bulletin dashboard is where we add adding new bulletins, update the bulletins, remove bulletin, change bulletin status to active (shows bulletin segment) or inactive (hide bulletin segment), change the bulletin priority (drag the bulletin to change which segments will be shown first).
 
-**Note: Bulletins will take some time to appear on the Bulletin Screen (normally 15 min), which is shown on top of bulletin Dashboard page**
+**Note: Changes will take some time to appear on the Bulletin Screen (normally 15 min), which is shown on top of bulletin Dashboard page**
 
 ### Table Of Contents
 
