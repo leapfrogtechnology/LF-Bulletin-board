@@ -32,7 +32,7 @@ Please report unacceptable behavior to [opensource@lftechnology.com](mailto:open
 
 ### Installation
 
-To setup bulletin-board on your machine go through the [installation guide](INSTALL.md).
+To setup bulletin-board on your machine go through the [installation guide](README.md#setup).
 
 ## How Can I Contribute?
 
