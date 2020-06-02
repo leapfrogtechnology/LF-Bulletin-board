@@ -2,7 +2,7 @@
 
 ## Bulletin Dashboard
 
-Bulletin dashboard is where we can perform CRUD operation to the bulletins. In addition to this, we can also set  status of bulletin: active (shows bulletin segment) or inactive (hide bulletin segment) and change the bulletin priority by dragging the bulletin up or down based on the priority list.
+Bulletin dashboard is where we can perform CRUD operation to the bulletins. In addition to this, we can also set status of bulletin: active (shows bulletin segment) or inactive (hide bulletin segment) and change the bulletin priority by dragging the bulletin up or down based on the priority list.
 
 **Note: Changes will take some time to appear on the Bulletin Screen (normally 15 min), which is shown on top of bulletin Dashboard page**
 
@@ -10,17 +10,17 @@ Bulletin dashboard is where we can perform CRUD operation to the bulletins. In a
 
 - [Add New Entry](#add-new-entry)
 
-* [Adding Google Slides](#adding-google-slides)
+  - [Adding Google Slides](#adding-google-slides)
 
-* [Adding Other Sites](#adding-other-sites)
+  - [Adding Other Sites](#adding-other-sites)
 
-* [Edit Bulletin Entry](#edit-bulletin-entry)
+- [Edit Bulletin Entry](#edit-bulletin-entry)
 
-* [Changing Bulletin Visibility](#changing-bulletin-visibility)
+- [Changing Bulletin Visibility](#changing-bulletin-visibility)
 
-* [Changing Bulletin Priority](#changing-bulletin-priority)
+- [Changing Bulletin Priority](#changing-bulletin-priority)
 
-* [Remove Bulletin Entry](#remove-bulletin-entry)
+- [Remove Bulletin Entry](#remove-bulletin-entry)
 
 ## Add New Entry
 
