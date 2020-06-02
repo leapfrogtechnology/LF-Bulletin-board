@@ -10,17 +10,17 @@ Bulletin dashboard is where we add adding new bulletins, update the bulletins, r
 
 - [Add New Entry](#add-new-entry)
 
-  - [Adding Website/YouTube/Images/Videos](#adding-website/youtube/images/videos)
+* [Adding Google Slides](#adding-google-slides)
 
-  - [Adding Google Slides](#adding-google-slides)
+* [Adding Other Sites](#adding-other-sites)
 
-- [Edit Bulletin Entry](#edit-bulletin-entry)
+* [Edit Bulletin Entry](#edit-bulletin-entry)
 
-- [Changing Bulletin Visibility](#changing-bulletin-visibility)
+* [Changing Bulletin Visibility](#changing-bulletin-visibility)
 
-- [Changing Bulletin Priority](#changing-bulletin-priority)
+* [Changing Bulletin Priority](#changing-bulletin-priority)
 
-- [Remove Bulletin Entry](#remove-bulletin-entry)
+* [Remove Bulletin Entry](#remove-bulletin-entry)
 
 ## Add New Entry
 
@@ -41,14 +41,6 @@ Adding new entry requires some filed.
 **Active Status:** Whether to show bulletin segment on main screen or not.
 
 **URL:** Link of the segment which we are willing to show for information flow.
-
-<br>
-
-### Adding Website/YouTube/Images/Videos
-
-Websites, YouTube, Images, Videos can be added in bulletin board. Just pass in the normal/embed link on add/edit bulletin segment.
-
-**Note:** YouTube link will be automatically converted to embedded link.
 
 <br>
 
@@ -76,6 +68,15 @@ Step 4. Head back to Bulletin Board dashboard screen, click add button on corner
 Step 5. Paste in the copied link in Url section, add the title of segment, duration for how long the slide is to be shown and make sure Active Status is checked. Then click the ADD button at bottom.
 
 <img  src="assets/4_add_new_entry.png"/>
+
+<br>
+<br>
+
+### Adding Other Sites
+
+Websites, YouTube, Images, Videos can be added in bulletin board. Just pass in the normal/embed link on add/edit bulletin segment.
+
+**Note:** YouTube link will be automatically converted to embedded link.
 
 <br>
 <br>
