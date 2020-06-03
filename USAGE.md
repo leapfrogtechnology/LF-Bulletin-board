@@ -119,7 +119,7 @@ Then Edit Bulletin Popup will appear. Check/ uncheck the Active status.
 
 ## Changing Bulletin Priority
 
-On the Bulletin Board dashboard screen, click on side handle of the bulletin to change its list priority. Move the bulletin entry higher/lower to change the list entry on when you want to show the entry.
+On the Bulletin Board dashboard screen, click on side handle of a bulletin entry to change its priority in the list. Drag and drop the bulletin entries and arrange them in the order you prefer.
 
 <img  src="assets/change_priority.png"/>
 
