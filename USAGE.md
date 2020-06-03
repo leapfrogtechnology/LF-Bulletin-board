@@ -50,7 +50,7 @@ Adding new entry requires some filed.
 
 <img  src="assets/1_publish_to_web.png"/>
 
-**Step 2.** In the box that pops up, choose the Embed tab. Then check the Start slideshow as soon as the player loads and Restart slide after last slide.
+**Step 2.** In the box that pops up, choose the Embed tab. Then check the checkboxes beside **_Start slideshow as soon as the player loads_** and **_Restart slide after last slide_**.
 Then click Publish.
 
 <img  src="assets/2_create_embed_link.png"/>
