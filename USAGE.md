@@ -96,7 +96,7 @@ Then Edit Bulletin Popup will appear. Change in your requirements and click EDIT
 
 ## Changing Bulletin Visibility
 
-There are cases where we want to keep the bulletin entry but don't want to remove them but doesn't want those entry to show up in bulletin screen.
+There are cases where we don't want the bulletin entry to show up in bulletin screen but don't want to remove them.
 
 In those conditions just change active status of bulletin entry. There are 2 ways to do that.
 
