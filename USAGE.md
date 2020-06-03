@@ -128,7 +128,7 @@ On the Bulletin Board dashboard screen, click on side handle of a bulletin entry
 
 ## Remove Bulletin Entry
 
-On the Bulletin Board dashboard screen, click on the delete button on the entry you want to edit.
+On the Bulletin Board dashboard screen, click on the delete button on the entry you want to delete.
 
 <img  src="assets/remove_entry_button.png"/>
 
