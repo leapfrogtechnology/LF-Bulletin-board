@@ -1,5 +1,15 @@
 # Changelog
 
+## [v4.0.1](https://github.com/leapfrogtechnology/bulletin-board/tree/v4.0.1) (2020-06-04)
+
+[Full Changelog](https://github.com/leapfrogtechnology/bulletin-board/compare/v4.0.0...v4.0.1)
+
+**Changes**
+
+- LE-299: Create Bulletin Board Usage Documentation [\#116](https://github.com/leapfrogtechnology/bulletin-board/pull/116) ([bhattaraib58](https://github.com/bhattaraib58))
+- Remove unnecessary line breaks [\#115](https://github.com/leapfrogtechnology/bulletin-board/pull/115) ([mesaugat](https://github.com/mesaugat))
+- v4.0.0 Release Change log [\#113](https://github.com/leapfrogtechnology/bulletin-board/pull/113) ([bhattaraib58](https://github.com/bhattaraib58))
+
 ## [v4.0.0](https://github.com/leapfrogtechnology/bulletin-board/tree/v4.0.0) (2020-04-22)
 
 [Full Changelog](https://github.com/leapfrogtechnology/bulletin-board/compare/v3.1.0...v4.0.0)
@@ -29,7 +39,6 @@
 
 **Changes**
 
-- Merge DEV to Master \(Release v4.0.0\) [\#112](https://github.com/leapfrogtechnology/bulletin-board/pull/112) ([bhattaraib58](https://github.com/bhattaraib58))
 - LE-297: Fix the Documentation and create release note/ Changelog [\#111](https://github.com/leapfrogtechnology/bulletin-board/pull/111) ([bhattaraib58](https://github.com/bhattaraib58))
 - Hotfix: Fix interval [\#110](https://github.com/leapfrogtechnology/bulletin-board/pull/110) ([bhattaraib58](https://github.com/bhattaraib58))
 - LE-296: Fix-up Bulletin-Board Screen Component and Discard Socket In Favor of Interval [\#109](https://github.com/leapfrogtechnology/bulletin-board/pull/109) ([bhattaraib58](https://github.com/bhattaraib58))
