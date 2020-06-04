@@ -20,7 +20,7 @@ changelog() {
     --issues-label "**Closed Issues**" \
     --future-release="$NEXT" \
     --release-branch=master \
-    --exclude-labels=unnecessary,duplicate,question,invalid,wontfix \
+    --exclude-labels=unnecessary,duplicate,question,invalid,wontfix,exclude-from-changelog \
     --user leapfrogtechnology \
     --project bulletin-board \
     --exclude-tags v1.0.0,2.0.0
