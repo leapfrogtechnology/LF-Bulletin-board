@@ -3,9 +3,9 @@ import bookshelf from '../db';
 const TABLE_NAME = 'sessions';
 
 /**
- * Session model
+ * Session model.
  *
- * @extends {bookshelf.Model}
+ * @augments {bookshelf.Model}
  */
 class Session extends bookshelf.Model {
   /**

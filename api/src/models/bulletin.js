@@ -5,7 +5,7 @@ const TABLE_NAME = 'bulletins';
 /**
  * Bulletin model.
  *
- * @extends {bookshelf.Model}
+ * @augments {bookshelf.Model}
  */
 class Bulletin extends bookshelf.Model {
   /**

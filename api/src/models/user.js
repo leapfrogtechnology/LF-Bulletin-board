@@ -5,7 +5,7 @@ const TABLE_NAME = 'users';
 /**
  * User model.
  *
- * @extends {bookshelf.Model}
+ * @augments {bookshelf.Model}
  */
 class User extends bookshelf.Model {
   /**

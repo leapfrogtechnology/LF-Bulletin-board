@@ -21,7 +21,7 @@ export function getAllBulletins() {
  * @returns {Promise}
  */
 export function getBulletin(id) {
-  return new Bulletin({ id }).fetch().then(bulletin => {
+  return new Bulletin({ id }).fetch().then((bulletin) => {
     if (!bulletin) {
       throw new Boom.notFound('Bulletin not found');
     }
@@ -48,7 +48,7 @@ export async function createBulletin(bulletin) {
     url: bulletin.url
   })
     .save()
-    .then(bulletin => bulletin.refresh());
+    .then((bulletin) => bulletin.refresh());
 }
 
 /**
@@ -68,7 +68,7 @@ export function updateBulletin(id, bulletin) {
       active_status: bulletin.activeStatus,
       url: bulletin.url
     })
-    .then(bulletin => bulletin.refresh());
+    .then((bulletin) => bulletin.refresh());
 }
 
 /**
@@ -80,10 +80,10 @@ export function updateBulletin(id, bulletin) {
 export async function updateBulletins(bulletins) {
   const knex = Bookshelf.knex;
 
-  await knex.transaction(trx => {
+  await knex.transaction((trx) => {
     const queries = [];
 
-    bulletins.map(bulletin => {
+    bulletins.map((bulletin) => {
       const query = knex('bulletins')
         .where('id', bulletin.id)
         .update({
@@ -99,9 +99,7 @@ export async function updateBulletins(bulletins) {
       queries.push(query);
     });
 
-    Promise.all(queries)
-      .then(trx.commit)
-      .catch(trx.rollback);
+    Promise.all(queries).then(trx.commit).catch(trx.rollback);
   });
 
   return { status: true };
@@ -114,7 +112,7 @@ export async function updateBulletins(bulletins) {
  * @returns {Promise}
  */
 export function deleteBulletin(id) {
-  return new Bulletin({ id }).fetch().then(bulletin => bulletin.destroy());
+  return new Bulletin({ id }).fetch().then((bulletin) => bulletin.destroy());
 }
 
 /**
