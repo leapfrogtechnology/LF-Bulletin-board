@@ -1,6 +1,6 @@
 const path = require('path');
 
-require('babel-register');
+require('@babel/register');
 require('dotenv').config({ path: __dirname + '/../.env' });
 
 let connection = {};
