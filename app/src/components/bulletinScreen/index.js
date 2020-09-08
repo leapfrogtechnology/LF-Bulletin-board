@@ -66,16 +66,16 @@ class BulletinScreen extends Component {
   fetchBulletinList() {
     bulletinService
       .listBulletin()
-      .then(response => {
+      .then((response) => {
         const bulletinList = bulletinService.filterActiveList(response.data.data);
 
         this.setData(bulletinList);
       })
-      .catch(err => swal(getErrorMessage(err)));
+      .catch((err) => swal(getErrorMessage(err)));
   }
 
   getNewCollection() {
-    bulletinService.listBulletin().then(response => {
+    bulletinService.listBulletin().then((response) => {
       const bulletinList = bulletinService.filterActiveList(response.data.data);
       const isBulletinListUpdated = !isEqual(bulletinList, this.state.dataCollection);
 

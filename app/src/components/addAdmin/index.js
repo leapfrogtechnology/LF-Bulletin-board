@@ -20,7 +20,7 @@ const defaultFormData = {
 /**
  *
  * @class AddAdmin
- * @extends {Component}
+ * @augments {Component}
  */
 class AddAdmin extends Component {
   constructor() {
@@ -52,7 +52,7 @@ class AddAdmin extends Component {
           formdata: { ...defaultFormData }
         });
       })
-      .catch(err => swal(getErrorMessage(err)));
+      .catch((err) => swal(getErrorMessage(err)));
   }
 
   /**
@@ -112,7 +112,7 @@ class AddAdmin extends Component {
           content-label="add entry modal"
         >
           <h2 className="add-entry-heading">Add New Admin</h2>
-          <form className="add-entry-form" onSubmit={event => this.handleSubmit(event)}>
+          <form className="add-entry-form" onSubmit={(event) => this.handleSubmit(event)}>
             <FormGroup>
               <ControlLabel>Email</ControlLabel>
               <FormControl
@@ -121,7 +121,7 @@ class AddAdmin extends Component {
                 type="text"
                 placeholder=""
                 value={this.state.formdata.email}
-                onChange={el => this.handleChange(el)}
+                onChange={(el) => this.handleChange(el)}
               />
             </FormGroup>
 
@@ -131,7 +131,7 @@ class AddAdmin extends Component {
                 <DropdownButton
                   id="userRole"
                   title={userRole === userRoles.superAdmin ? 'Super Admin' : 'Admin'}
-                  onSelect={selectedValue => {
+                  onSelect={(selectedValue) => {
                     const target = {
                       name: 'userRole',
                       value: selectedValue
