@@ -16,6 +16,7 @@
         "properties": "never"
       }
     ],
+    "arrow-parens": ["error", "as-needed"],
     "no-console": ["error", { "allow": ["warn", "error"] }],
     "require-jsdoc": [
       "error",
