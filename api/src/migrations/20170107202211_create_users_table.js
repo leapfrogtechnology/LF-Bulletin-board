@@ -5,7 +5,7 @@
  * @returns {Promise}
  */
 export function up(knex) {
-  return knex.schema.createTable('users', table => {
+  return knex.schema.createTable('users', (table) => {
     table.increments();
     table.string('email').notNull();
   });

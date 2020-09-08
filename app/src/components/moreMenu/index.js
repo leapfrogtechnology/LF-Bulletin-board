@@ -44,10 +44,10 @@ class MoreMenu extends Component {
     return (
       <div
         className="more-menu-wrapper sidemenu-icons"
-        ref={element => {
+        ref={(element) => {
           this.dropDownMenu = element;
         }}
-        onClick={event => this.showMenu(event)}
+        onClick={(event) => this.showMenu(event)}
       >
         <img src={logoutIcon} alt="Log Out" />
         {this.state.showMenu ? (

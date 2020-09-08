@@ -27,23 +27,23 @@ class ListAdmin extends Component {
   componentDidMount() {
     userService
       .listAllUsers()
-      .then(response => {
+      .then((response) => {
         this.setState({
           items: (response && response.data && response.data.data && orderBy(response.data.data, 'email', 'asc')) || []
         });
       })
-      .catch(err => swal(getErrorMessage(err)));
+      .catch((err) => swal(getErrorMessage(err)));
   }
 
   refreshList() {
     userService
       .listAllUsers()
-      .then(response => {
+      .then((response) => {
         this.setState({
           items: (response && response.data && response.data.data && orderBy(response.data.data, 'email', 'asc')) || []
         });
       })
-      .catch(err => swal(getErrorMessage(err)));
+      .catch((err) => swal(getErrorMessage(err)));
   }
 
   deleteUser(id) {
@@ -55,14 +55,14 @@ class ListAdmin extends Component {
       buttons: true,
       dangerMode: true
     })
-      .then(willDelete => {
+      .then((willDelete) => {
         if (willDelete) {
           userService.deleteUser(id).then(() => {
             this.refreshList();
           });
         }
       })
-      .catch(err => swal(getErrorMessage(err)));
+      .catch((err) => swal(getErrorMessage(err)));
   }
 
   render() {

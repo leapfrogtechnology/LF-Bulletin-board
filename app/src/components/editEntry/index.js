@@ -37,7 +37,7 @@ class EditEntry extends Component {
         this.closeModal();
         this.props.refreshList();
       })
-      .catch(err => swal(getErrorMessage(err)));
+      .catch((err) => swal(getErrorMessage(err)));
   }
 
   handleChange(el) {
@@ -98,7 +98,7 @@ class EditEntry extends Component {
           content-label="edit entry modal"
         >
           <h2 className="add-entry-heading">Edit Bulletin</h2>
-          <form className="add-entry-form" onSubmit={event => this.handleSubmit(event)}>
+          <form className="add-entry-form" onSubmit={(event) => this.handleSubmit(event)}>
             <FormGroup>
               <ControlLabel>Segment Title</ControlLabel>
               <FormControl
@@ -107,7 +107,7 @@ class EditEntry extends Component {
                 type="text"
                 placeholder=""
                 value={this.state.formdata.title}
-                onChange={el => this.handleChange(el)}
+                onChange={(el) => this.handleChange(el)}
               />
             </FormGroup>
             <div className="two-col-fields-wrapper">
@@ -119,14 +119,14 @@ class EditEntry extends Component {
                   type="text"
                   placeholder=""
                   value={this.state.formdata.duration}
-                  onChange={el => this.handleChange(el)}
+                  onChange={(el) => this.handleChange(el)}
                 />
               </FormGroup>
               <FormGroup>
                 <ControlLabel>Active Status</ControlLabel>
                 <Checkbox
                   checked={this.state.formdata.activeStatus}
-                  onChange={el => this.handleCheckboxChange(el)}
+                  onChange={(el) => this.handleCheckboxChange(el)}
                   className="scale-checkbox"
                 />
               </FormGroup>
@@ -139,7 +139,7 @@ class EditEntry extends Component {
                 type="text"
                 placeholder=""
                 value={this.state.formdata.url}
-                onChange={el => this.handleChange(el)}
+                onChange={(el) => this.handleChange(el)}
               />
             </FormGroup>
 

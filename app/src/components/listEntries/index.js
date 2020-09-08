@@ -29,32 +29,32 @@ class ListEntries extends Component {
   componentDidMount() {
     bulletinService
       .listBulletin()
-      .then(response => {
+      .then((response) => {
         this.setState({
           items:
             (response && response.data && response.data.data && orderBy(response.data.data, 'priority', 'asc')) || []
         });
       })
-      .catch(err => swal(getErrorMessage(err)));
+      .catch((err) => swal(getErrorMessage(err)));
   }
 
   refreshList() {
     bulletinService
       .listBulletin()
-      .then(response => {
+      .then((response) => {
         this.setState({
           items:
             (response && response.data && response.data.data && orderBy(response.data.data, 'priority', 'asc')) || []
         });
       })
-      .catch(err => swal(getErrorMessage(err)));
+      .catch((err) => swal(getErrorMessage(err)));
   }
 
   onSortEnd({ oldIndex, newIndex }) {
     const lowerIndex = oldIndex < newIndex ? oldIndex : newIndex;
     const higherIndex = oldIndex > newIndex ? oldIndex : newIndex;
 
-    const oldBulletinList = this.state.items.map(item => {
+    const oldBulletinList = this.state.items.map((item) => {
       return {
         id: item.id,
         title: item.title,
@@ -74,7 +74,7 @@ class ListEntries extends Component {
         items: arrayMove(newBulletinList, oldIndex, newIndex)
       },
       () => {
-        bulletinService.updateBulletinsBulk(data).catch(err => {
+        bulletinService.updateBulletinsBulk(data).catch((err) => {
           this.setState({
             items: oldBulletinList
           });
@@ -94,19 +94,19 @@ class ListEntries extends Component {
       buttons: true,
       dangerMode: true
     })
-      .then(willDelete => {
+      .then((willDelete) => {
         if (willDelete) {
           bulletinService.deleteBulletin(id).then(() => {
             this.refreshList();
           });
         }
       })
-      .catch(err => swal(getErrorMessage(err)));
+      .catch((err) => swal(getErrorMessage(err)));
   }
 
   toggleActive(id) {
     const tempList = this.state.items;
-    const toggleItem = find(tempList, item => item.id === id) || {};
+    const toggleItem = find(tempList, (item) => item.id === id) || {};
 
     if (!isEmpty(toggleItem)) {
       toggleItem.activeStatus = !toggleItem.activeStatus;
@@ -118,7 +118,7 @@ class ListEntries extends Component {
         url: toggleItem.url
       };
 
-      bulletinService.editBulletin(id, data).then(response => {
+      bulletinService.editBulletin(id, data).then((response) => {
         if (response.status === textConstants.HTTP_OK) {
           this.setState({
             items: tempList

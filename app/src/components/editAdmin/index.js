@@ -34,7 +34,7 @@ class EditAdmin extends Component {
         this.closeModal();
         this.props.refreshList();
       })
-      .catch(err => swal(getErrorMessage(err)));
+      .catch((err) => swal(getErrorMessage(err)));
   }
 
   handleChange(el) {
@@ -74,7 +74,7 @@ class EditAdmin extends Component {
           content-label="edit entry modal"
         >
           <h2 className="add-entry-heading">Edit Admin</h2>
-          <form className="add-entry-form" onSubmit={event => this.handleSubmit(event)}>
+          <form className="add-entry-form" onSubmit={(event) => this.handleSubmit(event)}>
             <FormGroup>
               <ControlLabel>Email</ControlLabel>
               <FormControl
@@ -83,7 +83,7 @@ class EditAdmin extends Component {
                 type="text"
                 placeholder=""
                 value={this.state.formdata.email}
-                onChange={el => this.handleChange(el)}
+                onChange={(el) => this.handleChange(el)}
               />
             </FormGroup>
 
@@ -93,7 +93,7 @@ class EditAdmin extends Component {
                 <DropdownButton
                   id="userRole"
                   title={userRole === userRoles.superAdmin ? 'Super Admin' : 'Admin'}
-                  onSelect={selectedValue => {
+                  onSelect={(selectedValue) => {
                     const target = {
                       name: 'userRole',
                       value: selectedValue
