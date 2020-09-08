@@ -6,12 +6,12 @@
     "browser": true
   },
   "parser": "babel-eslint",
-  "extends": ["prettier", "eslint:recommended", "eslint-config-leapfrog/react"],
+  "extends": ["eslint:recommended", "eslint-config-leapfrog/react", "prettier"],
   "parserOptions": {
     "ecmaVersion": 2020,
     "sourceType": "module"
   },
-  "plugins": ["prettier", "react", "react-hooks"],
+  "plugins": ["react", "react-hooks", "prettier"],
   "rules": {
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "require-jsdoc": [
