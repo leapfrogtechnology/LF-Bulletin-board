@@ -4,9 +4,9 @@
     "node": true,
     "mocha": true
   },
-  "extends": ["eslint-config-leapfrog", "prettier"],
+  "extends": ["prettier", "eslint:recommended", "eslint-config-leapfrog"],
   "parserOptions": {
-    "ecmaVersion": 2018,
+    "ecmaVersion": 2020,
     "sourceType": "module"
   },
   "rules": {
@@ -16,6 +16,18 @@
         "properties": "never"
       }
     ],
-    "no-console": ["error", { "allow": ["warn", "error"] }]
+    "no-console": ["error", { "allow": ["warn", "error"] }],
+    "require-jsdoc": [
+      "error",
+      {
+        "require": {
+          "FunctionDeclaration": true,
+          "MethodDefinition": false,
+          "ClassDeclaration": false,
+          "ArrowFunctionExpression": true,
+          "FunctionExpression": false
+        }
+      }
+    ]
   }
 }
