@@ -1,23 +1,24 @@
 import { expect } from 'chai';
 import request from 'supertest';
-import app from '../../src/index';
-import bookshelf from '../../src/db';
+
+import app from '../../index';
+import bookshelf from '../../db';
 
 /**
- * Tests for '/api/users'
+ * Tests for '/api/users'.
  */
 describe('Users Controller Test', () => {
-  before(done => {
+  before((done) => {
     bookshelf
       .knex('users')
       .truncate()
       .then(() => done());
   });
 
-  it('should return list of users', done => {
+  it('should return list of users', (done) => {
     request(app)
       .get('/api/users')
-      .end((err, res) => {
+      .attach.end((err, res) => {
         expect(res.statusCode).to.be.equal(200);
         expect(res.body.data).to.be.an('array');
         expect(res.body.data).to.have.lengthOf(0);
@@ -26,7 +27,7 @@ describe('Users Controller Test', () => {
       });
   });
 
-  it('should not create a new user if name is not provided', done => {
+  it('should not create a new user if name is not provided', (done) => {
     const user = {
       noname: 'Jane Doe'
     };
@@ -48,7 +49,7 @@ describe('Users Controller Test', () => {
       });
   });
 
-  it('should create a new user with valid data', done => {
+  it('should create a new user with valid data', (done) => {
     const user = {
       name: 'Jane Doe'
     };
@@ -71,7 +72,7 @@ describe('Users Controller Test', () => {
       });
   });
 
-  it('should get information of user', done => {
+  it('should get information of user', (done) => {
     request(app)
       .get('/api/users/1')
       .end((err, res) => {
@@ -88,7 +89,7 @@ describe('Users Controller Test', () => {
       });
   });
 
-  it('should respond with not found error if random user id is provided', done => {
+  it('should respond with not found error if random user id is provided', (done) => {
     request(app)
       .get('/api/users/1991')
       .end((err, res) => {
@@ -102,7 +103,7 @@ describe('Users Controller Test', () => {
       });
   });
 
-  it('should update a user if name is provided', done => {
+  it('should update a user if name is provided', (done) => {
     const user = {
       name: 'John Doe'
     };
@@ -125,7 +126,7 @@ describe('Users Controller Test', () => {
       });
   });
 
-  it('should not update a user if name is not provided', done => {
+  it('should not update a user if name is not provided', (done) => {
     const user = {
       noname: 'John Doe'
     };
@@ -147,7 +148,7 @@ describe('Users Controller Test', () => {
       });
   });
 
-  it('should delete a user if valid id is provided', done => {
+  it('should delete a user if valid id is provided', (done) => {
     request(app)
       .delete('/api/users/1')
       .end((err, res) => {
@@ -157,7 +158,7 @@ describe('Users Controller Test', () => {
       });
   });
 
-  it('should respond with not found error if random user id is provided for deletion', done => {
+  it('should respond with not found error if random user id is provided for deletion', (done) => {
     request(app)
       .delete('/api/users/1991')
       .end((err, res) => {
@@ -171,7 +172,7 @@ describe('Users Controller Test', () => {
       });
   });
 
-  it('should respond with bad request for empty JSON in request body', done => {
+  it('should respond with bad request for empty JSON in request body', (done) => {
     const user = {};
 
     request(app)
