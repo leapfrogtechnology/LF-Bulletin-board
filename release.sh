@@ -77,9 +77,9 @@ bump() {
 
 CURRENT_BRANCH_NAME="$(git symbolic-ref --short HEAD)"
 
-if [ "$CURRENT_BRANCH" != "master" ]; then
+if [ "$CURRENT_BRANCH" == "master" ]; then
   echo ""
-  echo -e "${RED}Looks like you are not on master branch"
+  echo -e "${RED}Looks like you are on master branch"
   echo -e "${RED}Although this Changelog read's commit history from master branch"
   echo -e "${RED}Reason Being Other Branch will not have changelog and version history"
   echo -e "${NC}"
