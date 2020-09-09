@@ -58,9 +58,6 @@ bump() {
   # Update version in the following files
   sed -i "s/\(\"version\":\s*\"\)[^\"]*\(\"\)/\1${VERSION}\2/g" package.json
 
-  # Update Manifest Version
-  sed -i "s/\(\"version\":\s*\"\)[^\"]*\(\"\)/\1${VERSION}\2/g" public/manifest.json
-
   # Generate change log
   changelog
   echo ""
@@ -69,7 +66,7 @@ bump() {
   yarn
 
   # Prepare to commit
-  git add CHANGELOG.md package.json yarn.lock public/manifest.json && \
+  git add CHANGELOG.md package.json yarn.lock && \
     git commit -v --edit -m "${VERSION} Release :tada: :fireworks: :bell:" && \
     git tag "$NEXT" && \
     echo -e "\nRelease tagged $NEXT"
