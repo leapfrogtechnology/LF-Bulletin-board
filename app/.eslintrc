@@ -6,13 +6,12 @@
     "browser": true
   },
   "parser": "babel-eslint",
-  "extends": ["prettier", "eslint:recommended", "eslint-config-leapfrog/react"],
+  "extends": ["eslint:recommended", "eslint-config-leapfrog/react", "prettier"],
   "parserOptions": {
-    "ecmaVersion": 2018,
+    "ecmaVersion": 2020,
     "sourceType": "module"
   },
-  "plugins": ["prettier"],
-
+  "plugins": ["react", "react-hooks", "prettier"],
   "rules": {
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "require-jsdoc": [
@@ -33,5 +32,8 @@
       "pragma": "React", // Pragma to use, default to "React"
       "version": "detect" // React version. "detect" automatically picks the version you have installed.
     }
+  },
+  "globals": {
+    "expect": "readonly" // jest adds expect to global for ease out writing tests
   }
 }

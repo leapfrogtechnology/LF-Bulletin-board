@@ -30,7 +30,7 @@ export async function addBulletin(data) {
 
   data.owner = (user && user.name) || '';
 
-  return new Promise(resolve => {
+  return new Promise((resolve) => {
     const result = httpUtil.post(addBulletinUrl, data);
 
     resolve(result);
@@ -46,7 +46,7 @@ export async function listBulletin() {
   const listBulletinUrl = urlConstants.apiBaseUrl + '/bulletins';
   const result = await httpUtil.get(listBulletinUrl, {});
 
-  each(result.data.data, item => {
+  each(result.data.data, (item) => {
     item.activeStatus = item.activeStatus ? true : false;
   });
 
@@ -62,7 +62,7 @@ export async function listBulletin() {
 export async function deleteBulletin(bulletinId) {
   const deleteBulletinUrl = urlConstants.apiBaseUrl + '/bulletins/' + bulletinId;
 
-  return new Promise(resolve => {
+  return new Promise((resolve) => {
     const result = httpUtil.remove(deleteBulletinUrl);
 
     resolve(result);
@@ -79,7 +79,7 @@ export async function deleteBulletin(bulletinId) {
 export async function editBulletin(bulletinId, data) {
   const editBulletinUrl = urlConstants.apiBaseUrl + '/bulletins/' + bulletinId;
 
-  return new Promise(resolve => {
+  return new Promise((resolve) => {
     const result = httpUtil.put(editBulletinUrl, data);
 
     resolve(result);
@@ -95,7 +95,7 @@ export async function editBulletin(bulletinId, data) {
 export function updateBulletinsBulk(data) {
   const updateBulletinsBulkUrl = urlConstants.apiBaseUrl + '/bulletins/bulk';
 
-  return new Promise(resolve => {
+  return new Promise((resolve) => {
     const result = httpUtil.put(updateBulletinsBulkUrl, data);
 
     resolve(result);
@@ -113,7 +113,7 @@ export function validateAdmin(data) {
 
   const valiDateAdminUrl = googleLoginUrl;
 
-  return new Promise(resolve => {
+  return new Promise((resolve) => {
     const result = httpUtil.post(valiDateAdminUrl, data);
 
     resolve(result);
@@ -132,7 +132,7 @@ export async function logOut() {
     authorization: 'Bearer ' + refreshToken
   };
 
-  return new Promise(resolve => {
+  return new Promise((resolve) => {
     const result = httpUtil.remove(logoutUrl, data);
 
     resolve(result);
@@ -146,7 +146,7 @@ export async function logOut() {
  * @returns {Promise}
  */
 export function filterActiveList(list) {
-  const activeList = filter(list, item => item.activeStatus);
+  const activeList = filter(list, (item) => item.activeStatus);
 
   return orderBy(activeList, 'priority', 'asc');
 }

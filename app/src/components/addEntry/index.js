@@ -22,7 +22,7 @@ const defaultFormData = {
 /**
  *
  * @class AddEntry
- * @extends {Component}
+ * @augments {Component}
  */
 class AddEntry extends Component {
   constructor() {
@@ -65,7 +65,7 @@ class AddEntry extends Component {
           formdata: defaultFormData
         });
       })
-      .catch(err => swal(getErrorMessage(err)));
+      .catch((err) => swal(getErrorMessage(err)));
   }
 
   /**
@@ -139,7 +139,7 @@ class AddEntry extends Component {
           content-label="add entry modal"
         >
           <h2 className="add-entry-heading">Add New Entry</h2>
-          <form className="add-entry-form" onSubmit={event => this.handleSubmit(event)}>
+          <form className="add-entry-form" onSubmit={(event) => this.handleSubmit(event)}>
             <FormGroup>
               <ControlLabel>Segment Title</ControlLabel>
               <FormControl
@@ -148,7 +148,7 @@ class AddEntry extends Component {
                 type="text"
                 placeholder=""
                 value={this.state.formdata.title}
-                onChange={el => this.handleChange(el)}
+                onChange={(el) => this.handleChange(el)}
               />
             </FormGroup>
             <div className="two-col-fields-wrapper">
@@ -160,7 +160,7 @@ class AddEntry extends Component {
                   type="text"
                   placeholder=""
                   value={this.state.formdata.duration}
-                  onChange={el => this.handleChange(el)}
+                  onChange={(el) => this.handleChange(el)}
                 />
               </FormGroup>
 
@@ -168,7 +168,7 @@ class AddEntry extends Component {
                 <ControlLabel>Active Status</ControlLabel>
                 <Checkbox
                   checked={this.state.formdata.activeStatus}
-                  onChange={el => this.handleCheckboxChange(el)}
+                  onChange={(el) => this.handleCheckboxChange(el)}
                   className="scale-checkbox"
                 />
               </FormGroup>
@@ -182,7 +182,7 @@ class AddEntry extends Component {
                 type="text"
                 placeholder=""
                 value={this.state.formdata.url}
-                onChange={el => this.handleChange(el)}
+                onChange={(el) => this.handleChange(el)}
               />
             </FormGroup>
             <div className="form-buttons-wrapper">

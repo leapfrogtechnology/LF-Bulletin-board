@@ -12,7 +12,7 @@ import { getUserLocalStorageData } from '../../utils/bulletinUtil';
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route
     {...rest}
-    render={props => {
+    render={(props) => {
       const isAuthenticated = getUserLocalStorageData() ? true : false;
 
       return isAuthenticated ? (
