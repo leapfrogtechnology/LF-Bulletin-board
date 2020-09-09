@@ -29,7 +29,7 @@ class GoogleLoginComponent extends Component {
 
     bulletinService
       .validateAdmin(data)
-      .then(async res => {
+      .then(async (res) => {
         const { tokens } = res.data.data;
 
         await localStorage.setItem('accessToken', tokens.accessToken);
@@ -41,7 +41,7 @@ class GoogleLoginComponent extends Component {
           isLoggedIn: true
         });
       })
-      .catch(err => {
+      .catch((err) => {
         const loginErrorMessage = getErrorMessage(err);
 
         this.setState({

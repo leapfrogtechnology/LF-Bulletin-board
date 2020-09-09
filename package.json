@@ -17,12 +17,13 @@
     "lint:fix": "npx lerna run --concurrency 1 --stream lint:fix"
   },
   "devDependencies": {
-    "husky": "^3.1.0",
-    "lerna": "^3.20.2",
-    "prettier": "^1.18.2"
+    "husky": "^4.3.0",
+    "lerna": "^3.22.1",
+    "prettier": "^2.1.1"
   },
   "husky": {
     "hooks": {
+      "pre-push": "yarn lint:fix",
       "pre-commit": "npx lerna run --concurrency 1 --stream precommit"
     }
   }

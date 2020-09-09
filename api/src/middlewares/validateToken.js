@@ -18,11 +18,11 @@ export default function validateRefreshToken(req, res, next) {
     refresh_token: req.token
   })
     .fetch()
-    .then(data => {
+    .then((data) => {
       if (!data) {
         throw new Boom.notFound('Token Not Found');
       }
       next();
     })
-    .catch(err => next(err));
+    .catch((err) => next(err));
 }

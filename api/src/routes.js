@@ -1,3 +1,5 @@
+/* eslint-disable jsdoc/check-tag-names */
+
 import { Router } from 'express';
 
 import swaggerSpec from './utils/swagger';
@@ -15,7 +17,7 @@ import bulletinsController from './controllers/bulletins';
 const router = Router();
 
 /**
- * GET /api/swagger.json
+ * GET /api/swagger.json.
  */
 router.get('/swagger.json', (req, res) => {
   res.json(swaggerSpec);

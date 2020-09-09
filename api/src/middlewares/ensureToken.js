@@ -13,10 +13,10 @@ export default function ensureToken(req, res, next) {
 
   tokenService
     .verifyAccessToken(req.token)
-    .then(response => {
+    .then((response) => {
       req.userRole = response.encryptedData.role;
       req.id = response.encryptedData.id;
       next();
     })
-    .catch(error => next(error));
+    .catch((error) => next(error));
 }

@@ -5,7 +5,7 @@
  * @returns {Promise}
  */
 export function up(knex) {
-  return knex.schema.createTable('bulletins', table => {
+  return knex.schema.createTable('bulletins', (table) => {
     table.increments();
     table.timestamps();
     table.string('title').notNull();

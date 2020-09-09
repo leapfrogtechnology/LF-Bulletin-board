@@ -21,7 +21,7 @@ export function getAllUsers() {
  * @returns {Promise}
  */
 export function getUser(id) {
-  return new User({ id }).fetch().then(user => {
+  return new User({ id }).fetch().then((user) => {
     if (!user) {
       throw new Boom.notFound('User not found');
     }
@@ -37,7 +37,7 @@ export function getUser(id) {
  * @returns {Promise}
  */
 export function createUser(user) {
-  return new User({ email: user.email, role: user.userRole }).save().then(user => user.refresh());
+  return new User({ email: user.email, role: user.userRole }).save().then((user) => user.refresh());
 }
 
 /**
@@ -48,7 +48,7 @@ export function createUser(user) {
  * @returns {Promise}
  */
 export function updateUser(id, user) {
-  return new User({ id }).save({ email: user.email, role: user.userRole }).then(user => user.refresh());
+  return new User({ id }).save({ email: user.email, role: user.userRole }).then((user) => user.refresh());
 }
 
 /**
@@ -58,7 +58,7 @@ export function updateUser(id, user) {
  * @returns {Promise}
  */
 export function deleteUser(id) {
-  return new User({ id }).fetch().then(user => user.destroy());
+  return new User({ id }).fetch().then((user) => user.destroy());
 }
 
 /**

@@ -1,26 +1,26 @@
 @font-face {
   font-family: 'geomanist';
-  src: url(./assets/fonts/geomanist-regular-webfont.ttf);
+  src: url(./fonts/geomanist-regular-webfont.ttf);
 }
 
 @font-face {
   font-family: 'montserrat';
-  src: url(./assets/fonts/montserrat/Montserrat-Regular.otf);
+  src: url(./fonts/montserrat/Montserrat-Regular.otf);
 }
 
 @font-face {
   font-family: 'montserrat-bold';
-  src: url(./assets/fonts/montserrat/Montserrat-SemiBold.otf);
+  src: url(./fonts/montserrat/Montserrat-SemiBold.otf);
 }
 
 @font-face {
   font-family: 'IBMPlexSans';
-  src: url(./assets/fonts/IBM_Plex_Sans/IBMPlexSans-Regular.ttf);
+  src: url(./fonts/IBM_Plex_Sans/IBMPlexSans-Regular.ttf);
 }
 
 @font-face {
   font-family: 'IBMPlexSans-bold';
-  src: url(./assets/fonts/IBM_Plex_Sans/IBMPlexSans-SemiBold.ttf);
+  src: url(./fonts/IBM_Plex_Sans/IBMPlexSans-SemiBold.ttf);
 }
 
 body {
