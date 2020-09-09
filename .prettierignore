@@ -1,5 +1,6 @@
 # Build directory
 dist
+build
 
 # Test directories
 coverage
