@@ -10,6 +10,7 @@ logs
 
 # Minified files
 **/*{.,-}min.js
+**/*{.,-}min.css
 
 # NPM files
 package.json
