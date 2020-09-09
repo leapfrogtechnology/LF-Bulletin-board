@@ -24,8 +24,8 @@
     "eslint:fix": "eslint --fix src",
     "lint": "yarn prettier && yarn eslint",
     "lint:fix": "yarn prettier:fix && yarn eslint:fix",
-    "prettier": "prettier --list-different \"{src,api}/**/*.js\" \"{src,api}/**/*.{md,yml,yml,json,css}\" --loglevel warn",
-    "prettier:fix": "prettier --write \"{src,api}/**/*.js\" \"{src,api}/**/*.{md,yml,yml,json,css}\" --loglevel warn",
+    "prettier": "prettier --list-different \"{src,api}/**/*.js\" \"{src,api,public}/**/*.{html,css,md,yml,yml,json}\" --loglevel warn",
+    "prettier:fix": "prettier --write \"{src,api}/**/*.js\" \"{src,api,public}/**/*.{html,css,md,yml,yml,json}\" --loglevel warn",
     "precommit": "lint-staged"
   },
   "lint-staged": {
@@ -33,7 +33,7 @@
       "eslint --fix",
       "prettier --write"
     ],
-    "*.{md,yml,yml,json,css}": [
+    "*.{html,css,md,yml,yml,json}": [
       "prettier --write"
     ]
   },
