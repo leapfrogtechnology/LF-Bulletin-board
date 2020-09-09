@@ -1,5 +1,9 @@
+# Directory
 public/api-docs
-**/*{.,-}min.js
 dist
 build
 node_modules
+
+# Minified files
+**/*{.,-}min.js
+**/*{.,-}min.css
