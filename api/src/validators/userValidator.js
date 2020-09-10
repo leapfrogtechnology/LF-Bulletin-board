@@ -7,16 +7,8 @@ import validate from '../utils/validate';
 import * as userService from '../services/userService';
 
 const SCHEMA = {
-  email: Joi.string()
-    .email()
-    .label('email')
-    .max(50)
-    .required(),
-  userRole: Joi.string()
-    .valid(userRoles.admin, userRoles.superAdmin)
-    .label('userRole')
-    .max(50)
-    .required()
+  email: Joi.string().email().label('email').max(50).required(),
+  userRole: Joi.string().valid(userRoles.admin, userRoles.superAdmin).label('userRole').max(50).required()
 };
 
 /**
@@ -30,12 +22,12 @@ const SCHEMA = {
 function checkUserExistsByEmail(req, res, next) {
   return userService
     .fetchByEmail(req.query.email)
-    .then(userObj => {
+    .then((userObj) => {
       req.userObj = userObj;
 
       return next();
     })
-    .catch(err => next(err));
+    .catch((err) => next(err));
 }
 
 /**
@@ -49,7 +41,7 @@ function checkUserExistsByEmail(req, res, next) {
 function userValidator(req, res, next) {
   return validate(req.body, SCHEMA)
     .then(() => next())
-    .catch(err => next(err));
+    .catch((err) => next(err));
 }
 
 /**
@@ -64,7 +56,7 @@ function findUser(req, res, next) {
   return userService
     .getUser(req.params.id)
     .then(() => next())
-    .catch(err => next(err));
+    .catch((err) => next(err));
 }
 
 export { findUser, userValidator, checkUserExistsByEmail };

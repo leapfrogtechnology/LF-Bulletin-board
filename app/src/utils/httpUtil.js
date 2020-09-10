@@ -74,10 +74,10 @@ export function remove(url, data = {}) {
 }
 
 axios.interceptors.response.use(
-  response => {
+  (response) => {
     return response;
   },
-  error => {
+  (error) => {
     const originalRequest = error.config;
 
     if (
@@ -116,7 +116,7 @@ axios.interceptors.response.use(
 );
 
 axios.interceptors.request.use(
-  config => {
+  (config) => {
     const accessToken = localStorage.getItem('accessToken') || null;
 
     if (accessToken !== null || accessToken !== undefined) {
@@ -125,7 +125,7 @@ axios.interceptors.request.use(
 
     return config;
   },
-  err => {
+  (err) => {
     return Promise.reject(err);
   }
 );

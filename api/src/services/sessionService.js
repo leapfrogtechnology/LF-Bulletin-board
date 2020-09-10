@@ -15,7 +15,7 @@ export function createSession(userParams) {
     refresh_token: userParams.tokens.refreshToken
   })
     .save()
-    .then(Session => Session.refresh());
+    .then((Session) => Session.refresh());
 }
 
 /**
@@ -25,7 +25,7 @@ export function createSession(userParams) {
  * @returns
  */
 export function deleteSession(refreshToken) {
-  return new Session({ refresh_token: refreshToken }).fetch().then(session => {
+  return new Session({ refresh_token: refreshToken }).fetch().then((session) => {
     if (!session) {
       throw new Boom.notFound('Session not found');
     }

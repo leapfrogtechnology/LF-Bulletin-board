@@ -57,7 +57,7 @@ export function verifyUser(loginParams) {
     password: loginParams.password
   })
     .fetch()
-    .then(user => {
+    .then((user) => {
       if (!user) {
         throw new Boom.notFound('User not found');
       }

@@ -11,33 +11,30 @@
   ],
   "scripts": {
     "start": "BABEL_CACHE_PATH=/tmp/my-cache.json node dist/index.js",
-    "codecov": "cat coverage/*/lcov.info | codecov",
-    "seed": "knex seed:run --knexfile src/knexfile.js",
+    "start:dev": "nodemon --watch .env --watch src --exec babel-node src --source-maps",
     "build": "rimraf dist && babel src -D --out-dir dist",
+    "seed": "knex seed:run --knexfile src/knexfile.js",
     "migrate": "knex migrate:latest --knexfile src/knexfile.js",
     "rollback": "knex migrate:rollback --knexfile src/knexfile.js",
     "make:seeder": "knex seed:make --knexfile src/knexfile.js",
     "make:migration": "knex migrate:make --knexfile src/knexfile.js",
-    "test": "NODE_ENV=test mocha --recursive --require babel-register test",
-    "start:dev": "nodemon --watch .env --watch src --exec babel-node src --source-maps",
-    "test:coverage": "NODE_ENV=test nyc --require babel-register --reporter lcov --reporter text mocha --recursive test",
+    "test": "NODE_ENV=test mocha --recursive --require @babel/register src/test",
+    "test:coverage": "NODE_ENV=test nyc --require @babel/register --reporter lcov --reporter text mocha --recursive src/test",
     "eslint": "eslint src",
     "eslint:fix": "eslint --fix src",
-    "prettier": "prettier --single-quote --print-width 120 --write \"src/**/*.js\" \"src/**/*.css\" \"test/**/*.js\"",
-    "prettier:fix": "prettier --write \"{src,api}/**/*.js\" \"{src,api}/**/*.css\"",
-    "lint": "yarn prettier && eslint src test; exit 0",
-    "lint:fix": "yarn prettier:fix && eslint src test --fix; exit 0",
+    "lint": "yarn prettier && yarn eslint",
+    "lint:fix": "yarn prettier:fix && yarn eslint:fix",
+    "prettier": "prettier --list-different \"{src,api}/**/*.js\" \"{src,api,public}/**/*.{html,css,md,yml,yml,json}\" --loglevel warn",
+    "prettier:fix": "prettier --write \"{src,api}/**/*.js\" \"{src,api,public}/**/*.{html,css,md,yml,yml,json}\" --loglevel warn",
     "precommit": "lint-staged"
   },
   "lint-staged": {
     "*.js": [
       "eslint --fix",
-      "prettier --write",
-      "git add"
+      "prettier --write"
     ],
-    "*.{md,yml,yml,json,css}": [
-      "prettier --write",
-      "git add"
+    "*.{html,css,md,yml,yml,json}": [
+      "prettier --write"
     ]
   },
   "dependencies": {
@@ -47,10 +44,10 @@
     "boom": "^5.1.0",
     "compression": "^1.6.2",
     "cors": "^2.8.3",
-    "dotenv": "^4.0.0",
+    "dotenv": "^8.2.0",
     "express": "^4.15.3",
     "google-auth-library": "^1.3.2",
-    "helmet": "^3.6.1",
+    "helmet": "^4.1.0",
     "http-status-codes": "^1.1.6",
     "joi": "^11.0.1",
     "jsonwebtoken": "^8.5.1",
@@ -58,33 +55,33 @@
     "lodash": "^4.17.4",
     "morgan": "^1.8.2",
     "mysql": "^2.18.1",
-    "pg": "^7.18.1",
     "serve-favicon": "^2.4.3",
     "socket.io": "^2.1.1",
-    "sqlite3": "^4.0.4",
     "swagger-jsdoc": "^1.9.4",
     "winston": "^3.2.1"
   },
   "devDependencies": {
-    "babel-cli": "^6.24.1",
-    "babel-preset-env": "^1.6.1",
-    "babel-register": "^6.24.1",
+    "@babel/cli": "^7.10.5",
+    "@babel/core": "^7.11.6",
+    "@babel/node": "^7.10.5",
+    "@babel/preset-env": "^7.11.0",
+    "@babel/register": "^7.11.5",
+    "babel-plugin-module-resolver": "^4.0.0",
     "chai": "^4.0.0",
-    "codecov": "^3.6.5",
-    "eslint": "^6.8.0",
-    "eslint-config-leapfrog": "^2.0.1",
-    "eslint-config-prettier": "^6.9.0",
-    "eslint-plugin-prettier": "^3.1.2",
-    "lint-staged": "^9.5.0",
-    "mocha": "^6.2.2",
-    "nodemon": "^1.18.4",
-    "nyc": "^11.4.1",
-    "prettier": "^1.19.1",
-    "rimraf": "^2.6.1",
-    "supertest": "^3.0.0"
+    "eslint": "^7.7.0",
+    "eslint-config-leapfrog": "^3.0.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "lint-staged": "^10.2.11",
+    "mocha": "^8.1.3",
+    "nodemon": "^2.0.4",
+    "nyc": "^15.1.0",
+    "prettier": "^2.0.5",
+    "rimraf": "^3.0.2",
+    "supertest": "^4.0.2"
   },
   "engines": {
-    "node": ">= 6.9.0",
-    "npm": ">= 3.10.8"
+    "node": ">= 10.0.0",
+    "npm": ">= 6.0.0"
   }
 }

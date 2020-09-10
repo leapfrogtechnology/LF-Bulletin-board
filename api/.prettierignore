@@ -1,5 +1,6 @@
 # Build directory
 dist
+build
 
 # Test directories
 coverage
@@ -10,6 +11,7 @@ logs
 
 # Minified files
 **/*{.,-}min.js
+**/*{.,-}min.css
 
 # NPM files
 package.json

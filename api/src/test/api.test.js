@@ -1,9 +1,10 @@
 import { expect } from 'chai';
-import app from '../src/index';
 import request from 'supertest';
 
+import app from '../index';
+
 describe('Base API Test', () => {
-  it('should return API version and title for the app', done => {
+  it('should return API version and title for the app', (done) => {
     request(app)
       .get('/api')
       .end((err, res) => {
@@ -15,10 +16,8 @@ describe('Base API Test', () => {
       });
   });
 
-  it('should return 405 method not allowed for random API hits', done => {
-    const randomString = Math.random()
-      .toString(36)
-      .substr(2, 5);
+  it('should return 405 method not allowed for random API hits', (done) => {
+    const randomString = Math.random().toString(36).substr(2, 5);
 
     request(app)
       .get(`/api/${randomString}`)
