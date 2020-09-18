@@ -20,16 +20,16 @@
     "make:migration": "knex migrate:make --knexfile src/knexfile.js",
     "test": "NODE_ENV=test mocha --recursive --require @babel/register src/test",
     "test:coverage": "NODE_ENV=test nyc --require @babel/register --reporter lcov --reporter text mocha --recursive src/test",
-    "eslint": "eslint \"{src,api,public}/**/*.{js,jsx}\"",
-    "eslint:fix": "eslint --fix \"{src,api,public}/**/*.{js,jsx}\"",
+    "eslint": "eslint src",
+    "eslint:fix": "eslint --fix src",
     "lint": "yarn prettier && yarn eslint",
     "lint:fix": "yarn prettier:fix && yarn eslint:fix",
-    "prettier": "prettier --list-different \"{src,api,public}/**/*.{js,jsx,html,css,md,yml,yml,json}\" --loglevel warn",
-    "prettier:fix": "prettier --write \"{src,api,public}/**/*.{js,jsx,html,css,md,yml,yml,json}\" --loglevel warn",
+    "prettier": "prettier --list-different \"{src,api}/**/*.js\" \"{src,api,public}/**/*.{html,css,md,yml,yml,json}\" --loglevel warn",
+    "prettier:fix": "prettier --write \"{src,api}/**/*.js\" \"{src,api,public}/**/*.{html,css,md,yml,yml,json}\" --loglevel warn",
     "precommit": "lint-staged"
   },
   "lint-staged": {
-    "*.{js,jsx}": [
+    "*.js": [
       "eslint --fix",
       "prettier --write"
     ],
