@@ -1,5 +1,17 @@
 # Changelog
 
+## [v4.0.2](https://github.com/leapfrogtechnology/bulletin-board/tree/v4.0.2) (2020-09-18)
+
+[Full Changelog](https://github.com/leapfrogtechnology/bulletin-board/compare/v4.0.1...v4.0.2)
+
+**Changes**
+
+- Fix pretty script and lint code base [\#132](https://github.com/leapfrogtechnology/bulletin-board/pull/132) ([bhattaraib58](https://github.com/bhattaraib58))
+- Fix release script to Take Token and Add Validation Scripts [\#131](https://github.com/leapfrogtechnology/bulletin-board/pull/131) ([bhattaraib58](https://github.com/bhattaraib58))
+- LE-301: Fix Eslint and Prettier Config with new Version Changes, and changes in leapfrog-eslint [\#130](https://github.com/leapfrogtechnology/bulletin-board/pull/130) ([bhattaraib58](https://github.com/bhattaraib58))
+- LE-300: Update Packages in APP and API, and Fix subpackage issues as well [\#129](https://github.com/leapfrogtechnology/bulletin-board/pull/129) ([bhattaraib58](https://github.com/bhattaraib58))
+- Remove old devops Unused Code [\#127](https://github.com/leapfrogtechnology/bulletin-board/pull/127) ([bhattaraib58](https://github.com/bhattaraib58))
+
 ## [v4.0.1](https://github.com/leapfrogtechnology/bulletin-board/tree/v4.0.1) (2020-06-04)
 
 [Full Changelog](https://github.com/leapfrogtechnology/bulletin-board/compare/v4.0.0...v4.0.1)
@@ -87,7 +99,6 @@
 - Bump fstream from 1.0.10 to 1.0.12 in /api [\#62](https://github.com/leapfrogtechnology/bulletin-board/pull/62) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Bump sshpk from 1.10.1 to 1.16.1 in /api [\#61](https://github.com/leapfrogtechnology/bulletin-board/pull/61) ([dependabot[bot]](https://github.com/apps/dependabot))
 - Update envault [\#60](https://github.com/leapfrogtechnology/bulletin-board/pull/60) ([pravashupreti](https://github.com/pravashupreti))
-- modify package.json and add .prettierrc [\#59](https://github.com/leapfrogtechnology/bulletin-board/pull/59) ([alesh-dulal](https://github.com/alesh-dulal))
 - installation guide for bulletin board [\#58](https://github.com/leapfrogtechnology/bulletin-board/pull/58) ([alesh-dulal](https://github.com/alesh-dulal))
 - add license [\#57](https://github.com/leapfrogtechnology/bulletin-board/pull/57) ([alesh-dulal](https://github.com/alesh-dulal))
 
@@ -104,6 +115,7 @@
 
 **Changes**
 
+- modify package.json and add .prettierrc [\#59](https://github.com/leapfrogtechnology/bulletin-board/pull/59) ([alesh-dulal](https://github.com/alesh-dulal))
 - Remove vault dependency for building the frontend [\#56](https://github.com/leapfrogtechnology/bulletin-board/pull/56) ([pravashupreti](https://github.com/pravashupreti))
 - Explicitly define the docker dind version [\#55](https://github.com/leapfrogtechnology/bulletin-board/pull/55) ([pravashupreti](https://github.com/pravashupreti))
 - LE-208: Integrate the feature to drag and rearrange the bulletins' priorities [\#54](https://github.com/leapfrogtechnology/bulletin-board/pull/54) ([aanchal-adk](https://github.com/aanchal-adk))
