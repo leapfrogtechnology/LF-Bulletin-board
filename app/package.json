@@ -13,16 +13,16 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "eslint": "eslint src",
-    "eslint:fix": "eslint --fix src",
+    "eslint": "eslint \"{src,api,public}/**/*.{js,jsx}\"",
+    "eslint:fix": "eslint --fix \"{src,api,public}/**/*.{js,jsx}\"",
     "lint": "yarn prettier && yarn eslint",
     "lint:fix": "yarn prettier:fix && yarn eslint:fix",
-    "prettier": "prettier --list-different \"{src,api}/**/*.js\" \"{src,api,public}/**/*.{html,css,md,yml,yml,json}\" --loglevel warn",
-    "prettier:fix": "prettier --write \"{src,api}/**/*.js\" \"{src,api,public}/**/*.{html,css,md,yml,yml,json}\" --loglevel warn",
+    "prettier": "prettier --list-different \"{src,api,public}/**/*.{js,jsx,html,css,md,yml,yml,json}\" --loglevel warn",
+    "prettier:fix": "prettier --write \"{src,api,public}/**/*.{js,jsx,html,css,md,yml,yml,json}\" --loglevel warn",
     "precommit": "lint-staged"
   },
   "lint-staged": {
-    "*.js": [
+    "*.{js,jsx}": [
       "eslint --fix",
       "prettier --write"
     ],
